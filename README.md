@@ -6,6 +6,12 @@ Hi, this is a repo for the frontend implementation on ocw-central.
 
 ## How to develop
 
+- Install dependencies:
+
+  ```bash
+  yarn install
+  ```
+
 - Start the server
 
   ```bash
