@@ -1,5 +1,5 @@
-import { mockVideos } from "./MockVideos";
 import { Subject } from "../models/subject";
+import { mockVideos } from "./MockVideos";
 
 const subject1: Subject = {
   id: "1",

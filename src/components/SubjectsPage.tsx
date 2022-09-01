@@ -1,8 +1,12 @@
 import { Box, Grid, InputBase } from "@mui/material";
 import { useState } from "react";
-import { useNavigate, createSearchParams, useSearchParams } from "react-router-dom";
-import { SubjectCard } from "./subjectsPageComponents/SubjectCard";
+import {
+  createSearchParams,
+  useNavigate,
+  useSearchParams,
+} from "react-router-dom";
 import { MockSubjects } from "../mock/MockSubjects";
+import { SubjectCard } from "./subjectsPageComponents/SubjectCard";
 
 type Params = {
   title?: string;

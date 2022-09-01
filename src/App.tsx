@@ -1,9 +1,9 @@
-import { Header } from "./components/common/Header";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
+import { Header } from "./components/common/Header";
+import { HomePage } from "./components/HomePage";
 import { SubjectPage } from "./components/SubjectPage";
 import { SubjectsPage } from "./components/SubjectsPage";
-import { Route, BrowserRouter, Routes } from "react-router-dom";
-import { HomePage } from "./components/HomePage";
 
 function App() {
   return (

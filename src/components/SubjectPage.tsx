@@ -1,12 +1,11 @@
-import { Box, Grid, Typography } from "@mui/material";
-import { useParams } from "react-router-dom";
+import { Box, Typography } from "@mui/material";
 import { useState } from "react";
 import YouTube from "react-youtube";
 import { MockSubjects } from "../mock/MockSubjects";
-import { ChapterBox } from "./subjectPageComponents/ChapterBox";
-import { VideosBox } from "./subjectPageComponents/VideosBox";
 import { Subject } from "../models/subject";
 import { Video } from "../models/video";
+import { ChapterBox } from "./subjectPageComponents/ChapterBox";
+import { VideosBox } from "./subjectPageComponents/VideosBox";
 
 // 実際にはparams.idから取得
 //const params = useParams();
@@ -51,7 +50,13 @@ export function SubjectPage() {
               >
                 {video?.title}
               </Typography>
-              <Typography variant="h4" component="div" align="left" gutterBottom={true} sx={{ p: 1 }}>
+              <Typography
+                variant="h4"
+                component="div"
+                align="left"
+                gutterBottom={true}
+                sx={{ p: 1 }}
+              >
                 {video?.faculties && video?.faculties.join(", ")}
               </Typography>
               <YouTube videoId={video?.videoId} />
