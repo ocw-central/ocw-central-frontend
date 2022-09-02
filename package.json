@@ -17,8 +17,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.3.0",
-    "react-youtube": "^9.0.3",
-    "vite-plugin-svgr": "^2.2.1"
+    "react-youtube": "^9.0.3"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.16.5",
@@ -32,6 +31,8 @@
     "eslint-plugin-react": "^7.30.1",
     "prettier": "^2.7.1",
     "typescript": "^4.6.4",
-    "vite": "^3.0.7"
+    "vite": "^3.0.7",
+    "vite-plugin-svgr": "^2.2.1",
+    "vite-tsconfig-paths": "^3.5.0"
   }
 }
