@@ -20,7 +20,12 @@
       "jest",
       "@testing-library/jest-dom",
       "vite-plugin-svgr/client"
-    ]
+    ],
+    "baseUrl": "./",
+    "paths": {
+      "@/*": ["src/*"],
+      "~/*": ["public/*"]
+    }
   },
   "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }]
