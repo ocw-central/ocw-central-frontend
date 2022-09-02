@@ -31,5 +31,9 @@
     "prettier": "^2.7.1",
     "typescript": "^4.6.4",
     "vite": "^3.0.7"
+  },
+  "scripts": {
+    "lint:eslint": "eslint src --ext .js,.jsx,.ts,.tsx",
+    "lint:prettier": "prettier --check src"
+>>>>>>> Stashed changes
   }
-}
