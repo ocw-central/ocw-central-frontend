@@ -9,6 +9,7 @@ import IconButton from "@mui/material/IconButton";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import { Link } from "react-router-dom";
+import { Nav } from "src/components/common/Nav";
 
 const Search = styled("div")(() => ({
   position: "relative",
@@ -41,6 +42,7 @@ export function Header() {
               OCW Central
             </Link>
           </Typography>
+          <Nav />
           <Search>
             <IconButton
               size="large"
