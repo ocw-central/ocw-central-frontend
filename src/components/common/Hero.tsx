@@ -1,4 +1,4 @@
-export function Hero({ title, subtitle }) {
+export function Hero({ any: title, subtitle: any }) {
   return (
     <div>
       <h1>{title}</h1>
