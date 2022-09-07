@@ -19,6 +19,13 @@ Hi, this is a repo for the frontend implementation on ocw-central.
   ```
 
 - Use eslint to lint the code
+
   ```bash
   yarn lint
+  ```
+
+- Check for build errors before opening PR
+
+  ```bash
+  yarn build
   ```
