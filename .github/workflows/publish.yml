@@ -3,7 +3,7 @@ name: Cloudflare Pages
 on:
   pull_request:
     branches:
-        - dev
+      - dev
     types: [opened, reopened, edited]
 
 jobs:
@@ -23,10 +23,10 @@ jobs:
         id: cloudflare_pages_deploy
         uses: cloudflare/pages-action@1
         with:
-	  accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           projectName: ocw-central-frontend
-          directory: ./dist
+          directory: ./src
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
 
       # これを追記
