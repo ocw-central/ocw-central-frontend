@@ -7,13 +7,16 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "lint": "eslint --fix 'src/**/*.tsx' 'src/**/*.ts'"
+    "lint": "eslint --fix 'src/**/*.tsx' 'src/**/*.ts'",
+    "generate": "graphql-codegen"
   },
   "dependencies": {
+    "@apollo/client": "^3.6.9",
     "@emotion/react": "^11.10.0",
     "@emotion/styled": "^11.10.0",
     "@mui/icons-material": "^5.8.4",
     "@mui/material": "^5.10.1",
+    "graphql": "^16.6.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.3.0",
@@ -21,6 +24,10 @@
     "vite-tsconfig-paths": "^3.5.0"
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "^2.12.0",
+    "@graphql-codegen/introspection": "^2.2.1",
+    "@graphql-codegen/typescript-operations": "^2.5.3",
+    "@graphql-codegen/typescript-react-apollo": "^3.3.3",
     "@testing-library/jest-dom": "^5.16.5",
     "@types/react": "^18.0.17",
     "@types/react-dom": "^18.0.6",
