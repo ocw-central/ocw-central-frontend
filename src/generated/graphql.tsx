@@ -139,15 +139,17 @@ export type Video = Node & {
   videoLength: Scalars['Int'];
 };
 
-export type SubjectQueryQueryVariables = Exact<{ [key: string]: never; }>;
+export type SubjectQueryQueryVariables = Exact<{
+  id: Scalars['ID'];
+}>;
 
 
 export type SubjectQueryQuery = { __typename?: 'Query', subject: { __typename?: 'Subject', id: string, title: string } };
 
 
 export const SubjectQueryDocument = gql`
-    query subjectQuery {
-  subject(id: "01GB4X63GYA0382MTCVQNN7YXQ") {
+    query subjectQuery($id: ID!) {
+  subject(id: $id) {
     id
     title
   }
@@ -166,10 +168,11 @@ export const SubjectQueryDocument = gql`
  * @example
  * const { data, loading, error } = useSubjectQueryQuery({
  *   variables: {
+ *      id: // value for 'id'
  *   },
  * });
  */
-export function useSubjectQueryQuery(baseOptions?: Apollo.QueryHookOptions<SubjectQueryQuery, SubjectQueryQueryVariables>) {
+export function useSubjectQueryQuery(baseOptions: Apollo.QueryHookOptions<SubjectQueryQuery, SubjectQueryQueryVariables>) {
         const options = {...defaultOptions, ...baseOptions}
         return Apollo.useQuery<SubjectQueryQuery, SubjectQueryQueryVariables>(SubjectQueryDocument, options);
       }
