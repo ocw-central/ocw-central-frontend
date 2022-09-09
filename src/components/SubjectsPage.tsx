@@ -1,3 +1,4 @@
+import { useSubjetcsQuery } from "@/generated/graphql";
 import { Box, Grid, InputBase } from "@mui/material";
 import { useState } from "react";
 import {
@@ -37,6 +38,38 @@ export function SubjectsPage() {
 
   // 講義名検索結果を持つstate
   const [searchTitle, setSearchTitle] = useState("");
+
+  // const client = new ApolloClient({
+  //   uri: "http://localhost:8081/query",
+  //   cache: new InMemoryCache(),
+  // });
+
+  // client
+  //   .query({
+  //     query: gql`
+  //       query {
+  //         subjects(title: "細胞") {
+  //           id
+  //           title
+  //           thumbnailLink
+  //         }
+  //       }
+  //     `,
+  //   })
+  //   .then((result) => console.log(result))
+  //   .catch((error) => {
+  //     console.log("error");
+  //     console.log(error);
+  //   });
+  const { data, loading, error } = useSubjetcsQuery({
+    variables: {
+      title: "細胞",
+      faculty: null,
+      academicField: null,
+    },
+  });
+  console.log(data);
+  console.log(loading);
 
   // stateに基づきsearch parameterを切り替える関数
   const setSearchParams = () => {

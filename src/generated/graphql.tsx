@@ -139,16 +139,25 @@ export type Video = Node & {
   videoLength: Scalars['Int'];
 };
 
-export type SubjectQueryQueryVariables = Exact<{
+export type SubjectQueryVariables = Exact<{
   id: Scalars['ID'];
 }>;
 
 
-export type SubjectQueryQuery = { __typename?: 'Query', subject: { __typename?: 'Subject', id: string, title: string } };
+export type SubjectQuery = { __typename?: 'Query', subject: { __typename?: 'Subject', id: string, title: string } };
+
+export type SubjetcsQueryVariables = Exact<{
+  title?: InputMaybe<Scalars['String']>;
+  faculty?: InputMaybe<Scalars['String']>;
+  academicField?: InputMaybe<Scalars['String']>;
+}>;
 
 
-export const SubjectQueryDocument = gql`
-    query subjectQuery($id: ID!) {
+export type SubjetcsQuery = { __typename?: 'Query', subjects: Array<{ __typename?: 'Subject', title: string, faculty: string, thumbnailLink: string }> };
+
+
+export const SubjectDocument = gql`
+    query subject($id: ID!) {
   subject(id: $id) {
     id
     title
@@ -157,29 +166,68 @@ export const SubjectQueryDocument = gql`
     `;
 
 /**
- * __useSubjectQueryQuery__
+ * __useSubjectQuery__
  *
- * To run a query within a React component, call `useSubjectQueryQuery` and pass it any options that fit your needs.
- * When your component renders, `useSubjectQueryQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useSubjectQuery` and pass it any options that fit your needs.
+ * When your component renders, `useSubjectQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useSubjectQueryQuery({
+ * const { data, loading, error } = useSubjectQuery({
  *   variables: {
  *      id: // value for 'id'
  *   },
  * });
  */
-export function useSubjectQueryQuery(baseOptions: Apollo.QueryHookOptions<SubjectQueryQuery, SubjectQueryQueryVariables>) {
+export function useSubjectQuery(baseOptions: Apollo.QueryHookOptions<SubjectQuery, SubjectQueryVariables>) {
         const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<SubjectQueryQuery, SubjectQueryQueryVariables>(SubjectQueryDocument, options);
+        return Apollo.useQuery<SubjectQuery, SubjectQueryVariables>(SubjectDocument, options);
       }
-export function useSubjectQueryLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<SubjectQueryQuery, SubjectQueryQueryVariables>) {
+export function useSubjectLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<SubjectQuery, SubjectQueryVariables>) {
           const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<SubjectQueryQuery, SubjectQueryQueryVariables>(SubjectQueryDocument, options);
+          return Apollo.useLazyQuery<SubjectQuery, SubjectQueryVariables>(SubjectDocument, options);
         }
-export type SubjectQueryQueryHookResult = ReturnType<typeof useSubjectQueryQuery>;
-export type SubjectQueryLazyQueryHookResult = ReturnType<typeof useSubjectQueryLazyQuery>;
-export type SubjectQueryQueryResult = Apollo.QueryResult<SubjectQueryQuery, SubjectQueryQueryVariables>;
+export type SubjectQueryHookResult = ReturnType<typeof useSubjectQuery>;
+export type SubjectLazyQueryHookResult = ReturnType<typeof useSubjectLazyQuery>;
+export type SubjectQueryResult = Apollo.QueryResult<SubjectQuery, SubjectQueryVariables>;
+export const SubjetcsDocument = gql`
+    query subjetcs($title: String, $faculty: String, $academicField: String) {
+  subjects(title: $title, faculty: $faculty, academicField: $academicField) {
+    title
+    faculty
+    thumbnailLink
+  }
+}
+    `;
+
+/**
+ * __useSubjetcsQuery__
+ *
+ * To run a query within a React component, call `useSubjetcsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useSubjetcsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useSubjetcsQuery({
+ *   variables: {
+ *      title: // value for 'title'
+ *      faculty: // value for 'faculty'
+ *      academicField: // value for 'academicField'
+ *   },
+ * });
+ */
+export function useSubjetcsQuery(baseOptions?: Apollo.QueryHookOptions<SubjetcsQuery, SubjetcsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<SubjetcsQuery, SubjetcsQueryVariables>(SubjetcsDocument, options);
+      }
+export function useSubjetcsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<SubjetcsQuery, SubjetcsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<SubjetcsQuery, SubjetcsQueryVariables>(SubjetcsDocument, options);
+        }
+export type SubjetcsQueryHookResult = ReturnType<typeof useSubjetcsQuery>;
+export type SubjetcsLazyQueryHookResult = ReturnType<typeof useSubjetcsLazyQuery>;
+export type SubjetcsQueryResult = Apollo.QueryResult<SubjetcsQuery, SubjetcsQueryVariables>;
