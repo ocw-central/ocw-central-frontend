@@ -128,7 +128,8 @@ export function Header() {
               aria-haspopup="true"
               onClick={handleOpenNavMenu}
               color="inherit"
-            ></IconButton>
+            >
+            </IconButton>
             <Menu
               id="menu-appbar"
               anchorEl={anchorElNav}
