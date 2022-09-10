@@ -1,25 +1,34 @@
 import styles from "@/styles/Nav.module.css";
 import { Link } from "react-router-dom";
 
+import { Box } from "@mui/material";
+
+const linkNames = [
+  { link: "/", name: "Home" },
+  { link: "/about", name: "このサイトについて" },
+  { link: "/guideline", name: "利用ガイド" },
+];
+
 export function Nav() {
   return (
     <nav>
       <ul className={styles.list}>
-        <li>
-          <Link to="/">
-            <a>Home</a>
-          </Link>
-        </li>
-        <li>
-          <Link to="/about">
-            <a>このサイトについて</a>
-          </Link>
-        </li>
-        <li>
-          <Link to="/guideline">
-            <a>利用ガイド</a>
-          </Link>
-        </li>
+        {linkNames.map((linkName) => (
+          <li>
+            <Box
+              mr={1}
+              sx={{
+                "&:hover": {
+                  color: "rgba(255,255,255,0.7)",
+                },
+              }}
+            >
+              <Link to={linkName.link}>
+                <a>{linkName.name}</a>
+              </Link>
+            </Box>
+          </li>
+        ))}
       </ul>
     </nav>
   );

@@ -1,6 +1,4 @@
-/* https://github.com/ebisucom/next-react-website/blob/main/blog/styles/nav.module.css */
 /* デスクトップ */
-
 @media (min-width: 768px) {
   .btn {
     display: none;
@@ -8,7 +6,7 @@
 
   .list {
     display: flex;
-    gap: 3 em;
+    gap: 2em;
   }
 }
 
@@ -95,7 +93,7 @@
 /* ホバー */
 @media (hover: hover) {
   .list a:hover {
-    color: "#0F5173";
+    color: var(--accent);
   }
 }
 
@@ -105,6 +103,6 @@
   }
 
   .list a:active {
-    color: "#0F5173";
+    color: var(--accent);
   }
 }

@@ -9,6 +9,7 @@ import { SubjectPage } from "./components/SubjectPage";
 import { SubjectsPage } from "./components/SubjectsPage";
 import { UserGuidePage } from "./components/UserGuidePage";
 import GlobalStyles from "./styles/GlobalStyles";
+import { Footer } from "@/components/common/Footer";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route path="/about" element={<AboutPage />} />
           <Route path="/guideline" element={<UserGuidePage />} />
         </Routes>
+        <Footer />
       </ThemeProvider>
     </BrowserRouter>
   );
