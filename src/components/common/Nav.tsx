@@ -1,4 +1,4 @@
-import styles from "@/styles/Nav.module.css";
+import styles from "@/styles/nav.module.css";
 import { Link } from "react-router-dom";
 
 import { Box } from "@mui/material";
