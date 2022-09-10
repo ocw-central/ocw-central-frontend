@@ -1,60 +1,225 @@
-import { ReactComponent as Logo } from "@/assets/ocwc-owl.svg";
-import styled from "@emotion/styled";
-import SearchIcon from "@mui/icons-material/Search";
-import { alpha, InputBase } from "@mui/material";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import IconButton from "@mui/material/IconButton";
-import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
-import { Link } from "react-router-dom";
+// import styles from "@/styles/utils.module.css";
+// import AppBar from "@mui/material/AppBar";
+// import Box from "@mui/material/Box";
+// import Button from "@mui/material/Button";
+// import Toolbar from "@mui/material/Toolbar";
 
-const Search = styled("div")(() => ({
+// const ToSubjectsButton = styled(Button)(() => ({
+//   backgroundColor: alpha("#fff", 0.9),
+//   "&:hover": {
+//     backgroundColor: alpha("#fff", 1),
+//   },
+// }));
+
+// export function Header() {
+//   return (
+//     <Box sx={{ flexGrow: 1 }} className={styles.sideBySide}>
+//       <AppBar position="static" sx={{ bgcolor: "primary" }}>
+//         <Logo />
+//         <Toolbar>
+//           <Search>
+//             <SearchIconWrapper>
+//               <SearchIcon />
+//             </SearchIconWrapper>
+//             <StyledInputBase
+//               placeholder="Search…"
+//               inputProps={{ "aria-label": "search" }}
+//             />
+//           </Search>
+//           <Nav />
+//         </Toolbar>
+//       </AppBar>
+//     </Box>
+//   );
+// }
+
+import AdbIcon from "@mui/icons-material/Adb";
+import MenuIcon from "@mui/icons-material/Menu";
+import SearchIcon from "@mui/icons-material/Search";
+import {
+  AppBar,
+  Box,
+  Container,
+  IconButton,
+  InputBase,
+  Menu,
+  MenuItem,
+  Toolbar,
+  Typography,
+} from "@mui/material";
+import { alpha, styled } from "@mui/material/styles";
+import * as React from "react";
+
+import { ReactComponent as Img } from "@/assets/ocwc-owl.svg";
+import { Nav } from "src/components/common/Nav";
+
+const pages = ["Products", "Pricing", "Blog"];
+const settings = ["Profile", "Account", "Dashboard", "Logout"];
+
+const Search = styled("div")(({ theme }) => ({
   position: "relative",
-  marginLeft: 0,
-  backgroundColor: alpha("#fff", 0.15),
+  borderRadius: theme.shape.borderRadius,
+  backgroundColor: alpha(theme.palette.common.white, 0.15),
   "&:hover": {
-    backgroundColor: alpha("#fff", 0.25),
+    backgroundColor: alpha(theme.palette.common.white, 0.25),
+  },
+  marginLeft: 0,
+  width: "100%",
+  [theme.breakpoints.up("sm")]: {
+    marginLeft: theme.spacing(1),
+    width: "auto",
   },
 }));
 
-const ToSubjectsButton = styled(Button)(() => ({
-  backgroundColor: alpha("#fff", 0.9),
-  "&:hover": {
-    backgroundColor: alpha("#fff", 1),
+const SearchIconWrapper = styled("div")(({ theme }) => ({
+  padding: theme.spacing(0, 2),
+  height: "100%",
+  position: "absolute",
+  pointerEvents: "none",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+}));
+
+const StyledInputBase = styled(InputBase)(({ theme }) => ({
+  color: "inherit",
+  "& .MuiInputBase-input": {
+    padding: theme.spacing(1, 1, 1, 0),
+    // vertical padding + font size from searchIcon
+    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+    transition: theme.transitions.create("width"),
+    width: "100%",
+    [theme.breakpoints.up("sm")]: {
+      width: "12ch",
+      "&:focus": {
+        width: "20ch",
+      },
+    },
   },
 }));
 
 export function Header() {
-  return (
-    <Box sx={{ flexGrow: 1 }} className="Header">
-      <AppBar position="static" sx={{ bgcolor: "primary.light" }}>
-        <Toolbar>
-          <Logo style={{ width: "50px", height: "50px" }} />
-          <ToSubjectsButton>
-            <Link to="/subjects">講義検索</Link>
-          </ToSubjectsButton>
+  const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
+    null
+  );
+  const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
+    null
+  );
 
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            <Link to="/" style={{ color: "#fff" }}>
-              OCW Central
-            </Link>
+  const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorElNav(event.currentTarget);
+  };
+  const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorElUser(event.currentTarget);
+  };
+
+  const handleCloseNavMenu = () => {
+    setAnchorElNav(null);
+  };
+
+  const handleCloseUserMenu = () => {
+    setAnchorElUser(null);
+  };
+
+  return (
+    <AppBar position="static">
+      <Container maxWidth="xl">
+        <Toolbar disableGutters>
+          <Box mr={2}>
+            <Img style={{ width: "50px", height: "50px" }} />
+          </Box>
+          <Typography
+            variant="h6"
+            noWrap
+            component="a"
+            href="/"
+            sx={{
+              mr: 2,
+              display: { xs: "none", md: "flex" },
+              fontFamily: "monospace",
+              fontWeight: 700,
+              // letterSpacing: ".3rem",
+              color: "inherit",
+              textDecoration: "none",
+            }}
+          >
+            OCWCENTRAL
           </Typography>
           <Search>
+            <SearchIconWrapper>
+              <SearchIcon />
+            </SearchIconWrapper>
+            <StyledInputBase
+              placeholder="Search…"
+              inputProps={{ "aria-label": "search" }}
+            />
+          </Search>
+          <Box sx={{ flexGrow: 1 }}></Box>
+
+          {/* for mobile */}
+          <Box sx={{ flexGrow: 0, display: { xs: "flex", md: "none" } }}>
             <IconButton
               size="large"
-              edge="start"
+              aria-label="account of current user"
+              aria-controls="menu-appbar"
+              aria-haspopup="true"
+              onClick={handleOpenNavMenu}
               color="inherit"
-              aria-label=""
-              sx={{ mr: 2 }}
             >
-              <SearchIcon />
+              <MenuIcon />
             </IconButton>
-            <InputBase placeholder="講義名を検索" />
-          </Search>
+            <Menu
+              id="menu-appbar"
+              anchorEl={anchorElNav}
+              anchorOrigin={{
+                vertical: "bottom",
+                horizontal: "left",
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: "top",
+                horizontal: "left",
+              }}
+              open={Boolean(anchorElNav)}
+              onClose={handleCloseNavMenu}
+              sx={{
+                display: { xs: "block", md: "none" },
+              }}
+            >
+              {pages.map((page) => (
+                <MenuItem key={page} onClick={handleCloseNavMenu}>
+                  <Typography textAlign="center">{page}</Typography>
+                </MenuItem>
+              ))}
+            </Menu>
+          </Box>
+
+          <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
+          <Typography
+            variant="h5"
+            noWrap
+            component="a"
+            href=""
+            sx={{
+              mr: 2,
+              display: { xs: "flex", md: "none" },
+              flexGrow: 1,
+              fontFamily: "monospace",
+              fontWeight: 700,
+              letterSpacing: ".3rem",
+              color: "inherit",
+              textDecoration: "none",
+            }}
+          >
+            LOGO
+          </Typography>
+
+          {/* for PC */}
+          <Box sx={{ flexGrow: 0, display: { xs: "none", md: "flex" } }}>
+            <Nav />
+          </Box>
         </Toolbar>
-      </AppBar>
-    </Box>
+      </Container>
+    </AppBar>
   );
 }
