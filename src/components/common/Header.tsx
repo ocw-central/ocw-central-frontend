@@ -51,7 +51,8 @@ import { alpha, styled } from "@mui/material/styles";
 import * as React from "react";
 
 import { ReactComponent as Img } from "@/assets/ocwc-owl.svg";
-import { Nav } from "src/components/common/Nav";
+import { Nav } from "./Nav";
+import { createSearchParams, useNavigate } from "react-router-dom";
 
 const pages = ["Products", "Pricing", "Blog"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
@@ -120,6 +121,16 @@ export function Header() {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+  const navigate = useNavigate();
+  const onEnterDown = (e: React.KeyboardEvent) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      // ensure that the e.target is an input element
+      const title = (e.target as HTMLInputElement).value;
+      const searchParames = createSearchParams({ title });
+      navigate(`/subjects/?${searchParames}`);
+    }
+  };
 
   return (
     <AppBar position="static">
@@ -152,6 +163,9 @@ export function Header() {
             <StyledInputBase
               placeholder="Search…"
               inputProps={{ "aria-label": "search" }}
+              onKeyDown={(e) => {
+                onEnterDown(e);
+              }}
             />
           </Search>
           <Box sx={{ flexGrow: 1 }}></Box>
