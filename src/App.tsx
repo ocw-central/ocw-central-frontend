@@ -1,4 +1,5 @@
 import { theme } from "@/utils/themes";
+import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 import { ThemeProvider } from "@emotion/react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
@@ -9,19 +10,28 @@ import { SubjectPage } from "./components/SubjectPage";
 import { SubjectsPage } from "./components/SubjectsPage";
 import { UserGuidePage } from "./components/UserGuidePage";
 
+const client = new ApolloClient({
+  uri: import.meta.env.DEV
+    ? "http://localhost:8081/query"
+    : "https://ocw-central-server.onrender.com",
+  cache: new InMemoryCache(),
+});
+
 function App() {
   return (
     <BrowserRouter>
-      <ThemeProvider theme={theme}>
-        <Header />
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/subject/:id" element={<SubjectPage />} />
-          <Route path="/subjects" element={<SubjectsPage />}></Route>
-          <Route path="/about" element={<AboutPage />} />
-          <Route path="/guideline" element={<UserGuidePage />} />
-        </Routes>
-      </ThemeProvider>
+      <ApolloProvider client={client}>
+        <ThemeProvider theme={theme}>
+          <Header />
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/subject/:id" element={<SubjectPage />} />
+            <Route path="/subjects" element={<SubjectsPage />}></Route>
+            <Route path="/about" element={<AboutPage />} />
+            <Route path="/guideline" element={<UserGuidePage />} />
+          </Routes>
+        </ThemeProvider>
+      </ApolloProvider>
     </BrowserRouter>
   );
 }
