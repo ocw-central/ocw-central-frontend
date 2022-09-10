@@ -1,5 +1,6 @@
 import { ReactComponent as LicenseImage } from "@/assets/cc-license-by-nc-sa.svg";
-import { ReactComponent as Logo } from "@/assets/ocwc-owl.svg";
+import { Nav } from "@/components/common/Nav";
+import { Social } from "@/components/common/Social";
 import styles from "@/styles/footer.module.css";
 
 export function Footer() {
@@ -7,7 +8,8 @@ export function Footer() {
     <footer className={styles.wrapper}>
       <div className={styles.flexContainer}>
         <LicenseImage />
-        [ソーシャル]
+        <Social />
+        <Nav />
       </div>
     </footer>
   );

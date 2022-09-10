@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import { Box } from "@mui/material";
 
 const linkNames = [
-  { link: "/", name: "Home" },
   { link: "/about", name: "このサイトについて" },
   { link: "/guideline", name: "利用ガイド" },
 ];

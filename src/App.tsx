@@ -1,3 +1,4 @@
+import { Footer } from "@/components/common/Footer";
 import "@/styles/App.css";
 import { theme } from "@/utils/themes";
 import { ThemeProvider } from "@emotion/react";
@@ -9,7 +10,6 @@ import { SubjectPage } from "./components/SubjectPage";
 import { SubjectsPage } from "./components/SubjectsPage";
 import { UserGuidePage } from "./components/UserGuidePage";
 import GlobalStyles from "./styles/GlobalStyles";
-import { Footer } from "@/components/common/Footer";
 
 function App() {
   return (
