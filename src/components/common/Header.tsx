@@ -17,8 +17,7 @@ import * as React from "react";
 import { ReactComponent as Img } from "@/assets/ocwc-owl.svg";
 import { Nav } from "src/components/common/Nav";
 
-const pages = ["Products", "Pricing", "Blog"];
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
+const pages = ["Home", "このサイトについて", "利用ガイド"];
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
