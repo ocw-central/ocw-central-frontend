@@ -1,0 +1,12 @@
+overwrite: true
+schema: "http://127.0.0.1:8081/query"
+documents: "./src/documents/*.graphql"
+generates:
+  src/generated/graphql.tsx:
+    plugins:
+      - "typescript"
+      - "typescript-operations"
+      - "typescript-react-apollo"
+  ./graphql.schema.json:
+    plugins:
+      - "introspection"
