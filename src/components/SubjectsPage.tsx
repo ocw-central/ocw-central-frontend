@@ -50,10 +50,9 @@ export function SubjectsPage() {
   const navigate = useNavigate();
   // クエリパラメータをもとに検索を行い、コンポーネントを書き換える
   const GridItems = ChangeGridItems();
-
-  // 講義名検索結果を持つstate
+  // 講義名検索パラメーターを持つstate
   const [searchTitle, setSearchTitle] = useState("");
-  // stateに基づきsearch parameterを切り替える関数
+  // stateに基づきsearch parameterを切り替えて再レンダリングする関数
   const setSearchParams = () => {
     const params: Params = {
       title: searchTitle,
