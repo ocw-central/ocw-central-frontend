@@ -15,7 +15,7 @@ import { Footer } from "@/components/common/Footer";
 const client = new ApolloClient({
   uri: import.meta.env.DEV
     ? "http://localhost:8081/query"
-    : "https://ocw-central-server.onrender.com",
+    : "https://ocw-central-server.onrender.com/query",
   cache: new InMemoryCache(),
 });
 
