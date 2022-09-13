@@ -1,14 +1,18 @@
 import { ReactComponent as LicenseImage } from "@/assets/cc-license-by-nc-sa.svg";
 import { Social } from "@/components/common/Social";
-import styles from "@/styles/footer.module.css";
+import { Box } from "@mui/material";
 
 export function Footer() {
   return (
-    <footer className={styles.wrapper}>
-      <div className={styles.flexContainer}>
-        <LicenseImage />
-        <Social />
-      </div>
-    </footer>
+    <Box
+      style={{ bottom: 0, height: 180 }}
+      sx={{
+        backgroundColor: "#5286AB",
+        color: "#fff",
+      }}
+    >
+      <LicenseImage />
+      <Social />
+    </Box>
   );
 }
