@@ -20,7 +20,7 @@ export const SubjectCard = (props: Props) => {
           <CardMedia
             component="img"
             height="300"
-            image={props.subject.thumbnail}
+            image={props.subject.thumbnailLink}
             alt="thumbnail of subject"
           />
           <CardContent>
@@ -28,7 +28,7 @@ export const SubjectCard = (props: Props) => {
               {props.subject.title}
             </Typography>
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-              {props.subject.faculties && props.subject.faculties.join(", ")}
+              {props.subject.faculty}
             </Typography>
           </CardContent>
         </Card>

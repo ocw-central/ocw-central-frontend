@@ -4,7 +4,7 @@ import { Video } from "./video";
 export type Subject = {
   id: string;
   title: string;
-  thumbnail?: string;
+  thumbnailLink?: string;
   category?: string;
   videos?: Video[];
   location?: string;
@@ -12,7 +12,7 @@ export type Subject = {
   relatedSubjects?: Subject[];
   department?: string;
   firstHeldOn?: number;
-  faculties?: string[];
+  faculty?: string[];
   language?: string;
   freeDescription?: string;
   series?: string;

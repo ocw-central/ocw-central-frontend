@@ -1,4 +1,5 @@
 import { useSubjetcsQuery } from "@/generated/graphql";
+import { Subject } from "@/models/subject";
 import { Box, Grid, InputBase } from "@mui/material";
 import { useState } from "react";
 import {
@@ -12,6 +13,10 @@ type Params = {
   title?: string;
 };
 
+type Props = {
+  subject: Subject;
+};
+
 // 実際には検索を行い検索結果をもとにGridItems書き換える
 const ChangeGridItems = () => {
   const GridItems: JSX.Element[] = [];
@@ -21,8 +26,6 @@ const ChangeGridItems = () => {
   const { data, loading, error } = useSubjetcsQuery({
     variables: {
       title: title,
-      faculty: "",
-      academicField: "",
     },
   });
 
@@ -41,7 +44,7 @@ const ChangeGridItems = () => {
   data.subjects.forEach((subject) => {
     GridItems.push(
       <Grid item xs={12} sm={6} md={4} key={subject.id}>
-        <SubjectCard subject={subject} />
+        <SubjectCard Subject subject={subject} />
       </Grid>
     );
   });
@@ -52,9 +55,10 @@ export function SubjectsPage() {
   const navigate = useNavigate();
   // クエリパラメータをもとに検索を行い、コンポーネントを書き換える
   const GridItems = ChangeGridItems();
-  // 講義名検索パラメーターを持つstate
+
+  // 講義名検索結果を持つstate
   const [searchTitle, setSearchTitle] = useState("");
-  // stateに基づきsearch parameterを切り替えて再レンダリングする関数
+  // stateに基づきsearch parameterを切り替える関数
   const setSearchParams = () => {
     const params: Params = {
       title: searchTitle,
