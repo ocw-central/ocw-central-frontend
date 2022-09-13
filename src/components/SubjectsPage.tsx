@@ -70,7 +70,7 @@ export function SubjectsPage() {
 
   return (
     <Box>
-      <Box border={1} sx={{ m: 5, p: 3, backgroundColor: "primary.main" }}>
+      <Box border={1} sx={{ m: 5, p: 3, backgroundColor: "#5286AB" }}>
         <InputBase
           placeholder="講義名"
           sx={{ backgroundColor: "#ffffff", m: 4 }}
