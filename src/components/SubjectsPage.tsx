@@ -1,5 +1,4 @@
-import { useSubjetcsQuery } from "@/generated/graphql";
-import { Subject } from "@/models/subject";
+import { Subject, useSubjetcsQuery } from "@/generated/graphql";
 import { Box, Grid, InputBase } from "@mui/material";
 import { useState } from "react";
 import {
@@ -44,7 +43,7 @@ const ChangeGridItems = () => {
   data.subjects.forEach((subject) => {
     GridItems.push(
       <Grid item xs={12} sm={6} md={4} key={subject.id}>
-        <SubjectCard Subject subject={subject} />
+        <SubjectCard subject={subject} />
       </Grid>
     );
   });

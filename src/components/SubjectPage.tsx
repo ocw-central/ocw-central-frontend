@@ -57,7 +57,7 @@ export function SubjectPage() {
                 gutterBottom={true}
                 sx={{ p: 1 }}
               >
-                {video?.faculties && video?.faculties.join(", ")}
+                {video?.faculty}
               </Typography>
               <YouTube videoId={video?.videoId} />
             </Box>

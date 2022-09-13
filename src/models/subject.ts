@@ -12,7 +12,7 @@ export type Subject = {
   relatedSubjects?: Subject[];
   department?: string;
   firstHeldOn?: number;
-  faculty?: string[];
+  faculty?: string;
   language?: string;
   freeDescription?: string;
   series?: string;
