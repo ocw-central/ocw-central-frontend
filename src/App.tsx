@@ -35,7 +35,7 @@ function App() {
       <BrowserRouter>
         <ScrollToTop />
         <ThemeProvider theme={theme}>
-          <div style={style_footer}>
+          <div style={style_footer as React.CSSProperties}>
             <div style={style_footer_b}>
               <GlobalStyles />
               <Header />
