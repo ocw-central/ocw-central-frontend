@@ -6,7 +6,7 @@ export type Video = {
   link?: string; // どちらかがほしい
   videoId?: string; // どちらかがほしい
   chapters?: Chapter[];
-  faculties?: string[];
+  faculty?: string;
   lecturedOn?: number;
   videoLength?: number; // 秒数
   language?: string;

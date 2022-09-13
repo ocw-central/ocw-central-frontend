@@ -16,11 +16,11 @@ export const SubjectCard = (props: Props) => {
   return (
     <Link to={`/subject/${props.subject.id}`}>
       <CardActionArea>
-        <Card className="SubjectCard" sx={{ m: 5, p: 3 }}>
+        <Card className="SubjectCard" sx={{ m: 5, p: 5 }}>
           <CardMedia
             component="img"
             height="300"
-            image={props.subject.thumbnail}
+            image={props.subject.thumbnailLink}
             alt="thumbnail of subject"
           />
           <CardContent>
@@ -28,7 +28,7 @@ export const SubjectCard = (props: Props) => {
               {props.subject.title}
             </Typography>
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-              {props.subject.faculties && props.subject.faculties.join(", ")}
+              {props.subject.faculty}
             </Typography>
           </CardContent>
         </Card>

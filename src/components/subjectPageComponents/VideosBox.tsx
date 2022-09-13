@@ -45,7 +45,7 @@ export function VideosBox(props: Props) {
             {video.title}
           </Typography>
           <Typography variant="h6" component="div" align="left">
-            {video.faculties && video.faculties.join(", ")}
+            {video.faculty}
           </Typography>
         </Box>
       </Box>

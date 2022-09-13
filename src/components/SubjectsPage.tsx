@@ -1,4 +1,4 @@
-import { useSubjetcsQuery } from "@/generated/graphql";
+import { Subject, useSubjetcsQuery } from "@/generated/graphql";
 import { Box, Grid, InputBase } from "@mui/material";
 import { useState } from "react";
 import {
@@ -10,6 +10,10 @@ import { SubjectCard } from "./subjectsPageComponents/SubjectCard";
 
 type Params = {
   title?: string;
+};
+
+type Props = {
+  subject: Subject;
 };
 
 // 実際には検索を行い検索結果をもとにGridItems書き換える
@@ -50,9 +54,10 @@ export function SubjectsPage() {
   const navigate = useNavigate();
   // クエリパラメータをもとに検索を行い、コンポーネントを書き換える
   const GridItems = ChangeGridItems();
-  // 講義名検索パラメーターを持つstate
+
+  // 講義名検索結果を持つstate
   const [searchTitle, setSearchTitle] = useState("");
-  // stateに基づきsearch parameterを切り替えて再レンダリングする関数
+  // stateに基づきsearch parameterを切り替える関数
   const setSearchParams = () => {
     const params: Params = {
       title: searchTitle,
@@ -64,7 +69,7 @@ export function SubjectsPage() {
 
   return (
     <Box>
-      <Box border={1} sx={{ m: 5, p: 3, backgroundColor: "primary.main" }}>
+      <Box border={1} sx={{ m: 5, p: 3, backgroundColor: "#5286AB" }}>
         <InputBase
           placeholder="講義名"
           sx={{ backgroundColor: "#ffffff", m: 4 }}
