@@ -1,10 +1,10 @@
 /*https://github.com/ebisucom/next-react-website/blob/main/blog/styles/footer.module.css*/
 .wrapper {
   padding: var(--space-xl) 0;
-  background-color: #5286ab;
+  background-color: var(--gray-10);
 }
 
 .flexContainer {
-  composes: sideBySideCenter from "./utils.module.css";
+  composes: sideBySideCenter from './utils.module.css';
   gap: 2em;
 }

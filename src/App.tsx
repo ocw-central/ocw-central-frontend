@@ -20,25 +20,38 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
+const style_footer = {
+  display: "flex",
+  flexDirection: "column",
+  minHeight: "100vh",
+};
+const style_footer_b = {
+  flex: 1,
+};
+
 function App() {
   return (
-    <BrowserRouter>
-      <ScrollToTop />
-      <ApolloProvider client={client}>
+    <ApolloProvider client={client}>
+      <BrowserRouter>
+        <ScrollToTop />
         <ThemeProvider theme={theme}>
-          <GlobalStyles />
-          <Header />
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/subject/:id" element={<SubjectPage />} />
-            <Route path="/subjects" element={<SubjectsPage />}></Route>
-            <Route path="/about" element={<AboutPage />} />
-            <Route path="/guideline" element={<UserGuidePage />} />
-          </Routes>
-          <Footer />
+          <div style={style_footer}>
+            <div style={style_footer_b}>
+              <GlobalStyles />
+              <Header />
+              <Routes>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/subject/:id" element={<SubjectPage />} />
+                <Route path="/subjects" element={<SubjectsPage />}></Route>
+                <Route path="/about" element={<AboutPage />} />
+                <Route path="/guideline" element={<UserGuidePage />} />
+              </Routes>
+            </div>
+            <Footer />
+          </div>
         </ThemeProvider>
-      </ApolloProvider>
-    </BrowserRouter>
+      </BrowserRouter>
+    </ApolloProvider>
   );
 }
 
