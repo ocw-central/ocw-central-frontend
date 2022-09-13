@@ -21,6 +21,8 @@ const ChangeGridItems = () => {
   const { data, loading, error } = useSubjetcsQuery({
     variables: {
       title: title,
+      faculty: "",
+      academicField: "",
     },
   });
 
