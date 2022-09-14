@@ -23,6 +23,11 @@ export type Scalars = {
   Time: any;
 };
 
+export type AcademicField = {
+  __typename?: "AcademicField";
+  name: Scalars["String"];
+};
+
 export type Chapter = Node & {
   __typename?: "Chapter";
   id: Scalars["ID"];
@@ -37,6 +42,7 @@ export type Node = {
 
 export type Query = {
   __typename?: "Query";
+  academicFields: Array<AcademicField>;
   subject: Subject;
   subjects: Array<Subject>;
 };
@@ -86,7 +92,7 @@ export type Subject = Node & {
   category: Scalars["String"];
   department: Scalars["String"];
   faculty: Scalars["String"];
-  firstHeldOn: Scalars["Time"];
+  firstHeldOn?: Maybe<Scalars["Time"]>;
   freeDescription: Scalars["String"];
   id: Scalars["ID"];
   language: Scalars["String"];
@@ -94,7 +100,7 @@ export type Subject = Node & {
   relatedSubjects: Array<RelatedSubject>;
   resources: Array<Resource>;
   series: Scalars["String"];
-  syllabus: Syllabus;
+  syllabus?: Maybe<Syllabus>;
   thumbnailLink: Scalars["String"];
   title: Scalars["String"];
   videos: Array<Video>;
@@ -110,9 +116,9 @@ export type Syllabus = Node & {
   __typename?: "Syllabus";
   academicYear: Scalars["Int"];
   assignedGrade: Scalars["String"];
-  courceDayPeriod: Scalars["String"];
-  courceFormat: Scalars["String"];
-  courceRequirement: Scalars["String"];
+  courseDayPeriod: Scalars["String"];
+  courseFormat: Scalars["String"];
+  courseRequirement: Scalars["String"];
   faculty: Scalars["String"];
   gradingMethod: Scalars["String"];
   id: Scalars["ID"];
@@ -143,37 +149,229 @@ export type Video = Node & {
   videoLength: Scalars["Int"];
 };
 
+export type SubjectsQueryVariables = Exact<{
+  title: Scalars["String"];
+  faculty: Scalars["String"];
+  academicField: Scalars["String"];
+}>;
+
+export type SubjectsQuery = {
+  __typename?: "Query";
+  subjects: Array<{
+    __typename?: "Subject";
+    id: string;
+    title: string;
+    thumbnailLink: string;
+    faculty: string;
+  }>;
+};
+
 export type SubjectQueryVariables = Exact<{
   id: Scalars["ID"];
 }>;
 
 export type SubjectQuery = {
   __typename?: "Query";
-  subject: { __typename?: "Subject"; id: string; title: string };
-};
-
-export type SubjetcsQueryVariables = Exact<{
-  title?: InputMaybe<Scalars["String"]>;
-  faculty?: InputMaybe<Scalars["String"]>;
-  academicField?: InputMaybe<Scalars["String"]>;
-}>;
-
-export type SubjetcsQuery = {
-  __typename?: "Query";
-  subjects: Array<{
+  subject: {
     __typename?: "Subject";
     id: string;
+    category: string;
     title: string;
+    location: string;
+    department: string;
+    firstHeldOn?: any | null;
     faculty: string;
+    language: string;
+    freeDescription: string;
+    series: string;
+    academicField: string;
     thumbnailLink: string;
-  }>;
+    videos: Array<{
+      __typename?: "Video";
+      id: string;
+      title: string;
+      ordering: number;
+      link: string;
+      faculty: string;
+      lecturedOn: any;
+      videoLength: number;
+      language: string;
+      chapters: Array<{
+        __typename?: "Chapter";
+        id: string;
+        startAt: number;
+        topic: string;
+        thumbnailLink: string;
+      }>;
+    }>;
+    resources: Array<{
+      __typename?: "Resource";
+      id: string;
+      title: string;
+      ordering: number;
+      description: string;
+      link: string;
+    }>;
+    relatedSubjects: Array<{
+      __typename?: "RelatedSubject";
+      id: string;
+      title: string;
+      thumbnailLink: string;
+      faculty: string;
+    }>;
+    syllabus?: {
+      __typename?: "Syllabus";
+      id: string;
+      faculty: string;
+      language: string;
+      subjectNumbering: string;
+      academicYear: number;
+      semester: string;
+      numCredit: number;
+      courseFormat: string;
+      assignedGrade: string;
+      targetedAudience: string;
+      courseDayPeriod: string;
+      outline: string;
+      objective: string;
+      lessonPlan: string;
+      gradingMethod: string;
+      courseRequirement: string;
+      outClassLearning: string;
+      reference: string;
+      remark: string;
+      subpages: Array<{ __typename?: "Subpage"; id: string; content: string }>;
+    } | null;
+  };
 };
 
+export const SubjectsDocument = gql`
+  query subjects($title: String!, $faculty: String!, $academicField: String!) {
+    subjects(title: $title, faculty: $faculty, academicField: $academicField) {
+      id
+      title
+      thumbnailLink
+      faculty
+    }
+  }
+`;
+
+/**
+ * __useSubjectsQuery__
+ *
+ * To run a query within a React component, call `useSubjectsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useSubjectsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useSubjectsQuery({
+ *   variables: {
+ *      title: // value for 'title'
+ *      faculty: // value for 'faculty'
+ *      academicField: // value for 'academicField'
+ *   },
+ * });
+ */
+export function useSubjectsQuery(
+  baseOptions: Apollo.QueryHookOptions<SubjectsQuery, SubjectsQueryVariables>
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<SubjectsQuery, SubjectsQueryVariables>(
+    SubjectsDocument,
+    options
+  );
+}
+export function useSubjectsLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    SubjectsQuery,
+    SubjectsQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<SubjectsQuery, SubjectsQueryVariables>(
+    SubjectsDocument,
+    options
+  );
+}
+export type SubjectsQueryHookResult = ReturnType<typeof useSubjectsQuery>;
+export type SubjectsLazyQueryHookResult = ReturnType<
+  typeof useSubjectsLazyQuery
+>;
+export type SubjectsQueryResult = Apollo.QueryResult<
+  SubjectsQuery,
+  SubjectsQueryVariables
+>;
 export const SubjectDocument = gql`
   query subject($id: ID!) {
     subject(id: $id) {
       id
+      category
       title
+      videos {
+        id
+        title
+        ordering
+        link
+        chapters {
+          id
+          startAt
+          topic
+          thumbnailLink
+        }
+        faculty
+        lecturedOn
+        videoLength
+        language
+      }
+      location
+      resources {
+        id
+        title
+        ordering
+        description
+        link
+      }
+      relatedSubjects {
+        id
+        title
+        thumbnailLink
+        faculty
+      }
+      department
+      firstHeldOn
+      faculty
+      language
+      freeDescription
+      syllabus {
+        id
+        faculty
+        language
+        subjectNumbering
+        academicYear
+        semester
+        numCredit
+        courseFormat
+        assignedGrade
+        targetedAudience
+        courseDayPeriod
+        outline
+        objective
+        lessonPlan
+        gradingMethod
+        courseRequirement
+        outClassLearning
+        reference
+        remark
+        subpages {
+          id
+          content
+        }
+      }
+      series
+      academicField
+      thumbnailLink
     }
   }
 `;
@@ -217,62 +415,4 @@ export type SubjectLazyQueryHookResult = ReturnType<typeof useSubjectLazyQuery>;
 export type SubjectQueryResult = Apollo.QueryResult<
   SubjectQuery,
   SubjectQueryVariables
->;
-export const SubjetcsDocument = gql`
-  query subjetcs($title: String, $faculty: String, $academicField: String) {
-    subjects(title: $title, faculty: $faculty, academicField: $academicField) {
-      id
-      title
-      faculty
-      thumbnailLink
-    }
-  }
-`;
-
-/**
- * __useSubjetcsQuery__
- *
- * To run a query within a React component, call `useSubjetcsQuery` and pass it any options that fit your needs.
- * When your component renders, `useSubjetcsQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useSubjetcsQuery({
- *   variables: {
- *      title: // value for 'title'
- *      faculty: // value for 'faculty'
- *      academicField: // value for 'academicField'
- *   },
- * });
- */
-export function useSubjetcsQuery(
-  baseOptions?: Apollo.QueryHookOptions<SubjetcsQuery, SubjetcsQueryVariables>
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<SubjetcsQuery, SubjetcsQueryVariables>(
-    SubjetcsDocument,
-    options
-  );
-}
-export function useSubjetcsLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<
-    SubjetcsQuery,
-    SubjetcsQueryVariables
-  >
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<SubjetcsQuery, SubjetcsQueryVariables>(
-    SubjetcsDocument,
-    options
-  );
-}
-export type SubjetcsQueryHookResult = ReturnType<typeof useSubjetcsQuery>;
-export type SubjetcsLazyQueryHookResult = ReturnType<
-  typeof useSubjetcsLazyQuery
->;
-export type SubjetcsQueryResult = Apollo.QueryResult<
-  SubjetcsQuery,
-  SubjetcsQueryVariables
 >;

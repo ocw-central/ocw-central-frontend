@@ -1,4 +1,4 @@
-import { Subject, useSubjetcsQuery } from "@/generated/graphql";
+import { Subject, useSubjectsQuery } from "@/generated/graphql";
 import { Box, Grid, InputBase } from "@mui/material";
 import { useState } from "react";
 import {
@@ -20,11 +20,13 @@ type Props = {
 const ChangeGridItems = () => {
   const GridItems: JSX.Element[] = [];
   const [searchParams] = useSearchParams();
-  const title = searchParams.get("title");
+  const title = searchParams.get("title")!;
 
-  const { data, loading, error } = useSubjetcsQuery({
+  const { data, loading, error } = useSubjectsQuery({
     variables: {
       title: title,
+      faculty: "",
+      academicField: "",
     },
   });
 
