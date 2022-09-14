@@ -1,0 +1,79 @@
+query subjects($title: String!, $faculty: String!, $academicField: String!) {
+  subjects(title: $title, faculty: $faculty, academicField: $academicField) {
+    id
+    title
+    thumbnailLink
+    faculty
+  }
+}
+
+query subject($id: ID!) {
+  subject(id: $id) {
+    id
+    category
+    title
+    videos {
+      id
+      title
+      ordering
+      link
+      chapters {
+        id
+        startAt
+        topic
+        thumbnailLink
+      }
+      faculty
+      lecturedOn
+      videoLength
+      language
+    }
+    location
+    resources {
+      id
+      title
+      ordering
+      description
+      link
+    }
+    relatedSubjects {
+      id
+      title
+      thumbnailLink
+      faculty
+    }
+    department
+    firstHeldOn
+    faculty
+    language
+    freeDescription
+    syllabus {
+      id
+      faculty
+      language
+      subjectNumbering
+      academicYear
+      semester
+      numCredit
+      courseFormat
+      assignedGrade
+      targetedAudience
+      courseDayPeriod
+      outline
+      objective
+      lessonPlan
+      gradingMethod
+      courseRequirement
+      outClassLearning
+      reference
+      remark
+      subpages {
+        id
+        content
+      }
+    }
+    series
+    academicField
+    thumbnailLink
+  }
+}
