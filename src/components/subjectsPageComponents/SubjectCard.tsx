@@ -12,6 +12,8 @@ type Props = {
   subject: Subject;
 };
 
+const thumbnailBaseURL = "/images/subject_thumbnails/";
+
 export const SubjectCard = (props: Props) => {
   return (
     <Link to={`/subject/${props.subject.id}`}>
@@ -20,7 +22,7 @@ export const SubjectCard = (props: Props) => {
           <CardMedia
             component="img"
             height="300"
-            image={props.subject.thumbnailLink}
+            image={`${thumbnailBaseURL}${props.subject.id}.png`}
             alt="thumbnail of subject"
           />
           <CardContent>
