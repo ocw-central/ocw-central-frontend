@@ -95,9 +95,12 @@ export function Header() {
               // letterSpacing: ".3rem",
               color: "inherit",
               textDecoration: "none",
+              align: "center",
+              whiteSpace: "pre-line",
+              lineHeight: "24px",
             }}
           >
-            OCWCENTRAL
+            {`OCW\nCENTRAL`}
           </Typography>
           <Search>
             <SearchIconWrapper>
