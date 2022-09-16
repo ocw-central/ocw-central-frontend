@@ -1,5 +1,6 @@
 import { ReactComponent as LicenseImage } from "@/assets/cc-license-by-nc-sa.svg";
-import { Social } from "@/components/common/Social";
+import { faGithub, faTwitter } from "@fortawesome/free-brands-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Box } from "@mui/material";
 
 export function Footer() {
@@ -11,8 +12,43 @@ export function Footer() {
         color: "#fff",
       }}
     >
-      <LicenseImage />
-      <Social />
+      <Box
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "center",
+          marginTop: "4em",
+          gap: "2em",
+        }}
+      >
+        <a href="https://twitter.com/ocwcentral">
+          <FontAwesomeIcon icon={faTwitter} size="2x" />
+          <span className="sr-only">Twitter</span>
+        </a>
+        <a href="https://github.com/kafugen" style={{ marginRight: "2em" }}>
+          <FontAwesomeIcon icon={faGithub} size="2x" />
+          <span className="sr-only">GitHub</span>
+        </a>
+      </Box>
+      <Box
+        style={{
+          marginBottom: "1px",
+          marginLeft: "1px",
+          position: "fixed",
+          bottom: "0",
+        }}
+      >
+        <a
+          href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ja"
+          style={{
+            justifyContent: "flex-start",
+            alignSelf: "flex-end",
+            alignItems: "flex-end",
+          }}
+        >
+          <LicenseImage />
+        </a>
+      </Box>
     </Box>
   );
 }
