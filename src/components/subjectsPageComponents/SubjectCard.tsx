@@ -12,7 +12,7 @@ type Props = {
   subject: Subject;
 };
 
-const thumbnailBaseURL = "/images/subject_thumbnails/";
+const thumbnailBaseURL = "/subject_thumbnails/";
 
 export const SubjectCard = (props: Props) => {
   return (
