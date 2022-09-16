@@ -85,6 +85,9 @@ export function Header() {
             component="a"
             href="/"
             sx={{
+              "&:hover": {
+                color: "rgba(255,255,255,0.7)",
+              },
               mr: 2,
               display: { xs: "none", md: "flex" },
               fontFamily: "monospace",
