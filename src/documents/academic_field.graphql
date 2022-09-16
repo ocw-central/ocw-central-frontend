@@ -1,0 +1,5 @@
+query academicFields {
+  academicFields {
+    name
+  }
+}

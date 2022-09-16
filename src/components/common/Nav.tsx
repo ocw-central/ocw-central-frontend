@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 const pages = [
   { link: "/", name: "Home" },
   { link: "/search", name: "詳細検索" },
-  { link: "/fields", name: "分野一覧" },
+  { link: "/academic-fields", name: "分野一覧" },
   { link: "/about", name: "このサイトについて" },
 ];
 
