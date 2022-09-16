@@ -11,7 +11,9 @@ export function Footer() {
         color: "#fff",
       }}
     >
-      <LicenseImage />
+      <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ja">
+        <LicenseImage />
+      </a>
       <Social />
     </Box>
   );

@@ -1,13 +1,9 @@
-import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import {
   AppBar,
   Box,
   Container,
-  IconButton,
   InputBase,
-  Menu,
-  MenuItem,
   Toolbar,
   Typography,
 } from "@mui/material";
@@ -15,8 +11,8 @@ import { alpha, styled } from "@mui/material/styles";
 import * as React from "react";
 
 import { ReactComponent as Img } from "@/assets/ocwc-owl.svg";
-import { createSearchParams, useNavigate } from "react-router-dom";
-import { Nav } from "./Nav";
+import { Nav } from "@/components/common/Nav";
+import { createSearchParams, Link, useNavigate } from "react-router-dom";
 
 const pages = ["Home", "詳細検索", "このサイトについて"];
 
@@ -63,8 +59,6 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export function Header() {
-
- 
   const navigate = useNavigate();
   const onEnterDown = (e: React.KeyboardEvent) => {
     if (e.key === "Enter") {
@@ -81,7 +75,9 @@ export function Header() {
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Box mr={2}>
-            <Img style={{ width: "50px", height: "50px" }} />
+            <Link to="/">
+              <Img style={{ width: "50px", height: "50px" }} />
+            </Link>
           </Box>
           <Typography
             variant="h6"
@@ -114,7 +110,6 @@ export function Header() {
           </Search>
           <Box sx={{ flexGrow: 1 }}></Box>
 
-          
           <Nav />
           {/* for PC */}
           <Box sx={{ flexGrow: 0, display: { xs: "none", md: "flex" } }}></Box>
