@@ -52,9 +52,9 @@ export type QuerySubjectArgs = {
 };
 
 export type QuerySubjectsArgs = {
-  academicField?: InputMaybe<Scalars["String"]>;
-  faculty?: InputMaybe<Scalars["String"]>;
-  title?: InputMaybe<Scalars["String"]>;
+  academicField: Scalars["String"];
+  faculty: Scalars["String"];
+  title: Scalars["String"];
 };
 
 export type RelatedSubject = Node & {
@@ -147,6 +147,13 @@ export type Video = Node & {
   ordering: Scalars["Int"];
   title: Scalars["String"];
   videoLength: Scalars["Int"];
+};
+
+export type AcademicFieldsQueryVariables = Exact<{ [key: string]: never }>;
+
+export type AcademicFieldsQuery = {
+  __typename?: "Query";
+  academicFields: Array<{ __typename?: "AcademicField"; name: string }>;
 };
 
 export type SubjectsQueryVariables = Exact<{
@@ -245,6 +252,63 @@ export type SubjectQuery = {
   };
 };
 
+export const AcademicFieldsDocument = gql`
+  query academicFields {
+    academicFields {
+      name
+    }
+  }
+`;
+
+/**
+ * __useAcademicFieldsQuery__
+ *
+ * To run a query within a React component, call `useAcademicFieldsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAcademicFieldsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useAcademicFieldsQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useAcademicFieldsQuery(
+  baseOptions?: Apollo.QueryHookOptions<
+    AcademicFieldsQuery,
+    AcademicFieldsQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<AcademicFieldsQuery, AcademicFieldsQueryVariables>(
+    AcademicFieldsDocument,
+    options
+  );
+}
+export function useAcademicFieldsLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    AcademicFieldsQuery,
+    AcademicFieldsQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<AcademicFieldsQuery, AcademicFieldsQueryVariables>(
+    AcademicFieldsDocument,
+    options
+  );
+}
+export type AcademicFieldsQueryHookResult = ReturnType<
+  typeof useAcademicFieldsQuery
+>;
+export type AcademicFieldsLazyQueryHookResult = ReturnType<
+  typeof useAcademicFieldsLazyQuery
+>;
+export type AcademicFieldsQueryResult = Apollo.QueryResult<
+  AcademicFieldsQuery,
+  AcademicFieldsQueryVariables
+>;
 export const SubjectsDocument = gql`
   query subjects($title: String!, $faculty: String!, $academicField: String!) {
     subjects(title: $title, faculty: $faculty, academicField: $academicField) {

@@ -115,7 +115,6 @@ export function Header() {
             />
           </Search>
           <Box sx={{ flexGrow: 1 }}></Box>
-
           <Nav />
           {/* for PC */}
           <Box sx={{ flexGrow: 0, display: { xs: "none", md: "flex" } }}></Box>

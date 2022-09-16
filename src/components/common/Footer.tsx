@@ -32,7 +32,6 @@ export function Footer() {
       </Box>
       <Box
         style={{
-          marginBottom: "1px",
           marginLeft: "1px",
           position: "fixed",
           bottom: "0",
