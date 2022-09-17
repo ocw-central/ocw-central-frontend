@@ -1,4 +1,8 @@
-query subjectOnSearchPagewatch canelo vs ggg($title: String!, $faculty: String!, $academicField: String!) {
+query subjectOnSearchPage(
+  $title: String!
+  $faculty: String!
+  $academicField: String!
+) {
   subjects(title: $title, faculty: $faculty, academicField: $academicField) {
     id
     title

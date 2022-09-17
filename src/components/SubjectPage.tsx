@@ -4,9 +4,6 @@ import { useSubjectQuery } from "@/generated/graphql";
 import { Box, Typography } from "@mui/material";
 import { useSearchParams } from "react-router-dom";
 
-// 実際にはparams.idから取得
-//const params = useParams();
-
 export function SubjectPage() {
   const [SearchParams] = useSearchParams();
   const id = SearchParams.get("id")!;
@@ -38,8 +35,6 @@ export function SubjectPage() {
   //const chapters = videos.chapters ?? [];
   const syllabus = subject.syllabus;
 
-  //  const video = videos.find((video) => video.id === videoId);
-
   return (
     <Box className="Subject">
       <Box className="MainBox">
@@ -57,7 +52,9 @@ export function SubjectPage() {
             {subject.title}
           </Typography>
         </Box>
-        {hasVideos && <SubjectMainWithVideo subjectId={subject.id} videos={videos} />}
+        {hasVideos && (
+          <SubjectMainWithVideo subjectId={subject.id} videos={videos} />
+        )}
         {!hasVideos && <SubjectMainWithNoVideo />}
       </Box>
     </Box>
