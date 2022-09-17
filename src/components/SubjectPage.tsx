@@ -1,7 +1,6 @@
 import { useSubjectQuery } from "@/generated/graphql";
 import { Box, Typography } from "@mui/material";
 import { useSearchParams } from "react-router-dom";
-import YouTube from "react-youtube";
 import { ChapterBox } from "./subjectPageComponents/ChapterBox";
 
 // 実際にはparams.idから取得
@@ -32,6 +31,8 @@ export function SubjectPage() {
   console.log(data);
   const subject = data.subject;
   const videos = subject.videos ?? []; //already sorted by `ordering` field
+  const youtubeLinks = videos.map((video) => video.link);
+  const youtubeIds = youtubeLinks.map((link) => link.split("=")[1]);
   const topVideo = videos[0];
   //const chapters = videos.chapters ?? [];
   const syllabus = subject.syllabus;
@@ -81,7 +82,7 @@ export function SubjectPage() {
               >
                 {topVideo?.faculty}
               </Typography>
-              <YouTube videoId={videos[0]?.link} />
+              <YouTub
             </Box>
           </Box>
         </Box>
