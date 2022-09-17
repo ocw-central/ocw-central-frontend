@@ -150,14 +150,14 @@ export type AcademicFieldsQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type AcademicFieldsQuery = { __typename?: 'Query', academicFields: Array<{ __typename?: 'AcademicField', name: string }> };
 
-export type SubjectsQueryVariables = Exact<{
+export type SubjectOnSearchPageQueryVariables = Exact<{
   title: Scalars['String'];
   faculty: Scalars['String'];
   academicField: Scalars['String'];
 }>;
 
 
-export type SubjectsQuery = { __typename?: 'Query', subjects: Array<{ __typename?: 'Subject', id: string, title: string, thumbnailLink: string, faculty: string }> };
+export type SubjectOnSearchPageQuery = { __typename?: 'Query', subjects: Array<{ __typename?: 'Subject', id: string, title: string, thumbnailLink: string, faculty: string }> };
 
 export type SubjectQueryVariables = Exact<{
   id: Scalars['ID'];
@@ -201,8 +201,8 @@ export function useAcademicFieldsLazyQuery(baseOptions?: Apollo.LazyQueryHookOpt
 export type AcademicFieldsQueryHookResult = ReturnType<typeof useAcademicFieldsQuery>;
 export type AcademicFieldsLazyQueryHookResult = ReturnType<typeof useAcademicFieldsLazyQuery>;
 export type AcademicFieldsQueryResult = Apollo.QueryResult<AcademicFieldsQuery, AcademicFieldsQueryVariables>;
-export const SubjectsDocument = gql`
-    query subjects($title: String!, $faculty: String!, $academicField: String!) {
+export const SubjectOnSearchPageDocument = gql`
+    query subjectOnSearchPage($title: String!, $faculty: String!, $academicField: String!) {
   subjects(title: $title, faculty: $faculty, academicField: $academicField) {
     id
     title
@@ -213,16 +213,16 @@ export const SubjectsDocument = gql`
     `;
 
 /**
- * __useSubjectsQuery__
+ * __useSubjectOnSearchPageQuery__
  *
- * To run a query within a React component, call `useSubjectsQuery` and pass it any options that fit your needs.
- * When your component renders, `useSubjectsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useSubjectOnSearchPageQuery` and pass it any options that fit your needs.
+ * When your component renders, `useSubjectOnSearchPageQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useSubjectsQuery({
+ * const { data, loading, error } = useSubjectOnSearchPageQuery({
  *   variables: {
  *      title: // value for 'title'
  *      faculty: // value for 'faculty'
@@ -230,17 +230,17 @@ export const SubjectsDocument = gql`
  *   },
  * });
  */
-export function useSubjectsQuery(baseOptions: Apollo.QueryHookOptions<SubjectsQuery, SubjectsQueryVariables>) {
+export function useSubjectOnSearchPageQuery(baseOptions: Apollo.QueryHookOptions<SubjectOnSearchPageQuery, SubjectOnSearchPageQueryVariables>) {
         const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<SubjectsQuery, SubjectsQueryVariables>(SubjectsDocument, options);
+        return Apollo.useQuery<SubjectOnSearchPageQuery, SubjectOnSearchPageQueryVariables>(SubjectOnSearchPageDocument, options);
       }
-export function useSubjectsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<SubjectsQuery, SubjectsQueryVariables>) {
+export function useSubjectOnSearchPageLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<SubjectOnSearchPageQuery, SubjectOnSearchPageQueryVariables>) {
           const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<SubjectsQuery, SubjectsQueryVariables>(SubjectsDocument, options);
+          return Apollo.useLazyQuery<SubjectOnSearchPageQuery, SubjectOnSearchPageQueryVariables>(SubjectOnSearchPageDocument, options);
         }
-export type SubjectsQueryHookResult = ReturnType<typeof useSubjectsQuery>;
-export type SubjectsLazyQueryHookResult = ReturnType<typeof useSubjectsLazyQuery>;
-export type SubjectsQueryResult = Apollo.QueryResult<SubjectsQuery, SubjectsQueryVariables>;
+export type SubjectOnSearchPageQueryHookResult = ReturnType<typeof useSubjectOnSearchPageQuery>;
+export type SubjectOnSearchPageLazyQueryHookResult = ReturnType<typeof useSubjectOnSearchPageLazyQuery>;
+export type SubjectOnSearchPageQueryResult = Apollo.QueryResult<SubjectOnSearchPageQuery, SubjectOnSearchPageQueryVariables>;
 export const SubjectDocument = gql`
     query subject($id: ID!) {
   subject(id: $id) {

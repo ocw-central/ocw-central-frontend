@@ -1,9 +1,8 @@
+import { Video } from "@/generated/graphql";
 import { Box, Typography } from "@mui/material";
-import YouTube from "react-youtube";
-import { Video } from "@/models/video";
 
 type Props = {
-  setVideoIdFunc: (videoId: string) => void;
+  setFocusedVideoOrdering: (videoId: number) => void;
   videos: Video[];
 };
 
@@ -24,13 +23,13 @@ export function VideosBox(props: Props) {
           borderBottom: 2,
         }}
         onClick={() => {
-          props.setVideoIdFunc(video.id);
+          props.setFocusedVideoOrdering(video.ordering);
         }}
       >
-        <img
-          src={`https://img.youtube.com/vi/${video.videoId}/maxresdefault.jpg`}
+        {/*  <img #FIXME after adding thumbnail field to Video model
+          src={video.thumbnailLink}
           style={{ width: "20%", height: "100%" }}
-        />
+        /> */}
         <Box
           sx={{
             display: "flex",
@@ -67,7 +66,12 @@ export function VideosBox(props: Props) {
         variant="h3"
         component="div"
         align="center"
-        sx={{ bgcolor: "primary.light", color: "primary.contrastText", borderLeft: 1, p: 1 }}
+        sx={{
+          bgcolor: "secondary.dark",
+          color: "primary.contrastText",
+          borderLeft: 1,
+          p: 1,
+        }}
       >
         動画一覧
       </Typography>

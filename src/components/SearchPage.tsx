@@ -1,4 +1,4 @@
-import { Subject, useSubjectsQuery } from "@/generated/graphql";
+import { useSubjectOnSearchPageQuery } from "@/generated/graphql";
 import { Box, Grid, InputBase } from "@mui/material";
 import { useState } from "react";
 import {
@@ -12,16 +12,12 @@ type Params = {
   title?: string;
 };
 
-type Props = {
-  subject: Subject;
-};
-
 const ChangeGridItems = () => {
   const GridItems: JSX.Element[] = [];
   const [searchParams] = useSearchParams();
   const title = searchParams.get("title")!;
 
-  const { data, loading, error } = useSubjectsQuery({
+  const { data, loading, error } = useSubjectOnSearchPageQuery({
     variables: {
       title: title,
       faculty: "",
@@ -44,7 +40,7 @@ const ChangeGridItems = () => {
   data.subjects.forEach((subject) => {
     GridItems.push(
       <Grid item xs={12} sm={6} md={4} key={subject.id}>
-        <SubjectCard subject={subject} />
+        <SubjectCard {...subject} />
       </Grid>
     );
   });

@@ -2,7 +2,9 @@ import { youtube_parser } from "@/utils/youtubeParser";
 import { Box, Typography } from "@mui/material";
 import YouTube from "react-youtube";
 //import { ChapterBox } from "./subjectPageComponents/ChapterBox";
+import { VideosBox } from "@/components/subjectPageComponents/VideosBox";
 import { Video } from "@/generated/graphql";
+import { useState } from "react";
 
 type Props = {
   //setVideoIdFunc: (videoId: string) => void;
@@ -11,14 +13,11 @@ type Props = {
 
 export function SubjectMainWithVideo(props: Props) {
   const videos = props.videos ?? []; //already sorted by `ordering` field
-  const hasVideos = videos.length > 0;
+  const [FocusedVideoOrdering, SetFocusedVideoOrdering] = useState(0);
+  const FocusedVideo = videos[FocusedVideoOrdering];
+  const FocusedYoutubeId = youtube_parser(FocusedVideo.link);
 
-  const youtubeLinks = videos.map((video) => video.link);
-  const youtubeIds = youtubeLinks.map((link) => youtube_parser(link));
-  const topVideo = hasVideos ? videos[0] : null;
-  const topYoutubeId = hasVideos ? youtubeIds[0] : "";
-
-  //  const video = videos.find((video) => video.id === videoId);
+  // const video = videos.find((video) => video.id === videoId);
 
   return (
     <Box className="Subject">
@@ -48,7 +47,7 @@ export function SubjectMainWithVideo(props: Props) {
                 color="primary"
                 sx={{ color: "primary.main", borderLeft: 1, p: 1 }}
               >
-                {topVideo?.title}
+                {FocusedVideo?.title}
               </Typography>
               <Typography
                 variant="h4"
@@ -57,22 +56,21 @@ export function SubjectMainWithVideo(props: Props) {
                 gutterBottom={true}
                 sx={{ p: 1 }}
               >
-                {topVideo?.faculty}
+                {FocusedVideo?.faculty}
               </Typography>
-              {hasVideos && (
-                <YouTube
-                  videoId={topYoutubeId}
-                  opts={{
-                    height: "390",
-                    width: "640",
-                    playerVars: {
-                      // https://developers.google.com/youtube/player_parameters
-                      autoplay: 0,
-                    },
-                  }}
-                />
-              )}
+              <YouTube
+                videoId={FocusedYoutubeId}
+                opts={{
+                  height: "390",
+                  width: "640",
+                  playerVars: {
+                    // https://developers.google.com/youtube/player_parameters
+                    autoplay: 0,
+                  },
+                }}
+              />
             </Box>
+            <VideosBox videos={videos} setFocusedVideoOrdering={SetFocusedVideoOrdering} />
           </Box>
         </Box>
       </Box>
