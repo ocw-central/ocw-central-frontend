@@ -1,26 +1,43 @@
+import { useSubjectQuery } from "@/generated/graphql";
 import { Box, Typography } from "@mui/material";
-import { useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import YouTube from "react-youtube";
-import { MockSubjects } from "../mock/MockSubjects";
-import { Subject } from "../models/subject";
-import { Video } from "../models/video";
 import { ChapterBox } from "./subjectPageComponents/ChapterBox";
-import { VideosBox } from "./subjectPageComponents/VideosBox";
 
 // 実際にはparams.idから取得
 //const params = useParams();
-const subject: Subject = MockSubjects[0];
-
-const videos: Video[] = subject.videos ?? [];
 
 export function SubjectPage() {
   const [SearchParams] = useSearchParams();
   const id = SearchParams.get("id")!;
-  console.log(id);
 
-  const [videoId, setVideoId] = useState(videos[0].id);
-  const video = videos.find((video) => video.id === videoId);
+  const { data, loading, error } = useSubjectQuery({
+    variables: {
+      id: id,
+    },
+  });
+
+  if (loading) {
+    return <div>loading...</div>;
+  }
+
+  if (error) {
+    return <div>error</div>;
+  }
+
+  if (!data) {
+    return <div>no data</div>;
+  }
+
+  console.log(data);
+  const subject = data.subject;
+  const videos = subject.videos ?? []; //already sorted by `ordering` field
+  const topVideo = videos[0];
+  //const chapters = videos.chapters ?? [];
+  const syllabus = subject.syllabus;
+
+  //  const [videoId, setVideoId] = useState(videos[0].id);
+  //  const video = videos.find((video) => video.id === videoId);
 
   return (
     <Box className="Subject">
@@ -53,7 +70,7 @@ export function SubjectPage() {
                 color="primary"
                 sx={{ color: "primary.main", borderLeft: 1, p: 1 }}
               >
-                {video?.title}
+                {topVideo?.title}
               </Typography>
               <Typography
                 variant="h4"
@@ -62,18 +79,10 @@ export function SubjectPage() {
                 gutterBottom={true}
                 sx={{ p: 1 }}
               >
-                {video?.faculty}
+                {topVideo?.faculty}
               </Typography>
-              <YouTube videoId={video?.videoId} />
+              <YouTube videoId={videos[0]?.link} />
             </Box>
-            {videoId && (
-              <VideosBox
-                videos={videos}
-                setVideoIdFunc={(videoId?: string) => {
-                  videoId && setVideoId(videoId);
-                }}
-              />
-            )}
           </Box>
         </Box>
       </Box>
