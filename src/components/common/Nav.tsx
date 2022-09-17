@@ -90,11 +90,11 @@ export function Nav() {
           }}
         >
           {pages.map((page) => (
-            <MenuItem key={page.name} onClick={handleCloseNavMenu}>
-              <Link to={page.link}>
+            <Link to={page.link}>
+              <MenuItem key={page.name} onClick={handleCloseNavMenu}>
                 <Typography textAlign="center">{page.name}</Typography>
-              </Link>
-            </MenuItem>
+              </MenuItem>
+            </Link>
           ))}
         </Menu>
       </Box>
