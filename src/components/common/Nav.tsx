@@ -47,7 +47,8 @@ export function Nav() {
                   },
                   display: {
                     xs: "none",
-                    sm: "block",
+                    sm: "none",
+                    md: "block",
                   },
                 }}
               >
