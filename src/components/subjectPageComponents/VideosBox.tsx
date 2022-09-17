@@ -1,6 +1,6 @@
 import { Box, Typography } from "@mui/material";
 import YouTube from "react-youtube";
-import { Video } from "../../models/video";
+import { Video } from "@/models/video";
 
 type Props = {
   setVideoIdFunc: (videoId: string) => void;
