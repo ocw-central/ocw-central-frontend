@@ -1,14 +1,17 @@
+import { Video } from "@/generated/graphql";
 import { Box, Typography } from "@mui/material";
-import YouTube from "react-youtube";
-import { Video } from "../../models/video";
+import { useLocation, useNavigate } from "react-router-dom";
 
 type Props = {
-  setVideoIdFunc: (videoId: string) => void;
+  setFocusedVideoOrdering: (videoId: number) => void;
+  subjectId: string;
   videos: Video[];
 };
 
 export function VideosBox(props: Props) {
   const VideoItems = [];
+  const navigate = useNavigate();
+  const location = useLocation();
 
   for (const video of props.videos) {
     const VideoItem = (
@@ -17,20 +20,21 @@ export function VideosBox(props: Props) {
           display: "flex",
           justifyContent: "start",
           flexDirection: "row",
-          p: 1,
-          m: 1,
           bgcolor: "background.paper",
           borderRadius: 1,
           borderBottom: 2,
         }}
         onClick={() => {
-          props.setVideoIdFunc(video.id);
+          props.setFocusedVideoOrdering(video.ordering);
+          navigate(
+            `/subjects/?id=${props.subjectId}&video=${video.id}` //FIXME ad-hoc solution for routing
+          );
         }}
       >
-        <img
-          src={`https://img.youtube.com/vi/${video.videoId}/maxresdefault.jpg`}
+        {/*  <img #FIXME after adding thumbnail field to Video model
+          src={video.thumbnailLink}
           style={{ width: "20%", height: "100%" }}
-        />
+        /> */}
         <Box
           sx={{
             display: "flex",
@@ -67,7 +71,12 @@ export function VideosBox(props: Props) {
         variant="h3"
         component="div"
         align="center"
-        sx={{ bgcolor: "primary.light", color: "primary.contrastText", borderLeft: 1, p: 1 }}
+        sx={{
+          bgcolor: "secondary.dark",
+          color: "primary.contrastText",
+          borderLeft: 1,
+          p: 1,
+        }}
       >
         動画一覧
       </Typography>

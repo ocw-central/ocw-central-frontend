@@ -1,4 +1,8 @@
-query subjects($title: String!, $faculty: String!, $academicField: String!) {
+query subjectOnSearchPage(
+  $title: String!
+  $faculty: String!
+  $academicField: String!
+) {
   subjects(title: $title, faculty: $faculty, academicField: $academicField) {
     id
     title
@@ -10,6 +14,7 @@ query subjects($title: String!, $faculty: String!, $academicField: String!) {
 query subject($id: ID!) {
   subject(id: $id) {
     id
+    title
     category
     title
     videos {

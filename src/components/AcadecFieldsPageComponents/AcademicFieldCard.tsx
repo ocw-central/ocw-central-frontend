@@ -8,7 +8,7 @@ type Props = {
 
 export const AcademicFieldCard = (props: Props) => {
   return (
-    <Link to={`/subjects/?field=${props.academicField.name.toLowerCase()}`}>
+    <Link to={`/search/?field=${props.academicField.name.toLowerCase()}`}>
       <CardActionArea>
         <Card
           className="AcademicFieldCard"

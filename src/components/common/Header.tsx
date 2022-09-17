@@ -66,7 +66,7 @@ export function Header() {
       // ensure that the e.target is an input element
       const title = (e.target as HTMLInputElement).value;
       const searchParames = createSearchParams({ title });
-      navigate(`/subjects/?${searchParames}`);
+      navigate(`/search/?${searchParames}`);
     }
   };
 
@@ -107,7 +107,7 @@ export function Header() {
               <SearchIcon />
             </SearchIconWrapper>
             <StyledInputBase
-              placeholder="Search…"
+              placeholder="講義名で検索"
               inputProps={{ "aria-label": "search" }}
               onKeyDown={(e) => {
                 onEnterDown(e);
