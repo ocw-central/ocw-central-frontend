@@ -1,22 +1,6 @@
-import { useAcademicFieldsQuery } from "@/generated/graphql";
 import { Box } from "@mui/material";
 
 export function HomePage() {
-  const { data, loading, error } = useAcademicFieldsQuery({});
-  if (loading) {
-    return <div>loading...</div>;
-  }
-
-  if (error) {
-    return <div>error</div>;
-  }
-
-  if (!data) {
-    return <div>no data</div>;
-  }
-
-  console.log(data);
-
   return (
     <Box className="HomePage" sx={{ flexGrow: 1 }}>
       <h3>
