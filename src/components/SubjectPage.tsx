@@ -34,15 +34,18 @@ export function SubjectPage() {
 
   const subject = data.subject;
   const videos = subject.videos ?? []; //already sorted by `ordering` field
+  const hasVideos = videos.length > 0;
 
   const youtubeLinks = videos.map((video) => video.link);
   const youtubeIds = youtubeLinks.map((link) => youtube_parser(link));
-  const topVideo = videos[0];
-  const topYoutubeId = youtubeIds[0];
+  const topVideo = hasVideos ? videos[0] : null;
+  const topYoutubeId = hasVideos ? youtubeIds[0] : "";
+  //const [videoId, setVideoId] = hasVideos ? useState(videos[0].id): null;
+
   //const chapters = videos.chapters ?? [];
   const syllabus = subject.syllabus;
 
-  //  const [videoId, setVideoId] = useState(videos[0].id);
+  //
   //  const video = videos.find((video) => video.id === videoId);
 
   return (
@@ -87,12 +90,23 @@ export function SubjectPage() {
               >
                 {topVideo?.faculty}
               </Typography>
-              <YouTube videoId={topYoutubeId} />
+              {hasVideos && (
+                <YouTube
+                  videoId={topYoutubeId}
+                  opts={{
+                    height: "390",
+                    width: "640",
+                    playerVars: {
+                      // https://developers.google.com/youtube/player_parameters
+                      autoplay: 0,
+                    },
+                  }}
+                />
+              )}
             </Box>
           </Box>
         </Box>
       </Box>
-
       <ChapterBox />
     </Box>
   );
