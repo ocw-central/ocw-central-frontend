@@ -20,8 +20,6 @@ export function VideosBox(props: Props) {
           display: "flex",
           justifyContent: "start",
           flexDirection: "row",
-          p: 1,
-          m: 1,
           bgcolor: "background.paper",
           borderRadius: 1,
           borderBottom: 2,

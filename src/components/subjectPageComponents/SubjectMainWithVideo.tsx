@@ -36,7 +36,10 @@ export function SubjectMainWithVideo(props: Props) {
           <Box
             sx={{
               display: "flex",
-              flexDirection: "row",
+              flexDirection: {
+                xs: "column",
+                md: "row",
+              },
               borderRadius: 1,
             }}
           >
@@ -71,7 +74,11 @@ export function SubjectMainWithVideo(props: Props) {
                 }}
               />
             </Box>
-                      <VideosBox subjectId={props.subjectId} videos={videos} setFocusedVideoOrdering={SetFocusedVideoOrdering} />
+            <VideosBox
+              subjectId={props.subjectId}
+              videos={videos}
+              setFocusedVideoOrdering={SetFocusedVideoOrdering}
+            />
           </Box>
         </Box>
       </Box>
