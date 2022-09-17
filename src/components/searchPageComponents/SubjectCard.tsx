@@ -16,7 +16,7 @@ const thumbnailBaseURL = "/subject_thumbnails/";
 
 export const SubjectCard = (props: Props) => {
   return (
-    <Link to={`/subject/${props.subject.id}`}>
+    <Link to={`/subjecs/?id=${props.subject.id}`}>
       <CardActionArea>
         <Card className="SubjectCard" sx={{ m: 5, p: 5 }}>
           <CardMedia

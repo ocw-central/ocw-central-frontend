@@ -6,7 +6,7 @@ import {
   useNavigate,
   useSearchParams,
 } from "react-router-dom";
-import { SubjectCard } from "./subjectsPageComponents/SubjectCard";
+import { SubjectCard } from "./searchPageComponents/SubjectCard";
 
 type Params = {
   title?: string;
@@ -16,7 +16,6 @@ type Props = {
   subject: Subject;
 };
 
-// 実際には検索を行い検索結果をもとにGridItems書き換える
 const ChangeGridItems = () => {
   const GridItems: JSX.Element[] = [];
   const [searchParams] = useSearchParams();
@@ -52,7 +51,7 @@ const ChangeGridItems = () => {
   return GridItems;
 };
 
-export function SubjectsPage() {
+export function SearchPage() {
   const navigate = useNavigate();
   // クエリパラメータをもとに検索を行い、コンポーネントを書き換える
   const GridItems = ChangeGridItems();

@@ -9,8 +9,8 @@ import { AcademicFields } from "./components/AcademicFields";
 import { Header } from "./components/common/Header";
 import { ScrollToTop } from "./components/common/ScrollToTop";
 import { HomePage } from "./components/HomePage";
+import { SearchPage } from "./components/SearchPage";
 import { SubjectPage } from "./components/SubjectPage";
-import { SubjectsPage } from "./components/SubjectsPage";
 import GlobalStyles from "./styles/GlobalStyles";
 
 const client = new ApolloClient({
@@ -42,7 +42,7 @@ function App() {
               <Routes>
                 <Route path="/" element={<HomePage />} />
                 <Route path="/subject/:id" element={<SubjectPage />} />
-                <Route path="/subjects" element={<SubjectsPage />}></Route>
+                <Route path="/search" element={<SearchPage />}></Route>
                 <Route path="/about" element={<AboutPage />} />
                 <Route path="/academic-fields" element={<AcademicFields />} />
               </Routes>
