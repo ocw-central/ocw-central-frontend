@@ -41,10 +41,10 @@ function App() {
               <Header />
               <Routes>
                 <Route path="/" element={<HomePage />} />
-                <Route path="/subject/:id" element={<SubjectPage />} />
+                <Route path="/subjects/" element={<SubjectPage />} />
                 <Route path="/search" element={<SearchPage />}></Route>
                 <Route path="/about" element={<AboutPage />} />
-                <Route path="/academic-fields" element={<AcademicFields />} />
+                <Route path="/academic_fields" element={<AcademicFields />} />
               </Routes>
             </div>
             <Footer />

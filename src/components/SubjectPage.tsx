@@ -1,5 +1,6 @@
 import { Box, Typography } from "@mui/material";
 import { useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import YouTube from "react-youtube";
 import { MockSubjects } from "../mock/MockSubjects";
 import { Subject } from "../models/subject";
@@ -14,6 +15,10 @@ const subject: Subject = MockSubjects[0];
 const videos: Video[] = subject.videos ?? [];
 
 export function SubjectPage() {
+  const [SearchParams] = useSearchParams();
+  const id = SearchParams.get("id")!;
+  console.log(id);
+
   const [videoId, setVideoId] = useState(videos[0].id);
   const video = videos.find((video) => video.id === videoId);
 
