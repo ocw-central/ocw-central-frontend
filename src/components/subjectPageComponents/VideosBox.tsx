@@ -1,13 +1,17 @@
 import { Video } from "@/generated/graphql";
 import { Box, Typography } from "@mui/material";
+import { useLocation, useNavigate } from "react-router-dom";
 
 type Props = {
   setFocusedVideoOrdering: (videoId: number) => void;
+  subjectId: string;
   videos: Video[];
 };
 
 export function VideosBox(props: Props) {
   const VideoItems = [];
+  const navigate = useNavigate();
+  const location = useLocation();
 
   for (const video of props.videos) {
     const VideoItem = (
@@ -24,6 +28,9 @@ export function VideosBox(props: Props) {
         }}
         onClick={() => {
           props.setFocusedVideoOrdering(video.ordering);
+          navigate(
+            `/subjects/?id=${props.subjectId}&video=${video.id}` //FIXME ad-hoc solution for routing
+          );
         }}
       >
         {/*  <img #FIXME after adding thumbnail field to Video model

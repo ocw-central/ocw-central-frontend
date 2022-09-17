@@ -8,6 +8,7 @@ import { useState } from "react";
 
 type Props = {
   //setVideoIdFunc: (videoId: string) => void;
+  subjectId: string;
   videos: Video[];
 };
 
@@ -70,7 +71,7 @@ export function SubjectMainWithVideo(props: Props) {
                 }}
               />
             </Box>
-            <VideosBox videos={videos} setFocusedVideoOrdering={SetFocusedVideoOrdering} />
+                      <VideosBox subjectId={props.subjectId} videos={videos} setFocusedVideoOrdering={SetFocusedVideoOrdering} />
           </Box>
         </Box>
       </Box>
