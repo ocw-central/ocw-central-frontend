@@ -10,6 +10,7 @@ query subjects($title: String!, $faculty: String!, $academicField: String!) {
 query subject($id: ID!) {
   subject(id: $id) {
     id
+    title
     category
     title
     videos {
