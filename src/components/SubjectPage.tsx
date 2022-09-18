@@ -19,7 +19,7 @@ export function SubjectPage() {
   }
 
   if (error) {
-    return <div>error</div>;
+    return <div>failed to fetch use SubjectQuery in SubjectPage</div>;
   }
 
   if (!data) {

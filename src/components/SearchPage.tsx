@@ -16,19 +16,14 @@ type Params = {
 
 const ChangeGridItems = () => {
   const GridItems: JSX.Element[] = [];
-  console.log("ChangeGridItems");
   const [searchParams] = useSearchParams();
   const titleParam = searchParams.get("title");
   const title: string = titleParam !== null ? titleParam : "";
-  console.log(title);
   const facultyParam = searchParams.get("faculty");
   const faculty: string = facultyParam !== null ? facultyParam : "";
-  console.log(faculty);
   const academicFieldParam = searchParams.get("field");
-  console.log(academicFieldParam);
   const academic_field: string =
     academicFieldParam !== null ? academicFieldParam : "";
-
   const { data, loading, error } = useSubjectOnSearchPageQuery({
     variables: {
       title: title,
@@ -42,7 +37,7 @@ const ChangeGridItems = () => {
   }
 
   if (error) {
-    return <div>error</div>;
+    return <div>useSubjectOnSearchPageQuery failed in SearchPage.tsx</div>;
   }
 
   if (!data) {
