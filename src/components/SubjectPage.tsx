@@ -26,8 +26,6 @@ export function SubjectPage() {
     return <div>no data</div>;
   }
 
-  console.log(data); //#FIXME
-
   const subject = data.subject;
   const videos = subject.videos ?? []; //already sorted by `ordering` field
   const hasVideos = videos.length > 0;
