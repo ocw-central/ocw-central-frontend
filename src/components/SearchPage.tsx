@@ -10,18 +10,30 @@ import { SubjectCard } from "./searchPageComponents/SubjectCard";
 
 type Params = {
   title?: string;
+  faculty?: string;
+  academic_fields?: string;
 };
 
 const ChangeGridItems = () => {
   const GridItems: JSX.Element[] = [];
+  console.log("ChangeGridItems");
   const [searchParams] = useSearchParams();
-  const title = searchParams.get("title")!;
+  const titleParam = searchParams.get("title");
+  const title: string = titleParam !== null ? titleParam : "";
+  console.log(title);
+  const facultyParam = searchParams.get("faculty");
+  const faculty: string = facultyParam !== null ? facultyParam : "";
+  console.log(faculty);
+  const academicFieldParam = searchParams.get("field");
+  console.log(academicFieldParam);
+  const academic_field: string =
+    academicFieldParam !== null ? academicFieldParam : "";
 
   const { data, loading, error } = useSubjectOnSearchPageQuery({
     variables: {
       title: title,
-      faculty: "",
-      academicField: "",
+      faculty: faculty,
+      academicField: academic_field,
     },
   });
 
@@ -54,10 +66,15 @@ export function SearchPage() {
 
   // 講義名検索結果を持つstate
   const [searchTitle, setSearchTitle] = useState("");
+  const [searchFaculty, setSearchFaculty] = useState("");
+  const [searchAcademicField, setSearchAcademicField] = useState("");
+
   // stateに基づきsearch parameterを切り替える関数
   const setSearchParams = () => {
     const params: Params = {
       title: searchTitle,
+      faculty: searchFaculty,
+      academic_fields: searchAcademicField,
     };
     const searchParams = createSearchParams(params);
 
