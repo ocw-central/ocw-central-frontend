@@ -1,6 +1,6 @@
 import { useSubjectOnSearchPageQuery } from "@/generated/graphql";
 import { Box, Grid, InputBase } from "@mui/material";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import {
   createSearchParams,
   useNavigate,
@@ -24,33 +24,35 @@ const ChangeGridItems = () => {
   const academicFieldParam = searchParams.get("field");
   const academic_field: string =
     academicFieldParam !== null ? academicFieldParam : "";
+  const mounted = useRef(false);
   const { data, loading, error } = useSubjectOnSearchPageQuery({
     variables: {
       title: title,
       faculty: faculty,
       academicField: academic_field,
     },
+    skip: title === "" && faculty === "" && academic_field === "",
   });
-
-  if (loading) {
-    return <div>loading...</div>;
+  if (mounted.current) {
+    if (loading) {
+      return <div>Loading...</div>;
+    }
+    if (error) {
+      return <div>Error</div>;
+    }
+    if (!data) {
+      return <div>該当講義がありません</div>;
+    }
+    if (data) {
+      data.subjects.forEach((subject) => {
+        GridItems.push(
+          <Grid item xs={12} sm={6} md={4} lg={3} key={subject.id}>
+            <SubjectCard {...subject} />
+          </Grid>
+        );
+      });
+    }
   }
-
-  if (error) {
-    return <div>useSubjectOnSearchPageQuery failed in SearchPage.tsx</div>;
-  }
-
-  if (!data) {
-    return <div>no data</div>;
-  }
-
-  data.subjects.forEach((subject) => {
-    GridItems.push(
-      <Grid item xs={12} sm={6} md={4} key={subject.id}>
-        <SubjectCard {...subject} />
-      </Grid>
-    );
-  });
   return GridItems;
 };
 
