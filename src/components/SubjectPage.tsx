@@ -19,14 +19,12 @@ export function SubjectPage() {
   }
 
   if (error) {
-    return <div>error</div>;
+    return <div>failed to fetch use SubjectQuery in SubjectPage</div>;
   }
 
   if (!data) {
     return <div>no data</div>;
   }
-
-  console.log(data); //#FIXME
 
   const subject = data.subject;
   const videos = subject.videos ?? []; //already sorted by `ordering` field

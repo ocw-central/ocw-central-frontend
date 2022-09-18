@@ -9,7 +9,9 @@ export function AcademicFields() {
   }
 
   if (error) {
-    return <div>error</div>;
+    return (
+      <div>Failed to fetch useAcademicFieldsQuery in AcademicFields.tsx</div>
+    );
   }
 
   if (!data) {
