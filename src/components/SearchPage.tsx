@@ -53,6 +53,7 @@ const ChangeGridItems = () => {
       });
     }
   }
+  mounted.current = true;
   return GridItems;
 };
 
