@@ -1,12 +1,13 @@
+import { DetailedSearchBar } from "@/components/searchPageComponents/DetailedSearchBar";
+import { SubjectCard } from "@/components/searchPageComponents/SubjectCard";
 import { useSubjectOnSearchPageQuery } from "@/generated/graphql";
-import { Box, Grid, InputBase } from "@mui/material";
+import { Box, Grid } from "@mui/material";
 import { useRef, useState } from "react";
 import {
   createSearchParams,
   useNavigate,
   useSearchParams,
 } from "react-router-dom";
-import { SubjectCard } from "./searchPageComponents/SubjectCard";
 
 type Params = {
   title?: string;
@@ -81,15 +82,13 @@ export function SearchPage() {
 
   return (
     <Box>
-      <Box border={1} sx={{ m: 5, p: 3, backgroundColor: "#5286AB" }}>
-        <InputBase
-          placeholder="講義名"
-          sx={{ backgroundColor: "#ffffff", m: 4 }}
-          onChange={(e) => setSearchTitle(e.target.value)}
-        />
-        <button onClick={() => setSearchParams()}>検索</button>
-      </Box>
-      <Grid container spacing={1}>
+      <DetailedSearchBar
+        setSearchParams={setSearchParams}
+        setSearchTitle={setSearchTitle}
+        setSearchFaculty={setSearchFaculty}
+        setSearchAcademicField={setSearchAcademicField}
+      />
+      <Grid container spacing={0}>
         {GridItems}
       </Grid>
     </Box>
