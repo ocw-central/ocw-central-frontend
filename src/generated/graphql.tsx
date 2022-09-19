@@ -153,7 +153,7 @@ export type AcademicFieldsQuery = { __typename?: 'Query', academicFields: Array<
 export type SubjectOnSearchPageQueryVariables = Exact<{
   title: Scalars['String'];
   faculty: Scalars['String'];
-  academicField: Scalars['String'];
+  field: Scalars['String'];
 }>;
 
 
@@ -202,8 +202,8 @@ export type AcademicFieldsQueryHookResult = ReturnType<typeof useAcademicFieldsQ
 export type AcademicFieldsLazyQueryHookResult = ReturnType<typeof useAcademicFieldsLazyQuery>;
 export type AcademicFieldsQueryResult = Apollo.QueryResult<AcademicFieldsQuery, AcademicFieldsQueryVariables>;
 export const SubjectOnSearchPageDocument = gql`
-    query subjectOnSearchPage($title: String!, $faculty: String!, $academicField: String!) {
-  subjects(title: $title, faculty: $faculty, academicField: $academicField) {
+    query subjectOnSearchPage($title: String!, $faculty: String!, $field: String!) {
+  subjects(title: $title, faculty: $faculty, academicField: $field) {
     id
     title
     thumbnailLink
@@ -226,7 +226,7 @@ export const SubjectOnSearchPageDocument = gql`
  *   variables: {
  *      title: // value for 'title'
  *      faculty: // value for 'faculty'
- *      academicField: // value for 'academicField'
+ *      field: // value for 'field'
  *   },
  * });
  */

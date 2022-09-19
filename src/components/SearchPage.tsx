@@ -1,17 +1,18 @@
+import { DetailedSearchBar } from "@/components/searchPageComponents/DetailedSearchBar";
+import { SubjectCard } from "@/components/searchPageComponents/SubjectCard";
 import { useSubjectOnSearchPageQuery } from "@/generated/graphql";
-import { Box, Grid, InputBase } from "@mui/material";
-import { useState } from "react";
+import { Box, Grid } from "@mui/material";
+import { useRef, useState } from "react";
 import {
   createSearchParams,
   useNavigate,
   useSearchParams,
 } from "react-router-dom";
-import { SubjectCard } from "./searchPageComponents/SubjectCard";
 
 type Params = {
   title?: string;
   faculty?: string;
-  academic_fields?: string;
+  field?: string;
 };
 
 const ChangeGridItems = () => {
@@ -22,35 +23,37 @@ const ChangeGridItems = () => {
   const facultyParam = searchParams.get("faculty");
   const faculty: string = facultyParam !== null ? facultyParam : "";
   const academicFieldParam = searchParams.get("field");
-  const academic_field: string =
-    academicFieldParam !== null ? academicFieldParam : "";
+  const field: string = academicFieldParam !== null ? academicFieldParam : "";
+  const mounted = useRef(false);
   const { data, loading, error } = useSubjectOnSearchPageQuery({
     variables: {
       title: title,
       faculty: faculty,
-      academicField: academic_field,
+      field: field,
     },
+    skip: title === "" && faculty === "" && field === "",
   });
-
-  if (loading) {
-    return <div>loading...</div>;
+  if (mounted.current) {
+    if (loading) {
+      return <div>Loading...</div>;
+    }
+    if (error) {
+      return <div>Error</div>;
+    }
+    if (!data) {
+      return <div>該当講義がありません</div>;
+    }
+    if (data) {
+      data.subjects.forEach((subject) => {
+        GridItems.push(
+          <Grid item xs={12} sm={6} md={4} lg={3} key={subject.id}>
+            <SubjectCard {...subject} />
+          </Grid>
+        );
+      });
+    }
   }
-
-  if (error) {
-    return <div>useSubjectOnSearchPageQuery failed in SearchPage.tsx</div>;
-  }
-
-  if (!data) {
-    return <div>no data</div>;
-  }
-
-  data.subjects.forEach((subject) => {
-    GridItems.push(
-      <Grid item xs={12} sm={6} md={4} key={subject.id}>
-        <SubjectCard {...subject} />
-      </Grid>
-    );
-  });
+  mounted.current = true;
   return GridItems;
 };
 
@@ -69,7 +72,7 @@ export function SearchPage() {
     const params: Params = {
       title: searchTitle,
       faculty: searchFaculty,
-      academic_fields: searchAcademicField,
+      field: searchAcademicField,
     };
     const searchParams = createSearchParams(params);
 
@@ -78,15 +81,13 @@ export function SearchPage() {
 
   return (
     <Box>
-      <Box border={1} sx={{ m: 5, p: 3, backgroundColor: "#5286AB" }}>
-        <InputBase
-          placeholder="講義名"
-          sx={{ backgroundColor: "#ffffff", m: 4 }}
-          onChange={(e) => setSearchTitle(e.target.value)}
-        />
-        <button onClick={() => setSearchParams()}>検索</button>
-      </Box>
-      <Grid container spacing={1}>
+      <DetailedSearchBar
+        setSearchParams={setSearchParams}
+        setSearchTitle={setSearchTitle}
+        setSearchFaculty={setSearchFaculty}
+        setSearchAcademicField={setSearchAcademicField}
+      />
+      <Grid container spacing={0}>
         {GridItems}
       </Grid>
     </Box>
