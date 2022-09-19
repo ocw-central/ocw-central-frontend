@@ -1,3 +1,4 @@
+import { SubjectCopyrightCard } from "@/components/subjectPageComponents/SubjectCopyrightCard";
 import { SubjectMainWithNoVideo } from "@/components/subjectPageComponents/SubjectMainWithNoVideo";
 import { SubjectMainWithVideo } from "@/components/subjectPageComponents/SubjectMainWithVideo";
 import { useSubjectQuery } from "@/generated/graphql";
@@ -35,7 +36,10 @@ export function SubjectPage() {
 
   return (
     <Box className="Subject">
-      <Box className="MainBox">
+      <Box
+        className="MainBox"
+        sx={{ display: "flex", flexDirection: "column" }}
+      >
         <Box
           sx={{
             display: "flex",
@@ -46,7 +50,7 @@ export function SubjectPage() {
             borderRadius: 1,
           }}
         >
-          <Typography variant="h2" component="div" align="left" sx={{ p: 1 }}>
+          <Typography variant="h3" component="div" align="left" sx={{ p: 1 }}>
             {subject.title}
           </Typography>
         </Box>
@@ -54,6 +58,16 @@ export function SubjectPage() {
           <SubjectMainWithVideo subjectId={subject.id} videos={videos} />
         )}
         {!hasVideos && <SubjectMainWithNoVideo />}
+      </Box>
+      <Box className="CopyrightBox" sx={{ display: "flex" }}>
+        <SubjectCopyrightCard
+          title={subject.title}
+          subject_faculty={subject.faculty}
+          syllabus_faculty={syllabus?.faculty}
+          subject_year={subject.firstHeldOn}
+          syllabus_year={syllabus?.academicYear}
+          videos={videos}
+        />
       </Box>
     </Box>
   );

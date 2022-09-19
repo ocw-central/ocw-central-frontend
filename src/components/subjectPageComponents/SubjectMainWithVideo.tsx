@@ -45,7 +45,7 @@ export function SubjectMainWithVideo(props: Props) {
           >
             <Box>
               <Typography
-                variant="h3"
+                variant="h4"
                 component="div"
                 align="left"
                 color="primary"
@@ -54,7 +54,7 @@ export function SubjectMainWithVideo(props: Props) {
                 {FocusedVideo?.title}
               </Typography>
               <Typography
-                variant="h4"
+                variant="h5"
                 component="div"
                 align="left"
                 gutterBottom={true}
