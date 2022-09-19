@@ -58,8 +58,11 @@ export function SubjectPage() {
       </Box>
       <SubjectCopyrightCard
         title={subject.title}
-        faculty={subject.faculty}
-        year={subject.firstHeldOn}
+        subject_faculty={subject.faculty}
+        syllabus_faculty={syllabus?.faculty}
+        subject_year={subject.firstHeldOn}
+        syllabus_year={syllabus?.academicYear}
+        videos={videos}
       />
     </Box>
   );
