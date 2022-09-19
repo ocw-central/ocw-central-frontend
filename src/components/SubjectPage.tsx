@@ -1,3 +1,4 @@
+import { SubjectCopyrightCard } from "@/components/subjectPageComponents/SubjectCopyrightCard";
 import { SubjectMainWithNoVideo } from "@/components/subjectPageComponents/SubjectMainWithNoVideo";
 import { SubjectMainWithVideo } from "@/components/subjectPageComponents/SubjectMainWithVideo";
 import { useSubjectQuery } from "@/generated/graphql";
@@ -55,6 +56,11 @@ export function SubjectPage() {
         )}
         {!hasVideos && <SubjectMainWithNoVideo />}
       </Box>
+      <SubjectCopyrightCard
+        title={subject.title}
+        faculty={subject.faculty}
+        year={subject.firstHeldOn}
+      />
     </Box>
   );
 }
