@@ -36,7 +36,10 @@ export function SubjectPage() {
 
   return (
     <Box className="Subject">
-      <Box className="MainBox">
+      <Box
+        className="MainBox"
+        sx={{ display: "flex", flexDirection: "column" }}
+      >
         <Box
           sx={{
             display: "flex",
@@ -56,14 +59,16 @@ export function SubjectPage() {
         )}
         {!hasVideos && <SubjectMainWithNoVideo />}
       </Box>
-      <SubjectCopyrightCard
-        title={subject.title}
-        subject_faculty={subject.faculty}
-        syllabus_faculty={syllabus?.faculty}
-        subject_year={subject.firstHeldOn}
-        syllabus_year={syllabus?.academicYear}
-        videos={videos}
-      />
+      <Box className="CopyrightBox" sx={{ display: "flex" }}>
+        <SubjectCopyrightCard
+          title={subject.title}
+          subject_faculty={subject.faculty}
+          syllabus_faculty={syllabus?.faculty}
+          subject_year={subject.firstHeldOn}
+          syllabus_year={syllabus?.academicYear}
+          videos={videos}
+        />
+      </Box>
     </Box>
   );
 }

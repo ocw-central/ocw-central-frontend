@@ -3,6 +3,7 @@ import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
+import Link from "@mui/material/Link";
 import Typography from "@mui/material/Typography";
 
 type Props = {
@@ -51,19 +52,37 @@ export function SubjectCopyrightCard(props: Props) {
     : "";
 
   return (
-    <Card sx={{ minWidth: 275}}>
+    <Card
+      variant="outlined"
+      sx={{
+        maxWidth: 600,
+        backgroundColor: "primary.dark",
+        mb: 2,
+      }}
+    >
       <CardContent>
-        <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+        <Typography sx={{ fontSize: 20 }} color="white" gutterBottom>
           著作権表記
         </Typography>
-        <Typography sx={{ mb: 1.5 }} color="text.secondary">
+        <Typography sx={{ mb: 1.5 }} color="white">
           この資料は京都大学OCWウェブサイトに掲載されている
           {title}の資料であり、その著作権は{faculty_copyright}
           に帰属します。©️ {year_copyright} {faculty_copyright}
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small">Learn More</Button>
+        <Link href="https://ocw.kyoto-u.ac.jp/guideline/">
+          <Button
+            style={{
+              borderRadius: 35,
+              color: "white",
+              padding: "18px 36px",
+              fontSize: "18px",
+            }}
+          >
+            Learn More
+          </Button>
+        </Link>
       </CardActions>
     </Card>
   );
