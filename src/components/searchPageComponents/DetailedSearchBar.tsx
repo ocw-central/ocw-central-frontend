@@ -15,10 +15,24 @@ export const DetailedSearchBar = ({
   return (
     <Box border={1} sx={{ m: 5, p: 3, backgroundColor: "#5286AB" }}>
       <InputBase
-        placeholder="講義名"
+        placeholder="講義タイトル"
         sx={{ backgroundColor: "#ffffff", m: 4 }}
         onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
           setSearchTitle(e.target.value)
+        }
+      />
+      <InputBase
+        placeholder="教授"
+        sx={{ backgroundColor: "#ffffff", m: 4 }}
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+          setSearchFaculty(e.target.value)
+        }
+      />
+      <InputBase
+        placeholder="学問分野"
+        sx={{ backgroundColor: "#ffffff", m: 4 }}
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+          setSearchAcademicField(e.target.value)
         }
       />
       <button onClick={() => setSearchParams()}>検索</button>

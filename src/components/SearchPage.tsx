@@ -12,7 +12,7 @@ import {
 type Params = {
   title?: string;
   faculty?: string;
-  academic_fields?: string;
+  field?: string;
 };
 
 const ChangeGridItems = () => {
@@ -23,16 +23,15 @@ const ChangeGridItems = () => {
   const facultyParam = searchParams.get("faculty");
   const faculty: string = facultyParam !== null ? facultyParam : "";
   const academicFieldParam = searchParams.get("field");
-  const academic_field: string =
-    academicFieldParam !== null ? academicFieldParam : "";
+  const field: string = academicFieldParam !== null ? academicFieldParam : "";
   const mounted = useRef(false);
   const { data, loading, error } = useSubjectOnSearchPageQuery({
     variables: {
       title: title,
       faculty: faculty,
-      academicField: academic_field,
+      field: field,
     },
-    skip: title === "" && faculty === "" && academic_field === "",
+    skip: title === "" && faculty === "" && field === "",
   });
   if (mounted.current) {
     if (loading) {
@@ -73,7 +72,7 @@ export function SearchPage() {
     const params: Params = {
       title: searchTitle,
       faculty: searchFaculty,
-      academic_fields: searchAcademicField,
+      field: searchAcademicField,
     };
     const searchParams = createSearchParams(params);
 

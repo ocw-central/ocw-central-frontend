@@ -1,9 +1,5 @@
-query subjectOnSearchPage(
-  $title: String!
-  $faculty: String!
-  $academicField: String!
-) {
-  subjects(title: $title, faculty: $faculty, academicField: $academicField) {
+query subjectOnSearchPage($title: String!, $faculty: String!, $field: String!) {
+  subjects(title: $title, faculty: $faculty, academicField: $field) {
     id
     title
     thumbnailLink
