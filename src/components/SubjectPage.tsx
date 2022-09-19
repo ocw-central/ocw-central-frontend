@@ -50,7 +50,7 @@ export function SubjectPage() {
             borderRadius: 1,
           }}
         >
-          <Typography variant="h2" component="div" align="left" sx={{ p: 1 }}>
+          <Typography variant="h3" component="div" align="left" sx={{ p: 1 }}>
             {subject.title}
           </Typography>
         </Box>
