@@ -1,0 +1,12 @@
+/* https://github.com/ebisucom/next-react-website/blob/main/blog/styles/container.module.css */
+.default {
+  width: 99%;
+  margin: 3em;
+  margin: 0 auto;
+}
+
+.large {
+  composes: default;
+  margin: 3em;
+  max-width: 1280px;
+}
