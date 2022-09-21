@@ -36,11 +36,11 @@ function App() {
       <BrowserRouter>
         <ScrollToTop />
         <ThemeProvider theme={theme}>
-          <Container large={false}>
-            <div style={style_footer as React.CSSProperties}>
-              <div style={style_footer_b}>
-                <GlobalStyles />
-                <Header />
+          <div style={style_footer as React.CSSProperties}>
+            <div style={style_footer_b}>
+              <GlobalStyles />
+              <Header />
+              <Container large={true}>
                 <Routes>
                   <Route path="/" element={<HomePage />} />
                   <Route path="/subjects/" element={<SubjectPage />} />
@@ -48,10 +48,10 @@ function App() {
                   <Route path="/about" element={<AboutPage />} />
                   <Route path="/academic_fields" element={<AcademicFields />} />
                 </Routes>
-              </div>
-              <Footer />
+              </Container>
             </div>
-          </Container>
+            <Footer />
+          </div>
         </ThemeProvider>
       </BrowserRouter>
     </ApolloProvider>

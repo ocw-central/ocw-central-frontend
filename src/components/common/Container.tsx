@@ -3,7 +3,6 @@ import styles from "@/styles/container.module.css";
 
 type Props = {
   children: React.ReactNode;
-  large: boolean;
 };
 
 export function Container(props: Props) {
