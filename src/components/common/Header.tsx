@@ -71,55 +71,59 @@ export function Header() {
   };
 
   return (
-    <AppBar position="static">
-      <Container maxWidth="xl">
-        <Toolbar disableGutters>
-          <Box mr={2}>
-            <Link to="/">
-              <Img style={{ width: "50px", height: "50px" }} />
-            </Link>
-          </Box>
-          <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            href="/"
-            sx={{
-              "&:hover": {
-                color: "rgba(255,255,255,0.7)",
-              },
-              mr: 2,
-              display: { xs: "none", md: "flex" },
-              fontFamily: "monospace",
-              fontWeight: 700,
-              // letterSpacing: ".3rem",
-              color: "inherit",
-              textDecoration: "none",
-              align: "center",
-              whiteSpace: "pre-line",
-              lineHeight: "24px",
-            }}
-          >
-            {`OCW\nCENTRAL`}
-          </Typography>
-          <Search>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="講義名で検索"
-              inputProps={{ "aria-label": "search" }}
-              onKeyDown={(e) => {
-                onEnterDown(e);
+    <Box>
+      <AppBar position="static">
+        <Container maxWidth="xl">
+          <Toolbar disableGutters>
+            <Box mr={2}>
+              <Link to="/">
+                <Img style={{ width: "50px", height: "50px" }} />
+              </Link>
+            </Box>
+            <Typography
+              variant="h6"
+              noWrap
+              component="a"
+              href="/"
+              sx={{
+                "&:hover": {
+                  color: "rgba(255,255,255,0.7)",
+                },
+                mr: 2,
+                display: { xs: "none", md: "flex" },
+                fontFamily: "monospace",
+                fontWeight: 700,
+                // letterSpacing: ".3rem",
+                color: "inherit",
+                textDecoration: "none",
+                align: "center",
+                whiteSpace: "pre-line",
+                lineHeight: "24px",
               }}
-            />
-          </Search>
-          <Box sx={{ flexGrow: 1 }}></Box>
-          <Nav />
-          {/* for PC */}
-          <Box sx={{ flexGrow: 0, display: { xs: "none", md: "flex" } }}></Box>
-        </Toolbar>
-      </Container>
-    </AppBar>
+            >
+              {`OCW\nCENTRAL`}
+            </Typography>
+            <Search>
+              <SearchIconWrapper>
+                <SearchIcon />
+              </SearchIconWrapper>
+              <StyledInputBase
+                placeholder="講義名で検索"
+                inputProps={{ "aria-label": "search" }}
+                onKeyDown={(e) => {
+                  onEnterDown(e);
+                }}
+              />
+            </Search>
+            <Box sx={{ flexGrow: 1 }}></Box>
+            <Nav />
+            {/* for PC */}
+            <Box
+              sx={{ flexGrow: 0, display: { xs: "none", md: "flex" } }}
+            ></Box>
+          </Toolbar>
+        </Container>
+      </AppBar>
+    </Box>
   );
 }

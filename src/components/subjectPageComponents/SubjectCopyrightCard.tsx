@@ -1,7 +1,5 @@
 import { Video } from "@/generated/graphql";
-import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import Link from "@mui/material/Link";
 import Typography from "@mui/material/Typography";
@@ -56,34 +54,24 @@ export function SubjectCopyrightCard(props: Props) {
       variant="outlined"
       sx={{
         maxWidth: 600,
-        backgroundColor: "primary.dark",
+        backgroundColor: "white",
         mb: 2,
       }}
     >
       <CardContent>
-        <Typography sx={{ fontSize: 20 }} color="white" gutterBottom>
+        <Typography sx={{ fontSize: "1.2em" }} color="black" gutterBottom>
           著作権表記
         </Typography>
-        <Typography sx={{ mb: 1.5 }} color="white">
+        <Typography
+          sx={{ mb: 1.5, fontSize: "1em", textAlign: "left" }}
+          color="balck"
+        >
           この資料は京都大学OCWウェブサイトに掲載されている
           {title}の資料であり、その著作権は{faculty_copyright}
-          に帰属します。©️ {year_copyright} {faculty_copyright}
+          に帰属します。
+          <Link href="https://ocw.kyoto-u.ac.jp/guideline/">より詳しく</Link>
         </Typography>
       </CardContent>
-      <CardActions>
-        <Link href="https://ocw.kyoto-u.ac.jp/guideline/">
-          <Button
-            style={{
-              borderRadius: 35,
-              color: "white",
-              padding: "18px 36px",
-              fontSize: "18px",
-            }}
-          >
-            Learn More
-          </Button>
-        </Link>
-      </CardActions>
     </Card>
   );
 }
