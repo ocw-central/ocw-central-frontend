@@ -40,7 +40,7 @@ function App() {
             <div style={style_footer_b}>
               <GlobalStyles />
               <Header />
-              <Container large={true}>
+              <Container>
                 <Routes>
                   <Route path="/" element={<HomePage />} />
                   <Route path="/subjects/" element={<SubjectPage />} />

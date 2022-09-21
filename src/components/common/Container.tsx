@@ -1,4 +1,3 @@
-// https://github.com/ebisucom/next-react-website/blob/main/blog/components/container.js
 import styles from "@/styles/container.module.css";
 
 type Props = {
@@ -6,9 +5,5 @@ type Props = {
 };
 
 export function Container(props: Props) {
-  return (
-    <div className={props.large ? styles.large : styles.default}>
-      {props.children}
-    </div>
-  );
+  return <div className={styles.default}>{props.children}</div>;
 }
