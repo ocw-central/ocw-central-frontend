@@ -33,7 +33,7 @@ export function Footer() {
       <Box
         style={{
           marginLeft: "1px",
-          position: "absolute",
+          position: "fixed",
           bottom: "0",
         }}
       >
