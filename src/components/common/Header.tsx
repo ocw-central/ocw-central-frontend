@@ -1,17 +1,9 @@
-import SearchIcon from "@mui/icons-material/Search";
-import {
-  AppBar,
-  Box,
-  Container,
-  InputBase,
-  Toolbar,
-  Typography,
-} from "@mui/material";
-import { alpha, styled } from "@mui/material/styles";
-import * as React from "react";
-
 import { ReactComponent as Img } from "@/assets/ocwc-owl.svg";
 import { Nav } from "@/components/common/Nav";
+import SearchIcon from "@mui/icons-material/Search";
+import { AppBar, Box, Container, InputBase, Toolbar } from "@mui/material";
+import { alpha, styled } from "@mui/material/styles";
+import * as React from "react";
 import { createSearchParams, Link, useNavigate } from "react-router-dom";
 
 const pages = ["Home", "詳細検索", "このサイトについて"];
@@ -72,7 +64,7 @@ export function Header() {
 
   return (
     <Box>
-      <AppBar position="static">
+      <AppBar position="static" sx={{ height: "3.5em" }}>
         <Container maxWidth="xl">
           <Toolbar disableGutters>
             <Box mr={2}>
@@ -80,29 +72,6 @@ export function Header() {
                 <Img style={{ width: "50px", height: "50px" }} />
               </Link>
             </Box>
-            <Typography
-              variant="h6"
-              noWrap
-              component="a"
-              href="/"
-              sx={{
-                "&:hover": {
-                  color: "rgba(255,255,255,0.7)",
-                },
-                mr: 2,
-                display: { xs: "none", md: "flex" },
-                fontFamily: "monospace",
-                fontWeight: 700,
-                // letterSpacing: ".3rem",
-                color: "inherit",
-                textDecoration: "none",
-                align: "center",
-                whiteSpace: "pre-line",
-                lineHeight: "24px",
-              }}
-            >
-              {`OCW\nCENTRAL`}
-            </Typography>
             <Search>
               <SearchIconWrapper>
                 <SearchIcon />
