@@ -89,7 +89,7 @@ type Subject = {
 export function SubjectDetails({ subject }: { subject: Subject }) {
   return (
     <Box>
-      <Typography variant="h4">講義詳細</Typography>
+      <Typography variant="h5">講義詳細</Typography>
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="subject details">
           <TableHead>
@@ -97,8 +97,8 @@ export function SubjectDetails({ subject }: { subject: Subject }) {
               {subject.firstHeldOn && <TableCell>開講日</TableCell>}
               {subject.category && <TableCell>カテゴリ</TableCell>}
               {subject.location && <TableCell>開催場所</TableCell>}
-              {subject.department && <TableCell>開講学部</TableCell>}
-              {subject.faculty && <TableCell>開講学科</TableCell>}
+              {subject.department && <TableCell>開講学科</TableCell>}
+              {subject.faculty && <TableCell>担当教員</TableCell>}
               {subject.language && <TableCell>言語</TableCell>}
               {subject.freeDescription && <TableCell>概要</TableCell>}
               {subject.series && <TableCell>シリーズ</TableCell>}
@@ -116,7 +116,13 @@ export function SubjectDetails({ subject }: { subject: Subject }) {
               {subject.faculty && <TableCell>{subject.faculty}</TableCell>}
               {subject.language && <TableCell>{subject.language}</TableCell>}
               {subject.freeDescription && (
-                <TableCell>{subject.freeDescription}</TableCell>
+                <TableCell>
+                  <div
+                    dangerouslySetInnerHTML={{
+                      __html: subject.freeDescription,
+                    }}
+                  ></div>
+                </TableCell>
               )}
               {subject.series && <TableCell>{subject.series}</TableCell>}
               {subject.academicField && (
