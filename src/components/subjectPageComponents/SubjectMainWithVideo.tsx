@@ -6,6 +6,7 @@ import { SubjectDetails } from "@/components/subjectPageComponents/SubjectDetail
 import { VideosBox } from "@/components/subjectPageComponents/VideosBox";
 import { Video } from "@/generated/graphql";
 import { useState } from "react";
+import { SubjectSyllabus } from "./SubjectSyllabus";
 
 type Subject = {
   __typename?: "Subject" | undefined;
@@ -161,6 +162,7 @@ export function SubjectMainWithVideo(props: Props) {
             />
           </Box>
           <SubjectDetails subject={props.subject} />
+          <SubjectSyllabus subject={props.subject} />
         </Box>
       </Box>
     </Box>

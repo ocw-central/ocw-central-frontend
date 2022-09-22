@@ -57,7 +57,7 @@ export function SubjectPage() {
         {hasVideos && (
           <SubjectMainWithVideo subject={subject} videos={videos} />
         )}
-        {!hasVideos && <SubjectMainWithNoVideo />}
+        {!hasVideos && <SubjectMainWithNoVideo subject={subject} />}
       </Box>
       <Box className="CopyrightBox" sx={{ display: "flex" }}>
         <SubjectCopyrightCard
