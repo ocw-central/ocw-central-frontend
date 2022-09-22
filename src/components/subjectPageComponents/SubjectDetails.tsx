@@ -1,10 +1,11 @@
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
+import Typography from "@mui/material/Typography";
+import { Box } from "@mui/system";
 
 type Subject = {
   __typename?: "Subject" | undefined;
@@ -85,54 +86,46 @@ type Subject = {
     | undefined;
 };
 
-function createData(
-  name: string,
-  calories: number,
-  fat: number,
-  carbs: number,
-  protein: number
-) {
-  return { name, calories, fat, carbs, protein };
-}
-
-const rows = [
-  createData("Frozen yoghurt", 159, 6.0, 24, 4.0),
-  createData("Ice cream sandwich", 237, 9.0, 37, 4.3),
-  createData("Eclair", 262, 16.0, 24, 6.0),
-  createData("Cupcake", 305, 3.7, 67, 4.3),
-  createData("Gingerbread", 356, 16.0, 49, 3.9),
-];
-
 export function SubjectDetails({ subject }: { subject: Subject }) {
   return (
-    <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 650 }} aria-label="simple table">
-        <TableHead>
-          <TableRow>
-            <TableCell>Dessert (100g serving)</TableCell>
-            <TableCell align="right">Calories</TableCell>
-            <TableCell align="right">Fat&nbsp;(g)</TableCell>
-            <TableCell align="right">Carbs&nbsp;(g)</TableCell>
-            <TableCell align="right">Protein&nbsp;(g)</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {rows.map((row) => (
-            <TableRow
-              key={row.name}
-              sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-            >
-              <TableCell component="th" scope="row">
-                {row.name}
-              </TableCell>
-              <TableCell align="right">{row.calories}</TableCell>
-              <TableCell align="right">{row.fat}</TableCell>
-              <TableCell align="right">{row.carbs}</TableCell>
-              <TableCell align="right">{row.protein}</TableCell>
+    <Box>
+      <Typography variant="h4">講義詳細</Typography>
+      <TableContainer component={Paper}>
+        <Table sx={{ minWidth: 650 }} aria-label="subject details">
+          <TableHead>
+            <TableRow>
+              {subject.firstHeldOn && <TableCell>開講日</TableCell>}
+              {subject.category && <TableCell>カテゴリ</TableCell>}
+              {subject.location && <TableCell>開催場所</TableCell>}
+              {subject.department && <TableCell>開講学部</TableCell>}
+              {subject.faculty && <TableCell>開講学科</TableCell>}
+              {subject.language && <TableCell>言語</TableCell>}
+              {subject.freeDescription && <TableCell>概要</TableCell>}
+              {subject.series && <TableCell>シリーズ</TableCell>}
+              {subject.academicField && <TableCell>学術分野</TableCell>}
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+            <TableRow>
+              {subject.firstHeldOn && (
+                <TableCell>{subject.firstHeldOn.slice(0, 10)}</TableCell>
+              )}
+              {subject.category && <TableCell>{subject.category}</TableCell>}
+              {subject.location && <TableCell>{subject.location}</TableCell>}
+              {subject.department && (
+                <TableCell>{subject.department}</TableCell>
+              )}
+              {subject.faculty && <TableCell>{subject.faculty}</TableCell>}
+              {subject.language && <TableCell>{subject.language}</TableCell>}
+              {subject.freeDescription && (
+                <TableCell>{subject.freeDescription}</TableCell>
+              )}
+              {subject.series && <TableCell>{subject.series}</TableCell>}
+              {subject.academicField && (
+                <TableCell>{subject.academicField}</TableCell>
+              )}
+            </TableRow>
+          </TableHead>
+        </Table>
+      </TableContainer>
+    </Box>
   );
 }
