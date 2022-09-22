@@ -24,10 +24,12 @@ const client = new ApolloClient({
 const style_footer = {
   display: "flex",
   flexDirection: "column",
+
   minHeight: "100vh",
 };
 const style_footer_b = {
   flex: 1,
+  flexBase: 0,
 };
 
 function App() {

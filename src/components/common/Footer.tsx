@@ -11,7 +11,6 @@ export function Footer() {
       style={{
         display: "flex",
         flexDirection: "row",
-        flexGrow: "1",
         justifyContent: "space-between",
         alignItems: "center",
       }}
@@ -39,16 +38,18 @@ export function Footer() {
           <LicenseImage style={{ position: "relative", left: "0" }} />
         </a>
       </Box>
-      <Link to="/">
-        <Logo
-          style={{
-            position: "relative",
-            width: "16em",
-            height: "10em",
-            alignSelf: "center",
-          }}
-        />
-      </Link>
+      <Box sx={{ display: { xs: "none", md: "contents" } }}>
+        <Link to="/">
+          <Logo
+            style={{
+              position: "relative",
+              width: "11em",
+              height: "10em",
+              alignSelf: "center",
+            }}
+          />
+        </Link>
+      </Box>
       <Box
         style={{
           display: "flex",
@@ -61,7 +62,7 @@ export function Footer() {
         <a href="https://twitter.com/ocwcentral">
           <FontAwesomeIcon
             icon={faTwitter}
-            size="3x"
+            size="2x"
             style={{ alignSelf: "flex-end" }}
           />
           <span className="sr-only">Twitter</span>
@@ -69,7 +70,7 @@ export function Footer() {
         <a href="https://github.com/kafugen" style={{ marginRight: "2em" }}>
           <FontAwesomeIcon
             icon={faGithub}
-            size="3x"
+            size="2x"
             style={{ alignSelf: "flex-end" }}
           />
           <span className="sr-only">GitHub</span>
