@@ -1,12 +1,19 @@
 import { ReactComponent as LicenseImage } from "@/assets/cc-license-by-nc-sa.svg";
+import { ReactComponent as Logo } from "@/assets/logo.svg";
 import { faGithub, faTwitter } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Box } from "@mui/material";
+import { Link } from "react-router-dom";
 
 export function Footer() {
   return (
     <Box
-      style={{ bottom: 0, height: 180 }}
+      style={{
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "center",
+      }}
       sx={{
         backgroundColor: "#5286AB",
         color: "#fff",
@@ -14,27 +21,10 @@ export function Footer() {
     >
       <Box
         style={{
-          display: "flex",
-          flexDirection: "row",
-          justifyContent: "center",
-          marginTop: "4em",
-          gap: "2em",
-        }}
-      >
-        <a href="https://twitter.com/ocwcentral">
-          <FontAwesomeIcon icon={faTwitter} size="2x" />
-          <span className="sr-only">Twitter</span>
-        </a>
-        <a href="https://github.com/kafugen" style={{ marginRight: "2em" }}>
-          <FontAwesomeIcon icon={faGithub} size="2x" />
-          <span className="sr-only">GitHub</span>
-        </a>
-      </Box>
-      <Box
-        style={{
-          marginLeft: "1px",
-          position: "fixed",
+          marginLeft: "0px",
+          position: "relative",
           bottom: "0",
+          alignSelf: "flex-end",
         }}
       >
         <a
@@ -45,7 +35,45 @@ export function Footer() {
             alignItems: "flex-end",
           }}
         >
-          <LicenseImage />
+          <LicenseImage style={{ position: "relative", left: "0" }} />
+        </a>
+      </Box>
+      <Box sx={{ display: { xs: "none", md: "contents" } }}>
+        <Link to="/">
+          <Logo
+            style={{
+              position: "relative",
+              width: "11em",
+              height: "10em",
+              alignSelf: "center",
+            }}
+          />
+        </Link>
+      </Box>
+      <Box
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "right",
+          marginTop: "4em",
+          gap: "2em",
+        }}
+      >
+        <a href="https://twitter.com/ocwcentral">
+          <FontAwesomeIcon
+            icon={faTwitter}
+            size="2x"
+            style={{ alignSelf: "flex-end" }}
+          />
+          <span className="sr-only">Twitter</span>
+        </a>
+        <a href="https://github.com/kafugen" style={{ marginRight: "2em" }}>
+          <FontAwesomeIcon
+            icon={faGithub}
+            size="2x"
+            style={{ alignSelf: "flex-end" }}
+          />
+          <span className="sr-only">GitHub</span>
         </a>
       </Box>
     </Box>

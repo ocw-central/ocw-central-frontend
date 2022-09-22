@@ -1,10 +1,5 @@
-/* https://github.com/ebisucom/next-react-website/blob/main/blog/styles/container.module.css */
 .default {
   margin: 3em;
   display: "flex";
   flex-direction: "row";
-}
-
-.large {
-  composes: default;
 }

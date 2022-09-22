@@ -55,7 +55,7 @@ export function SubjectPage() {
           </Typography>
         </Box>
         {hasVideos && (
-          <SubjectMainWithVideo subjectId={subject.id} videos={videos} />
+          <SubjectMainWithVideo subject={subject} videos={videos} />
         )}
         {!hasVideos && <SubjectMainWithNoVideo />}
       </Box>
