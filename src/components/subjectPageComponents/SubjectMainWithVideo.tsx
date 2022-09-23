@@ -3,6 +3,7 @@ import { Box, Typography } from "@mui/material";
 import YouTube from "react-youtube";
 //import { ChapterBox } from "./subjectPageComponents/ChapterBox";
 import { SubjectDetails } from "@/components/subjectPageComponents/SubjectDetails";
+import { SubjectResources } from "@/components/subjectPageComponents/SubjectResources";
 import { VideosBox } from "@/components/subjectPageComponents/VideosBox";
 import { Video } from "@/generated/graphql";
 import { useState } from "react";
@@ -161,6 +162,7 @@ export function SubjectMainWithVideo(props: Props) {
               setFocusedVideoOrdering={SetFocusedVideoOrdering}
             />
           </Box>
+          <SubjectResources subject={props.subject} />
           <SubjectDetails subject={props.subject} />
           <SubjectSyllabus subject={props.subject} />
         </Box>
