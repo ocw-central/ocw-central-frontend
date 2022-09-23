@@ -69,7 +69,13 @@ export function SubjectCopyrightCard(props: Props) {
           この資料は京都大学OCWウェブサイトに掲載されている
           {title}の資料であり、その著作権は{faculty_copyright}
           に帰属します。
-          <Link href="https://ocw.kyoto-u.ac.jp/guideline/">より詳しく</Link>
+          <Link
+            href="https://ocw.kyoto-u.ac.jp/guideline/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            より詳しく
+          </Link>
         </Typography>
       </CardContent>
     </Card>

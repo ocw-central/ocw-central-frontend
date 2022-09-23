@@ -1,9 +1,13 @@
-import { Box } from "@mui/material";
-
-//import { ChapterBox } from "./subjectPageComponents/ChapterBox";
-import { SubjectDetails } from "@/components/subjectPageComponents/SubjectDetails";
-import { SubjectResources } from "@/components/subjectPageComponents/SubjectResources";
-import { SubjectSyllabus } from "@/components/subjectPageComponents/SubjectSyllabus";
+import {
+  Paper,
+  Table,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+} from "@mui/material";
+import Typography from "@mui/material/Typography";
+import { Box } from "@mui/system";
 
 type Subject = {
   __typename?: "Subject" | undefined;
@@ -84,19 +88,28 @@ type Subject = {
     | undefined;
 };
 
-type Props = {
-  //setVideoIdFunc: (videoId: string) => void;
-  subject: Subject;
-};
-
-export function SubjectMainWithNoVideo(props: Props) {
+export function SubjectResources({ subject }: { subject: Subject }) {
   return (
-    <Box className="Subject">
-      <Box className="MainBox">
-        <SubjectResources subject={props.subject} />
-        <SubjectDetails subject={props.subject} />
-        <SubjectSyllabus subject={props.subject} />
-      </Box>
+    <Box>
+      <Typography variant="h5">講義資料</Typography>
+      <TableContainer component={Paper}>
+        <Table sx={{ minWidth: 650 }} aria-label="subject details">
+          <TableHead>
+            {subject.resources.map((resource) => (
+              <TableRow>
+                {resource.title && (
+                  <TableCell>
+                    <a href={resource.link}> {resource.title}</a>
+                  </TableCell>
+                )}
+                {resource.description && (
+                  <TableCell>{resource.description}</TableCell>
+                )}
+              </TableRow>
+            ))}
+          </TableHead>
+        </Table>
+      </TableContainer>
     </Box>
   );
 }
