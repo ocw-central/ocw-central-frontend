@@ -47,6 +47,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 const SearchBar = (props: {
   label: string;
   setValue: Dispatch<SetStateAction<string>>;
+  setSearchParams: () => void;
 }) => (
   <Search sx={{ background: "lightgrey" }}>
     <SearchIconWrapper>
@@ -58,6 +59,11 @@ const SearchBar = (props: {
       onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
         props.setValue(e.target.value)
       }
+      onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === "Enter") {
+          props.setSearchParams();
+        }
+      }}
     />
   </Search>
 );
@@ -84,7 +90,11 @@ export const DetailedSearchBar = ({
         justifyContent: "center",
       }}
     >
-      <SearchBar label="講義タイトル" setValue={setSearchTitle} />
+      <SearchBar
+        label="講義タイトル"
+        setValue={setSearchTitle}
+        setSearchParams={setSearchParams}
+      />
       <Box
         sx={{
           display: "flex",
@@ -93,8 +103,16 @@ export const DetailedSearchBar = ({
           m: 1,
         }}
       >
-        <SearchBar label="教授名" setValue={setSearchFaculty} />
-        <SearchBar label="分野名" setValue={setSearchAcademicField} />
+        <SearchBar
+          label="教授名"
+          setValue={setSearchFaculty}
+          setSearchParams={setSearchParams}
+        />
+        <SearchBar
+          label="分野名"
+          setValue={setSearchAcademicField}
+          setSearchParams={setSearchParams}
+        />
       </Box>
       <Button
         variant="contained"

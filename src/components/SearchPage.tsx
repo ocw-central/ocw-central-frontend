@@ -1,7 +1,7 @@
 import { DetailedSearchBar } from "@/components/searchPageComponents/DetailedSearchBar";
 import { SubjectCard } from "@/components/searchPageComponents/SubjectCard";
 import { useSubjectOnSearchPageQuery } from "@/generated/graphql";
-import { Box, Grid } from "@mui/material";
+import { Box, Grid, ImageList } from "@mui/material";
 import { useRef, useState } from "react";
 import {
   createSearchParams,
@@ -87,9 +87,9 @@ export function SearchPage() {
         setSearchFaculty={setSearchFaculty}
         setSearchAcademicField={setSearchAcademicField}
       />
-      <Grid container spacing={0}>
+      <ImageList variant="masonry" cols={3} gap={8}>
         {GridItems}
-      </Grid>
+      </ImageList>
     </Box>
   );
 }
