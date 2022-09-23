@@ -38,7 +38,7 @@ export function Footer() {
           <LicenseImage style={{ position: "relative", left: "0" }} />
         </a>
       </Box>
-      <Box sx={{ display: { xs: "none", md: "contents" } }}>
+      <Box sx={{ display: { xs: "none", sm: "contents" } }}>
         <Link to="/">
           <Logo
             style={{
