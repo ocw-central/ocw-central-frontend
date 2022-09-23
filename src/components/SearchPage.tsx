@@ -1,13 +1,14 @@
 import { DetailedSearchBar } from "@/components/searchPageComponents/DetailedSearchBar";
 import { SubjectCard } from "@/components/searchPageComponents/SubjectCard";
 import { useSubjectOnSearchPageQuery } from "@/generated/graphql";
-import { Box, Grid, ImageList } from "@mui/material";
+import { Box, Divider, Grid, ImageList, Typography } from "@mui/material";
 import { useRef, useState } from "react";
 import {
   createSearchParams,
   useNavigate,
   useSearchParams,
 } from "react-router-dom";
+import { SideBar } from "./searchPageComponents/SideBar";
 
 type Params = {
   title?: string;
@@ -45,11 +46,7 @@ const ChangeGridItems = () => {
     }
     if (data) {
       data.subjects.forEach((subject) => {
-        GridItems.push(
-          <Grid item xs={12} sm={6} md={4} lg={3} key={subject.id}>
-            <SubjectCard {...subject} />
-          </Grid>
-        );
+        GridItems.push(<SubjectCard {...subject} />);
       });
     }
   }
@@ -80,16 +77,38 @@ export function SearchPage() {
   };
 
   return (
-    <Box>
-      <DetailedSearchBar
-        setSearchParams={setSearchParams}
-        setSearchTitle={setSearchTitle}
-        setSearchFaculty={setSearchFaculty}
-        setSearchAcademicField={setSearchAcademicField}
-      />
-      <ImageList variant="masonry" cols={3} gap={8}>
-        {GridItems}
-      </ImageList>
-    </Box>
+    <Grid container>
+      <Grid
+        container
+        xs={0}
+        md={3}
+        sx={{ display: { xs: "none", md: "block" } }}
+      >
+        <SideBar />
+      </Grid>
+
+      <Grid item xs={12} md={9}>
+        <Box
+          sx={{
+            m: {
+              xs: 0,
+              md: 4,
+            },
+          }}
+        >
+          <Typography variant="h5" component="div" align="left">
+            詳細検索
+          </Typography>
+          <Divider sx={{ mb: 2 }} />
+          <DetailedSearchBar
+            setSearchParams={setSearchParams}
+            setSearchTitle={setSearchTitle}
+            setSearchFaculty={setSearchFaculty}
+            setSearchAcademicField={setSearchAcademicField}
+          />
+          <Grid container>{GridItems}</Grid>
+        </Box>
+      </Grid>
+    </Grid>
   );
 }
