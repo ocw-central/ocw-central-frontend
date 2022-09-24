@@ -91,7 +91,6 @@ type Subject = {
 export function SubjectResources({ subject }: { subject: Subject }) {
   return (
     <Box>
-      <Typography variant="h5">講義資料</Typography>
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="subject details">
           <TableHead>

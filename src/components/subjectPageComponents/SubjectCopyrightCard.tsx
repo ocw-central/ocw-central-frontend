@@ -54,7 +54,7 @@ export function SubjectCopyrightCard(props: Props) {
       variant="outlined"
       sx={{
         maxWidth: 600,
-        backgroundColor: "white",
+        backgroundColor: "#E6F2FF",
         mb: 2,
       }}
     >

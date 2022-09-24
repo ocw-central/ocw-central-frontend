@@ -1,6 +1,11 @@
 import { Video } from "@/generated/graphql";
-import { Box, Typography } from "@mui/material";
+import PlayCircleIcon from "@mui/icons-material/PlayCircle";
+import { Box, ListItemIcon, Typography } from "@mui/material";
+import ListItem from "@mui/material/ListItem";
+import ListItemButton from "@mui/material/ListItemButton";
+import ListItemText from "@mui/material/ListItemText";
 import { useLocation, useNavigate } from "react-router-dom";
+import { FixedSizeList, ListChildComponentProps } from "react-window";
 
 type Subject = {
   __typename?: "Subject" | undefined;
@@ -87,54 +92,65 @@ type Props = {
   videos: Video[];
 };
 
-export function VideosBox(props: Props) {
-  const VideoItems = [];
+function secondsToHms(d: number) {
+  d = Number(d);
+  var h = Math.floor(d / 3600);
+  var m = Math.floor((d % 3600) / 60);
+  var s = Math.floor((d % 3600) % 60);
+
+  var hDisplay = h > 0 ? h + "h" : "";
+  var mDisplay = m > 0 ? m + "m" : "";
+  var sDisplay = s > 0 ? s + "s" : "";
+  return hDisplay + mDisplay + sDisplay;
+}
+
+export function VideosBox(propsVideo: Props) {
   const navigate = useNavigate();
   const location = useLocation();
+  //colorize selected component
 
-  for (const video of props.videos) {
-    const VideoItem = (
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "start",
-          flexDirection: "row",
-          bgcolor: "background.paper",
-          borderRadius: 1,
-          borderBottom: 2,
-        }}
-        onClick={() => {
-          props.setFocusedVideoOrdering(video.ordering);
-          navigate(
-            `/subjects/?id=${props.subject.id}&video=${video.id}` //FIXME ad-hoc solution for routing
-          );
-        }}
-      >
-        {/*  <img #FIXME after adding thumbnail field to Video model
-          src={video.thumbnailLink}
-          style={{ width: "20%", height: "100%" }}
-        /> */}
-        <Box
+  function renderRow(propsRender: ListChildComponentProps) {
+    const { index, style } = propsRender;
+
+    return (
+      <ListItem style={style} key={index} button={true}>
+        <ListItemButton
           sx={{
-            display: "flex",
-            flexDirection: "column",
-            p: 1,
-            m: 1,
-            bgcolor: "background.paper",
-            borderRadius: 1,
+            border: "1em",
           }}
         >
-          <Typography variant="h5" component="div" align="left">
-            {video.title}
-          </Typography>
-          <Typography variant="h6" component="div" align="left">
-            {video.faculty}
-          </Typography>
-        </Box>
-      </Box>
+          <ListItemIcon>
+            <PlayCircleIcon />
+          </ListItemIcon>
+          <ListItemText
+            primary={`${propsVideo.videos[index].ordering + 1}. ${
+              propsVideo.videos[index].title
+            }`}
+            primaryTypographyProps={{
+              color: "primary",
+              fontWeight: "medium",
+              variant: "body2",
+            }}
+            secondary={
+              `${propsVideo.videos[index].faculty} ` +
+              `${propsVideo.videos[index].lecturedOn.slice(0, 10)} ` +
+              `${propsVideo.videos[index].language} ` +
+              `${secondsToHms(propsVideo.videos[index].videoLength)}`
+            }
+            onClick={() => {
+              propsVideo.setFocusedVideoOrdering(
+                propsVideo.videos[index].ordering
+              );
+              navigate(
+                `/subjects/?id=${propsVideo.subject.id}&video=${propsVideo.videos[index].id}` //FIXME ad-hoc solution for routing
+              );
+            }}
+          />
+        </ListItemButton>
+      </ListItem>
     );
-    VideoItems.push(VideoItem);
   }
+
   return (
     <Box
       className="VideoBox"
@@ -159,7 +175,16 @@ export function VideosBox(props: Props) {
       >
         動画一覧
       </Typography>
-      {VideoItems}
+
+      <FixedSizeList
+        height={400}
+        width={560}
+        itemSize={100}
+        itemCount={propsVideo.videos.length}
+        overscanCount={100}
+      >
+        {renderRow}
+      </FixedSizeList>
     </Box>
   );
 }
