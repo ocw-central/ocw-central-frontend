@@ -102,6 +102,19 @@ export function SubjectMainWithVideo(props: Props) {
 
   // const video = videos.find((video) => video.id === videoId);
 
+  const hasResources = props.subject.resources.length > 0;
+  const hasDetails =
+    props.subject.firstHeldOn ||
+    props.subject.category ||
+    props.subject.location ||
+    props.subject.department ||
+    props.subject.faculty ||
+    props.subject.language ||
+    props.subject.freeDescription ||
+    props.subject.series ||
+    props.subject.academicField;
+  const hasSyllabus = props.subject.syllabus !== null;
+
   return (
     <Box className="Subject">
       <Box className="MainBox">
@@ -162,9 +175,9 @@ export function SubjectMainWithVideo(props: Props) {
               setFocusedVideoOrdering={SetFocusedVideoOrdering}
             />
           </Box>
-          <SubjectResources subject={props.subject} />
-          <SubjectDetails subject={props.subject} />
-          <SubjectSyllabus subject={props.subject} />
+          {hasResources && <SubjectResources subject={props.subject} />}
+          {hasDetails && <SubjectDetails subject={props.subject} />}
+          {hasSyllabus && <SubjectSyllabus subject={props.subject} />}
         </Box>
       </Box>
     </Box>
