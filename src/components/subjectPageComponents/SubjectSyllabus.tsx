@@ -4,7 +4,6 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import Typography from "@mui/material/Typography";
 import { Box } from "@mui/system";
 
 type Subject = {
@@ -91,22 +90,21 @@ export function SubjectSyllabus({ subject }: { subject: Subject }) {
 
   return (
     <Box>
-      <Typography variant="h5">シラバス</Typography>
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="subject details">
           <TableHead>
             <TableRow>
-              {syllabus?.academicYear && (
+              {syllabus?.academicYear !== 0 && (
                 <TableCell>
                   <b>開講年度・開講期</b>
                 </TableCell>
               )}
               {syllabus?.semester && (
                 <TableCell>
-                  <b>開講学</b>期
+                  <b>開講学期</b>
                 </TableCell>
               )}
-              {syllabus?.numCredit && (
+              {syllabus?.numCredit !== 0 && (
                 <TableCell>
                   <b>単位数</b>
                 </TableCell>
@@ -182,8 +180,8 @@ export function SubjectSyllabus({ subject }: { subject: Subject }) {
                 <TableCell>{syllabus.academicYear}</TableCell>
               )}
               {syllabus?.semester && <TableCell>{syllabus.semester}</TableCell>}
-              {syllabus?.numCredit && (
-                <TableCell>{syllabus.numCredit}</TableCell>
+              {(syllabus?.numCredit || syllabus?.numCredit !== 0) && (
+                <TableCell>{syllabus?.numCredit}</TableCell>
               )}
               {syllabus?.assignedGrade && (
                 <TableCell>{syllabus.assignedGrade}</TableCell>
