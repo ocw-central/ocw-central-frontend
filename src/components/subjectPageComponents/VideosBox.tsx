@@ -1,5 +1,6 @@
 import { Video } from "@/generated/graphql";
-import { Box, Typography } from "@mui/material";
+import PlayCircleIcon from "@mui/icons-material/PlayCircle";
+import { Box, ListItemIcon, Typography } from "@mui/material";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
@@ -106,17 +107,30 @@ function secondsToHms(d: number) {
 export function VideosBox(propsVideo: Props) {
   const navigate = useNavigate();
   const location = useLocation();
+  //colorize selected component
 
   function renderRow(propsRender: ListChildComponentProps) {
     const { index, style } = propsRender;
 
     return (
-      <ListItem style={style} key={index} component="div">
-        <ListItemButton>
+      <ListItem style={style} key={index} button={true}>
+        <ListItemButton
+          sx={{
+            border: "1em",
+          }}
+        >
+          <ListItemIcon>
+            <PlayCircleIcon />
+          </ListItemIcon>
           <ListItemText
             primary={`${propsVideo.videos[index].ordering + 1}. ${
               propsVideo.videos[index].title
             }`}
+            primaryTypographyProps={{
+              color: "primary",
+              fontWeight: "medium",
+              variant: "body2",
+            }}
             secondary={
               `${propsVideo.videos[index].faculty} ` +
               `${propsVideo.videos[index].lecturedOn.slice(0, 10)} ` +
