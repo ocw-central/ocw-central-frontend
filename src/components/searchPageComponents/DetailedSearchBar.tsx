@@ -5,6 +5,7 @@ import { Dispatch, SetStateAction } from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import { alpha, styled } from "@mui/material/styles";
 import * as React from "react";
+import { theme } from "@/utils/themes";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -47,6 +48,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 const SearchBar = (props: {
   label: string;
   setValue: Dispatch<SetStateAction<string>>;
+  setSearchParams: () => void;
 }) => (
   <Search sx={{ background: "lightgrey" }}>
     <SearchIconWrapper>
@@ -58,6 +60,11 @@ const SearchBar = (props: {
       onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
         props.setValue(e.target.value)
       }
+      onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === "Enter") {
+          props.setSearchParams();
+        }
+      }}
     />
   </Search>
 );
@@ -78,30 +85,67 @@ export const DetailedSearchBar = ({
       sx={{
         display: "flex",
         flexDirection: "column",
-        m: 5,
-        p: 3,
         alignItems: "center",
         justifyContent: "center",
+        background: alpha(theme.palette.primary.main, 0.6),
+        p: 6,
+        mx: {
+          md: 10,
+          sm: 10,
+          xs: 0,
+        },
+        borderRadius: 2,
+        borderColor: alpha(theme.palette.primary.main, 1),
+        borderStyle: "solid",
+        borderWidth: 6,
       }}
     >
-      <SearchBar label="講義タイトル" setValue={setSearchTitle} />
+      <Box>
+        <SearchBar
+          label="講義タイトル"
+          setValue={setSearchTitle}
+          setSearchParams={setSearchParams}
+        />
+      </Box>
       <Box
         sx={{
           display: "flex",
           alignContent: "center",
           justifyContent: "center",
-          m: 1,
+          flexFlow: {
+            xs: "column",
+            md: "row",
+          },
+          px: {
+            xs: 0,
+            md: 2,
+          },
+          py: {
+            xs: 0.5,
+            md: 0.5,
+          },
         }}
       >
-        <SearchBar label="教授名" setValue={setSearchFaculty} />
-        <SearchBar label="分野名" setValue={setSearchAcademicField} />
+        <SearchBar
+          label="教授名"
+          setValue={setSearchFaculty}
+          setSearchParams={setSearchParams}
+        />
+        <SearchBar
+          label="分野名"
+          setValue={setSearchAcademicField}
+          setSearchParams={setSearchParams}
+        />
       </Box>
       <Button
         variant="contained"
         aria-label="search"
-        color="primary"
         onClick={() => setSearchParams()}
         size="large"
+        sx={{
+          mt: 2,
+          borderRadius: 2,
+        }}
       >
         検索
       </Button>
