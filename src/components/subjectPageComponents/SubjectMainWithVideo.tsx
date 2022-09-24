@@ -174,11 +174,13 @@ export function SubjectMainWithVideo(props: Props) {
                 }}
               />
             </Box>
-            <VideosBox
-              subject={props.subject}
-              videos={videos}
-              setFocusedVideoOrdering={SetFocusedVideoOrdering}
-            />
+            {props.videos.length > 1 && (
+              <VideosBox
+                subject={props.subject}
+                videos={videos}
+                setFocusedVideoOrdering={SetFocusedVideoOrdering}
+              />
+            )}
           </Box>
           {hasResources && (
             <Accordion>
