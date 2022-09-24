@@ -1,6 +1,10 @@
 import { Video } from "@/generated/graphql";
 import { Box, Typography } from "@mui/material";
+import ListItem from "@mui/material/ListItem";
+import ListItemButton from "@mui/material/ListItemButton";
+import ListItemText from "@mui/material/ListItemText";
 import { useLocation, useNavigate } from "react-router-dom";
+import { ListChildComponentProps } from "react-window";
 
 type Subject = {
   __typename?: "Subject" | undefined;
@@ -88,53 +92,9 @@ type Props = {
 };
 
 export function VideosBox(props: Props) {
-  const VideoItems = [];
   const navigate = useNavigate();
   const location = useLocation();
 
-  for (const video of props.videos) {
-    const VideoItem = (
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "start",
-          flexDirection: "row",
-          bgcolor: "background.paper",
-          borderRadius: 1,
-          borderBottom: 2,
-        }}
-        onClick={() => {
-          props.setFocusedVideoOrdering(video.ordering);
-          navigate(
-            `/subjects/?id=${props.subject.id}&video=${video.id}` //FIXME ad-hoc solution for routing
-          );
-        }}
-      >
-        {/*  <img #FIXME after adding thumbnail field to Video model
-          src={video.thumbnailLink}
-          style={{ width: "20%", height: "100%" }}
-        /> */}
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            p: 1,
-            m: 1,
-            bgcolor: "background.paper",
-            borderRadius: 1,
-          }}
-        >
-          <Typography variant="h5" component="div" align="left">
-            {video.title}
-          </Typography>
-          <Typography variant="h6" component="div" align="left">
-            {video.faculty}
-          </Typography>
-        </Box>
-      </Box>
-    );
-    VideoItems.push(VideoItem);
-  }
   return (
     <Box
       className="VideoBox"
@@ -159,7 +119,59 @@ export function VideosBox(props: Props) {
       >
         動画一覧
       </Typography>
-      {VideoItems}
+
+      {props.videos.map((video) => (
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "start",
+            flexDirection: "row",
+            bgcolor: "background.paper",
+            borderRadius: 1,
+            borderBottom: 2,
+          }}
+          onClick={() => {
+            props.setFocusedVideoOrdering(video.ordering);
+            navigate(
+              `/subjects/?id=${props.subject.id}&video=${video.id}` //FIXME ad-hoc solution for routing
+            );
+          }}
+        >
+          {/*  <img #FIXME after adding thumbnail field to Video model
+          src={video.thumbnailLink}
+          style={{ width: "20%", height: "100%" }}
+        /> */}
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              p: 1,
+              m: 1,
+              bgcolor: "background.paper",
+              borderRadius: 1,
+            }}
+          >
+            <Typography variant="h5" component="div" align="left">
+              {video.title}
+            </Typography>
+            <Typography variant="h6" component="div" align="left">
+              {video.faculty}
+            </Typography>
+          </Box>
+        </Box>
+      ))}
     </Box>
+  );
+}
+
+function renderRow(props: ListChildComponentProps) {
+  const { index, style } = props;
+
+  return (
+    <ListItem style={style} key={index} component="div" disablePadding>
+      <ListItemButton>
+        <ListItemText primary={`Item ${index + 1}`} />
+      </ListItemButton>
+    </ListItem>
   );
 }
