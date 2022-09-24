@@ -1,10 +1,15 @@
+import { theme } from "@/utils/themes";
 import {
   Card,
   CardActionArea,
   CardContent,
   CardMedia,
+  Grid,
+  ImageListItem,
+  ImageListItemBar,
   Typography,
 } from "@mui/material";
+import { alpha, styled } from "@mui/material/styles";
 import { Link } from "react-router-dom";
 
 const thumbnailBaseURL = "/subject_thumbnails/";
@@ -16,27 +21,33 @@ type SubjectOnSearchPage = {
   thumbnailLink: string;
 };
 
+const MyImageListItemBar = styled(ImageListItemBar)({
+  color: "white",
+  backgroundColor: alpha("#000", 0.75),
+});
+const MyImageListItem = styled(ImageListItem)({
+  "&:hover": {
+    opacity: 0.5,
+    transition: 0.3,
+  },
+});
+
 export const SubjectCard = (subject: SubjectOnSearchPage) => {
   return (
-    <Link to={`/subjects/?id=${subject.id}`}>
-      <CardActionArea>
-        <Card className="SubjectCard" sx={{ m: 5, p: 5 }}>
-          <CardMedia
-            component="img"
-            height="300"
-            image={`${thumbnailBaseURL}${subject.id}.png`}
-            alt="thumbnail of subject"
+    <Grid item xs={12} sm={4} md={3} sx={{ p: 1.5 }}>
+      <Link to={`/subjects/?id=${subject.id}`}>
+        <MyImageListItem>
+          <img
+            src={`${subject.thumbnailLink}`}
+            loading="lazy"
+            style={{ height: 200 }}
           />
-          <CardContent>
-            <Typography variant="h5" component="div">
-              {subject.title}
-            </Typography>
-            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-              {subject.faculty}
-            </Typography>
-          </CardContent>
-        </Card>
-      </CardActionArea>
-    </Link>
+          <MyImageListItemBar
+            title={subject.title}
+            subtitle={subject.faculty}
+          />
+        </MyImageListItem>
+      </Link>
+    </Grid>
   );
 };
