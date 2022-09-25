@@ -3,15 +3,16 @@ import { SubjectMainWithNoVideo } from "@/components/subjectPageComponents/Subje
 import { SubjectMainWithVideo } from "@/components/subjectPageComponents/SubjectMainWithVideo";
 import { useSubjectQuery } from "@/generated/graphql";
 import { Box, Typography } from "@mui/material";
-import { useSearchParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 export function SubjectPage() {
-  const [SearchParams] = useSearchParams();
-  const id = SearchParams.get("id")!;
+  let { id } = useParams();
+  // FIXME: I don't know how to distinguish parameter and search parameter
+  id = id?.replace(/\&.+/, "");
 
   const { data, loading, error } = useSubjectQuery({
     variables: {
-      id: id,
+      id: id ? id : "",
     },
   });
 

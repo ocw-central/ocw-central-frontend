@@ -45,7 +45,7 @@ function App() {
               <Container>
                 <Routes>
                   <Route path="/" element={<HomePage />} />
-                  <Route path="/subjects/" element={<SubjectPage />} />
+                  <Route path="/subjects/:id" element={<SubjectPage />} />
                   <Route path="/search" element={<SearchPage />}></Route>
                   <Route path="/about" element={<AboutPage />} />
                   <Route path="/academic_fields" element={<AcademicFields />} />
