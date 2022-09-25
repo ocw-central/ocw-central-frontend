@@ -142,7 +142,7 @@ export function VideosBox(propsVideo: Props) {
                 propsVideo.videos[index].ordering
               );
               navigate(
-                `/subjects/?id=${propsVideo.subject.id}&video=${propsVideo.videos[index].id}` //FIXME ad-hoc solution for routing
+                `/subjects/${propsVideo.subject.id}&video=${propsVideo.videos[index].id}` //FIXME ad-hoc solution for routing
               );
             }}
           />

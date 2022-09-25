@@ -35,7 +35,7 @@ const MyImageListItem = styled(ImageListItem)({
 export const SubjectCard = (subject: SubjectOnSearchPage) => {
   return (
     <Grid item xs={12} sm={4} md={3} sx={{ p: 1.5 }}>
-      <Link to={`/subjects/?id=${subject.id}`}>
+      <Link to={`/subjects/${subject.id}`}>
         <MyImageListItem>
           <img
             src={`${subject.thumbnailLink}`}
