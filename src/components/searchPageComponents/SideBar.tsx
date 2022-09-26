@@ -12,8 +12,23 @@ import {
 import { createSearchParams, useNavigate } from "react-router-dom";
 
 export function SideBar() {
+  function separateEnglishAndJapaneseWords(word: string[]) {
+    const englishWords: string[] = [];
+    const japaneseWords: string[] = [];
+    word.forEach((word) => {
+      if (word[0].match(/^[a-zA-Z0-9]+$/)) {
+        // chack if the first character is English
+        englishWords.push(word);
+      } else {
+        japaneseWords.push(word);
+      }
+    });
+    return [englishWords, japaneseWords];
+  }
+
   const { data, loading, error } = useAcademicFieldsQuery({});
   const navigate = useNavigate();
+
   if (loading) {
     return <Loading />;
   }
@@ -28,6 +43,10 @@ export function SideBar() {
     return <div>no data</div>;
   }
 
+  const [englishFields, japaneseFields] = separateEnglishAndJapaneseWords(
+    data.academicFields.map((academicField) => academicField.name)
+  );
+
   return (
     <List
       subheader={
@@ -36,18 +55,32 @@ export function SideBar() {
         </ListSubheader>
       }
     >
-      <Divider />
-      {data.academicFields.map((academicField) => (
+      {japaneseFields.map((academicField) => (
         <ListItem disablePadding>
           <ListItemButton
             onClick={() => {
               const academicFieldParames = createSearchParams({
-                field: academicField.name,
+                field: academicField,
               });
               navigate(`/search/?${academicFieldParames}`);
             }}
           >
-            <ListItemText primary={academicField.name} />
+            <ListItemText primary={academicField} />
+          </ListItemButton>
+        </ListItem>
+      ))}
+      <Divider />
+      {englishFields.map((academicField) => (
+        <ListItem disablePadding>
+          <ListItemButton
+            onClick={() => {
+              const academicFieldParames = createSearchParams({
+                field: academicField,
+              });
+              navigate(`/search/?${academicFieldParames}`);
+            }}
+          >
+            <ListItemText primary={academicField} />
           </ListItemButton>
         </ListItem>
       ))}
