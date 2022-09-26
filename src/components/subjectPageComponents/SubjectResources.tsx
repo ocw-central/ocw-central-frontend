@@ -95,8 +95,8 @@ export function SubjectResources({ subject }: { subject: Subject }) {
     <Box>
       {subject.resources.map((resource) => (
         <Paper key={resource.id} sx={{ my: 2 }}>
-          <ListItem key={resource.id}>
-            <a href={resource.link} target="_blank" rel="noreferrer">
+          <a href={resource.link} target="_blank" rel="noreferrer">
+            <ListItem key={resource.id}>
               <ListItemButton>
                 <ListItemIcon>
                   {resource.link.endsWith(".pdf") ? (
@@ -112,8 +112,8 @@ export function SubjectResources({ subject }: { subject: Subject }) {
                   secondary={resource.description}
                 />
               </ListItemButton>
-            </a>
-          </ListItem>
+            </ListItem>
+          </a>
           <Divider />
         </Paper>
       ))}
