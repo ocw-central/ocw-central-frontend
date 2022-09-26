@@ -1,5 +1,6 @@
 import { Container } from "@/components/common/Container";
 import { Footer } from "@/components/common/Footer";
+import { PageNotFound } from "@/components/PageNotFound";
 import "@/styles/App.css";
 import { theme } from "@/utils/themes";
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
@@ -49,6 +50,7 @@ function App() {
                   <Route path="/search" element={<SearchPage />}></Route>
                   <Route path="/about" element={<AboutPage />} />
                   <Route path="/academic_fields" element={<AcademicFields />} />
+                  <Route path="*" element={<PageNotFound />} />
                 </Routes>
               </Container>
             </div>
