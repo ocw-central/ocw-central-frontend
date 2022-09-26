@@ -16,7 +16,6 @@ import {
 } from "@mui/material";
 import React from "react";
 import { createSearchParams, Link, useNavigate } from "react-router-dom";
-
 const pages = [
   { link: "/", name: "Home" },
   { link: "/search", name: "詳細検索" },
@@ -37,7 +36,7 @@ export function Nav() {
   const { data, loading, error } = useAcademicFieldsQuery({});
   const navigate = useNavigate();
   if (loading) {
-    return <div>loading...</div>;
+    return <div>Loading</div>;
   }
 
   if (error) {
