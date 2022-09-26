@@ -1,4 +1,4 @@
-import { AcademicFieldCard } from "@/components/AcadecFieldsPageComponents/AcademicFieldCard";
+import { Loading } from "@/components/common/Loading";
 import { useAcademicFieldsQuery } from "@/generated/graphql";
 import {
   Divider,
@@ -9,17 +9,13 @@ import {
   ListSubheader,
   Typography,
 } from "@mui/material";
-import {
-  createSearchParams,
-  useNavigate,
-  useSearchParams,
-} from "react-router-dom";
+import { createSearchParams, useNavigate } from "react-router-dom";
 
 export function SideBar() {
   const { data, loading, error } = useAcademicFieldsQuery({});
   const navigate = useNavigate();
   if (loading) {
-    return <div>loading...</div>;
+    return <Loading />;
   }
 
   if (error) {

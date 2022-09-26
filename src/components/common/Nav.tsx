@@ -1,3 +1,4 @@
+import { Loading } from "@/components/common/Loading";
 import { useAcademicFieldsQuery } from "@/generated/graphql";
 import styles from "@/styles/nav.module.css";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -16,7 +17,6 @@ import {
 } from "@mui/material";
 import React from "react";
 import { createSearchParams, Link, useNavigate } from "react-router-dom";
-
 const pages = [
   { link: "/", name: "Home" },
   { link: "/search", name: "詳細検索" },
@@ -37,7 +37,7 @@ export function Nav() {
   const { data, loading, error } = useAcademicFieldsQuery({});
   const navigate = useNavigate();
   if (loading) {
-    return <div>loading...</div>;
+    return <Loading />;
   }
 
   if (error) {

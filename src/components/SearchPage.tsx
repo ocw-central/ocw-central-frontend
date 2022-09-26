@@ -1,7 +1,8 @@
+import { Loading } from "@/components/common/Loading";
 import { DetailedSearchBar } from "@/components/searchPageComponents/DetailedSearchBar";
 import { SubjectCard } from "@/components/searchPageComponents/SubjectCard";
 import { useSubjectOnSearchPageQuery } from "@/generated/graphql";
-import { Box, Divider, Grid, ImageList, Typography } from "@mui/material";
+import { Box, Divider, Grid, Typography } from "@mui/material";
 import { useRef, useState } from "react";
 import {
   createSearchParams,
@@ -36,7 +37,7 @@ const ChangeGridItems = () => {
   });
   if (mounted.current) {
     if (loading) {
-      return <div>Loading...</div>;
+      return <Loading />;
     }
     if (error) {
       return <div>Error</div>;

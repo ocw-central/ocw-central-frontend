@@ -1,11 +1,12 @@
 import { AcademicFieldCard } from "@/components/AcadecFieldsPageComponents/AcademicFieldCard";
+import { Loading } from "@/components/common/Loading";
 import { useAcademicFieldsQuery } from "@/generated/graphql";
 import { Grid } from "@mui/material";
 
 export function AcademicFields() {
   const { data, loading, error } = useAcademicFieldsQuery({});
   if (loading) {
-    return <div>loading...</div>;
+    return <Loading />;
   }
 
   if (error) {
