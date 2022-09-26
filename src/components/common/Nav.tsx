@@ -1,4 +1,3 @@
-import { Loading } from "@/components/common/Loading";
 import { useAcademicFieldsQuery } from "@/generated/graphql";
 import styles from "@/styles/nav.module.css";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -37,7 +36,7 @@ export function Nav() {
   const { data, loading, error } = useAcademicFieldsQuery({});
   const navigate = useNavigate();
   if (loading) {
-    return <Loading />;
+    return <div>Loading</div>;
   }
 
   if (error) {
