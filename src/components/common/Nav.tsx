@@ -118,7 +118,7 @@ export function Nav() {
               </MenuItem>
             </Link>
           ))}
-          <AcademicFieldsList inNav={true} />
+          <AcademicFieldsList inNav={true} onClick={handleCloseNavMenu} />
         </Menu>
       </Box>
     </div>

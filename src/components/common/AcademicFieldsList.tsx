@@ -18,6 +18,7 @@ import { createSearchParams, useNavigate } from "react-router-dom";
 import { FixedSizeList, ListChildComponentProps } from "react-window";
 type Props = {
   inNav: boolean;
+  onClick?: () => void;
 };
 
 export function AcademicFieldsList(props: Props) {
@@ -82,6 +83,7 @@ export function AcademicFieldsList(props: Props) {
               const academicFieldParames = createSearchParams({
                 field: fields[index],
               });
+              props.onClick && props.onClick();
               navigate(`/search/?${academicFieldParames}`);
             }}
           />
@@ -143,7 +145,7 @@ export function AcademicFieldsList(props: Props) {
             <FixedSizeList
               height={350}
               width={330}
-              itemSize={50}
+              itemSize={70}
               itemCount={japaneseFields.length}
               overscanCount={100}
             >
@@ -185,7 +187,7 @@ export function AcademicFieldsList(props: Props) {
             <FixedSizeList
               height={350}
               width={330}
-              itemSize={50}
+              itemSize={70}
               itemCount={englishFields.length}
               overscanCount={100}
             >
