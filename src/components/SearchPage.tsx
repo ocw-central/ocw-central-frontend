@@ -37,7 +37,11 @@ const ChangeGridItems = () => {
   });
   if (mounted.current) {
     if (loading) {
+<<<<<<< HEAD
       return <Loading size={"7em"} color={"primary"} />;
+=======
+      return <Loading size={"10em"} color={"primary"} />;
+>>>>>>> 5f978ec (finetune loading icon)
     }
     if (error) {
       return <div>Error</div>;
