@@ -1,3 +1,4 @@
+import { Loading } from "@/components/common/Loading";
 import { SubjectCopyrightCard } from "@/components/subjectPageComponents/SubjectCopyrightCard";
 import { SubjectMainWithNoVideo } from "@/components/subjectPageComponents/SubjectMainWithNoVideo";
 import { SubjectMainWithVideo } from "@/components/subjectPageComponents/SubjectMainWithVideo";
@@ -17,7 +18,7 @@ export function SubjectPage() {
   });
 
   if (loading) {
-    return <div>loading...</div>;
+    return <Loading />;
   }
 
   if (error) {

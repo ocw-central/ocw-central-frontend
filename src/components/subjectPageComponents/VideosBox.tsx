@@ -117,6 +117,7 @@ export function VideosBox(propsVideo: Props) {
         <ListItemButton
           sx={{
             border: "1em",
+            marginTop: "1em",
           }}
         >
           <ListItemIcon>
@@ -127,9 +128,9 @@ export function VideosBox(propsVideo: Props) {
               propsVideo.videos[index].title
             }`}
             primaryTypographyProps={{
-              color: "primary",
+              color: "primary.dark",
               fontWeight: "medium",
-              variant: "body2",
+              variant: "body1",
             }}
             secondary={
               `${propsVideo.videos[index].faculty} ` +
@@ -173,13 +174,13 @@ export function VideosBox(propsVideo: Props) {
           p: 1,
         }}
       >
-        動画一覧
+        講義一覧 ({propsVideo.videos.length})
       </Typography>
 
       <FixedSizeList
         height={400}
         width={560}
-        itemSize={100}
+        itemSize={130}
         itemCount={propsVideo.videos.length}
         overscanCount={100}
       >
