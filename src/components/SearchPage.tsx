@@ -1,15 +1,10 @@
 import { Loading } from "@/components/common/Loading";
-import { DetailedSearchBar } from "@/components/searchPageComponents/DetailedSearchBar";
-import { SubjectCard } from "@/components/searchPageComponents/SubjectCard";
 import { useSubjectOnSearchPageQuery } from "@/generated/graphql";
-import { Box, Divider, Grid, Typography } from "@mui/material";
-import { useRef, useState } from "react";
-import {
-  createSearchParams,
-  useNavigate,
-  useSearchParams,
-} from "react-router-dom";
-import { AcademicFieldsList } from "./common/AcademicFieldsList";
+import { useRef } from "react";
+import
+  {
+    useSearchParams
+  } from "react-router-dom";
 
 type Params = {
   title?: string;
@@ -41,7 +36,6 @@ const ChangeGridItems = () => {
       return <Loading size={"7em"} color={"primary"} />;
 =======
       return <Loading size={"10em"} color={"primary"} />;
->>>>>>> 5f978ec (finetune loading icon)
     }
     if (error) {
       return <div>Error</div>;
