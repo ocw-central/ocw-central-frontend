@@ -72,7 +72,8 @@ export function SideBar() {
             primaryTypographyProps={{
               color: "primary.dark",
               fontWeight: "medium",
-              variant: "body1",
+              variant: "h6",
+              fontStyle: "bald",
             }}
             onClick={() => {
               const academicFieldParames = createSearchParams({
