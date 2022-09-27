@@ -37,7 +37,7 @@ const ChangeGridItems = () => {
   });
   if (mounted.current) {
     if (loading) {
-      return <Loading />;
+      return <Loading size={"7em"} color={"primary"} />;
     }
     if (error) {
       return <div>Error</div>;
@@ -83,7 +83,14 @@ export function SearchPage() {
         container
         xs={0}
         md={3}
-        sx={{ display: { xs: "none", md: "block" } }}
+        sx={{
+          display: { xs: "none", md: "flex" },
+          mb: 2,
+          flexDirection: "column",
+          height: 700,
+          overflow: "hidden",
+          overflowY: "scroll",
+        }}
       >
         <AcademicFieldsList inNav={false} />
       </Grid>
@@ -95,6 +102,12 @@ export function SearchPage() {
               xs: 0,
               md: 4,
             },
+            mb: 2,
+            display: "flex",
+            flexDirection: "column",
+            height: 700,
+            overflow: "hidden",
+            overflowY: "scroll",
           }}
         >
           <Typography variant="h5" component="div" align="left">

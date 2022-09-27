@@ -18,7 +18,7 @@ export function SubjectPage() {
   });
 
   if (loading) {
-    return <Loading />;
+    return <Loading size={"7em"} color={"primary"} />;
   }
 
   if (error) {
