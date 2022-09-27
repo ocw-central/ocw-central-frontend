@@ -1,15 +1,21 @@
 import { Loading } from "@/components/common/Loading";
 import { useAcademicFieldsQuery } from "@/generated/graphql";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import SchoolIcon from "@mui/icons-material/School";
 import {
-  Divider,
   List,
   ListItem,
   ListItemButton,
+  ListItemIcon,
   ListItemText,
   ListSubheader,
   Typography,
 } from "@mui/material";
+import Accordion from "@mui/material/Accordion";
+import AccordionDetails from "@mui/material/AccordionDetails";
+import AccordionSummary from "@mui/material/AccordionSummary";
 import { createSearchParams, useNavigate } from "react-router-dom";
+import { FixedSizeList, ListChildComponentProps } from "react-window";
 
 export function SideBar() {
   function separateEnglishAndJapaneseWords(word: string[]) {
@@ -47,43 +53,99 @@ export function SideBar() {
     data.academicFields.map((academicField) => academicField.name)
   );
 
+  function renderRow(propsRender: ListChildComponentProps, fields: string[]) {
+    const { index, style } = propsRender;
+
+    return (
+      <ListItem style={style} key={index} button={true}>
+        <ListItemButton
+          sx={{
+            border: "1em",
+            marginTop: "1em",
+          }}
+        >
+          <ListItemIcon>
+            <SchoolIcon />
+          </ListItemIcon>
+          <ListItemText
+            primary={`${fields[index]}`}
+            primaryTypographyProps={{
+              color: "primary.dark",
+              fontWeight: "medium",
+              variant: "body1",
+            }}
+            onClick={() => {
+              const academicFieldParames = createSearchParams({
+                field: fields[index],
+              });
+              navigate(`/search/?${academicFieldParames}`);
+            }}
+          />
+        </ListItemButton>
+      </ListItem>
+    );
+  }
+
+  function japaneseRenderRow(propsRender: ListChildComponentProps) {
+    return renderRow(propsRender, japaneseFields);
+  }
+
+  function englishRenderRow(propsRender: ListChildComponentProps) {
+    return renderRow(propsRender, englishFields);
+  }
+
   return (
     <List
       subheader={
         <ListSubheader component="div" sx={{ textAlign: "left" }}>
-          <Typography variant="h5">分野一覧</Typography>
+          <Typography variant="h5">学問分野</Typography>
         </ListSubheader>
       }
     >
-      {japaneseFields.map((academicField) => (
-        <ListItem disablePadding>
-          <ListItemButton
-            onClick={() => {
-              const academicFieldParames = createSearchParams({
-                field: academicField,
-              });
-              navigate(`/search/?${academicFieldParames}`);
-            }}
+      <Accordion>
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel1a-content"
+          id="panel1a-header"
+        >
+          <Typography>
+            <b>日本語講義</b>
+          </Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <FixedSizeList
+            height={350}
+            width={420}
+            itemSize={50}
+            itemCount={japaneseFields.length}
+            overscanCount={100}
           >
-            <ListItemText primary={academicField} />
-          </ListItemButton>
-        </ListItem>
-      ))}
-      <Divider />
-      {englishFields.map((academicField) => (
-        <ListItem disablePadding>
-          <ListItemButton
-            onClick={() => {
-              const academicFieldParames = createSearchParams({
-                field: academicField,
-              });
-              navigate(`/search/?${academicFieldParames}`);
-            }}
+            {japaneseRenderRow}
+          </FixedSizeList>
+        </AccordionDetails>
+      </Accordion>
+      <Accordion>
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel1a-content"
+          id="panel1a-header"
+        >
+          <Typography>
+            <b>英語講義</b>
+          </Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <FixedSizeList
+            height={350}
+            width={420}
+            itemSize={50}
+            itemCount={englishFields.length}
+            overscanCount={100}
           >
-            <ListItemText primary={academicField} />
-          </ListItemButton>
-        </ListItem>
-      ))}
+            {englishRenderRow}
+          </FixedSizeList>
+        </AccordionDetails>
+      </Accordion>
     </List>
   );
 }
