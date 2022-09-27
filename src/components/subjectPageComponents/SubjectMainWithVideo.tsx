@@ -189,7 +189,7 @@ export function SubjectMainWithVideo(props: Props) {
                 aria-controls="resource"
                 id="resource"
               >
-                <Typography>講義資料</Typography>
+                <Typography sx={{ fontWeight: "bold" }}>講義資料</Typography>
               </AccordionSummary>
               <AccordionDetails>
                 <SubjectResources subject={props.subject} />
@@ -203,7 +203,7 @@ export function SubjectMainWithVideo(props: Props) {
                 aria-controls="details"
                 id="details"
               >
-                <Typography>講義詳細</Typography>
+                <Typography sx={{ fontWeight: "bold" }}>講義詳細</Typography>
               </AccordionSummary>
               <SubjectDetails subject={props.subject} />
             </Accordion>
@@ -215,7 +215,9 @@ export function SubjectMainWithVideo(props: Props) {
                 aria-controls="syllabus"
                 id="syllabus"
               >
-                <Typography>シラバス</Typography>
+                <Typography sx={{ variant: "h6", fontWeight: "bold" }}>
+                  シラバス
+                </Typography>
               </AccordionSummary>
               <AccordionDetails>
                 <SubjectSyllabus subject={props.subject} />

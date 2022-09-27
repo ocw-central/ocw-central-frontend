@@ -78,3 +78,12 @@ query subject($id: ID!) {
     thumbnailLink
   }
 }
+
+query subjectOnHomepage($id: ID!) {
+  subject(id: $id) {
+    id
+    title
+    thumbnailLink
+    faculty
+  }
+}

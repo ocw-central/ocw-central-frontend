@@ -1,6 +1,6 @@
 import { Loading } from "@/components/common/Loading";
+import { SubjectCard } from "@/components/common/SubjectCard";
 import { DetailedSearchBar } from "@/components/searchPageComponents/DetailedSearchBar";
-import { SubjectCard } from "@/components/searchPageComponents/SubjectCard";
 import { useSubjectOnSearchPageQuery } from "@/generated/graphql";
 import { Box, Divider, Grid, Typography } from "@mui/material";
 import { useRef, useState } from "react";
