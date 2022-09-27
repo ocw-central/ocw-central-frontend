@@ -84,9 +84,8 @@ export function SearchPage() {
         xs={0}
         md={3}
         sx={{
-          display: { xs: "none", md: "block" },
+          display: { xs: "none", md: "flex" },
           mb: 2,
-          display: "flex",
           flexDirection: "column",
           height: 700,
           overflow: "hidden",
