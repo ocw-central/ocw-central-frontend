@@ -8,7 +8,6 @@ import {
   ListItemButton,
   ListItemIcon,
   ListItemText,
-  ListSubheader,
   Typography,
 } from "@mui/material";
 import Accordion from "@mui/material/Accordion";
@@ -40,7 +39,7 @@ export function AcademicFieldsList(props: Props) {
   const navigate = useNavigate();
 
   if (loading) {
-    return <Loading />;
+    return <Loading size={"5em"} color={"primary"} />;
   }
 
   if (error) {
@@ -61,11 +60,15 @@ export function AcademicFieldsList(props: Props) {
     const { index, style } = propsRender;
 
     return (
-      <ListItem style={style} key={index} button={true}>
+      <ListItem style={style} key={index} button={true} disablePadding={true}>
         <ListItemButton
-          sx={{
-            border: "1em",
-            marginTop: "1em",
+          sx={{ fullWidth: "true", margin: "0" }}
+          onClick={() => {
+            const academicFieldParames = createSearchParams({
+              field: fields[index],
+            });
+            props.onClick && props.onClick();
+            navigate(`/search/?${academicFieldParames}`);
           }}
         >
           <ListItemIcon>
@@ -78,13 +81,6 @@ export function AcademicFieldsList(props: Props) {
               fontWeight: "medium",
               variant: "h6",
               fontStyle: "bald",
-            }}
-            onClick={() => {
-              const academicFieldParames = createSearchParams({
-                field: fields[index],
-              });
-              props.onClick && props.onClick();
-              navigate(`/search/?${academicFieldParames}`);
             }}
           />
         </ListItemButton>
@@ -101,17 +97,7 @@ export function AcademicFieldsList(props: Props) {
   }
 
   return (
-    <List
-      subheader={
-        <ListSubheader component="div" sx={{ textAlign: "left" }}>
-          {!props.inNav && (
-            <Typography variant="h5" color="black">
-              <b>学問分野一覧</b>
-            </Typography>
-          )}
-        </ListSubheader>
-      }
-    >
+    <List>
       <Accordion>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
@@ -120,7 +106,7 @@ export function AcademicFieldsList(props: Props) {
         >
           {!props.inNav && (
             <Typography variant="h6" color="black">
-              <b>日本語講義</b>
+              <b>日本語講義分野</b>
             </Typography>
           )}
           {props.inNav && (
@@ -162,7 +148,7 @@ export function AcademicFieldsList(props: Props) {
         >
           {!props.inNav && (
             <Typography variant="h6" color="black">
-              <b>英語講義</b>
+              <b>英語講義分野</b>
             </Typography>
           )}
           {props.inNav && (
