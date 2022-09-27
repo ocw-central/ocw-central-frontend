@@ -61,11 +61,15 @@ export function AcademicFieldsList(props: Props) {
     const { index, style } = propsRender;
 
     return (
-      <ListItem style={style} key={index} button={true}>
+      <ListItem style={style} key={index} button={true} disablePadding={true}>
         <ListItemButton
-          sx={{
-            border: "1em",
-            marginTop: "1em",
+          sx={{ fullWidth: "true", margin: "0" }}
+          onClick={() => {
+            const academicFieldParames = createSearchParams({
+              field: fields[index],
+            });
+            props.onClick && props.onClick();
+            navigate(`/search/?${academicFieldParames}`);
           }}
         >
           <ListItemIcon>
@@ -78,13 +82,6 @@ export function AcademicFieldsList(props: Props) {
               fontWeight: "medium",
               variant: "h6",
               fontStyle: "bald",
-            }}
-            onClick={() => {
-              const academicFieldParames = createSearchParams({
-                field: fields[index],
-              });
-              props.onClick && props.onClick();
-              navigate(`/search/?${academicFieldParames}`);
             }}
           />
         </ListItemButton>
