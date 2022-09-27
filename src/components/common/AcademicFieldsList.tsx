@@ -8,7 +8,6 @@ import {
   ListItemButton,
   ListItemIcon,
   ListItemText,
-  ListSubheader,
   Typography,
 } from "@mui/material";
 import Accordion from "@mui/material/Accordion";
@@ -98,17 +97,7 @@ export function AcademicFieldsList(props: Props) {
   }
 
   return (
-    <List
-      subheader={
-        <ListSubheader component="div" sx={{ textAlign: "left" }}>
-          {!props.inNav && (
-            <Typography variant="h5" color="black">
-              <b>学問分野一覧</b>
-            </Typography>
-          )}
-        </ListSubheader>
-      }
-    >
+    <List>
       <Accordion>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
@@ -117,7 +106,7 @@ export function AcademicFieldsList(props: Props) {
         >
           {!props.inNav && (
             <Typography variant="h6" color="black">
-              <b>日本語講義</b>
+              <b>日本語講義分野</b>
             </Typography>
           )}
           {props.inNav && (
@@ -159,7 +148,7 @@ export function AcademicFieldsList(props: Props) {
         >
           {!props.inNav && (
             <Typography variant="h6" color="black">
-              <b>英語講義</b>
+              <b>英語講義分野</b>
             </Typography>
           )}
           {props.inNav && (
