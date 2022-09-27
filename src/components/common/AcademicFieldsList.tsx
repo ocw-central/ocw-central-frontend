@@ -40,7 +40,7 @@ export function AcademicFieldsList(props: Props) {
   const navigate = useNavigate();
 
   if (loading) {
-    return <Loading />;
+    return <Loading size={"5em"} color={"primary"} />;
   }
 
   if (error) {
