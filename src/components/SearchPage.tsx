@@ -98,7 +98,7 @@ export function SearchPage() {
           }}
         >
           <Typography variant="h5" component="div" align="left">
-            詳細検索
+            <b>詳細検索</b>
           </Typography>
           <Divider sx={{ mb: 2 }} />
           <DetailedSearchBar

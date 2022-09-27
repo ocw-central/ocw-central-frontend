@@ -2,10 +2,10 @@ import { Box, InputBase } from "@mui/material";
 import Button from "@mui/material/Button";
 import { Dispatch, SetStateAction } from "react";
 
+import { theme } from "@/utils/themes";
 import SearchIcon from "@mui/icons-material/Search";
 import { alpha, styled } from "@mui/material/styles";
 import * as React from "react";
-import { theme } from "@/utils/themes";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -147,7 +147,7 @@ export const DetailedSearchBar = ({
           borderRadius: 2,
         }}
       >
-        検索
+        <b>検索</b>
       </Button>
     </Box>
   );

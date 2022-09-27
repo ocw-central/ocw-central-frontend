@@ -98,7 +98,9 @@ export function SideBar() {
     <List
       subheader={
         <ListSubheader component="div" sx={{ textAlign: "left" }}>
-          <Typography variant="h5">学問分野</Typography>
+          <Typography variant="h5" color="black">
+            <b>学問分野</b>
+          </Typography>
         </ListSubheader>
       }
     >

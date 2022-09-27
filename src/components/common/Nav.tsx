@@ -82,7 +82,9 @@ export function Nav() {
                 }}
               >
                 <Link to={page.link}>
-                  <a>{page.name}</a>
+                  <a>
+                    <b>{page.name}</b>
+                  </a>
                 </Link>
               </Box>
             </li>
