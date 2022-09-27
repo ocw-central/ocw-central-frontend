@@ -37,7 +37,7 @@ const ChangeGridItems = () => {
   });
   if (mounted.current) {
     if (loading) {
-      return <Loading />;
+      return <Loading size={"10em"} color={"primary"} />;
     }
     if (error) {
       return <div>Error</div>;
