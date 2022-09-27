@@ -63,7 +63,7 @@ export function Header() {
   };
 
   return (
-    <Box>
+    <Box sx={{ position: "sticky", top: "0", zIndex: 1 }}>
       <AppBar position="static" sx={{ height: "3.5em" }}>
         <Container maxWidth="xl">
           <Toolbar disableGutters>
