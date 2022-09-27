@@ -82,6 +82,13 @@ export function AcademicFieldsList(props: Props) {
               variant: "h6",
               fontStyle: "bald",
             }}
+            onClick={() => {
+              const academicFieldParames = createSearchParams({
+                field: fields[index],
+              });
+              props.onClick && props.onClick();
+              navigate(`/search/?${academicFieldParames}`);
+            }}
           />
         </ListItemButton>
       </ListItem>
