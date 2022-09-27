@@ -9,7 +9,7 @@ import {
   useNavigate,
   useSearchParams,
 } from "react-router-dom";
-import { SideBar } from "./searchPageComponents/SideBar";
+import { AcademicFieldsList } from "./common/AcademicFieldsList";
 
 type Params = {
   title?: string;
@@ -85,7 +85,7 @@ export function SearchPage() {
         md={3}
         sx={{ display: { xs: "none", md: "block" } }}
       >
-        <SideBar />
+        <AcademicFieldsList inNav={false} />
       </Grid>
 
       <Grid item xs={12} md={9}>
