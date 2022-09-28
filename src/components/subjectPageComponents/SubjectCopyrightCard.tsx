@@ -31,8 +31,10 @@ export function SubjectCopyrightCard(props: Props) {
   const subject_faculty_str = subject_faculty;
   const syllabus_faculty_str = syllabus_faculty;
   // concatinate all faculty names in videos
-  const videos_faculty_str = videos
-    ? videos.map((video) => video.faculty).join("")
+  const video_names = videos ? videos.map((video) => video.faculty) : "";
+  // remove duplication with the same order
+  const videos_faculty_str = video_names
+    ? video_names.filter((x, i, self) => self.indexOf(x) === i).join(", ")
     : "";
 
   const faculty_copyright = subject_faculty_str
