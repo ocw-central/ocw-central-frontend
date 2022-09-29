@@ -87,3 +87,12 @@ query subjectOnHomepage($id: ID!) {
     faculty
   }
 }
+
+query randomSubject {
+  randomSubjects {
+    id
+    title
+    thumbnailLink
+    faculty
+  }
+}
