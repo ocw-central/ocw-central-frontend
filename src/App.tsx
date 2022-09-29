@@ -1,12 +1,12 @@
 import { Container } from "@/components/common/Container";
 import { Footer } from "@/components/common/Footer";
+import { PageNotFound } from "@/components/PageNotFound";
 import "@/styles/App.css";
 import { theme } from "@/utils/themes";
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 import { ThemeProvider } from "@emotion/react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { AboutPage } from "./components/AboutPage";
-import { AcademicFields } from "./components/AcademicFields";
 import { Header } from "./components/common/Header";
 import { ScrollToTop } from "./components/common/ScrollToTop";
 import { HomePage } from "./components/HomePage";
@@ -45,10 +45,10 @@ function App() {
               <Container>
                 <Routes>
                   <Route path="/" element={<HomePage />} />
-                  <Route path="/subjects/" element={<SubjectPage />} />
+                  <Route path="/subjects/:id" element={<SubjectPage />} />
                   <Route path="/search" element={<SearchPage />}></Route>
                   <Route path="/about" element={<AboutPage />} />
-                  <Route path="/academic_fields" element={<AcademicFields />} />
+                  <Route path="*" element={<PageNotFound />} />
                 </Routes>
               </Container>
             </div>

@@ -4,7 +4,6 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import Typography from "@mui/material/Typography";
 import { Box } from "@mui/system";
 
 type Subject = {
@@ -91,41 +90,98 @@ export function SubjectSyllabus({ subject }: { subject: Subject }) {
 
   return (
     <Box>
-      <Typography variant="h5">シラバス</Typography>
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="subject details">
           <TableHead>
             <TableRow>
-              {syllabus?.academicYear && (
-                <TableCell>開講年度・開講期</TableCell>
+              {syllabus?.academicYear !== 0 && (
+                <TableCell>
+                  <b>開講年度・開講期</b>
+                </TableCell>
               )}
-              {syllabus?.semester && <TableCell>開講学期</TableCell>}
-              {syllabus?.numCredit && <TableCell>単位数</TableCell>}
-              {syllabus?.assignedGrade && <TableCell>配当学年</TableCell>}
-              {syllabus?.courseFormat && <TableCell>授業形態</TableCell>}
-              {syllabus?.targetedAudience && <TableCell>対象学生</TableCell>}
-              {syllabus?.language && <TableCell>使用言語</TableCell>}
-              {syllabus?.courseDayPeriod && <TableCell>曜時限</TableCell>}
-              {syllabus?.faculty && <TableCell>教員</TableCell>}
-              {syllabus?.outline && <TableCell>授業概要</TableCell>}
-              {syllabus?.objective && <TableCell>授業の概要・目的</TableCell>}
-              {syllabus?.lessonPlan && <TableCell>授業計画と内容</TableCell>}
+              {syllabus?.semester && (
+                <TableCell>
+                  <b>開講学期</b>
+                </TableCell>
+              )}
+              {syllabus?.numCredit !== 0 && (
+                <TableCell>
+                  <b>単位数</b>
+                </TableCell>
+              )}
+              {syllabus?.assignedGrade && (
+                <TableCell>
+                  <b>配当学年</b>
+                </TableCell>
+              )}
+              {syllabus?.courseFormat && (
+                <TableCell>
+                  <b>授業形態</b>
+                </TableCell>
+              )}
+              {syllabus?.targetedAudience && (
+                <TableCell>
+                  <b>対象学生</b>
+                </TableCell>
+              )}
+              {syllabus?.language && (
+                <TableCell>
+                  <b>使用言語</b>
+                </TableCell>
+              )}
+              {syllabus?.courseDayPeriod && (
+                <TableCell>
+                  <b>曜時限</b>
+                </TableCell>
+              )}
+              {syllabus?.faculty && (
+                <TableCell>
+                  <b>教員</b>
+                </TableCell>
+              )}
+              {syllabus?.outline && (
+                <TableCell>
+                  <b>授業概要</b>
+                </TableCell>
+              )}
+              {syllabus?.objective && (
+                <TableCell>
+                  <b>授業の概要・目的</b>
+                </TableCell>
+              )}
+              {syllabus?.lessonPlan && (
+                <TableCell>
+                  <b>授業計画と内容</b>
+                </TableCell>
+              )}
               {syllabus?.gradingMethod && (
-                <TableCell>成績評価の方法・観点</TableCell>
+                <TableCell>
+                  <b>成績評価の方法・観点</b>
+                </TableCell>
               )}
-              {syllabus?.courseRequirement && <TableCell>履修要件</TableCell>}
+              {syllabus?.courseRequirement && (
+                <TableCell>
+                  <b>履修要件</b>
+                </TableCell>
+              )}
               {syllabus?.outClassLearning && (
-                <TableCell>授業外学習（予習・復習）等</TableCell>
+                <TableCell>
+                  <b>授業外学習（予習・復習）等</b>
+                </TableCell>
               )}
-              {syllabus?.reference && <TableCell>教科書・参考書等</TableCell>}
+              {syllabus?.reference && (
+                <TableCell>
+                  <b>教科書・参考書等</b>
+                </TableCell>
+              )}
             </TableRow>
             <TableRow>
               {syllabus?.academicYear && (
                 <TableCell>{syllabus.academicYear}</TableCell>
               )}
               {syllabus?.semester && <TableCell>{syllabus.semester}</TableCell>}
-              {syllabus?.numCredit && (
-                <TableCell>{syllabus.numCredit}</TableCell>
+              {(syllabus?.numCredit || syllabus?.numCredit !== 0) && (
+                <TableCell>{syllabus?.numCredit}</TableCell>
               )}
               {syllabus?.assignedGrade && (
                 <TableCell>{syllabus.assignedGrade}</TableCell>

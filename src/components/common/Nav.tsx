@@ -1,21 +1,11 @@
+import { AcademicFieldsList } from "@/components/common/AcademicFieldsList";
+import { Loading } from "@/components/common/Loading";
 import { useAcademicFieldsQuery } from "@/generated/graphql";
 import styles from "@/styles/nav.module.css";
 import MenuIcon from "@mui/icons-material/Menu";
-import {
-  Box,
-  Divider,
-  IconButton,
-  List,
-  ListItem,
-  ListItemButton,
-  ListItemText,
-  ListSubheader,
-  Menu,
-  MenuItem,
-  Typography,
-} from "@mui/material";
+import { Box, IconButton, Menu, MenuItem, Typography } from "@mui/material";
 import React from "react";
-import { createSearchParams, Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const pages = [
   { link: "/", name: "Home" },
@@ -37,7 +27,7 @@ export function Nav() {
   const { data, loading, error } = useAcademicFieldsQuery({});
   const navigate = useNavigate();
   if (loading) {
-    return <div>loading...</div>;
+    return <Loading size={"1.5em"} color={"inherit"} />;
   }
 
   if (error) {
@@ -83,7 +73,9 @@ export function Nav() {
                 }}
               >
                 <Link to={page.link}>
-                  <a>{page.name}</a>
+                  <a>
+                    <b>{page.name}</b>
+                  </a>
                 </Link>
               </Box>
             </li>
@@ -127,29 +119,7 @@ export function Nav() {
               </MenuItem>
             </Link>
           ))}
-          <List
-            subheader={
-              <ListSubheader component="div" sx={{ textAlign: "left" }}>
-                <Typography>分野一覧</Typography>
-              </ListSubheader>
-            }
-          >
-            <Divider />
-            {data.academicFields.map((academicField) => (
-              <ListItem disablePadding>
-                <ListItemButton
-                  onClick={() => {
-                    const academicFieldParames = createSearchParams({
-                      field: academicField.name,
-                    });
-                    navigate(`/search/?${academicFieldParames}`);
-                  }}
-                >
-                  <ListItemText primary={academicField.name} />
-                </ListItemButton>
-              </ListItem>
-            ))}
-          </List>
+          <AcademicFieldsList inNav={true} onClick={handleCloseNavMenu} />
         </Menu>
       </Box>
     </div>

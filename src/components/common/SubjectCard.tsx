@@ -1,14 +1,4 @@
-import { theme } from "@/utils/themes";
-import {
-  Card,
-  CardActionArea,
-  CardContent,
-  CardMedia,
-  Grid,
-  ImageListItem,
-  ImageListItemBar,
-  Typography,
-} from "@mui/material";
+import { Grid, ImageListItem, ImageListItemBar } from "@mui/material";
 import { alpha, styled } from "@mui/material/styles";
 import { Link } from "react-router-dom";
 
@@ -34,13 +24,13 @@ const MyImageListItem = styled(ImageListItem)({
 
 export const SubjectCard = (subject: SubjectOnSearchPage) => {
   return (
-    <Grid item xs={12} sm={4} md={3} sx={{ p: 1.5 }}>
-      <Link to={`/subjects/?id=${subject.id}`}>
+    <Grid item xs={12} sm={4} md={4} sx={{ p: 0.5 }}>
+      <Link to={`/subjects/${subject.id}`}>
         <MyImageListItem>
           <img
             src={`${subject.thumbnailLink}`}
             loading="lazy"
-            style={{ height: 200 }}
+            style={{ height: 280 }}
           />
           <MyImageListItemBar
             title={subject.title}

@@ -5,6 +5,14 @@ import { SubjectDetails } from "@/components/subjectPageComponents/SubjectDetail
 import { SubjectResources } from "@/components/subjectPageComponents/SubjectResources";
 import { SubjectSyllabus } from "@/components/subjectPageComponents/SubjectSyllabus";
 
+import { Typography } from "@mui/material";
+//import { ChapterBox } from "./subjectPageComponents/ChapterBox";
+
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import Accordion from "@mui/material/Accordion";
+import AccordionDetails from "@mui/material/AccordionDetails";
+import AccordionSummary from "@mui/material/AccordionSummary";
+
 type Subject = {
   __typename?: "Subject" | undefined;
   id: string;
@@ -90,12 +98,62 @@ type Props = {
 };
 
 export function SubjectMainWithNoVideo(props: Props) {
+  const hasResources = props.subject.resources.length > 0;
+  const hasDetails =
+    props.subject.firstHeldOn ||
+    props.subject.category ||
+    props.subject.location ||
+    props.subject.department ||
+    props.subject.faculty ||
+    props.subject.language ||
+    props.subject.freeDescription ||
+    props.subject.series ||
+    props.subject.academicField;
+  const hasSyllabus = props.subject.syllabus !== null;
+
   return (
     <Box className="Subject">
       <Box className="MainBox">
-        <SubjectResources subject={props.subject} />
-        <SubjectDetails subject={props.subject} />
-        <SubjectSyllabus subject={props.subject} />
+        {hasResources && (
+          <Accordion>
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls="resource"
+              id="resource"
+            >
+              <Typography sx={{ fontWeight: "bold" }}>講義資料</Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <SubjectResources subject={props.subject} />
+            </AccordionDetails>
+          </Accordion>
+        )}
+        {hasDetails && (
+          <Accordion>
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls="details"
+              id="details"
+            >
+              <Typography sx={{ fontWeight: "bold" }}>講義詳細</Typography>
+            </AccordionSummary>
+            <SubjectDetails subject={props.subject} />
+          </Accordion>
+        )}
+        {hasSyllabus && (
+          <Accordion>
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls="syllabus"
+              id="syllabus"
+            >
+              <Typography sx={{ fontWeight: "bold" }}>シラバス</Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <SubjectSyllabus subject={props.subject} />
+            </AccordionDetails>
+          </Accordion>
+        )}
       </Box>
     </Box>
   );

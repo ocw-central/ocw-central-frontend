@@ -166,6 +166,13 @@ export type SubjectQueryVariables = Exact<{
 
 export type SubjectQuery = { __typename?: 'Query', subject: { __typename?: 'Subject', id: string, title: string, category: string, location: string, department: string, firstHeldOn?: any | null, faculty: string, language: string, freeDescription: string, series: string, academicField: string, thumbnailLink: string, videos: Array<{ __typename?: 'Video', id: string, title: string, ordering: number, link: string, faculty: string, lecturedOn: any, videoLength: number, language: string, chapters: Array<{ __typename?: 'Chapter', id: string, startAt: number, topic: string, thumbnailLink: string }> }>, resources: Array<{ __typename?: 'Resource', id: string, title: string, ordering: number, description: string, link: string }>, relatedSubjects: Array<{ __typename?: 'RelatedSubject', id: string, title: string, thumbnailLink: string, faculty: string }>, syllabus?: { __typename?: 'Syllabus', id: string, faculty: string, language: string, subjectNumbering: string, academicYear: number, semester: string, numCredit: number, courseFormat: string, assignedGrade: string, targetedAudience: string, courseDayPeriod: string, outline: string, objective: string, lessonPlan: string, gradingMethod: string, courseRequirement: string, outClassLearning: string, reference: string, remark: string, subpages: Array<{ __typename?: 'Subpage', id: string, content: string }> } | null } };
 
+export type SubjectOnHomepageQueryVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+
+export type SubjectOnHomepageQuery = { __typename?: 'Query', subject: { __typename?: 'Subject', id: string, title: string, thumbnailLink: string, faculty: string } };
+
 
 export const AcademicFieldsDocument = gql`
     query academicFields {
@@ -342,3 +349,41 @@ export function useSubjectLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<Su
 export type SubjectQueryHookResult = ReturnType<typeof useSubjectQuery>;
 export type SubjectLazyQueryHookResult = ReturnType<typeof useSubjectLazyQuery>;
 export type SubjectQueryResult = Apollo.QueryResult<SubjectQuery, SubjectQueryVariables>;
+export const SubjectOnHomepageDocument = gql`
+    query subjectOnHomepage($id: ID!) {
+  subject(id: $id) {
+    id
+    title
+    thumbnailLink
+    faculty
+  }
+}
+    `;
+
+/**
+ * __useSubjectOnHomepageQuery__
+ *
+ * To run a query within a React component, call `useSubjectOnHomepageQuery` and pass it any options that fit your needs.
+ * When your component renders, `useSubjectOnHomepageQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useSubjectOnHomepageQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useSubjectOnHomepageQuery(baseOptions: Apollo.QueryHookOptions<SubjectOnHomepageQuery, SubjectOnHomepageQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<SubjectOnHomepageQuery, SubjectOnHomepageQueryVariables>(SubjectOnHomepageDocument, options);
+      }
+export function useSubjectOnHomepageLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<SubjectOnHomepageQuery, SubjectOnHomepageQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<SubjectOnHomepageQuery, SubjectOnHomepageQueryVariables>(SubjectOnHomepageDocument, options);
+        }
+export type SubjectOnHomepageQueryHookResult = ReturnType<typeof useSubjectOnHomepageQuery>;
+export type SubjectOnHomepageLazyQueryHookResult = ReturnType<typeof useSubjectOnHomepageLazyQuery>;
+export type SubjectOnHomepageQueryResult = Apollo.QueryResult<SubjectOnHomepageQuery, SubjectOnHomepageQueryVariables>;

@@ -1,14 +1,15 @@
+import { Loading } from "@/components/common/Loading";
+import { SubjectCard } from "@/components/common/SubjectCard";
 import { DetailedSearchBar } from "@/components/searchPageComponents/DetailedSearchBar";
-import { SubjectCard } from "@/components/searchPageComponents/SubjectCard";
 import { useSubjectOnSearchPageQuery } from "@/generated/graphql";
-import { Box, Divider, Grid, ImageList, Typography } from "@mui/material";
+import { Box, Divider, Grid, Typography } from "@mui/material";
 import { useRef, useState } from "react";
 import {
   createSearchParams,
   useNavigate,
   useSearchParams,
 } from "react-router-dom";
-import { SideBar } from "./searchPageComponents/SideBar";
+import { AcademicFieldsList } from "./common/AcademicFieldsList";
 
 type Params = {
   title?: string;
@@ -36,7 +37,7 @@ const ChangeGridItems = () => {
   });
   if (mounted.current) {
     if (loading) {
-      return <div>Loading...</div>;
+      return <Loading size={"7em"} color={"primary"} />;
     }
     if (error) {
       return <div>Error</div>;
@@ -82,9 +83,16 @@ export function SearchPage() {
         container
         xs={0}
         md={3}
-        sx={{ display: { xs: "none", md: "block" } }}
+        sx={{
+          display: { xs: "none", md: "flex" },
+          mb: 2,
+          flexDirection: "column",
+          height: 700,
+          overflow: "hidden",
+          overflowY: "scroll",
+        }}
       >
-        <SideBar />
+        <AcademicFieldsList inNav={false} />
       </Grid>
 
       <Grid item xs={12} md={9}>
@@ -94,10 +102,16 @@ export function SearchPage() {
               xs: 0,
               md: 4,
             },
+            mb: 2,
+            display: "flex",
+            flexDirection: "column",
+            height: 700,
+            overflow: "hidden",
+            overflowY: "scroll",
           }}
         >
           <Typography variant="h5" component="div" align="left">
-            詳細検索
+            <b>詳細検索</b>
           </Typography>
           <Divider sx={{ mb: 2 }} />
           <DetailedSearchBar

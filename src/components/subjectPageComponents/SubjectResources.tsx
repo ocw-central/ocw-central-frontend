@@ -1,12 +1,14 @@
+import AttachmentIcon from "@mui/icons-material/Attachment";
+import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
+import VideoFileIcon from "@mui/icons-material/VideoFile";
 import {
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
   Paper,
-  Table,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
 } from "@mui/material";
-import Typography from "@mui/material/Typography";
+import Divider from "@mui/material/Divider";
 import { Box } from "@mui/system";
 
 type Subject = {
@@ -91,25 +93,30 @@ type Subject = {
 export function SubjectResources({ subject }: { subject: Subject }) {
   return (
     <Box>
-      <Typography variant="h5">講義資料</Typography>
-      <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 650 }} aria-label="subject details">
-          <TableHead>
-            {subject.resources.map((resource) => (
-              <TableRow>
-                {resource.title && (
-                  <TableCell>
-                    <a href={resource.link}> {resource.title}</a>
-                  </TableCell>
-                )}
-                {resource.description && (
-                  <TableCell>{resource.description}</TableCell>
-                )}
-              </TableRow>
-            ))}
-          </TableHead>
-        </Table>
-      </TableContainer>
+      {subject.resources.map((resource) => (
+        <Paper key={resource.id} sx={{ my: 2 }}>
+          <a href={resource.link} target="_blank" rel="noreferrer">
+            <ListItem key={resource.id}>
+              <ListItemButton>
+                <ListItemIcon>
+                  {resource.link.endsWith(".pdf") ? (
+                    <PictureAsPdfIcon sx={{ color: "red" }} />
+                  ) : resource.link.endsWith(".mp4") ? (
+                    <VideoFileIcon sx={{ color: "red" }} />
+                  ) : (
+                    <AttachmentIcon sx={{ color: "secondary.main" }} />
+                  )}
+                </ListItemIcon>
+                <ListItemText
+                  primary={resource.title}
+                  secondary={resource.description}
+                />
+              </ListItemButton>
+            </ListItem>
+          </a>
+          <Divider />
+        </Paper>
+      ))}
     </Box>
   );
 }
