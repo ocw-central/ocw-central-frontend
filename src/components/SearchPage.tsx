@@ -27,6 +27,7 @@ export function SearchPage() {
   const [searchTitle, setSearchTitle] = useState("");
   const [searchFaculty, setSearchFaculty] = useState("");
   const [searchAcademicField, setSearchAcademicField] = useState("");
+  const [onSearch, setOnSearch] = useState(false);
 
   // stateに基づきsearch parameterを切り替える関数
   const setSearchParams = () => {
@@ -105,8 +106,16 @@ export function SearchPage() {
             setSearchTitle={setSearchTitle}
             setSearchFaculty={setSearchFaculty}
             setSearchAcademicField={setSearchAcademicField}
+            onSearch={() => setOnSearch(true)}
           />
-          <SubjectGrid subjects={data?.subjects} />
+          {onSearch && !title && !faculty && !field && (
+            <Typography variant="h5" component="div" align="left">
+              少なくとも一つの項目を入力してください
+            </Typography>
+          )}
+          {(title || faculty || field) && (
+            <SubjectGrid subjects={data?.subjects} />
+          )}
         </Box>
       </Grid>
     </Grid>

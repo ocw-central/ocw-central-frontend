@@ -74,11 +74,13 @@ export const DetailedSearchBar = ({
   setSearchFaculty,
   setSearchTitle,
   setSearchAcademicField,
+  onSearch,
 }: {
   setSearchParams: () => void;
   setSearchTitle: Dispatch<SetStateAction<string>>;
   setSearchFaculty: Dispatch<SetStateAction<string>>;
   setSearchAcademicField: Dispatch<SetStateAction<string>>;
+  onSearch: () => void;
 }) => {
   return (
     <Box
@@ -140,7 +142,10 @@ export const DetailedSearchBar = ({
       <Button
         variant="contained"
         aria-label="search"
-        onClick={() => setSearchParams()}
+        onClick={() => {
+          setSearchParams();
+          onSearch();
+        }}
         size="large"
         sx={{
           mt: 2,
