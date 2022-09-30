@@ -61,7 +61,14 @@ export function SubjectPage() {
         )}
         {!hasVideos && <SubjectMainWithNoVideo subject={subject} />}
       </Box>
-      <Box className="CopyrightBox" sx={{ display: "flex" }}>
+      <Box
+        className="CopyrightBox"
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignContent: "center",
+        }}
+      >
         <SubjectCopyrightCard
           title={subject.title}
           subject_faculty={subject.faculty}
