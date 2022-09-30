@@ -48,7 +48,6 @@ function App() {
                   <Route path="/subjects/:id" element={<SubjectPage />} />
                   <Route path="/search" element={<SearchPage />}></Route>
                   <Route path="/about" element={<AboutPage />} />
-                  <Route path="/academic_fields" element={<AcademicFields />} />
                   <Route path="*" element={<PageNotFound />} />
                 </Routes>
               </Container>
