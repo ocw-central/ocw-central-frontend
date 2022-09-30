@@ -1,9 +1,10 @@
 import { Loading } from "@/components/common/Loading";
-import { SubjectCard } from "@/components/common/SubjectCard";
 import { DetailedSearchBar } from "@/components/searchPageComponents/DetailedSearchBar";
+import { SubjectGrid } from "@/components/subjectPageComponents/SubjectGrid";
 import { useSubjectOnSearchPageQuery } from "@/generated/graphql";
 import { Box, Divider, Grid, Typography } from "@mui/material";
-import { useRef, useState } from "react";
+import { useState } from "react";
+
 import {
   createSearchParams,
   useNavigate,
@@ -17,48 +18,10 @@ type Params = {
   field?: string;
 };
 
-const ChangeGridItems = () => {
-  const GridItems: JSX.Element[] = [];
-  const [searchParams] = useSearchParams();
-  const titleParam = searchParams.get("title");
-  const title: string = titleParam !== null ? titleParam : "";
-  const facultyParam = searchParams.get("faculty");
-  const faculty: string = facultyParam !== null ? facultyParam : "";
-  const academicFieldParam = searchParams.get("field");
-  const field: string = academicFieldParam !== null ? academicFieldParam : "";
-  const mounted = useRef(false);
-  const { data, loading, error } = useSubjectOnSearchPageQuery({
-    variables: {
-      title: title,
-      faculty: faculty,
-      field: field,
-    },
-    skip: title === "" && faculty === "" && field === "",
-  });
-  if (mounted.current) {
-    if (loading) {
-      return <Loading size={"7em"} color={"primary"} />;
-    }
-    if (error) {
-      return <div>Error</div>;
-    }
-    if (!data) {
-      return <div>該当講義がありません</div>;
-    }
-    if (data) {
-      data.subjects.forEach((subject) => {
-        GridItems.push(<SubjectCard {...subject} />);
-      });
-    }
-  }
-  mounted.current = true;
-  return GridItems;
-};
-
 export function SearchPage() {
   const navigate = useNavigate();
   // クエリパラメータをもとに検索を行い、コンポーネントを書き換える
-  const GridItems = ChangeGridItems();
+  const GridItems: JSX.Element[] = [];
 
   // 講義名検索結果を持つstate
   const [searchTitle, setSearchTitle] = useState("");
@@ -76,6 +39,29 @@ export function SearchPage() {
 
     navigate(`?${searchParams}`);
   };
+
+  const [searchParams] = useSearchParams();
+  const titleParam = searchParams.get("title");
+  const title: string = titleParam !== null ? titleParam : "";
+  const facultyParam = searchParams.get("faculty");
+  const faculty: string = facultyParam !== null ? facultyParam : "";
+  const academicFieldParam = searchParams.get("field");
+  const field: string = academicFieldParam !== null ? academicFieldParam : "";
+
+  const { data, loading, error } = useSubjectOnSearchPageQuery({
+    variables: {
+      title: title,
+      faculty: faculty,
+      field: field,
+    },
+    skip: title === "" && faculty === "" && field === "",
+  });
+  if (loading) {
+    return <Loading size={"7em"} color={"primary"} />;
+  }
+  if (error) {
+    return <div>Error</div>;
+  }
 
   return (
     <Grid container>
@@ -120,7 +106,7 @@ export function SearchPage() {
             setSearchFaculty={setSearchFaculty}
             setSearchAcademicField={setSearchAcademicField}
           />
-          <Grid container>{GridItems}</Grid>
+          <SubjectGrid subjects={data?.subjects} />
         </Box>
       </Grid>
     </Grid>
