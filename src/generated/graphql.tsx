@@ -37,6 +37,7 @@ export type Node = {
 export type Query = {
   __typename?: 'Query';
   academicFields: Array<AcademicField>;
+  randomSubjects: Array<Subject>;
   subject: Subject;
   subjects: Array<Subject>;
 };
@@ -172,6 +173,11 @@ export type SubjectOnHomepageQueryVariables = Exact<{
 
 
 export type SubjectOnHomepageQuery = { __typename?: 'Query', subject: { __typename?: 'Subject', id: string, title: string, thumbnailLink: string, faculty: string } };
+
+export type RandomSubjectQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type RandomSubjectQuery = { __typename?: 'Query', randomSubjects: Array<{ __typename?: 'Subject', id: string, title: string, thumbnailLink: string, faculty: string }> };
 
 
 export const AcademicFieldsDocument = gql`
@@ -387,3 +393,40 @@ export function useSubjectOnHomepageLazyQuery(baseOptions?: Apollo.LazyQueryHook
 export type SubjectOnHomepageQueryHookResult = ReturnType<typeof useSubjectOnHomepageQuery>;
 export type SubjectOnHomepageLazyQueryHookResult = ReturnType<typeof useSubjectOnHomepageLazyQuery>;
 export type SubjectOnHomepageQueryResult = Apollo.QueryResult<SubjectOnHomepageQuery, SubjectOnHomepageQueryVariables>;
+export const RandomSubjectDocument = gql`
+    query randomSubject {
+  randomSubjects {
+    id
+    title
+    thumbnailLink
+    faculty
+  }
+}
+    `;
+
+/**
+ * __useRandomSubjectQuery__
+ *
+ * To run a query within a React component, call `useRandomSubjectQuery` and pass it any options that fit your needs.
+ * When your component renders, `useRandomSubjectQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useRandomSubjectQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useRandomSubjectQuery(baseOptions?: Apollo.QueryHookOptions<RandomSubjectQuery, RandomSubjectQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<RandomSubjectQuery, RandomSubjectQueryVariables>(RandomSubjectDocument, options);
+      }
+export function useRandomSubjectLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<RandomSubjectQuery, RandomSubjectQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<RandomSubjectQuery, RandomSubjectQueryVariables>(RandomSubjectDocument, options);
+        }
+export type RandomSubjectQueryHookResult = ReturnType<typeof useRandomSubjectQuery>;
+export type RandomSubjectLazyQueryHookResult = ReturnType<typeof useRandomSubjectLazyQuery>;
+export type RandomSubjectQueryResult = Apollo.QueryResult<RandomSubjectQuery, RandomSubjectQueryVariables>;

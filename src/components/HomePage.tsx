@@ -2,7 +2,7 @@ import { Box } from "@mui/material";
 
 import { Loading } from "@/components/common/Loading";
 import { SubjectCard } from "@/components/common/SubjectCard";
-import { useSubjectOnHomepageQuery } from "@/generated/graphql";
+import { useRandomSubjectQuery } from "@/generated/graphql";
 import { Divider, Grid, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
@@ -19,42 +19,35 @@ type Params = {
   field?: string;
 };
 
-const FEATURED_SUBJECTS_IDS = [
-  "01GB4X63H1KYQ3K8MN95PGYASY",
-  "01GBMW5CXV2RMJMSTQKCS5KKC0",
-  "01GB4X63GYPW8ECNVC7WXW7934",
-  "01GB4X63H5XDNBJ36VWYS83X9V",
-  "01GB4X63H52R2YFD372NEGCH92",
-  "01GB4X63GY2TZ3RGR0FHZ25K53",
-  "01GB4X63GYCAFPK51DZZSKB8JF",
-  "01GB4X63H0451ZJJ7RS4FB7PT2",
-  "01GB4X63H0D6B8FZJZS7FDHSM9",
-  "01GB4X63H2NC2K55QQA0ANN9V1",
-];
-
 export function HomePage() {
   const navigate = useNavigate();
-  const GridItems: JSX.Element[] = [];
-  FEATURED_SUBJECTS_IDS.forEach((id) => {
-    const { data, loading, error } = useSubjectOnHomepageQuery({
-      variables: {
-        id: id,
-      },
-    });
+  const GridRandomItems: JSX.Element[] = [];
 
-    if (loading) {
-      return <Loading size={"7em"} color={"primary"} />;
-    }
-    if (error) {
-      return <div>Error</div>;
-    }
-    if (!data) {
-      return <div>該当講義がありません</div>;
-    }
-    if (data) {
-      GridItems.push(<SubjectCard {...data.subject} />);
-    }
+  const { data, loading, error } = useRandomSubjectQuery({
+    variables: {},
   });
+
+  if (loading) {
+    return <Loading size={"7em"} color={"primary"} />;
+  }
+  if (error) {
+    return <div>Failed to fetch random lectures.</div>;
+  }
+  if (!data) {
+    return <div>該当講義がありません</div>;
+  }
+  if (data) {
+    data.randomSubjects.map((subject) => {
+      GridRandomItems.push(
+        <SubjectCard
+          id={subject.id}
+          title={subject.title}
+          faculty={subject.faculty}
+          thumbnailLink={subject.thumbnailLink}
+        />
+      );
+    });
+  }
   return (
     <Box>
       <Box className="HomePage">
@@ -94,10 +87,10 @@ export function HomePage() {
               }}
             >
               <Typography variant="h5" component="div" align="left">
-                <b>注目の講義</b>
+                <b>Feeling Lucky</b>
               </Typography>
               <Divider sx={{ mb: 2 }} />
-              <Grid container>{GridItems}</Grid>
+              <Grid container>{GridRandomItems}</Grid>
             </Box>
           </Grid>
         </Grid>
