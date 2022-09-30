@@ -50,28 +50,21 @@ export function HomePage() {
   }
   return (
     <Box>
-      <Box className="HomePage">
+      <Box
+        className="HomePage"
+        sx={{ display: "flex", flexDirection: "column" }}
+      >
         <h2>
           OCW
           CentralはOCW(高等教育機関によってオープンライセンスの元で提供される無料の学習教材)のポータルサイトです。
           教育資源の保全とアクセス向上を目的としています。
           このサイトは京都大学情報学科の学生有志によって自主的に運営されており、いかなる大学機関とも関わりはありません。
         </h2>
-        <Grid container sx={{ height: "100%" }}>
-          <Grid
-            container
-            xs={0}
-            md={3}
-            sx={{
-              display: { xs: "none", md: "flex" },
-              mb: 2,
-              flexDirection: "column",
-              height: 500,
-              overflow: "hidden",
-              overflowY: "scroll",
-            }}
-          ></Grid>
-          <Grid item xs={12} md={9}>
+        <Grid
+          container
+          sx={{ height: "100%", alignSelf: "center", justifyContent: "center" }}
+        >
+          <Grid item xs={12} md={15}>
             <Box
               sx={{
                 m: {
