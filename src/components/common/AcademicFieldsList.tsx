@@ -62,7 +62,13 @@ export function AcademicFieldsList(props: Props) {
     return (
       <ListItem style={style} key={index} button={true} disablePadding={true}>
         <ListItemButton
-          sx={{ fullWidth: "true", margin: "0" }}
+          sx={{
+            fullWidth: "true",
+            margin: "0",
+            "&:hover, &:focus": {
+              bgcolor: "unset",
+            },
+          }}
           onClick={() => {
             const academicFieldParames = createSearchParams({
               field: fields[index],
@@ -98,7 +104,7 @@ export function AcademicFieldsList(props: Props) {
 
   return (
     <List>
-      <Accordion>
+      <Accordion defaultExpanded={true}>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1a-content"
@@ -130,7 +136,7 @@ export function AcademicFieldsList(props: Props) {
           {props.inNav && (
             <FixedSizeList
               height={350}
-              width={330}
+              width={"auto"}
               itemSize={70}
               itemCount={japaneseFields.length}
               overscanCount={100}

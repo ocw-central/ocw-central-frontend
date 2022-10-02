@@ -3,8 +3,7 @@ import { Box } from "@mui/material";
 
 export function AboutPage() {
   return (
-    <Box className="About">
-      <h1>このサイトについて</h1>
+    <Box className="About" sx={{ m: "5em" }}>
       <Contact />
     </Box>
   );

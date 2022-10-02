@@ -1,8 +1,7 @@
-import { Box, InputBase } from "@mui/material";
+import { Box, InputBase, Typography } from "@mui/material";
 import Button from "@mui/material/Button";
 import { Dispatch, SetStateAction } from "react";
 
-import { theme } from "@/utils/themes";
 import SearchIcon from "@mui/icons-material/Search";
 import { alpha, styled } from "@mui/material/styles";
 import * as React from "react";
@@ -36,8 +35,11 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
     transition: theme.transitions.create("width"),
     width: "100%",
+    border: "2px solid #5286AB",
     [theme.breakpoints.up("sm")]: {
-      width: "12ch",
+      width: "18ch",
+      height: "2.5em",
+      mb: "1em",
       "&:focus": {
         width: "20ch",
       },
@@ -89,58 +91,35 @@ export const DetailedSearchBar = ({
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
-        background: alpha(theme.palette.primary.main, 0.6),
         p: 6,
         mx: {
           md: 10,
           sm: 10,
           xs: 0,
         },
-        borderRadius: 2,
-        borderColor: alpha(theme.palette.primary.main, 1),
-        borderStyle: "solid",
-        borderWidth: 6,
       }}
     >
-      <Box>
+      <Box sx={{ display: "flex", mb: "1em" }}>
         <SearchBar
           label="講義タイトル"
           setValue={setSearchTitle}
           setSearchParams={setSearchParams}
         />
-      </Box>
-      <Box
-        sx={{
-          display: "flex",
-          alignContent: "center",
-          justifyContent: "center",
-          flexFlow: {
-            xs: "column",
-            md: "row",
-          },
-          px: {
-            xs: 0,
-            md: 2,
-          },
-          py: {
-            xs: 0.5,
-            md: 0.5,
-          },
-        }}
-      >
         <SearchBar
           label="教授名"
           setValue={setSearchFaculty}
           setSearchParams={setSearchParams}
         />
-        <SearchBar
-          label="分野名"
-          setValue={setSearchAcademicField}
-          setSearchParams={setSearchParams}
-        />
+        <Box>
+          <SearchBar
+            label="分野名"
+            setValue={setSearchAcademicField}
+            setSearchParams={setSearchParams}
+          />
+        </Box>
       </Box>
       <Button
-        variant="contained"
+        variant="outlined"
         aria-label="search"
         onClick={() => {
           setSearchParams();
@@ -149,10 +128,14 @@ export const DetailedSearchBar = ({
         size="large"
         sx={{
           mt: 2,
-          borderRadius: 2,
+          width: "15em",
+          height: "3em",
+          boarder: "2px solid #5286AB",
         }}
       >
-        <b>検索</b>
+        <Typography variant="h6">
+          <b>検索</b>
+        </Typography>
       </Button>
     </Box>
   );

@@ -1,13 +1,11 @@
-import { alpha, Box } from "@mui/material";
+import { Box } from "@mui/material";
 
+import Background from "@/assets/background.svg";
 import { Loading } from "@/components/common/Loading";
 import { SubjectCard } from "@/components/common/SubjectCard";
 import { useRandomSubjectQuery } from "@/generated/graphql";
 import { Divider, Grid, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { theme } from "@/utils/themes";
-import { ReactComponent as OwlImg } from "@/assets/ocwc-owl.svg";
-import { ReactComponent as LogoImg } from "@/assets/logo.svg";
 type SubjectOnSearchPage = {
   id: string;
   title: string;
@@ -65,20 +63,21 @@ export function HomePage() {
           height: {
             xs: 300,
             sm: 400,
-            md: 300,
+            md: 400,
           },
           width: {
             xs: "100%",
-            md: "80%",
+            md: "100%",
           },
           p: {
             xs: 1,
             md: 4,
           },
-          backgroundColor: alpha(theme.palette.primary.main, 1),
-          borderColor: alpha(theme.palette.primary.main, 1),
           borderWidth: 20,
           borderRadius: 2,
+          backgroundImage: `url(${Background})`,
+          backgroundRepeat: "no-repeat, repeat",
+          backgroundPosition: "right",
         }}
       >
         <Grid
@@ -103,43 +102,23 @@ export function HomePage() {
           }}
         >
           <Typography
-            variant="h2"
-            sx={{
-              textAlign: "left",
-              color: "white",
-              mb: {
-                xs: 2,
-                md: 4,
-              },
-            }}
-          >
-            <b>Welcome to OCW Central!</b>
-          </Typography>
-          <Typography
             variant="h5"
             sx={{
               textAlign: "left",
-              color: "white",
               my: 4,
             }}
           >
-            <b>大学によって無償で提供される教育資料のポータルサイトです。</b>
+            <b>
+              OCW CentralはOCW(大学によって <br />
+              無償で提供される教育資料)のポータル
+              <br />
+              サイトです。京都大学情報学科の学生有志
+              <br />
+              によって教育資源の保全とアクセス向上を
+              <br />
+              目的として運営されています。
+            </b>
           </Typography>
-        </Grid>
-        <Grid
-          item
-          md={5}
-          xs={0}
-          sm={0}
-          sx={{
-            display: {
-              xs: "none",
-              sm: "none",
-              md: "block",
-            },
-          }}
-        >
-          <OwlImg style={{ width: "200px", height: "250px" }} />
         </Grid>
       </Grid>
       <Grid
@@ -154,11 +133,6 @@ export function HomePage() {
                 md: 4,
               },
               mb: 2,
-              display: "flex",
-              flexDirection: "column",
-              height: 700,
-              overflow: "hidden",
-              overflowY: "scroll",
             }}
           >
             <Typography variant="h5" component="div" align="left">

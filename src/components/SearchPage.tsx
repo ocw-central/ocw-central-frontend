@@ -65,24 +65,33 @@ export function SearchPage() {
   }
 
   return (
-    <Grid container>
+    <Grid container sx={{ dispplay: "flex" }}>
       <Grid
-        container
         xs={0}
         md={3}
         sx={{
           display: { xs: "none", md: "flex" },
           mb: 2,
           flexDirection: "column",
-          height: 700,
+          height: 920,
           overflow: "hidden",
           overflowY: "scroll",
         }}
       >
         <AcademicFieldsList inNav={false} />
       </Grid>
-
-      <Grid item xs={12} md={9}>
+      <Grid
+        item
+        xs={12}
+        md={9}
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          height: 900,
+          overflow: "hidden",
+          overflowY: "scroll",
+        }}
+      >
         <Box
           sx={{
             m: {
@@ -90,11 +99,6 @@ export function SearchPage() {
               md: 4,
             },
             mb: 2,
-            display: "flex",
-            flexDirection: "column",
-            height: 700,
-            overflow: "hidden",
-            overflowY: "scroll",
           }}
         >
           <Typography variant="h5" component="div" align="left">
@@ -109,7 +113,7 @@ export function SearchPage() {
             onSearch={() => setOnSearch(true)}
           />
           {onSearch && !title && !faculty && !field && (
-            <Typography variant="h5" component="div" align="left">
+            <Typography variant="h5" component="div" align="center">
               少なくとも一つの項目を入力してください
             </Typography>
           )}
