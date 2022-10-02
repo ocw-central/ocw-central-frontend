@@ -65,16 +65,15 @@ export function SearchPage() {
   }
 
   return (
-    <Grid container>
+    <Grid container sx={{ dispplay: "flex" }}>
       <Grid
-        container
         xs={0}
         md={3}
         sx={{
           display: { xs: "none", md: "flex" },
           mb: 2,
           flexDirection: "column",
-          height: 700,
+          height: 920,
           overflow: "hidden",
           overflowY: "scroll",
         }}
@@ -92,7 +91,7 @@ export function SearchPage() {
             mb: 2,
             display: "flex",
             flexDirection: "column",
-            height: 700,
+            height: 900,
             overflow: "hidden",
             overflowY: "scroll",
           }}
