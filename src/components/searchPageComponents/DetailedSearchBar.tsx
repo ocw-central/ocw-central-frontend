@@ -1,4 +1,4 @@
-import { Box, InputBase } from "@mui/material";
+import { Box, InputBase, Typography } from "@mui/material";
 import Button from "@mui/material/Button";
 import { Dispatch, SetStateAction } from "react";
 
@@ -35,7 +35,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
     transition: theme.transitions.create("width"),
     width: "100%",
-    border: "1px solid #5286AB",
+    border: "2px solid #5286AB",
     [theme.breakpoints.up("sm")]: {
       width: "18ch",
       height: "2.5em",
@@ -130,10 +130,12 @@ export const DetailedSearchBar = ({
           mt: 2,
           width: "15em",
           height: "3em",
-          borderRadius: 2,
+          boarder: "2px solid #5286AB",
         }}
       >
-        <b>検索</b>
+        <Typography variant="h6">
+          <b>検索</b>
+        </Typography>
       </Button>
     </Box>
   );

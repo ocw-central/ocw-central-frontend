@@ -104,7 +104,7 @@ export function AcademicFieldsList(props: Props) {
 
   return (
     <List>
-      <Accordion>
+      <Accordion defaultExpanded={true}>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1a-content"
