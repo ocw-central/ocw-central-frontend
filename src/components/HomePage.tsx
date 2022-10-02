@@ -1,13 +1,12 @@
 import { alpha, Box } from "@mui/material";
 
+import { ReactComponent as OwlImg } from "@/assets/ocwc-owl.svg";
 import { Loading } from "@/components/common/Loading";
 import { SubjectCard } from "@/components/common/SubjectCard";
 import { useRandomSubjectQuery } from "@/generated/graphql";
+import { theme } from "@/utils/themes";
 import { Divider, Grid, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { theme } from "@/utils/themes";
-import { ReactComponent as OwlImg } from "@/assets/ocwc-owl.svg";
-import { ReactComponent as LogoImg } from "@/assets/logo.svg";
 type SubjectOnSearchPage = {
   id: string;
   title: string;
@@ -123,7 +122,10 @@ export function HomePage() {
               my: 4,
             }}
           >
-            <b>大学によって無償で提供される教育資料のポータルサイトです。</b>
+            <b>
+              OCW(大学によって無償で提供される教育資料)のポータルサイトです。
+              京都大学情報学科の学生有志によって教育資源の保全とアクセス向上を目指して運営されています。
+            </b>
           </Typography>
         </Grid>
         <Grid
@@ -154,11 +156,6 @@ export function HomePage() {
                 md: 4,
               },
               mb: 2,
-              display: "flex",
-              flexDirection: "column",
-              height: 700,
-              overflow: "hidden",
-              overflowY: "scroll",
             }}
           >
             <Typography variant="h5" component="div" align="left">
