@@ -17,14 +17,14 @@ export function Footer() {
         }}
         sx={{
           backgroundColor: "#5286AB",
-          px: { xl: "16%", lg: "15%", md: "10%", sm: "3%", xs: "3%" },
+          px: { xl: "13%", lg: "10%", md: "10%", sm: "3%", xs: "3%" },
         }}
       >
         <Box
           style={{
             marginLeft: "0px",
             position: "relative",
-            bottom: "0",
+            bottom: "1em",
             alignSelf: "flex-end",
           }}
         >
@@ -56,7 +56,7 @@ export function Footer() {
             display: "flex",
             flexDirection: "row",
             justifyContent: "right",
-            marginTop: "4em",
+            marginTop: "5em",
             gap: "2em",
           }}
         >
