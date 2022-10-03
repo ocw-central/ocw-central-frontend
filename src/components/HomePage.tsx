@@ -1,11 +1,13 @@
-import { Box } from "@mui/material";
+import { alpha, Box } from "@mui/material";
 
-import Background from "@/assets/background.svg";
 import { Loading } from "@/components/common/Loading";
 import { SubjectCard } from "@/components/common/SubjectCard";
 import { useRandomSubjectQuery } from "@/generated/graphql";
+import { theme } from "@/utils/themes";
 import { Divider, Grid, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+
+import { ReactComponent as OwlImg } from "@/assets/ocwc-owl.svg";
 type SubjectOnSearchPage = {
   id: string;
   title: string;
@@ -63,21 +65,20 @@ export function HomePage() {
           height: {
             xs: 300,
             sm: 400,
-            md: 400,
+            md: 300,
           },
           width: {
             xs: "100%",
-            md: "100%",
+            md: "80%",
           },
           p: {
             xs: 1,
             md: 4,
           },
+          backgroundColor: alpha(theme.palette.primary.main, 1),
+          borderColor: alpha(theme.palette.primary.main, 1),
           borderWidth: 20,
           borderRadius: 2,
-          backgroundImage: `url(${Background})`,
-          backgroundRepeat: "no-repeat, repeat",
-          backgroundPosition: "right",
         }}
       >
         <Grid
@@ -102,23 +103,36 @@ export function HomePage() {
           }}
         >
           <Typography
-            variant="h5"
+            variant="h2"
             sx={{
-              textAlign: "left",
-              my: 4,
+              textAlign: "center",
+              color: "white",
+              mb: {
+                xs: 2,
+                md: 4,
+              },
             }}
           >
             <b>
-              OCW CentralはOCW(大学によって <br />
-              無償で提供される教育資料)のポータル
-              <br />
-              サイトです。京都大学情報学科の学生有志
-              <br />
-              によって教育資源の保全とアクセス向上を
-              <br />
-              目的として運営されています。
+              Welcome to <br />
+              OCW Central!
             </b>
           </Typography>
+        </Grid>
+        <Grid
+          item
+          md={5}
+          xs={0}
+          sm={0}
+          sx={{
+            display: {
+              xs: "none",
+              sm: "none",
+              md: "block",
+            },
+          }}
+        >
+          <OwlImg style={{ width: "200px", height: "250px" }} />
         </Grid>
       </Grid>
       <Grid
