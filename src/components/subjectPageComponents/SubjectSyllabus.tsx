@@ -176,8 +176,8 @@ export function SubjectSyllabus({ subject }: { subject: Subject }) {
               )}
             </TableRow>
             <TableRow>
-              {syllabus?.academicYear && (
-                <TableCell>{syllabus.academicYear}</TableCell>
+              {(syllabus?.academicYear || syllabus?.academicYear !== 0) && (
+                <TableCell>{syllabus?.academicYear}</TableCell>
               )}
               {syllabus?.semester && <TableCell>{syllabus.semester}</TableCell>}
               {(syllabus?.numCredit || syllabus?.numCredit !== 0) && (

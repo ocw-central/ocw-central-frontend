@@ -99,9 +99,9 @@ export function SubjectResources({ subject }: { subject: Subject }) {
             <ListItem key={resource.id}>
               <ListItemButton>
                 <ListItemIcon>
-                  {resource.link.endsWith(".pdf") ? (
+                  {resource.link.toLowerCase().endsWith(".pdf") ? (
                     <PictureAsPdfIcon sx={{ color: "red" }} />
-                  ) : resource.link.endsWith(".mp4") ? (
+                  ) : resource.link.toLowerCase().endsWith(".mp4") ? (
                     <VideoFileIcon sx={{ color: "red" }} />
                   ) : (
                     <AttachmentIcon sx={{ color: "secondary.main" }} />
