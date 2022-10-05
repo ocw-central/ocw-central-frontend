@@ -5,12 +5,9 @@ import { useSubjectQuery } from "@/generated/graphql";
 import { Box, Typography } from "@mui/material";
 import { useParams } from "react-router-dom";
 
-//import { ChapterBox } from "./subjectPageComponents/ChapterBox";
 import { SubjectDetails } from "@/components/subjectPageComponents/SubjectDetails";
 import { SubjectResources } from "@/components/subjectPageComponents/SubjectResources";
 import { SubjectSyllabus } from "@/components/subjectPageComponents/SubjectSyllabus";
-
-//import { ChapterBox } from "./subjectPageComponents/ChapterBox";
 
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Accordion from "@mui/material/Accordion";
@@ -86,7 +83,7 @@ export function SubjectPage() {
       </Box>
       <Box>
         {hasResources && (
-          <Accordion>
+          <Accordion sx={{ border: "3px solid #0F5173", m: "0.5em" }}>
             <AccordionSummary
               expandIcon={<ExpandMoreIcon />}
               aria-controls="resource"
@@ -100,7 +97,7 @@ export function SubjectPage() {
           </Accordion>
         )}
         {hasDetails && (
-          <Accordion>
+          <Accordion sx={{ border: "3px solid #0F5173", m: "0.5em" }}>
             <AccordionSummary
               expandIcon={<ExpandMoreIcon />}
               aria-controls="details"
@@ -112,7 +109,7 @@ export function SubjectPage() {
           </Accordion>
         )}
         {hasSyllabus && (
-          <Accordion>
+          <Accordion sx={{ border: "3px solid #0F5173", m: "0.5em" }}>
             <AccordionSummary
               expandIcon={<ExpandMoreIcon />}
               aria-controls="syllabus"
