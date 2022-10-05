@@ -16,7 +16,7 @@ export function AboutPage() {
     >
       <Grid item md={12} xs={12}>
         <Typography
-          variant="h3"
+          variant="h4"
           sx={{
             fontWeight: "bold",
             color: theme.palette.primary.main,
@@ -48,7 +48,7 @@ export function AboutPage() {
       </Grid>
       <Grid item md={12} xs={12}>
         <Typography
-          variant="h3"
+          variant="h4"
           sx={{
             textAlign: "center",
             fontWeight: "bold",
