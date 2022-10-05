@@ -114,6 +114,11 @@ export function SubjectMainWithNoVideo(props: Props) {
   return (
     <Box className="Subject">
       <Box className="MainBox">
+        {props.subject.faculty && (
+          <Typography variant="h6" component="div" align="left" sx={{ p: 1 }}>
+            {props.subject.faculty}
+          </Typography>
+        )}
         {hasResources && (
           <Accordion>
             <AccordionSummary
