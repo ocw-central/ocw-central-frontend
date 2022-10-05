@@ -2,17 +2,9 @@ import { youtube_parser } from "@/utils/youtubeParser";
 import { Box, Typography } from "@mui/material";
 import YouTube from "react-youtube";
 //import { ChapterBox } from "./subjectPageComponents/ChapterBox";
-import { SubjectDetails } from "@/components/subjectPageComponents/SubjectDetails";
-import { SubjectResources } from "@/components/subjectPageComponents/SubjectResources";
 import { VideosBox } from "@/components/subjectPageComponents/VideosBox";
 import { Video } from "@/generated/graphql";
 import { useState } from "react";
-import { SubjectSyllabus } from "./SubjectSyllabus";
-
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import Accordion from "@mui/material/Accordion";
-import AccordionDetails from "@mui/material/AccordionDetails";
-import AccordionSummary from "@mui/material/AccordionSummary";
 
 type Subject = {
   __typename?: "Subject" | undefined;
@@ -107,19 +99,6 @@ export function SubjectMainWithVideo(props: Props) {
 
   // const video = videos.find((video) => video.id === videoId);
 
-  const hasResources = props.subject.resources.length > 0;
-  const hasDetails =
-    props.subject.firstHeldOn ||
-    props.subject.category ||
-    props.subject.location ||
-    props.subject.department ||
-    props.subject.faculty ||
-    props.subject.language ||
-    props.subject.freeDescription ||
-    props.subject.series ||
-    props.subject.academicField;
-  const hasSyllabus = props.subject.syllabus !== null;
-
   return (
     <Box className="Subject">
       <Box className="MainBox">
@@ -187,48 +166,6 @@ export function SubjectMainWithVideo(props: Props) {
               />
             )}
           </Box>
-          {hasResources && (
-            <Accordion>
-              <AccordionSummary
-                expandIcon={<ExpandMoreIcon />}
-                aria-controls="resource"
-                id="resource"
-              >
-                <Typography sx={{ fontWeight: "bold" }}>講義資料</Typography>
-              </AccordionSummary>
-              <AccordionDetails>
-                <SubjectResources subject={props.subject} />
-              </AccordionDetails>
-            </Accordion>
-          )}
-          {hasDetails && (
-            <Accordion>
-              <AccordionSummary
-                expandIcon={<ExpandMoreIcon />}
-                aria-controls="details"
-                id="details"
-              >
-                <Typography sx={{ fontWeight: "bold" }}>講義詳細</Typography>
-              </AccordionSummary>
-              <SubjectDetails subject={props.subject} />
-            </Accordion>
-          )}
-          {hasSyllabus && (
-            <Accordion>
-              <AccordionSummary
-                expandIcon={<ExpandMoreIcon />}
-                aria-controls="syllabus"
-                id="syllabus"
-              >
-                <Typography sx={{ variant: "h6", fontWeight: "bold" }}>
-                  シラバス
-                </Typography>
-              </AccordionSummary>
-              <AccordionDetails>
-                <SubjectSyllabus subject={props.subject} />
-              </AccordionDetails>
-            </Accordion>
-          )}
         </Box>
       </Box>
     </Box>
