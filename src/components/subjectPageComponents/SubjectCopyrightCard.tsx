@@ -62,7 +62,7 @@ export function SubjectCopyrightCard(props: Props) {
     >
       <CardContent>
         <Typography sx={{ fontSize: "1.2em" }} color="black" gutterBottom>
-          著作権表記
+          <b>著作権表記</b>
         </Typography>
         <Typography
           sx={{ mb: 1.5, fontSize: "1em", textAlign: "left" }}

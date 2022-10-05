@@ -139,6 +139,8 @@ export function SubjectMainWithVideo(props: Props) {
               flexDirection: {
                 xs: "column",
                 md: "row",
+                justifyContent: "center",
+                alignContent: "center",
               },
               borderRadius: 1,
             }}
@@ -149,7 +151,11 @@ export function SubjectMainWithVideo(props: Props) {
                 component="div"
                 align="left"
                 color="primary"
-                sx={{ color: "primary.main", borderLeft: 1, p: 1 }}
+                sx={{
+                  color: "primary.main",
+                  borderLeft: 1,
+                  p: 1,
+                }}
               >
                 {FocusedVideo?.title}
               </Typography>
@@ -165,10 +171,9 @@ export function SubjectMainWithVideo(props: Props) {
               <YouTube
                 videoId={FocusedYoutubeId}
                 opts={{
-                  height: "390",
-                  width: "640",
+                  height: "390em",
+                  width: "640em",
                   playerVars: {
-                    // https://developers.google.com/youtube/player_parameters
                     autoplay: 0,
                   },
                 }}

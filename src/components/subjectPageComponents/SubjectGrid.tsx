@@ -18,7 +18,7 @@ export const SubjectGrid = (subjects: Subjects) => {
     return <div>検索結果がありません</div>;
   }
   return (
-    <Grid container>
+    <Grid container sx={{ height: 400 }}>
       {subjects.subjects?.map((subject) => (
         <SubjectCard
           id={subject.id}
