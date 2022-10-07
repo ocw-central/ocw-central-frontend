@@ -119,7 +119,7 @@ export const DetailedSearchBar = ({
         </Box>
       </Box>
       <Button
-        variant="outlined"
+        variant="contained"
         aria-label="search"
         onClick={() => {
           setSearchParams();

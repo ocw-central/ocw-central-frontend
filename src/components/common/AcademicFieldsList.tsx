@@ -60,13 +60,15 @@ export function AcademicFieldsList(props: Props) {
     const { index, style } = propsRender;
 
     return (
-      <ListItem style={style} key={index} button={true} disablePadding={true}>
+      <ListItem style={style} key={index} button={false} disablePadding={true}>
         <ListItemButton
+          divider={true}
           sx={{
             fullWidth: "true",
             margin: "0",
             "&:hover, &:focus": {
-              bgcolor: "unset",
+              bgcolor: "none",
+              textDecoration: "none",
             },
           }}
           onClick={() => {
@@ -87,6 +89,13 @@ export function AcademicFieldsList(props: Props) {
               fontWeight: "medium",
               variant: "h6",
               fontStyle: "bald",
+            }}
+            sx={{
+              fullWidth: "true",
+              margin: "0",
+              "&:hover, &:focus": {
+                bgcolor: "none",
+              },
             }}
           />
         </ListItemButton>
@@ -126,7 +135,7 @@ export function AcademicFieldsList(props: Props) {
             <FixedSizeList
               height={350}
               width={"auto"}
-              itemSize={75}
+              itemSize={55}
               itemCount={japaneseFields.length}
               overscanCount={100}
             >
@@ -137,7 +146,7 @@ export function AcademicFieldsList(props: Props) {
             <FixedSizeList
               height={350}
               width={"auto"}
-              itemSize={70}
+              itemSize={55}
               itemCount={japaneseFields.length}
               overscanCount={100}
             >
@@ -168,7 +177,7 @@ export function AcademicFieldsList(props: Props) {
             <FixedSizeList
               height={350}
               width={"auto"}
-              itemSize={75}
+              itemSize={55}
               itemCount={englishFields.length}
               overscanCount={100}
             >
@@ -178,8 +187,8 @@ export function AcademicFieldsList(props: Props) {
           {props.inNav && (
             <FixedSizeList
               height={350}
-              width={330}
-              itemSize={70}
+              width={"auto"}
+              itemSize={55}
               itemCount={englishFields.length}
               overscanCount={100}
             >
