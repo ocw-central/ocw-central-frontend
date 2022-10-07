@@ -63,20 +63,6 @@ export function SubjectPage() {
         className="MainBox"
         sx={{ display: "flex", flexDirection: "column" }}
       >
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            p: 1,
-            m: 1,
-            bgcolor: "background.paper",
-            borderRadius: 1,
-          }}
-        >
-          <Typography variant="h3" component="div" align="left" sx={{ p: 1 }}>
-            {subject.title}
-          </Typography>
-        </Box>
         {hasVideos && (
           <SubjectMainWithVideo subject={subject} videos={videos} />
         )}

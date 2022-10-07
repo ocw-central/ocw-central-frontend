@@ -1,10 +1,12 @@
 import { youtube_parser } from "@/utils/youtubeParser";
-import { Box, Typography } from "@mui/material";
+import { Accordion, Box, Button, Grid, Typography } from "@mui/material";
 import YouTube from "react-youtube";
 //import { ChapterBox } from "./subjectPageComponents/ChapterBox";
 import { VideosBox } from "@/components/subjectPageComponents/VideosBox";
 import { Video } from "@/generated/graphql";
 import { useState } from "react";
+import ReactPlayer from "react-player";
+import { VideoWrapper } from "./VideoWrapper";
 
 type Subject = {
   __typename?: "Subject" | undefined;
@@ -94,80 +96,86 @@ type Props = {
 export function SubjectMainWithVideo(props: Props) {
   const videos = props.videos ?? []; //already sorted by `ordering` field
   const [FocusedVideoOrdering, SetFocusedVideoOrdering] = useState(0);
+  const [startAt, setStartAt] = useState(0);
   const FocusedVideo = videos[FocusedVideoOrdering];
   const FocusedYoutubeId = youtube_parser(FocusedVideo.link);
 
   // const video = videos.find((video) => video.id === videoId);
-
+  console.log(startAt);
   return (
-    <Box className="Subject">
-      <Box className="MainBox">
-        <Box
+    <Grid
+      container
+      direction="column"
+      className="MainBox"
+      sx={{
+        pb: 3,
+      }}
+    >
+      <Grid
+        container
+        spacing={0}
+        direction={{ xs: "column", sm: "column", md: "row" }}
+        sx={{
+          justifyContent: "center",
+        }}
+      >
+        {props.videos.length >= 1 && (
+          <Grid
+            item
+            md={3}
+            sx={{
+              display: { xs: "none", sm: "none", md: "block" },
+            }}
+            className="VideoBox"
+          >
+            <VideosBox
+              subject={props.subject}
+              videos={videos}
+              focusedVideoOrdering={FocusedVideoOrdering}
+              setFocusedVideoOrdering={SetFocusedVideoOrdering}
+            />
+          </Grid>
+        )}
+        <Grid
+          container
+          direction="row"
+          md={8}
+          sm={12}
+          xs={12}
           sx={{
-            display: "flex",
-            flexDirection: "column",
-            p: 1,
-            m: 1,
-            bgcolor: "background.paper",
-            borderRadius: 1,
+            justifyContent: "center",
+            ml: 5,
+            pb: 5,
+            minHeight: {
+              md: 420,
+            },
           }}
         >
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: {
-                xs: "column",
-                md: "row",
-                justifyContent: "center",
-                alignContent: "center",
-              },
-              borderRadius: 1,
-            }}
+          <Typography
+            variant="h5"
+            sx={{ mb: 2, width: "100%", fontWeight: "bold" }}
           >
-            <Box>
-              <Typography
-                variant="h4"
-                component="div"
-                align="left"
-                color="primary"
-                sx={{
-                  color: "primary.main",
-                  borderLeft: 1,
-                  p: 1,
-                }}
-              >
-                {FocusedVideo?.title}
-              </Typography>
-              <Typography
-                variant="h5"
-                component="div"
-                align="left"
-                gutterBottom={true}
-                sx={{ p: 1 }}
-              >
-                {FocusedVideo?.faculty}
-              </Typography>
-              <YouTube
-                videoId={FocusedYoutubeId}
-                opts={{
-                  height: "390em",
-                  width: "640em",
-                  playerVars: {
-                    autoplay: 0,
-                  },
-                }}
-              />
-            </Box>
-            {props.videos.length > 1 && (
-              <VideosBox
-                subject={props.subject}
-                videos={videos}
-                setFocusedVideoOrdering={SetFocusedVideoOrdering}
-              />
-            )}
-          </Box>
-        </Box>
-      </Box>
-    </Box>
+            {props.subject.title}
+          </Typography>
+          <VideoWrapper FocusedYoutubeId={FocusedYoutubeId} startAt={startAt} />
+        </Grid>
+        {props.videos.length >= 1 && (
+          <Grid
+            item
+            sx={{
+              display: { xs: "block", sm: "block", md: "none" },
+            }}
+            className="VideoBox"
+          >
+            <VideosBox
+              subject={props.subject}
+              videos={videos}
+              focusedVideoOrdering={FocusedVideoOrdering}
+              setFocusedVideoOrdering={SetFocusedVideoOrdering}
+            />
+          </Grid>
+        )}
+      </Grid>
+    </Grid>
   );
 }
