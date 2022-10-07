@@ -151,22 +151,20 @@ export function SubjectMainWithVideo(props: Props) {
             },
           }}
         >
-          <Grid item>
-            <Typography variant="h5" sx={{ mb: 2, fontWeight: "bold" }}>
-              {props.subject.title}
-            </Typography>
-            <Typography
-              variant="h6"
-              sx={{
-                mb: 2,
-                width: "100%",
-                fontWeight: "medium",
-                color: theme.palette.primary.main,
-              }}
-            >
-              {FocusedVideo.title}
-            </Typography>
-          </Grid>
+          <Typography variant="h5" sx={{ mb: 2, fontWeight: "bold" }}>
+            {props.subject.title}
+          </Typography>
+          <Typography
+            variant="h6"
+            sx={{
+              mb: 2,
+              width: "100%",
+              fontWeight: "medium",
+              color: theme.palette.primary.main,
+            }}
+          >
+            {FocusedVideo.title}
+          </Typography>
 
           <VideoWrapper FocusedYoutubeId={FocusedYoutubeId} startAt={startAt} />
         </Grid>
