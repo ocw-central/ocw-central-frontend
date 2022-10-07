@@ -10,7 +10,6 @@ export const VideoWrapper = (props: Props) => {
         aspectRatio: "16 / 9",
         width: "100%",
         maxWidth: 960,
-        height: "95%",
         maxHeight: 540,
       }}
       src={`https://www.youtube.com/embed/${props.FocusedYoutubeId}?start=${props.startAt}`}

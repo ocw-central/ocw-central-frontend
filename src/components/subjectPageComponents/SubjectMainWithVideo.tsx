@@ -7,6 +7,7 @@ import { Video } from "@/generated/graphql";
 import { useState } from "react";
 import ReactPlayer from "react-player";
 import { VideoWrapper } from "./VideoWrapper";
+import { theme } from "@/utils/themes";
 
 type Subject = {
   __typename?: "Subject" | undefined;
@@ -101,7 +102,6 @@ export function SubjectMainWithVideo(props: Props) {
   const FocusedYoutubeId = youtube_parser(FocusedVideo.link);
 
   // const video = videos.find((video) => video.id === videoId);
-  console.log(startAt);
   return (
     <Grid
       container
@@ -144,19 +144,30 @@ export function SubjectMainWithVideo(props: Props) {
           xs={12}
           sx={{
             justifyContent: "center",
-            ml: 5,
+            ml: { xs: 0, sm: 0, md: 5 },
             pb: 5,
             minHeight: {
               md: 420,
             },
           }}
         >
-          <Typography
-            variant="h5"
-            sx={{ mb: 2, width: "100%", fontWeight: "bold" }}
-          >
-            {props.subject.title}
-          </Typography>
+          <Grid item>
+            <Typography variant="h5" sx={{ mb: 2, fontWeight: "bold" }}>
+              {props.subject.title}
+            </Typography>
+            <Typography
+              variant="h6"
+              sx={{
+                mb: 2,
+                width: "100%",
+                fontWeight: "medium",
+                color: theme.palette.primary.main,
+              }}
+            >
+              {FocusedVideo.title}
+            </Typography>
+          </Grid>
+
           <VideoWrapper FocusedYoutubeId={FocusedYoutubeId} startAt={startAt} />
         </Grid>
         {props.videos.length >= 1 && (
