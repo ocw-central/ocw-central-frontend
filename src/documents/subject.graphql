@@ -28,6 +28,7 @@ query subject($id: ID!) {
       lecturedOn
       videoLength
       language
+      transcription
     }
     location
     resources {

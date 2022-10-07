@@ -43,7 +43,6 @@ export function SubjectPage() {
 
   //const chapters = videos.chapters ?? [];
   const syllabus = subject.syllabus;
-
   const hasResources = subject.resources.length > 0;
   const hasDetails =
     subject.firstHeldOn ||
