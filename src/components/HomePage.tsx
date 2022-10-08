@@ -67,6 +67,7 @@ export function HomePage() {
             sm: 400,
             md: 300,
           },
+          marginTop: "1em",
           width: {
             xs: "100%",
             md: "80%",
