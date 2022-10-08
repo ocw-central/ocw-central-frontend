@@ -54,8 +54,6 @@ export function VideoTranscription(props: Props) {
     <Box
       className="VideoBox"
       sx={{
-        display: "flex",
-        flexDirection: "column",
         bgcolor: alpha(theme.palette.primary.main, 0.15),
         borderRadius: 1,
         p: 5,

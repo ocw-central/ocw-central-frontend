@@ -91,109 +91,67 @@ type Props = {
   //setVideoIdFunc: (videoId: string) => void;
   subject: Subject;
   videos: Video[];
+  focusedVideoOrdering: number;
 };
 
 export function SubjectMainWithVideo(props: Props) {
   const videos = props.videos ?? []; //already sorted by `ordering` field
-  const [FocusedVideoOrdering, SetFocusedVideoOrdering] = useState(0);
   const [VideoStartTime, SetVideoStartTime] = useState(0);
   const [AutoPlayOn, SetAutoPlayOn] = useState(0);
-  const FocusedVideo = videos[FocusedVideoOrdering];
+  const FocusedVideo = videos[props.focusedVideoOrdering];
   const FocusedYoutubeId = youtube_parser(FocusedVideo.link);
 
   return (
     <Grid
       container
-      direction="column"
-      className="MainBox"
+      spacing={0}
+      direction={{ xs: "row", sm: "row", md: "row" }}
       sx={{
-        pb: 3,
+        justifyContent: "center",
+        alignItems: "center",
       }}
     >
       <Grid
         container
-        spacing={0}
         direction={{ xs: "column", sm: "column", md: "row" }}
+        md={7}
+        sm={12}
+        xs={12}
         sx={{
           justifyContent: "center",
+          ml: { xs: 0, sm: 0, md: 5 },
+          pb: 5,
+          minHeight: {
+            md: 420,
+          },
         }}
       >
-        {props.videos.length >= 1 && (
-          <Grid
-            item
-            md={2}
-            sx={{
-              display: { xs: "none", sm: "none", md: "block" },
-            }}
-            className="VideoBox"
-          >
-            <VideosBox
-              subject={props.subject}
-              videos={videos}
-              focusedVideoOrdering={FocusedVideoOrdering}
-              setFocusedVideoOrdering={SetFocusedVideoOrdering}
-            />
-          </Grid>
-        )}
-        <Grid
-          container
-          direction="row"
-          md={6}
-          sm={12}
-          xs={12}
+        <Typography variant="h5" sx={{ mb: 2, fontWeight: "bold" }}>
+          {props.subject.title}
+        </Typography>
+        <Typography
+          variant="h6"
           sx={{
-            justifyContent: "center",
-            ml: { xs: 0, sm: 0, md: 5 },
-            pb: 5,
-            minHeight: {
-              md: 420,
-            },
+            mb: 2,
+            width: "100%",
+            fontWeight: "medium",
+            color: theme.palette.primary.main,
           }}
         >
-          <Typography variant="h5" sx={{ mb: 2, fontWeight: "bold" }}>
-            {props.subject.title}
-          </Typography>
-          <Typography
-            variant="h6"
-            sx={{
-              mb: 2,
-              width: "100%",
-              fontWeight: "medium",
-              color: theme.palette.primary.main,
-            }}
-          >
-            {FocusedVideo.title}
-          </Typography>
-          <PlayerWrapper
-            FocusedYoutubeId={FocusedYoutubeId}
-            startAt={VideoStartTime}
-            autoPlayOn={AutoPlayOn}
-          />
-        </Grid>
-        <Grid direction="row" md={3} sx={{ pl: 3 }}>
-          <VideoTranscription
-            transcription={FocusedVideo.transcription}
-            setTime={SetVideoStartTime}
-            setAutoPlayOn={SetAutoPlayOn}
-          />
-        </Grid>
-
-        {props.videos.length >= 1 && (
-          <Grid
-            item
-            sx={{
-              display: { xs: "block", sm: "block", md: "none" },
-            }}
-            className="VideoBox"
-          >
-            <VideosBox
-              subject={props.subject}
-              videos={videos}
-              focusedVideoOrdering={FocusedVideoOrdering}
-              setFocusedVideoOrdering={SetFocusedVideoOrdering}
-            />
-          </Grid>
-        )}
+          {FocusedVideo.title}
+        </Typography>
+        <PlayerWrapper
+          FocusedYoutubeId={FocusedYoutubeId}
+          startAt={VideoStartTime}
+          autoPlayOn={AutoPlayOn}
+        />
+      </Grid>
+      <Grid item md={4} sm={12} xs={12} sx={{ pl: 3 }}>
+        <VideoTranscription
+          transcription={FocusedVideo.transcription}
+          setTime={SetVideoStartTime}
+          setAutoPlayOn={SetAutoPlayOn}
+        />
       </Grid>
     </Grid>
   );

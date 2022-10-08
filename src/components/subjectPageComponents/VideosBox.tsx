@@ -115,11 +115,6 @@ export function VideosBox(propsVideo: Props) {
         maxHeight: 540,
         overflow: "auto",
       }}
-      subheader={
-        <Typography variant="h6" component="div">
-          講義一覧
-        </Typography>
-      }
     >
       {propsVideo.videos.map((video, index) => {
         return (
