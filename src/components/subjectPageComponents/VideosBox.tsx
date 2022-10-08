@@ -1,20 +1,10 @@
 import { Video } from "@/generated/graphql";
 import { theme } from "@/utils/themes";
 import PlayCircleIcon from "@mui/icons-material/PlayCircle";
-import {
-  alpha,
-  Box,
-  Grid,
-  List,
-  ListItemIcon,
-  ListSubheader,
-  Typography,
-} from "@mui/material";
+import { alpha, Box, List, ListItemIcon, Typography } from "@mui/material";
 import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import { useLocation, useNavigate } from "react-router-dom";
-import { FixedSizeList, ListChildComponentProps } from "react-window";
 
 type Subject = {
   __typename?: "Subject" | undefined;
