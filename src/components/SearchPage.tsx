@@ -28,6 +28,8 @@ export function SearchPage() {
   const [searchFaculty, setSearchFaculty] = useState("");
   const [searchAcademicField, setSearchAcademicField] = useState("");
   const [onSearch, setOnSearch] = useState(false);
+  const [jpFieldOpen, setJpFieldOpen] = useState(false);
+  const [enFieldOpen, setEnFieldOpen] = useState(false);
 
   // stateに基づきsearch parameterを切り替える関数
   const setSearchParams = () => {
@@ -78,7 +80,12 @@ export function SearchPage() {
           overflowY: "scroll",
         }}
       >
-        <AcademicFieldsList inNav={false} />
+        <AcademicFieldsList
+          jpFieldOpen={jpFieldOpen}
+          setJpFieldOpen={setJpFieldOpen}
+          enFieldOpen={enFieldOpen}
+          setEnFieldOpen={setEnFieldOpen}
+        />
       </Grid>
       <Grid
         item
@@ -107,8 +114,11 @@ export function SearchPage() {
           <Divider sx={{ mb: 2 }} />
           <DetailedSearchBar
             setSearchParams={setSearchParams}
+            searchTitle={searchTitle}
             setSearchTitle={setSearchTitle}
+            searchFaculty={searchFaculty}
             setSearchFaculty={setSearchFaculty}
+            searchAcademicField={searchAcademicField}
             setSearchAcademicField={setSearchAcademicField}
             onSearch={() => setOnSearch(true)}
           />

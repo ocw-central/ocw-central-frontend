@@ -1,11 +1,10 @@
 import { Video } from "@/generated/graphql";
+import { theme } from "@/utils/themes";
 import PlayCircleIcon from "@mui/icons-material/PlayCircle";
-import { Box, ListItemIcon, Typography } from "@mui/material";
+import { alpha, Box, List, ListItemIcon, Typography } from "@mui/material";
 import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import { useLocation, useNavigate } from "react-router-dom";
-import { FixedSizeList, ListChildComponentProps } from "react-window";
 
 type Subject = {
   __typename?: "Subject" | undefined;
@@ -87,6 +86,7 @@ type Subject = {
 };
 
 type Props = {
+  focusedVideoOrdering: number;
   setFocusedVideoOrdering: (videoId: number) => void;
   subject: Subject;
   videos: Video[];
@@ -107,85 +107,72 @@ function secondsToHms(d: number) {
 export function VideosBox(propsVideo: Props) {
   const navigate = useNavigate();
   const location = useLocation();
-  //colorize selected component
-
-  function renderRow(propsRender: ListChildComponentProps) {
-    const { index, style } = propsRender;
-
-    return (
-      <ListItem style={style} key={index} button={true}>
-        <ListItemButton
-          sx={{
-            border: "1em",
-            marginTop: "1em",
-          }}
-        >
-          <ListItemIcon>
-            <PlayCircleIcon />
-          </ListItemIcon>
-          <ListItemText
-            primary={`${propsVideo.videos[index].ordering + 1}. ${
-              propsVideo.videos[index].title
-            }`}
-            primaryTypographyProps={{
-              color: "primary.dark",
-              fontWeight: "medium",
-              variant: "body1",
-            }}
-            secondary={
-              `${propsVideo.videos[index].faculty} ` +
-              `${propsVideo.videos[index].lecturedOn.slice(0, 10)} ` +
-              `${propsVideo.videos[index].language} ` +
-              `${secondsToHms(propsVideo.videos[index].videoLength)}`
-            }
-            onClick={() => {
-              propsVideo.setFocusedVideoOrdering(
-                propsVideo.videos[index].ordering
-              );
-              navigate(
-                `/subjects/${propsVideo.subject.id}&video=${propsVideo.videos[index].id}` //FIXME ad-hoc solution for routing
-              );
-            }}
-          />
-        </ListItemButton>
-      </ListItem>
-    );
-  }
 
   return (
-    <Box
-      className="VideoBox"
+    <List
       sx={{
-        display: "flex",
-        flexDirection: "column",
-        bgcolor: "background.paper",
-        borderRadius: 1,
-        p: 5,
+        width: "100%",
+        maxHeight: 540,
+        overflow: "auto",
       }}
     >
-      <Typography
-        variant="h3"
-        component="div"
-        align="center"
-        sx={{
-          bgcolor: "secondary.dark",
-          color: "primary.contrastText",
-          borderLeft: 1,
-          p: 1,
-        }}
-      >
-        講義一覧 ({propsVideo.videos.length})
-      </Typography>
+      {propsVideo.videos.map((video, index) => {
+        return (
+          <ListItem
+            key={index}
+            button={false}
+            sx={{
+              bgcolor:
+                propsVideo.focusedVideoOrdering === video.ordering
+                  ? alpha(theme.palette.primary.main, 0.1)
+                  : "unset",
+              "&:hover, &:focus": {
+                bgcolor: alpha(theme.palette.primary.main, 0.1),
+              },
+              width: "100%",
+            }}
+            onClick={() => {
+              propsVideo.setFocusedVideoOrdering(video.ordering);
+              navigate(
+                `/subjects/${propsVideo.subject.id}&video=${video.id}` //FIXME ad-hoc solution for routing
+              );
+            }}
+          >
+            <Box
+              className="background"
+              sx={{
+                position: "absolute",
+                top: 0,
+                left: 0,
+                bottom: 0,
+                width: 10,
+                bgcolor:
+                  propsVideo.focusedVideoOrdering === video.ordering
+                    ? alpha(theme.palette.primary.main, 0.8)
+                    : "unset",
+              }}
+            />
 
-      <FixedSizeList
-        height={400}
-        width={560}
-        itemSize={130}
-        itemCount={propsVideo.videos.length}
-        overscanCount={100}
-      >
-        {renderRow}
-      </FixedSizeList>
-    </Box>
+            <ListItemIcon>
+              <PlayCircleIcon />
+            </ListItemIcon>
+            <ListItemText
+              primary={`${video.ordering + 1}. ${video.title}`}
+              primaryTypographyProps={{
+                color: "primary.dark",
+                fontWeight: "medium",
+                variant: "body1",
+              }}
+              secondary={
+                `${video.faculty} ` +
+                `${video.lecturedOn.slice(0, 10)} ` +
+                `${video.language} ` +
+                `${secondsToHms(video.videoLength)}`
+              }
+            />
+          </ListItem>
+        );
+      })}
+    </List>
   );
 }

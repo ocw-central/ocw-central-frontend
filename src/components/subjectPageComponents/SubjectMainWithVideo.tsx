@@ -1,9 +1,10 @@
-import { youtube_parser } from "@/utils/youtubeParser";
-import { Box, Typography } from "@mui/material";
-import YouTube from "react-youtube";
-//import { ChapterBox } from "./subjectPageComponents/ChapterBox";
+import { PlayerWrapper } from "@/components/subjectPageComponents/PlayerWrapper";
 import { VideosBox } from "@/components/subjectPageComponents/VideosBox";
+import { VideoTranscription } from "@/components/subjectPageComponents/VideoTranscription";
 import { Video } from "@/generated/graphql";
+import { theme } from "@/utils/themes";
+import { youtube_parser } from "@/utils/youtubeParser";
+import { Grid, Typography } from "@mui/material";
 import { useState } from "react";
 
 type Subject = {
@@ -30,6 +31,7 @@ type Subject = {
     lecturedOn: any;
     videoLength: number;
     language: string;
+    transcription: string;
     chapters: {
       __typename?: "Chapter" | undefined;
       id: string;
@@ -89,85 +91,70 @@ type Props = {
   //setVideoIdFunc: (videoId: string) => void;
   subject: Subject;
   videos: Video[];
+  focusedVideoOrdering: number;
 };
 
 export function SubjectMainWithVideo(props: Props) {
   const videos = props.videos ?? []; //already sorted by `ordering` field
-  const [FocusedVideoOrdering, SetFocusedVideoOrdering] = useState(0);
-  const FocusedVideo = videos[FocusedVideoOrdering];
+  const [VideoStartTime, SetVideoStartTime] = useState(0);
+  const [AutoPlayOn, SetAutoPlayOn] = useState(0);
+  const FocusedVideo = videos[props.focusedVideoOrdering];
   const FocusedYoutubeId = youtube_parser(FocusedVideo.link);
 
-  // const video = videos.find((video) => video.id === videoId);
-
   return (
-    <Box className="Subject">
-      <Box className="MainBox">
-        <Box
+    <Grid
+      container
+      spacing={0}
+      direction={{ xs: "row", sm: "row", md: "row" }}
+      sx={{
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <Grid
+        container
+        direction={{ xs: "column", sm: "column", md: "row" }}
+        md={7}
+        sm={12}
+        xs={12}
+        sx={{
+          justifyContent: "center",
+          ml: { xs: 0, sm: 0, md: 5 },
+          pb: 5,
+          minHeight: {
+            md: 420,
+          },
+        }}
+      >
+        <Typography variant="h5" sx={{ mb: 2, fontWeight: "bold" }}>
+          {props.subject.title}
+        </Typography>
+        <Typography
+          variant="h6"
           sx={{
-            display: "flex",
-            flexDirection: "column",
-            p: 1,
-            m: 1,
-            bgcolor: "background.paper",
-            borderRadius: 1,
+            mb: 2,
+            width: "100%",
+            fontWeight: "medium",
+            color: theme.palette.primary.main,
           }}
         >
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: {
-                xs: "column",
-                md: "row",
-                justifyContent: "center",
-                alignContent: "center",
-              },
-              borderRadius: 1,
-            }}
-          >
-            <Box>
-              <Typography
-                variant="h4"
-                component="div"
-                align="left"
-                color="primary"
-                sx={{
-                  color: "primary.main",
-                  borderLeft: 1,
-                  p: 1,
-                }}
-              >
-                {FocusedVideo?.title}
-              </Typography>
-              <Typography
-                variant="h5"
-                component="div"
-                align="left"
-                gutterBottom={true}
-                sx={{ p: 1 }}
-              >
-                {FocusedVideo?.faculty}
-              </Typography>
-              <YouTube
-                videoId={FocusedYoutubeId}
-                opts={{
-                  height: "390em",
-                  width: "640em",
-                  playerVars: {
-                    autoplay: 0,
-                  },
-                }}
-              />
-            </Box>
-            {props.videos.length > 1 && (
-              <VideosBox
-                subject={props.subject}
-                videos={videos}
-                setFocusedVideoOrdering={SetFocusedVideoOrdering}
-              />
-            )}
-          </Box>
-        </Box>
-      </Box>
-    </Box>
+          {FocusedVideo.title}
+        </Typography>
+        <PlayerWrapper
+          FocusedYoutubeId={FocusedYoutubeId}
+          startAt={VideoStartTime}
+          autoPlayOn={AutoPlayOn}
+        />
+      </Grid>
+      {FocusedVideo.transcription && (
+        <Grid item md={4} sm={12} xs={12} sx={{ pl: 3 }}>
+          <VideoTranscription
+            transcription={FocusedVideo.transcription}
+            setTime={SetVideoStartTime}
+            setAutoPlayOn={SetAutoPlayOn}
+          />
+        </Grid>
+      )}
+    </Grid>
   );
 }

@@ -2,7 +2,7 @@ import { Loading } from "@/components/common/Loading";
 import { SubjectCopyrightCard } from "@/components/subjectPageComponents/SubjectCopyrightCard";
 import { SubjectMainWithVideo } from "@/components/subjectPageComponents/SubjectMainWithVideo";
 import { useSubjectQuery } from "@/generated/graphql";
-import { Box, Typography } from "@mui/material";
+import { Box, Grid, Typography } from "@mui/material";
 import { useParams } from "react-router-dom";
 
 import { SubjectDetails } from "@/components/subjectPageComponents/SubjectDetails";
@@ -13,8 +13,11 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Accordion from "@mui/material/Accordion";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import AccordionSummary from "@mui/material/AccordionSummary";
+import { VideosBox } from "./subjectPageComponents/VideosBox";
+import { useState } from "react";
 
 export function SubjectPage() {
+  const [FocusedVideoOrdering, SetFocusedVideoOrdering] = useState(0);
   let { id } = useParams();
   // FIXME: I don't know how to distinguish parameter and search parameter
   id = id?.replace(/\&.+/, "");
@@ -43,7 +46,6 @@ export function SubjectPage() {
 
   //const chapters = videos.chapters ?? [];
   const syllabus = subject.syllabus;
-
   const hasResources = subject.resources.length > 0;
   const hasDetails =
     subject.firstHeldOn ||
@@ -58,46 +60,58 @@ export function SubjectPage() {
   const hasSyllabus = subject.syllabus !== null;
 
   return (
-    <Box className="Subject">
-      <Box
-        className="MainBox"
-        sx={{ display: "flex", flexDirection: "column" }}
-      >
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            p: 1,
-            m: 1,
-            bgcolor: "background.paper",
-            borderRadius: 1,
-          }}
-        >
-          <Typography variant="h3" component="div" align="left" sx={{ p: 1 }}>
-            {subject.title}
-          </Typography>
-        </Box>
+    <Grid container className="Subject" direction="column">
+      {hasVideos && (
+        <SubjectMainWithVideo
+          subject={subject}
+          videos={videos}
+          focusedVideoOrdering={FocusedVideoOrdering}
+        />
+      )}
+      <Grid container direction="column">
         {hasVideos && (
-          <SubjectMainWithVideo subject={subject} videos={videos} />
-        )}
-      </Box>
-      <Box>
-        {hasResources && (
-          <Accordion sx={{ border: "3px solid #0F5173", m: "0.5em" }}>
+          <Accordion
+            sx={{ border: "3px solid #0F5173", m: "0.5em", width: "100%" }}
+          >
             <AccordionSummary
               expandIcon={<ExpandMoreIcon />}
-              aria-controls="resource"
-              id="resource"
+              aria-controls="videos"
+              id="videos"
             >
-              <Typography sx={{ fontWeight: "bold" }}>講義資料</Typography>
+              <Typography sx={{ fontWeight: "bold" }}>講義一覧</Typography>
             </AccordionSummary>
             <AccordionDetails>
-              <SubjectResources subject={subject} />
+              <VideosBox
+                subject={subject}
+                videos={videos}
+                focusedVideoOrdering={FocusedVideoOrdering}
+                setFocusedVideoOrdering={SetFocusedVideoOrdering}
+              />
             </AccordionDetails>
           </Accordion>
         )}
+        {hasResources && (
+          <Grid item>
+            <Accordion
+              sx={{ border: "3px solid #0F5173", m: "0.5em", width: "100%" }}
+            >
+              <AccordionSummary
+                expandIcon={<ExpandMoreIcon />}
+                aria-controls="resource"
+                id="resource"
+              >
+                <Typography sx={{ fontWeight: "bold" }}>講義資料</Typography>
+              </AccordionSummary>
+              <AccordionDetails>
+                <SubjectResources subject={subject} />
+              </AccordionDetails>
+            </Accordion>
+          </Grid>
+        )}
         {hasDetails && (
-          <Accordion sx={{ border: "3px solid #0F5173", m: "0.5em" }}>
+          <Accordion
+            sx={{ border: "3px solid #0F5173", m: "0.5em", width: "100%" }}
+          >
             <AccordionSummary
               expandIcon={<ExpandMoreIcon />}
               aria-controls="details"
@@ -109,7 +123,9 @@ export function SubjectPage() {
           </Accordion>
         )}
         {hasSyllabus && (
-          <Accordion sx={{ border: "3px solid #0F5173", m: "0.5em" }}>
+          <Accordion
+            sx={{ border: "3px solid #0F5173", m: "0.5em", width: "100%" }}
+          >
             <AccordionSummary
               expandIcon={<ExpandMoreIcon />}
               aria-controls="syllabus"
@@ -124,8 +140,9 @@ export function SubjectPage() {
             </AccordionDetails>
           </Accordion>
         )}
-      </Box>
-      <Box
+      </Grid>
+      <Grid
+        container
         className="CopyrightBox"
         sx={{
           display: "flex",
@@ -142,7 +159,7 @@ export function SubjectPage() {
           syllabus_year={syllabus?.academicYear}
           videos={videos}
         />
-      </Box>
-    </Box>
+      </Grid>
+    </Grid>
   );
 }

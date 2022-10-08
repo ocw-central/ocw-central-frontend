@@ -1,4 +1,3 @@
-import { AcademicFieldsList } from "@/components/common/AcademicFieldsList";
 import { Loading } from "@/components/common/Loading";
 import { useAcademicFieldsQuery } from "@/generated/graphql";
 import styles from "@/styles/nav.module.css";
@@ -119,7 +118,6 @@ export function Nav() {
               </MenuItem>
             </Link>
           ))}
-          <AcademicFieldsList inNav={true} onClick={handleCloseNavMenu} />
         </Menu>
       </Box>
     </div>
