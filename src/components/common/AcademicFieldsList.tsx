@@ -1,11 +1,11 @@
 import { Loading } from "@/components/common/Loading";
 import { useAcademicFieldsQuery } from "@/generated/graphql";
+import { theme } from "@/utils/themes";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import SchoolIcon from "@mui/icons-material/School";
 import {
   List,
   ListItem,
-  ListItemButton,
   ListItemIcon,
   ListItemText,
   Typography,
@@ -13,10 +13,14 @@ import {
 import Accordion from "@mui/material/Accordion";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import AccordionSummary from "@mui/material/AccordionSummary";
+import { alpha } from "@mui/material/styles";
 import { createSearchParams, useNavigate } from "react-router-dom";
-import { FixedSizeList, ListChildComponentProps } from "react-window";
+
 type Props = {
-  inNav: boolean;
+  jpFieldOpen: boolean;
+  setJpFieldOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  enFieldOpen: boolean;
+  setEnFieldOpen: React.Dispatch<React.SetStateAction<boolean>>;
   onClick?: () => void;
 };
 
@@ -24,6 +28,7 @@ export function AcademicFieldsList(props: Props) {
   function separateEnglishAndJapaneseWords(word: string[]) {
     const englishWords: string[] = [];
     const japaneseWords: string[] = [];
+
     word.forEach((word) => {
       if (word[0].match(/^[a-zA-Z0-9]+$/)) {
         // chack if the first character is English
@@ -56,145 +61,106 @@ export function AcademicFieldsList(props: Props) {
     data.academicFields.map((academicField) => academicField.name)
   );
 
-  function renderRow(propsRender: ListChildComponentProps, fields: string[]) {
-    const { index, style } = propsRender;
-
-    return (
-      <ListItem style={style} key={index} button={false} disablePadding={true}>
-        <ListItemButton
-          divider={true}
-          sx={{
-            fullWidth: "true",
-            margin: "0",
-            "&:hover, &:focus": {
-              bgcolor: "none",
-              textDecoration: "none",
-            },
-          }}
-          onClick={() => {
-            const academicFieldParames = createSearchParams({
-              field: fields[index],
-            });
-            props.onClick && props.onClick();
-            navigate(`/search/?${academicFieldParames}`);
-          }}
-        >
-          <ListItemIcon>
-            <SchoolIcon />
-          </ListItemIcon>
-          <ListItemText
-            primary={`${fields[index]}`}
-            primaryTypographyProps={{
-              color: "primary.dark",
-              fontWeight: "medium",
-              variant: "h6",
-              fontStyle: "bald",
-            }}
-            sx={{
-              fullWidth: "true",
-              margin: "0",
-              "&:hover, &:focus": {
-                bgcolor: "none",
-              },
-            }}
-          />
-        </ListItemButton>
-      </ListItem>
-    );
-  }
-
-  function japaneseRenderRow(propsRender: ListChildComponentProps) {
-    return renderRow(propsRender, japaneseFields);
-  }
-
-  function englishRenderRow(propsRender: ListChildComponentProps) {
-    return renderRow(propsRender, englishFields);
-  }
-
   return (
     <List>
-      <Accordion defaultExpanded={true}>
+      <Accordion defaultExpanded={props.jpFieldOpen}>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1a-content"
           id="panel1a-header"
         >
-          {!props.inNav && (
-            <Typography variant="h6" color="black">
-              <b>日本語講義分野</b>
-            </Typography>
-          )}
-          {props.inNav && (
-            <Typography>
-              <b>日本語講義分野</b>
-            </Typography>
-          )}
+          <Typography variant="h6" color="black">
+            <b>学問分野(日本語講義)</b>
+          </Typography>
         </AccordionSummary>
         <AccordionDetails>
-          {!props.inNav && (
-            <FixedSizeList
-              height={350}
-              width={"auto"}
-              itemSize={55}
-              itemCount={japaneseFields.length}
-              overscanCount={100}
-            >
-              {japaneseRenderRow}
-            </FixedSizeList>
-          )}
-          {props.inNav && (
-            <FixedSizeList
-              height={350}
-              width={"auto"}
-              itemSize={55}
-              itemCount={japaneseFields.length}
-              overscanCount={100}
-            >
-              {japaneseRenderRow}
-            </FixedSizeList>
-          )}
+          <List sx={{ width: "100%", height: "540", overflow: "auto" }}>
+            {japaneseFields.map((field, index) => (
+              <ListItem
+                key={index}
+                button={false}
+                disablePadding={true}
+                divider={true}
+                onClick={() => {
+                  const academicFieldParames = createSearchParams({
+                    field: field,
+                  });
+                  props.setJpFieldOpen(true);
+                  props.onClick && props.onClick();
+                  navigate(`/search/?${academicFieldParames}`);
+                }}
+                sx={{
+                  fullWidth: "true",
+                  margin: "0",
+                  "&:hover, &:focus": {
+                    bgcolor: alpha(theme.palette.primary.main, 0.2),
+                    textDecoration: "none",
+                  },
+                }}
+              >
+                <ListItemIcon>
+                  <SchoolIcon />
+                </ListItemIcon>
+                <ListItemText
+                  primary={field}
+                  primaryTypographyProps={{
+                    color: "primary.dark",
+                    fontWeight: "medium",
+                    variant: "h6",
+                  }}
+                />
+              </ListItem>
+            ))}
+          </List>
         </AccordionDetails>
       </Accordion>
-      <Accordion>
+      <Accordion defaultExpanded={props.enFieldOpen}>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1a-content"
           id="panel1a-header"
         >
-          {!props.inNav && (
-            <Typography variant="h6" color="black">
-              <b>英語講義分野</b>
-            </Typography>
-          )}
-          {props.inNav && (
-            <Typography>
-              <b>英語講義分野</b>
-            </Typography>
-          )}
+          <Typography variant="h6" color="black">
+            <b>学問分野(英語講義)</b>
+          </Typography>
         </AccordionSummary>
         <AccordionDetails>
-          {!props.inNav && (
-            <FixedSizeList
-              height={350}
-              width={"auto"}
-              itemSize={55}
-              itemCount={englishFields.length}
-              overscanCount={100}
+          {englishFields.map((field, index) => (
+            <ListItem
+              divider={true}
+              key={index}
+              button={false}
+              disablePadding={true}
+              onClick={() => {
+                const academicFieldParames = createSearchParams({
+                  field: field,
+                });
+                props.setEnFieldOpen(true);
+                props.onClick && props.onClick();
+                navigate(`/search/?${academicFieldParames}`);
+              }}
+              sx={{
+                fullWidth: "true",
+                margin: "0",
+                "&:hover, &:focus": {
+                  bgcolor: alpha(theme.palette.primary.main, 0.2),
+                  textDecoration: "none",
+                },
+              }}
             >
-              {englishRenderRow}
-            </FixedSizeList>
-          )}
-          {props.inNav && (
-            <FixedSizeList
-              height={350}
-              width={"auto"}
-              itemSize={55}
-              itemCount={englishFields.length}
-              overscanCount={100}
-            >
-              {englishRenderRow}
-            </FixedSizeList>
-          )}
+              <ListItemIcon>
+                <SchoolIcon />
+              </ListItemIcon>
+              <ListItemText
+                primary={field}
+                primaryTypographyProps={{
+                  color: "primary.dark",
+                  fontWeight: "medium",
+                  variant: "h6",
+                }}
+              />
+            </ListItem>
+          ))}
         </AccordionDetails>
       </Accordion>
     </List>
