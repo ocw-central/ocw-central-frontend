@@ -146,13 +146,15 @@ export function SubjectMainWithVideo(props: Props) {
           autoPlayOn={AutoPlayOn}
         />
       </Grid>
-      <Grid item md={4} sm={12} xs={12} sx={{ pl: 3 }}>
-        <VideoTranscription
-          transcription={FocusedVideo.transcription}
-          setTime={SetVideoStartTime}
-          setAutoPlayOn={SetAutoPlayOn}
-        />
-      </Grid>
+      {FocusedVideo.transcription && (
+        <Grid item md={4} sm={12} xs={12} sx={{ pl: 3 }}>
+          <VideoTranscription
+            transcription={FocusedVideo.transcription}
+            setTime={SetVideoStartTime}
+            setAutoPlayOn={SetAutoPlayOn}
+          />
+        </Grid>
+      )}
     </Grid>
   );
 }

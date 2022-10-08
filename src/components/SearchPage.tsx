@@ -114,8 +114,11 @@ export function SearchPage() {
           <Divider sx={{ mb: 2 }} />
           <DetailedSearchBar
             setSearchParams={setSearchParams}
+            searchTitle={searchTitle}
             setSearchTitle={setSearchTitle}
+            searchFaculty={searchFaculty}
             setSearchFaculty={setSearchFaculty}
+            searchAcademicField={searchAcademicField}
             setSearchAcademicField={setSearchAcademicField}
             onSearch={() => setOnSearch(true)}
           />
