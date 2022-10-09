@@ -68,7 +68,10 @@ export function Footer() {
             />
             <span className="sr-only">Twitter</span>
           </a>
-          <a href="https://github.com/kafugen" style={{ marginRight: "2em" }}>
+          <a
+            href="https://github.com/ocw-central"
+            style={{ marginRight: "2em" }}
+          >
             <FontAwesomeIcon
               icon={faGithub}
               size="2x"
