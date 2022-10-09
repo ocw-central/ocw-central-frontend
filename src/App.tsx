@@ -5,6 +5,10 @@ import "@/styles/App.css";
 import { theme } from "@/utils/themes";
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 import { ThemeProvider } from "@emotion/react";
+import {
+  auto as followSystemColorScheme,
+  enable as enableDarkMode,
+} from "darkreader";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { AboutPage } from "./components/AboutPage";
 import { Header } from "./components/common/Header";
@@ -33,6 +37,27 @@ const style_footer_b = {
 };
 
 function App() {
+  function activateDarkMode() {
+    // set style to dark
+  }
+
+  // MediaQueryList
+  const darkModePreference = window.matchMedia("(prefers-color-scheme: dark)");
+
+  // recommended method for newer browsers: specify event-type as first argument
+  darkModePreference.addEventListener(
+    "change",
+    (e) => e.matches && activateDarkMode()
+  );
+
+  enableDarkMode({
+    brightness: 100,
+    contrast: 90,
+    sepia: 10,
+  });
+
+  followSystemColorScheme({ brightness: 123, contrast: 110, sepia: 0 });
+
   return (
     <ApolloProvider client={client}>
       <BrowserRouter>
