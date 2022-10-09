@@ -2,7 +2,7 @@ import { Loading } from "@/components/common/Loading";
 import { SubjectCopyrightCard } from "@/components/subjectPageComponents/SubjectCopyrightCard";
 import { SubjectMainWithVideo } from "@/components/subjectPageComponents/SubjectMainWithVideo";
 import { useSubjectQuery } from "@/generated/graphql";
-import { Box, Grid, Typography } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 import { useParams } from "react-router-dom";
 
 import { SubjectDetails } from "@/components/subjectPageComponents/SubjectDetails";
@@ -13,8 +13,8 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Accordion from "@mui/material/Accordion";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import AccordionSummary from "@mui/material/AccordionSummary";
-import { VideosBox } from "./subjectPageComponents/VideosBox";
 import { useState } from "react";
+import { VideosBox } from "./subjectPageComponents/VideosBox";
 
 export function SubjectPage() {
   const [FocusedVideoOrdering, SetFocusedVideoOrdering] = useState(0);
