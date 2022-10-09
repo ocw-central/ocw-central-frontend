@@ -68,10 +68,14 @@ export function SubjectPage() {
           focusedVideoOrdering={FocusedVideoOrdering}
         />
       )}
-      <Grid container direction="column">
+      <Grid container direction="column" display="flex">
         {hasVideos && (
           <Accordion
-            sx={{ border: "3px solid #0F5173", m: "0.5em", width: "100%" }}
+            sx={{
+              border: "3px solid #0F5173",
+              m: "0.5em auto",
+              width: "80%",
+            }}
           >
             <AccordionSummary
               expandIcon={<ExpandMoreIcon />}
@@ -92,7 +96,11 @@ export function SubjectPage() {
         )}
         {hasResources && (
           <Accordion
-            sx={{ border: "3px solid #0F5173", m: "0.5em", width: "100%" }}
+            sx={{
+              border: "3px solid #0F5173",
+              m: "0.5em auto",
+              width: "80%",
+            }}
           >
             <AccordionSummary
               expandIcon={<ExpandMoreIcon />}
@@ -108,7 +116,12 @@ export function SubjectPage() {
         )}
         {hasDetails && (
           <Accordion
-            sx={{ border: "3px solid #0F5173", m: "0.5em", width: "100%" }}
+            sx={{
+              border: "3px solid #0F5173",
+              m: "0.5em auto",
+              width: "80%",
+              justifyItems: "center",
+            }}
           >
             <AccordionSummary
               expandIcon={<ExpandMoreIcon />}
@@ -122,7 +135,7 @@ export function SubjectPage() {
         )}
         {hasSyllabus && (
           <Accordion
-            sx={{ border: "3px solid #0F5173", m: "0.5em", width: "100%" }}
+            sx={{ border: "3px solid #0F5173", m: "0.5em auto", width: "80%" }}
           >
             <AccordionSummary
               expandIcon={<ExpandMoreIcon />}
