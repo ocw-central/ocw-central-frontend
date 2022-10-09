@@ -61,6 +61,17 @@ export function SubjectPage() {
 
   return (
     <Grid container className="Subject" direction="column">
+      {!hasVideos && (
+        <Typography variant="h5" sx={{ mb: 2, fontWeight: "bold" }}>
+          {subject.title}
+        </Typography>
+      )}
+      {!hasVideos && subject.faculty && (
+        <Typography variant="h6" sx={{ textAlign: "center" }}>
+          {subject.faculty}
+        </Typography>
+      )}
+
       {hasVideos && (
         <SubjectMainWithVideo
           subject={subject}
@@ -68,13 +79,18 @@ export function SubjectPage() {
           focusedVideoOrdering={FocusedVideoOrdering}
         />
       )}
-      <Grid container direction="column" display="flex">
+      <Grid
+        container
+        direction="column"
+        width="80%"
+        sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
+      >
         {hasVideos && (
           <Accordion
             sx={{
               border: "3px solid #0F5173",
-              m: "0.5em auto",
-              width: "80%",
+              m: "0.5em",
+              width: "30%",
             }}
           >
             <AccordionSummary
@@ -98,8 +114,8 @@ export function SubjectPage() {
           <Accordion
             sx={{
               border: "3px solid #0F5173",
-              m: "0.5em auto",
-              width: "80%",
+              m: "0.5em",
+              width: "30%",
             }}
           >
             <AccordionSummary
@@ -118,8 +134,8 @@ export function SubjectPage() {
           <Accordion
             sx={{
               border: "3px solid #0F5173",
-              m: "0.5em auto",
-              width: "80%",
+              m: "0.5em",
+              width: "30%",
               justifyItems: "center",
             }}
           >
@@ -135,7 +151,7 @@ export function SubjectPage() {
         )}
         {hasSyllabus && (
           <Accordion
-            sx={{ border: "3px solid #0F5173", m: "0.5em auto", width: "80%" }}
+            sx={{ border: "3px solid #0F5173", m: "0.5em", width: "30%" }}
           >
             <AccordionSummary
               expandIcon={<ExpandMoreIcon />}
