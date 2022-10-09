@@ -91,22 +91,20 @@ export function SubjectPage() {
           </Accordion>
         )}
         {hasResources && (
-          <Grid item>
-            <Accordion
-              sx={{ border: "3px solid #0F5173", m: "0.5em", width: "100%" }}
+          <Accordion
+            sx={{ border: "3px solid #0F5173", m: "0.5em", width: "100%" }}
+          >
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls="resource"
+              id="resource"
             >
-              <AccordionSummary
-                expandIcon={<ExpandMoreIcon />}
-                aria-controls="resource"
-                id="resource"
-              >
-                <Typography sx={{ fontWeight: "bold" }}>講義資料</Typography>
-              </AccordionSummary>
-              <AccordionDetails>
-                <SubjectResources subject={subject} />
-              </AccordionDetails>
-            </Accordion>
-          </Grid>
+              <Typography sx={{ fontWeight: "bold" }}>講義資料</Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <SubjectResources subject={subject} />
+            </AccordionDetails>
+          </Accordion>
         )}
         {hasDetails && (
           <Accordion
