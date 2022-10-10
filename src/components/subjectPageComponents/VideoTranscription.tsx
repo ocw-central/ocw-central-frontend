@@ -19,7 +19,7 @@ export function VideoTranscription(props: Props) {
     return processedLines;
   }
 
-  // convert seconds to mm:ss
+  // convert seconds to mm:ssz
   function convertSecondToTime(second: number) {
     let mm: string = String(Math.floor(second / 60));
     let ss: string = String(Math.floor(second % 60));

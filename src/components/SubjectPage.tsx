@@ -60,7 +60,7 @@ export function SubjectPage() {
   const hasSyllabus = subject.syllabus !== null;
 
   return (
-    <Grid container className="Subject" direction="column">
+    <Grid container className="Subject" direction="column" sx={{ mt: 3 }}>
       {!hasVideos && (
         <Typography variant="h5" sx={{ mb: 2, fontWeight: "bold" }}>
           {subject.title}
@@ -82,15 +82,15 @@ export function SubjectPage() {
       <Grid
         container
         direction="column"
-        width="80%"
-        sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
+        width={{ md: "60%", sm: "90%", xs: "90%" }}
+        sx={{ justifyContent: "center", mx: "auto" }}
       >
         {hasVideos && (
           <Accordion
             sx={{
               border: "3px solid #0F5173",
-              m: "0.5em",
-              width: "30%",
+              my: "0.5em",
+              width: "100%",
             }}
           >
             <AccordionSummary
@@ -114,8 +114,8 @@ export function SubjectPage() {
           <Accordion
             sx={{
               border: "3px solid #0F5173",
-              m: "0.5em",
-              width: "30%",
+              my: "0.5em",
+              width: "100%",
             }}
           >
             <AccordionSummary
@@ -134,9 +134,8 @@ export function SubjectPage() {
           <Accordion
             sx={{
               border: "3px solid #0F5173",
-              m: "0.5em",
-              width: "30%",
-              justifyItems: "center",
+              my: "0.5em",
+              width: "100%",
             }}
           >
             <AccordionSummary
@@ -151,7 +150,7 @@ export function SubjectPage() {
         )}
         {hasSyllabus && (
           <Accordion
-            sx={{ border: "3px solid #0F5173", m: "0.5em", width: "30%" }}
+            sx={{ border: "3px solid #0F5173", my: "0.5em", width: "100%" }}
           >
             <AccordionSummary
               expandIcon={<ExpandMoreIcon />}
