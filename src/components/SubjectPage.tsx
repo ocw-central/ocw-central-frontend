@@ -2,7 +2,7 @@ import { Loading } from "@/components/common/Loading";
 import { SubjectCopyrightCard } from "@/components/subjectPageComponents/SubjectCopyrightCard";
 import { SubjectMainWithVideo } from "@/components/subjectPageComponents/SubjectMainWithVideo";
 import { useSubjectQuery } from "@/generated/graphql";
-import { Box, Grid, Typography } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 import { useParams } from "react-router-dom";
 
 import { SubjectDetails } from "@/components/subjectPageComponents/SubjectDetails";
@@ -13,8 +13,8 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Accordion from "@mui/material/Accordion";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import AccordionSummary from "@mui/material/AccordionSummary";
-import { VideosBox } from "./subjectPageComponents/VideosBox";
 import { useState } from "react";
+import { VideosBox } from "./subjectPageComponents/VideosBox";
 
 export function SubjectPage() {
   const [FocusedVideoOrdering, SetFocusedVideoOrdering] = useState(0);
@@ -60,7 +60,18 @@ export function SubjectPage() {
   const hasSyllabus = subject.syllabus !== null;
 
   return (
-    <Grid container className="Subject" direction="column">
+    <Grid container className="Subject" direction="column" sx={{ mt: 3 }}>
+      {!hasVideos && (
+        <Typography variant="h5" sx={{ mb: 2, fontWeight: "bold" }}>
+          {subject.title}
+        </Typography>
+      )}
+      {!hasVideos && subject.faculty && (
+        <Typography variant="h6" sx={{ textAlign: "center" }}>
+          {subject.faculty}
+        </Typography>
+      )}
+
       {hasVideos && (
         <SubjectMainWithVideo
           subject={subject}
@@ -68,10 +79,19 @@ export function SubjectPage() {
           focusedVideoOrdering={FocusedVideoOrdering}
         />
       )}
-      <Grid container direction="column">
+      <Grid
+        container
+        direction="column"
+        width={{ md: "60%", sm: "90%", xs: "90%" }}
+        sx={{ justifyContent: "center", mx: "auto" }}
+      >
         {hasVideos && (
           <Accordion
-            sx={{ border: "3px solid #0F5173", m: "0.5em", width: "100%" }}
+            sx={{
+              border: "3px solid #0F5173",
+              my: "0.5em",
+              width: "100%",
+            }}
           >
             <AccordionSummary
               expandIcon={<ExpandMoreIcon />}
@@ -92,7 +112,11 @@ export function SubjectPage() {
         )}
         {hasResources && (
           <Accordion
-            sx={{ border: "3px solid #0F5173", m: "0.5em", width: "100%" }}
+            sx={{
+              border: "3px solid #0F5173",
+              my: "0.5em",
+              width: "100%",
+            }}
           >
             <AccordionSummary
               expandIcon={<ExpandMoreIcon />}
@@ -108,7 +132,11 @@ export function SubjectPage() {
         )}
         {hasDetails && (
           <Accordion
-            sx={{ border: "3px solid #0F5173", m: "0.5em", width: "100%" }}
+            sx={{
+              border: "3px solid #0F5173",
+              my: "0.5em",
+              width: "100%",
+            }}
           >
             <AccordionSummary
               expandIcon={<ExpandMoreIcon />}
@@ -122,7 +150,7 @@ export function SubjectPage() {
         )}
         {hasSyllabus && (
           <Accordion
-            sx={{ border: "3px solid #0F5173", m: "0.5em", width: "100%" }}
+            sx={{ border: "3px solid #0F5173", my: "0.5em", width: "100%" }}
           >
             <AccordionSummary
               expandIcon={<ExpandMoreIcon />}

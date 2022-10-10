@@ -1,13 +1,20 @@
 import { ReactComponent as LicenseImage } from "@/assets/cc-license-by-nc-sa.svg";
 import { ReactComponent as Logo } from "@/assets/logo.svg";
+import { theme } from "@/utils/themes";
 import { faGithub, faTwitter } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Box } from "@mui/material";
+import { alpha } from "@mui/material/styles";
 import { Link } from "react-router-dom";
 
 export function Footer() {
   return (
-    <Box sx={{ backgorundColor: "#5286AB", color: "#fff" }}>
+    <Box
+      sx={{
+        backgorundColor: alpha(theme.palette.primary.main, 1),
+        color: "#fff",
+      }}
+    >
       <Box
         style={{
           display: "flex",
@@ -16,7 +23,7 @@ export function Footer() {
           alignItems: "center",
         }}
         sx={{
-          backgroundColor: "#5286AB",
+          backgroundColor: alpha(theme.palette.primary.main, 1),
           px: { xl: "13%", lg: "10%", md: "10%", sm: "3%", xs: "3%" },
         }}
       >
@@ -68,7 +75,10 @@ export function Footer() {
             />
             <span className="sr-only">Twitter</span>
           </a>
-          <a href="https://github.com/kafugen" style={{ marginRight: "2em" }}>
+          <a
+            href="https://github.com/ocw-central"
+            style={{ marginRight: "2em" }}
+          >
             <FontAwesomeIcon
               icon={faGithub}
               size="2x"

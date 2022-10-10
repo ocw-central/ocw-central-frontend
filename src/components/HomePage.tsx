@@ -63,10 +63,12 @@ export function HomePage() {
         container
         sx={{
           height: {
-            xs: 300,
-            sm: 400,
-            md: 300,
+            xs: 200,
+            sm: 300,
+            md: 400,
+            lg: 300,
           },
+          marginTop: "1em",
           width: {
             xs: "100%",
             md: "80%",
@@ -103,8 +105,8 @@ export function HomePage() {
           }}
         >
           <Typography
-            variant="h2"
             sx={{
+              typography: { xs: "h4", sm: "h2" },
               textAlign: "center",
               color: "white",
               mb: {
@@ -132,7 +134,12 @@ export function HomePage() {
             },
           }}
         >
-          <OwlImg style={{ width: "200px", height: "250px" }} />
+          <OwlImg
+            style={{
+              width: "200px",
+              height: "250px",
+            }}
+          />
         </Grid>
       </Grid>
       <Grid
@@ -147,6 +154,7 @@ export function HomePage() {
                 md: 4,
               },
               mb: 2,
+              pt: 1,
             }}
           >
             <Typography variant="h5" component="div" align="left">
