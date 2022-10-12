@@ -1,4 +1,4 @@
-import { ReactComponent as Img } from "@/assets/ocwc-owl.svg";
+import { ReactComponent as OwlImg } from "@/assets/ocwc-owl.svg";
 import { Nav } from "@/components/common/Nav";
 import SearchIcon from "@mui/icons-material/Search";
 import { AppBar, Box, Container, InputBase, Toolbar } from "@mui/material";
@@ -69,7 +69,12 @@ export function Header() {
           <Toolbar disableGutters>
             <Box mr={2}>
               <Link to="/">
-                <Img style={{ width: "50px", height: "50px" }} />
+                <OwlImg
+                  style={{
+                    width: "50px",
+                    height: "50px",
+                  }}
+                />
               </Link>
             </Box>
             <Search>

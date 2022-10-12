@@ -119,7 +119,7 @@ export function SubjectMainWithVideo(props: Props) {
         xs={12}
         sx={{
           justifyContent: "center",
-          ml: { xs: 0, sm: 0, md: 5 },
+          ml: { xs: 0, sm: 0, md: 0 },
           pb: 5,
           minHeight: {
             md: 420,
