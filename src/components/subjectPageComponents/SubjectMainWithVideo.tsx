@@ -1,5 +1,4 @@
 import { PlayerWrapper } from "@/components/subjectPageComponents/PlayerWrapper";
-import { VideosBox } from "@/components/subjectPageComponents/VideosBox";
 import { VideoTranscription } from "@/components/subjectPageComponents/VideoTranscription";
 import { Video } from "@/generated/graphql";
 import { theme } from "@/utils/themes";
@@ -130,15 +129,15 @@ export function SubjectMainWithVideo(props: Props) {
           {props.subject.title}
         </Typography>
         <Typography
-          variant="h6"
+          variant="h5"
           sx={{
             mb: 2,
             width: "100%",
             fontWeight: "medium",
-            color: theme.palette.primary.main,
+            color: theme.palette.primary.dark,
           }}
         >
-          {FocusedVideo.title}
+          {FocusedVideo.title} | {FocusedVideo.faculty.trim()}
         </Typography>
         <PlayerWrapper
           FocusedYoutubeId={FocusedYoutubeId}
