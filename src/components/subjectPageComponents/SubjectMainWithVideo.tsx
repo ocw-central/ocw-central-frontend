@@ -93,6 +93,12 @@ type Props = {
   focusedVideoOrdering: number;
 };
 
+const removeParenthesis = (s: string) => {
+  let re_full = /(\(|（)[^\(\）\)]*(\)|）)/g;
+  let re_half = /[\(（].*?[\)）]/g;
+  return s.replace(re_full, "").replace(re_half, "");
+};
+
 export function SubjectMainWithVideo(props: Props) {
   const videos = props.videos ?? []; //already sorted by `ordering` field
   const [VideoStartTime, SetVideoStartTime] = useState(0);
@@ -137,7 +143,8 @@ export function SubjectMainWithVideo(props: Props) {
             color: theme.palette.primary.dark,
           }}
         >
-          {FocusedVideo.title} | {FocusedVideo.faculty.trim()}
+          {FocusedVideo.title} |{" "}
+          {removeParenthesis(FocusedVideo.faculty.trim())}
         </Typography>
         <PlayerWrapper
           FocusedYoutubeId={FocusedYoutubeId}
