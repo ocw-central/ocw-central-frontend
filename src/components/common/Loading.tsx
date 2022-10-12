@@ -15,7 +15,7 @@ type Props = {
 
 export function Loading(props: Props) {
   return (
-    <Box sx={{ display: "flex", marginTop: "2em", margin: "auto" }}>
+    <Box sx={{ display: "flex", marginTop: "2em" }}>
       <CircularProgress
         color={props.color}
         size={props.size}

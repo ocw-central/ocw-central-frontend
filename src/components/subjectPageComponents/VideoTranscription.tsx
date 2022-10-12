@@ -12,14 +12,17 @@ type Props = {
 export function VideoTranscription(props: Props) {
   function processText(text: string) {
     const lines = text.split(/\r?\n/);
+    //remove empty lines`
+
     const processedLines = lines.map((line) => {
       const [startTime, endTime, text] = line.split(",");
       return { startTime, text };
     });
+    processedLines.pop(); //FIXME: last element is empty
     return processedLines;
   }
 
-  // convert seconds to mm:ssz
+  // convert seconds to mm:ss
   function convertSecondToTime(second: number) {
     let mm: string = String(Math.floor(second / 60));
     let ss: string = String(Math.floor(second % 60));
