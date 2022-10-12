@@ -59,6 +59,11 @@ export function SubjectPage() {
     subject.academicField;
   const hasSyllabus = subject.syllabus !== null;
 
+  const removeParenthesis = (s: string) => {
+    let re_full = /(\(|（)[^\(\）\)]*(\)|）)/g;
+    let re_half = /[\(（].*?[\)）]/g;
+    return s.replace(re_full, "").replace(re_half, "");
+  };
   return (
     <Grid container className="Subject" direction="column" sx={{ mt: 3 }}>
       {!hasVideos && (
@@ -76,7 +81,7 @@ export function SubjectPage() {
             color: theme.palette.primary.dark,
           }}
         >
-          {subject.faculty.trim()}
+          {removeParenthesis(subject.faculty.trim())}
         </Typography>
       )}
 
