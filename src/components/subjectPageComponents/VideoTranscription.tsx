@@ -15,7 +15,9 @@ export function VideoTranscription(props: Props) {
     //remove empty lines`
 
     const processedLines = lines.map((line) => {
-      const [startTime, endTime, text] = line.split(",");
+      const [startTime, endTime] = line.split(",");
+      // text is everything after the second comma
+      const text = line.slice(line.indexOf(",", line.indexOf(",") + 1) + 1);
       return { startTime, text };
     });
     processedLines.pop(); //FIXME: last element is empty
