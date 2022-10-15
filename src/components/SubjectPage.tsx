@@ -105,7 +105,7 @@ export function SubjectPage() {
               my: "0.5em",
               width: "100%",
             }}
-            expanded={true}
+            defaultExpanded={true}
           >
             <AccordionSummary
               expandIcon={<ExpandMoreIcon />}
