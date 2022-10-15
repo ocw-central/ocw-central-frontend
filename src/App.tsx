@@ -19,7 +19,7 @@ import GlobalStyles from "./styles/GlobalStyles";
 
 const client = new ApolloClient({
   uri: import.meta.env.DEV
-    ? "http://localhost:8081/query"
+    ? "http://localhost:8080/query"
     : "https://api-ocwcentral.onrender.com/query",
   cache: new InMemoryCache(),
 });
