@@ -1,4 +1,3 @@
-import { Container } from "@/components/common/Container";
 import { Footer } from "@/components/common/Footer";
 import { PageNotFound } from "@/components/PageNotFound";
 import "@/styles/App.css";
@@ -67,15 +66,13 @@ function App() {
             <div style={style_footer_b}>
               <GlobalStyles />
               <Header />
-              <Container>
-                <Routes>
-                  <Route path="/" element={<HomePage />} />
-                  <Route path="/subjects/:id" element={<SubjectPage />} />
-                  <Route path="/search" element={<SearchPage />}></Route>
-                  <Route path="/about" element={<AboutPage />} />
-                  <Route path="*" element={<PageNotFound />} />
-                </Routes>
-              </Container>
+              <Routes>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/subjects/:id" element={<SubjectPage />} />
+                <Route path="/search" element={<SearchPage />}></Route>
+                <Route path="/about" element={<AboutPage />} />
+                <Route path="*" element={<PageNotFound />} />
+              </Routes>
             </div>
             <Footer />
           </div>
