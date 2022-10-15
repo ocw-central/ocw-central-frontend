@@ -66,7 +66,7 @@ export function VideoTranscription(props: Props) {
               fontWeight: "bold",
             }}
           >
-            トランスクリプション
+            書き起こし
           </Typography>
         }
       >

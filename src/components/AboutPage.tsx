@@ -1,6 +1,6 @@
-import { Contact } from "@/components/common/Contact";
 import { theme } from "@/utils/themes";
-import { Box, Grid, Typography } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
+import Link from "@mui/material/Link";
 
 export function AboutPage() {
   return (
@@ -16,7 +16,7 @@ export function AboutPage() {
     >
       <Grid item md={12} xs={12}>
         <Typography
-          variant="h2"
+          variant="h3"
           sx={{
             fontWeight: "bold",
             color: theme.palette.primary.main,
@@ -24,66 +24,31 @@ export function AboutPage() {
             my: 2,
           }}
         >
-          What's this?
+          About
         </Typography>
       </Grid>
       <Grid item md={12} xs={12}>
         <Typography
-          variant="body1"
+          variant="h6"
           sx={{
             textAlign: "left",
             fontWeight: "bold",
             width: {
-              md: "30%",
+              md: "60%",
               sm: "80%",
               xs: "80%",
             },
             margin: "auto",
           }}
         >
-          OCWCentralは大学によって無償で提供される教育資料であるOCW（オープン・コース・ウェア）のポータルサイトです。
+          OCW Centralは大学によって無償で提供される教育資源であるOCW
+          (OpenCourseWare) のポータルサイトです。
           公益性の高い教育資源の保全とアクセス向上を目指し京都大学情報学研究科の学生有志により運営されています。
         </Typography>
       </Grid>
       <Grid item md={12} xs={12}>
         <Typography
-          variant="h2"
-          sx={{
-            textAlign: "center",
-            fontWeight: "bold",
-            color: theme.palette.primary.main,
-            // color: "#0F5173",
-            my: 2,
-          }}
-        >
-          Feature
-        </Typography>
-      </Grid>
-      <Grid item md={12} xs={12}>
-        <Typography
-          variant="body1"
-          sx={{
-            textAlign: "center",
-            fontWeight: "bold",
-            width: {
-              md: "30%",
-              sm: "80%",
-              xs: "80%",
-            },
-            margin: "auto",
-          }}
-        >
-          <ul>
-            <li>講義動画の検索</li>
-            <li>講義動画の閲覧</li>
-            <li>講義資料のダウンロード</li>
-            <li>講義音声のトランスクリプション（書き起こし）</li>
-          </ul>
-        </Typography>
-      </Grid>
-      <Grid item md={12} xs={12}>
-        <Typography
-          variant="h2"
+          variant="h3"
           sx={{
             textAlign: "center",
             fontWeight: "bold",
@@ -97,31 +62,43 @@ export function AboutPage() {
       </Grid>
       <Grid item md={12} xs={12}>
         <Typography
-          variant="body1"
+          variant="h6"
           sx={{
             textAlign: "left",
             fontWeight: "bold",
             width: {
-              md: "30%",
+              md: "60%",
               sm: "80%",
               xs: "80%",
             },
             margin: "auto",
           }}
         >
-          このサイトで公開されている全ての資料は
-          <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ja">
+          このサイトで公開されている資料は配布元の規約に基づき、
+          <Link
+            color="primary"
+            underline="always"
+            href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.ja"
+          >
             クリエイティブ・コモンズ・ライセンス "表示-非営利-継承 4.0 国際"
-          </a>
-          に基づき公開されています。
-          ライセンスに関するご指摘がございましたら下記のメールアドレスまでご連絡ください。
+          </Link>
+          に基づき公開されます。このサイト上の全ての資料について、著作権は作成者の先生方に帰属します。
+          ライセンス表記に関するご指摘や機能追加のご要望がありましたら下記のメールアドレスまでご連絡ください。
           <br />
-          また、このウェブサービスのソースコードはMITライセンスのもとでGitHubで公開されています。バグレポートやプルリクを歓迎します。
+          このウェブサービスのソースコードはMITライセンスのもとで
+          <Link
+            color="primary"
+            underline="always"
+            href="https://github.com/orgs/ocw-central"
+          >
+            GitHub
+          </Link>
+          で公開されています。バグレポートやプルリクを歓迎します。
         </Typography>
       </Grid>
       <Grid item md={12} xs={12}>
         <Typography
-          variant="h2"
+          variant="h4"
           sx={{
             textAlign: "center",
             fontWeight: "bold",
@@ -130,17 +107,47 @@ export function AboutPage() {
             my: 2,
           }}
         >
+          Disclaimer
+        </Typography>
+        <Typography
+          variant="h6"
+          sx={{
+            textAlign: "left",
+            fontWeight: "bold",
+            width: {
+              md: "60%",
+              sm: "80%",
+              xs: "80%",
+            },
+            margin: "auto",
+          }}
+        >
+          このサイト上の教育資料や書き起こし等の掲載情報の正確性に関して、一切の保証をいたしかねます。
+        </Typography>
+        <br />
+      </Grid>
+      <Grid item md={12} xs={12}>
+        <Typography
+          variant="h4"
+          sx={{
+            textAlign: "center",
+            fontWeight: "bold",
+            color: theme.palette.primary.main,
+            // color: "#0F5173",
+            my: 0,
+          }}
+        >
           Contact
         </Typography>
       </Grid>
       <Grid item md={12} xs={12}>
         <Typography
-          variant="body1"
+          variant="h6"
           sx={{
             textAlign: "center",
             fontWeight: "bold",
             width: {
-              md: "30%",
+              md: "60%",
               sm: "80%",
               xs: "80%",
             },
