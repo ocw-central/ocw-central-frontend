@@ -4,7 +4,8 @@ import { Video } from "@/generated/graphql";
 import { theme } from "@/utils/themes";
 import { youtube_parser } from "@/utils/youtubeParser";
 import { Grid, Typography } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 
 type Subject = {
   __typename?: "Subject" | undefined;
@@ -91,6 +92,7 @@ type Props = {
   subject: Subject;
   videos: Video[];
   focusedVideoOrdering: number;
+  setFocusedVideoOrdering: (ordering: number) => void;
 };
 
 const removeParenthesis = (s: string) => {
@@ -103,7 +105,16 @@ export function SubjectMainWithVideo(props: Props) {
   const videos = props.videos ?? []; //already sorted by `ordering` field
   const [VideoStartTime, SetVideoStartTime] = useState(0);
   const [AutoPlayOn, SetAutoPlayOn] = useState(0);
-  const FocusedVideo = videos[props.focusedVideoOrdering];
+  const [searchParams] = useSearchParams();
+  const initialVideoId = searchParams.get("video_id");
+  useEffect(() => {
+    //find Video with initialVideoId
+    const initialVideo = videos.find((v) => v.id === initialVideoId);
+    const initialVideoOrdering = initialVideo?.ordering ?? 0;
+    props.setFocusedVideoOrdering(initialVideoOrdering);
+  }, []);
+  const FocusedVideoOrdering = props.focusedVideoOrdering;
+  const FocusedVideo = videos[FocusedVideoOrdering];
   const FocusedYoutubeId = youtube_parser(FocusedVideo.link);
 
   return (
