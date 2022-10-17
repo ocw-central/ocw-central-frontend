@@ -17,6 +17,7 @@ export const PlayerWrapper = (props: Props) => {
       src={`https://www.youtube.com/embed/${props.FocusedYoutubeId}?start=${props.startAt}&autoplay=${props.autoPlayOn}&mute=0`}
       frameBorder="0"
       allow="fullscreen; picture-in-picture; accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope"
+      key={props.FocusedYoutubeId}
     />
   );
 };

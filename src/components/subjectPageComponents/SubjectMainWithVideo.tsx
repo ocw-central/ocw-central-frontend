@@ -4,7 +4,8 @@ import { Video } from "@/generated/graphql";
 import { theme } from "@/utils/themes";
 import { youtube_parser } from "@/utils/youtubeParser";
 import { Grid, Typography } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 
 type Subject = {
   __typename?: "Subject" | undefined;
@@ -91,6 +92,7 @@ type Props = {
   subject: Subject;
   videos: Video[];
   focusedVideoOrdering: number;
+  setFocusedVideoOrdering: (ordering: number) => void;
 };
 
 const removeParenthesis = (s: string) => {
@@ -103,8 +105,21 @@ export function SubjectMainWithVideo(props: Props) {
   const videos = props.videos ?? []; //already sorted by `ordering` field
   const [VideoStartTime, SetVideoStartTime] = useState(0);
   const [AutoPlayOn, SetAutoPlayOn] = useState(0);
-  const FocusedVideo = videos[props.focusedVideoOrdering];
-  const FocusedYoutubeId = youtube_parser(FocusedVideo.link);
+  const [searchParams] = useSearchParams();
+  const initialVideoId = searchParams.get("video_id");
+  let FocusedVideoOrdering = props.focusedVideoOrdering;
+  let FocusedVideo = videos[FocusedVideoOrdering];
+  let FocusedYoutubeId = youtube_parser(FocusedVideo.link);
+
+  useEffect(() => {
+    //find Video with initialVideoId
+    const initialVideo = videos.find((v) => v.id === initialVideoId);
+    const initialVideoOrdering = initialVideo?.ordering ?? 0;
+    props.setFocusedVideoOrdering(initialVideoOrdering);
+    FocusedVideoOrdering = initialVideoOrdering;
+    FocusedVideo = videos[FocusedVideoOrdering];
+    FocusedYoutubeId = youtube_parser(FocusedVideo.link);
+  }, []);
 
   return (
     <Grid
@@ -153,7 +168,7 @@ export function SubjectMainWithVideo(props: Props) {
         />
       </Grid>
       {FocusedVideo.transcription && (
-        <Grid item md={4} sm={12} xs={12} sx={{ pl: 3 }}>
+        <Grid item md={4} sm={12} xs={12} sx={{ p: 3, pr: { md: 0 } }}>
           <VideoTranscription
             transcription={FocusedVideo.transcription}
             setTime={SetVideoStartTime}

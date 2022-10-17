@@ -1,7 +1,7 @@
 import { Video } from "@/generated/graphql";
 import { theme } from "@/utils/themes";
 import PlayCircleIcon from "@mui/icons-material/PlayCircle";
-import { alpha, Box, List, ListItemIcon, Typography } from "@mui/material";
+import { alpha, Box, List, ListItemIcon } from "@mui/material";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -134,7 +134,7 @@ export function VideosBox(propsVideo: Props) {
             onClick={() => {
               propsVideo.setFocusedVideoOrdering(video.ordering);
               navigate(
-                `/subjects/${propsVideo.subject.id}&video=${video.id}` //FIXME ad-hoc solution for routing
+                `/subjects/${propsVideo.subject.id}?video_id=${video.id}` //FIXME ad-hoc solution for routing
               );
             }}
           >

@@ -93,7 +93,8 @@ export function AcademicFieldsList(props: Props) {
                   fullWidth: "true",
                   margin: "0",
                   "&:hover, &:focus": {
-                    bgcolor: alpha(theme.palette.primary.main, 0.2),
+                    bgcolor: alpha(theme.palette.primary.main, 0.3),
+                    cursor: "pointer",
                     textDecoration: "none",
                   },
                 }}
@@ -143,8 +144,9 @@ export function AcademicFieldsList(props: Props) {
                 fullWidth: "true",
                 margin: "0",
                 "&:hover, &:focus": {
-                  bgcolor: alpha(theme.palette.primary.main, 0.2),
+                  bgcolor: alpha(theme.palette.primary.main, 0.3),
                   textDecoration: "none",
+                  cursor: "pointer",
                 },
               }}
             >

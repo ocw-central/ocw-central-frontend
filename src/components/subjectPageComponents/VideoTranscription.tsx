@@ -41,18 +41,37 @@ export function VideoTranscription(props: Props) {
 
   return (
     <Box
-      className="VideoBox"
+      className="VideoTranscription"
       sx={{
         bgcolor: alpha(theme.palette.primary.main, 0.15),
-        borderRadius: 1,
-        p: 5,
+        borderRadius: 0.5,
+        p: 4,
+        overflow: "auto",
+        "&::-webkit-scrollbar": {
+          width: 10,
+        },
+        "&::-webkit-scrollbar-track": {
+          backgroundColor: alpha(theme.palette.primary.dark, 0.3),
+        },
+        "&::-webkit-scrollbar-thumb": {
+          backgroundColor: "darkgrey",
+          outline: `3px solid slategrey`,
+
+          "&:hover": {
+            backgroundColor: "grey",
+            cursor: "pointer",
+          },
+        },
+        "&::-webkit-scrollbar-thumb:hover": {
+          background: "#555",
+          cursor: "grabbing",
+        },
       }}
     >
       <List
         sx={{
           width: "100%",
           maxHeight: 540,
-          overflow: "auto",
         }}
         subheader={
           <Typography
@@ -82,6 +101,10 @@ export function VideoTranscription(props: Props) {
               sx={{
                 color: "white",
                 p: 0,
+                "&:hover, &:focus": {
+                  bgcolor: alpha(theme.palette.primary.main, 0.3),
+                  cursor: "pointer",
+                },
               }}
             >
               <ListItemText
