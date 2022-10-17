@@ -51,7 +51,7 @@ export function VideoTranscription(props: Props) {
           width: 10,
         },
         "&::-webkit-scrollbar-track": {
-          boxShadow: `inset 0 0 6px rgba(0, 0, 0, 0.3)`,
+          backgroundColor: alpha(theme.palette.primary.dark, 0.3),
         },
         "&::-webkit-scrollbar-thumb": {
           backgroundColor: "darkgrey",

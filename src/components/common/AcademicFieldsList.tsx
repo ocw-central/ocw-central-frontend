@@ -147,6 +147,11 @@ export function AcademicFieldsList(props: Props) {
                   bgcolor: alpha(theme.palette.primary.main, 0.2),
                   textDecoration: "none",
                 },
+                "&:hover, &:focus": {
+                  bgcolor: alpha(theme.palette.primary.main, 0.3),
+                  cursor: "pointer",
+                  textDecoration: "none",
+                },
               }}
             >
               <ListItemIcon>
