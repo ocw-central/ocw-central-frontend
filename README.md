@@ -63,6 +63,6 @@
 - [React](https://reactjs.org/) for building UI.
 - [ESLint](https://eslint.org/) and [Prettier](https://**prettier**.io/) for formatting.
 
-## Lisence
+### Lisence
 
 MIT License
