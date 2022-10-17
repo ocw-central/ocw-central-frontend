@@ -41,7 +41,7 @@ export function VideoTranscription(props: Props) {
 
   return (
     <Box
-      className="VideoBox"
+      className="VideoTranscription"
       sx={{
         bgcolor: alpha(theme.palette.primary.main, 0.15),
         borderRadius: 1,
@@ -82,6 +82,10 @@ export function VideoTranscription(props: Props) {
               sx={{
                 color: "white",
                 p: 0,
+                "&:hover, &:focus": {
+                  bgcolor: alpha(theme.palette.primary.main, 0.3),
+                  cursor: "pointer",
+                },
               }}
             >
               <ListItemText
