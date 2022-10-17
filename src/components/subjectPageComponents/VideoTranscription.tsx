@@ -3,40 +3,39 @@ import { Box, List, Typography } from "@mui/material";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import { alpha } from "@mui/material/styles";
+
 type Props = {
   transcription: string;
   setTime: (time: number) => void;
   setAutoPlayOn: (autoPlayOn: number) => void;
 };
 
+function processText(text: string) {
+  //remove empty lines
+  const lines = text.split(/\r?\n/);
+  const processedLines = lines.map((line) => {
+    const [startTime, endTime] = line.split(",");
+    // text is everything after the second comma
+    const text = line.slice(line.indexOf(",", line.indexOf(",") + 1) + 1);
+    return { startTime, text };
+  });
+  processedLines.pop(); //FIXME: last element is empty
+  return processedLines;
+}
+// convert seconds to mm:ssz
+function convertSecondToTime(second: number) {
+  let mm: string = String(Math.floor(second / 60));
+  let ss: string = String(Math.floor(second % 60));
+  if (mm.length === 1) {
+    mm = `0${mm}`;
+  }
+  if (ss.length === 1) {
+    ss = `0${ss}`;
+  }
+  return `${mm}:${ss}`;
+}
+
 export function VideoTranscription(props: Props) {
-  function processText(text: string) {
-    const lines = text.split(/\r?\n/);
-    //remove empty lines`
-
-    const processedLines = lines.map((line) => {
-      const [startTime, endTime] = line.split(",");
-      // text is everything after the second comma
-      const text = line.slice(line.indexOf(",", line.indexOf(",") + 1) + 1);
-      return { startTime, text };
-    });
-    processedLines.pop(); //FIXME: last element is empty
-    return processedLines;
-  }
-
-  // convert seconds to mm:ssz
-  function convertSecondToTime(second: number) {
-    let mm: string = String(Math.floor(second / 60));
-    let ss: string = String(Math.floor(second % 60));
-    if (mm.length === 1) {
-      mm = `0${mm}`;
-    }
-    if (ss.length === 1) {
-      ss = `0${ss}`;
-    }
-    return `${mm}:${ss}`;
-  }
-
   const processedLines = processText(props.transcription);
 
   return (

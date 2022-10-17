@@ -1,7 +1,7 @@
 import { Loading } from "@/components/common/Loading";
 import { SubjectCopyrightCard } from "@/components/subjectPageComponents/SubjectCopyrightCard";
 import { SubjectDetails } from "@/components/subjectPageComponents/SubjectDetails";
-import { SubjectMainWithVideo } from "@/components/subjectPageComponents/SubjectMainWithVideo";
+import { VideoWithTranscription } from "@/components/subjectPageComponents/VideoWithTranscription";
 import { SubjectResources } from "@/components/subjectPageComponents/SubjectResources";
 import { SubjectSyllabus } from "@/components/subjectPageComponents/SubjectSyllabus";
 import { useSubjectQuery } from "@/generated/graphql";
@@ -13,8 +13,14 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Accordion from "@mui/material/Accordion";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import AccordionSummary from "@mui/material/AccordionSummary";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { VideosBox } from "./subjectPageComponents/VideosBox";
+
+const removeParenthesis = (s: string) => {
+  let re_full = /(\(|（)[^\(\）\)]*(\)|）)/g;
+  let re_half = /[\(（].*?[\)）]/g;
+  return s.replace(re_full, " ").replace(re_half, " ");
+};
 
 export function SubjectPage() {
   const [FocusedVideoOrdering, SetFocusedVideoOrdering] = useState(0);
@@ -42,10 +48,10 @@ export function SubjectPage() {
 
   const subject = data.subject;
   const videos = subject.videos ?? []; //already sorted by `ordering` field
-  const hasVideos = videos.length > 0;
-
-  //const chapters = videos.chapters ?? [];
   const syllabus = subject.syllabus;
+
+  // Component display flags
+  const hasVideos = videos.length > 0;
   const hasResources = subject.resources.length > 0;
   const hasDetails =
     subject.firstHeldOn ||
@@ -58,12 +64,6 @@ export function SubjectPage() {
     subject.series ||
     subject.academicField;
   const hasSyllabus = subject.syllabus !== null;
-
-  const removeParenthesis = (s: string) => {
-    let re_full = /(\(|（)[^\(\）\)]*(\)|）)/g;
-    let re_half = /[\(（].*?[\)）]/g;
-    return s.replace(re_full, " ").replace(re_half, " ");
-  };
 
   return (
     <Grid container className="Subject" direction="column" sx={{ mt: 3 }}>
@@ -87,7 +87,7 @@ export function SubjectPage() {
       )}
 
       {hasVideos && (
-        <SubjectMainWithVideo
+        <VideoWithTranscription
           subject={subject}
           videos={videos}
           focusedVideoOrdering={FocusedVideoOrdering}

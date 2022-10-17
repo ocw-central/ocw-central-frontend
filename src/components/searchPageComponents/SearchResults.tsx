@@ -1,19 +1,8 @@
-import { SubjectCard } from "@/components/common/SubjectCard";
+import { SubjectCard } from "@/components/searchPageComponents/SubjectCard";
 import { Grid } from "@mui/material";
+import { Subjects } from "@/gqltypes/subjects";
 
-type Subjects = {
-  subjects:
-    | {
-        __typename?: "Subject" | undefined;
-        id: string;
-        title: string;
-        thumbnailLink: string;
-        faculty: string;
-      }[]
-    | undefined;
-};
-
-export const SubjectGrid = (subjects: Subjects) => {
+export const SearchResults = (subjects: Subjects) => {
   if (subjects.subjects?.length === 0) {
     return <div>検索結果がありません</div>;
   }

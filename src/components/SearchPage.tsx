@@ -1,10 +1,9 @@
 import { Loading } from "@/components/common/Loading";
-import { DetailedSearchBar } from "@/components/searchPageComponents/DetailedSearchBar";
-import { SubjectGrid } from "@/components/subjectPageComponents/SubjectGrid";
+import { DetailSearchBar } from "@/components/searchPageComponents/DetailSearchBar";
+import { SearchResults } from "@/components/searchPageComponents/SearchResults";
 import { useSubjectOnSearchPageQuery } from "@/generated/graphql";
 import { Box, Divider, Grid, Typography } from "@mui/material";
 import { useState } from "react";
-
 import {
   createSearchParams,
   useNavigate,
@@ -20,8 +19,6 @@ type Params = {
 
 export function SearchPage() {
   const navigate = useNavigate();
-  // クエリパラメータをもとに検索を行い、コンポーネントを書き換える
-  const GridItems: JSX.Element[] = [];
 
   // 講義名検索結果を持つstate
   const [searchTitle, setSearchTitle] = useState("");
@@ -111,7 +108,7 @@ export function SearchPage() {
             <b>詳細検索</b>
           </Typography>
           <Divider sx={{ mb: 2 }} />
-          <DetailedSearchBar
+          <DetailSearchBar
             setSearchParams={setSearchParams}
             searchTitle={searchTitle}
             setSearchTitle={setSearchTitle}
@@ -127,7 +124,7 @@ export function SearchPage() {
             </Typography>
           )}
           {(title || faculty || field) && (
-            <SubjectGrid subjects={data?.subjects} />
+            <SearchResults subjects={data?.subjects} />
           )}
         </Box>
       </Grid>

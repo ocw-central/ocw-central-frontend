@@ -1,25 +1,11 @@
 import { alpha, Box } from "@mui/material";
-
 import { Loading } from "@/components/common/Loading";
-import { SubjectCard } from "@/components/common/SubjectCard";
+import { SubjectCard } from "@/components/searchPageComponents/SubjectCard";
 import { useRandomSubjectQuery } from "@/generated/graphql";
 import { theme } from "@/utils/themes";
 import { Divider, Grid, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-
 import { ReactComponent as OwlImg } from "@/assets/ocwc-owl.svg";
-type SubjectOnSearchPage = {
-  id: string;
-  title: string;
-  faculty: string;
-  thumbnailLink: string;
-};
-
-type Params = {
-  title?: string;
-  faculty?: string;
-  field?: string;
-};
 
 export function HomePage() {
   const navigate = useNavigate();
