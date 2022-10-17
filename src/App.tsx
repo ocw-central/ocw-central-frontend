@@ -1,6 +1,5 @@
 import { Footer } from "@/components/common/Footer";
 import { PageNotFound } from "@/components/PageNotFound";
-import "@/styles/App.css";
 import { theme } from "@/utils/themes";
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 import { ThemeProvider } from "@emotion/react";
