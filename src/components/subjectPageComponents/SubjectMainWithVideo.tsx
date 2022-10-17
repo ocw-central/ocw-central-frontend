@@ -164,7 +164,7 @@ export function SubjectMainWithVideo(props: Props) {
         />
       </Grid>
       {FocusedVideo.transcription && (
-        <Grid item md={4} sm={12} xs={12} sx={{ pl: 3 }}>
+        <Grid item md={4} sm={12} xs={12} sx={{ p: 3 }}>
           <VideoTranscription
             transcription={FocusedVideo.transcription}
             setTime={SetVideoStartTime}

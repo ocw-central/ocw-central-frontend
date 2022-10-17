@@ -44,15 +44,34 @@ export function VideoTranscription(props: Props) {
       className="VideoTranscription"
       sx={{
         bgcolor: alpha(theme.palette.primary.main, 0.15),
-        borderRadius: 1,
-        p: 5,
+        borderRadius: 0.5,
+        p: 4,
+        overflow: "auto",
+        "&::-webkit-scrollbar": {
+          width: 10,
+        },
+        "&::-webkit-scrollbar-track": {
+          boxShadow: `inset 0 0 6px rgba(0, 0, 0, 0.3)`,
+        },
+        "&::-webkit-scrollbar-thumb": {
+          backgroundColor: "darkgrey",
+          outline: `3px solid slategrey`,
+
+          "&:hover": {
+            backgroundColor: "grey",
+            cursor: "pointer",
+          },
+        },
+        "&::-webkit-scrollbar-thumb:hover": {
+          background: "#555",
+          cursor: "grabbing",
+        },
       }}
     >
       <List
         sx={{
           width: "100%",
           maxHeight: 540,
-          overflow: "auto",
         }}
         subheader={
           <Typography
