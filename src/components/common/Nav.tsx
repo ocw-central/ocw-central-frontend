@@ -40,7 +40,7 @@ export function Nav() {
       <nav>
         <ul className={styles.list}>
           {pages.map((page) => (
-            <li key={page.link}>
+            <li>
               <Box
                 mr={1}
                 sx={{
@@ -95,7 +95,7 @@ export function Nav() {
           }}
         >
           {pages.map((page) => (
-            <Link to={page.link} key={page.link}>
+            <Link to={page.link}>
               <MenuItem key={page.name} onClick={handleCloseNavMenu}>
                 <Typography textAlign="center">{page.name}</Typography>
               </MenuItem>
