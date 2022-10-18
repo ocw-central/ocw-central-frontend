@@ -143,7 +143,12 @@ export function HomePage() {
               pt: 1,
             }}
           >
-            <Typography variant="h5" component="div" align="left">
+            <Typography
+              variant="h5"
+              component="div"
+              align="left"
+              sx={{ color: theme.palette.primary.dark }}
+            >
               <b>Feeling Lucky</b>
             </Typography>
             <Divider sx={{ mb: 2 }} />

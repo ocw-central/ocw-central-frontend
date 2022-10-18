@@ -67,7 +67,10 @@ export function VideoWithTranscription(props: Props) {
           },
         }}
       >
-        <Typography variant="h5" sx={{ mb: 2, fontWeight: "bold" }}>
+        <Typography
+          variant="h5"
+          sx={{ mb: 2, fontWeight: "bold", color: "black" }}
+        >
           {props.subject.title}
         </Typography>
         <Typography

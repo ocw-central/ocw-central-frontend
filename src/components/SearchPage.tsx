@@ -64,7 +64,7 @@ export function SearchPage() {
   }
 
   return (
-    <Grid container sx={{ dispplay: "flex" }}>
+    <Grid container>
       <Grid
         xs={0}
         md={3}

@@ -68,7 +68,10 @@ export function SubjectPage() {
   return (
     <Grid container className="Subject" direction="column" sx={{ mt: 3 }}>
       {!hasVideos && (
-        <Typography variant="h5" sx={{ mb: 2, fontWeight: "bold" }}>
+        <Typography
+          variant="h5"
+          sx={{ mb: 2, fontWeight: "bold", color: "black" }}
+        >
           {subject.title}
         </Typography>
       )}
