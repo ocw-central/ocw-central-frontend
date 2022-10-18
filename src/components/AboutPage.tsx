@@ -80,7 +80,8 @@ export function AboutPage() {
             underline="always"
             href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.ja"
           >
-            クリエイティブ・コモンズ・ライセンス 表示-非営利-継承 4.0 国際 (CC BY-NC-ND 4.0)
+            クリエイティブ・コモンズ・ライセンス 表示-非営利-継承 4.0 国際 (CC
+            BY-NC-ND 4.0)
           </Link>
           に基づき公開されます。このサイト上の全ての資料について、著作権は作成者の先生方に帰属します。
           ライセンス表記に関するご指摘や機能追加のご要望がありましたら下記のメールアドレスまでご連絡ください。
