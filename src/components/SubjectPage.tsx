@@ -1,7 +1,7 @@
 import { Loading } from "@/components/common/Loading";
 import { SubjectCopyrightCard } from "@/components/subjectPageComponents/SubjectCopyrightCard";
 import { SubjectDetails } from "@/components/subjectPageComponents/SubjectDetails";
-import { SubjectMainWithVideo } from "@/components/subjectPageComponents/SubjectMainWithVideo";
+import { VideoWithTranscription } from "@/components/subjectPageComponents/VideoWithTranscription";
 import { SubjectResources } from "@/components/subjectPageComponents/SubjectResources";
 import { SubjectSyllabus } from "@/components/subjectPageComponents/SubjectSyllabus";
 import { useSubjectQuery } from "@/generated/graphql";
@@ -47,10 +47,10 @@ export function SubjectPage() {
 
   const subject = data.subject;
   const videos = subject.videos ?? []; //already sorted by `ordering` field
-  const hasVideos = videos.length > 0;
-
-  //const chapters = videos.chapters ?? [];
   const syllabus = subject.syllabus;
+
+  // Component display flags
+  const hasVideos = videos.length > 0;
   const hasResources = subject.resources.length > 0;
   const hasDetails =
     subject.firstHeldOn ||
@@ -67,7 +67,10 @@ export function SubjectPage() {
   return (
     <Grid container className="Subject" direction="column" sx={{ mt: 3 }}>
       {!hasVideos && (
-        <Typography variant="h5" sx={{ mb: 2, fontWeight: "bold" }}>
+        <Typography
+          variant="h5"
+          sx={{ mb: 2, fontWeight: "bold", color: "black" }}
+        >
           {subject.title}
         </Typography>
       )}
@@ -86,7 +89,7 @@ export function SubjectPage() {
       )}
 
       {hasVideos && (
-        <SubjectMainWithVideo
+        <VideoWithTranscription
           subject={subject}
           videos={videos}
           focusedVideoOrdering={FocusedVideoOrdering}

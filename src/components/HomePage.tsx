@@ -1,11 +1,9 @@
 import { alpha, Box } from "@mui/material";
-
 import { Loading } from "@/components/common/Loading";
-import { SubjectCard } from "@/components/common/SubjectCard";
+import { SubjectCard } from "@/components/searchPageComponents/SubjectCard";
 import { useRandomSubjectQuery } from "@/generated/graphql";
 import { theme } from "@/utils/themes";
 import { Divider, Grid, Typography } from "@mui/material";
-
 import { ReactComponent as OwlImg } from "@/assets/ocwc-owl.svg";
 
 export function HomePage() {
@@ -143,7 +141,12 @@ export function HomePage() {
               pt: 1,
             }}
           >
-            <Typography variant="h5" component="div" align="left">
+            <Typography
+              variant="h5"
+              component="div"
+              align="left"
+              sx={{ color: "black" }}
+            >
               <b>Feeling Lucky</b>
             </Typography>
             <Divider sx={{ mb: 2 }} />

@@ -13,6 +13,7 @@ export const theme = createTheme({
     fontSize: 16,
   },
   palette: {
+    mode: "light",
     primary: {
       main: primary[100],
       light: primary[200],

@@ -57,7 +57,7 @@ export function SubjectCopyrightCard(props: Props) {
         </Typography>
         <Typography
           sx={{ mb: 1.5, fontSize: "1em", textAlign: "left" }}
-          color="balck"
+          color="black"
         >
           この資料は京都大学OCWウェブサイトに掲載されている
           {title}の資料であり、その著作権は{faculty_copyright}

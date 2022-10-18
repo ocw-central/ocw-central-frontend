@@ -1,10 +1,9 @@
 import { Loading } from "@/components/common/Loading";
-import { DetailedSearchBar } from "@/components/searchPageComponents/DetailedSearchBar";
-import { SubjectGrid } from "@/components/subjectPageComponents/SubjectGrid";
+import { DetailSearchBar } from "@/components/searchPageComponents/DetailSearchBar";
+import { SearchResults } from "@/components/searchPageComponents/SearchResults";
 import { useSubjectOnSearchPageQuery } from "@/generated/graphql";
 import { Box, Divider, Grid, Typography } from "@mui/material";
 import { useState } from "react";
-
 import {
   createSearchParams,
   useNavigate,
@@ -62,7 +61,7 @@ export function SearchPage() {
   }
 
   return (
-    <Grid container sx={{ dispplay: "flex" }}>
+    <Grid container>
       <Grid
         xs={0}
         md={3}
@@ -102,11 +101,16 @@ export function SearchPage() {
             mb: 2,
           }}
         >
-          <Typography variant="h5" component="div" align="left">
+          <Typography
+            variant="h5"
+            component="div"
+            align="left"
+            sx={{ color: "black" }}
+          >
             <b>詳細検索</b>
           </Typography>
           <Divider sx={{ mb: 2 }} />
-          <DetailedSearchBar
+          <DetailSearchBar
             setSearchParams={setSearchParams}
             searchTitle={searchTitle}
             setSearchTitle={setSearchTitle}
@@ -117,12 +121,17 @@ export function SearchPage() {
             onSearch={() => setOnSearch(true)}
           />
           {onSearch && !title && !faculty && !field && (
-            <Typography variant="h5" component="div" align="center">
+            <Typography
+              variant="h5"
+              component="div"
+              align="center"
+              sx={{ color: "black" }}
+            >
               少なくとも一つの項目を入力してください
             </Typography>
           )}
           {(title || faculty || field) && (
-            <SubjectGrid subjects={data?.subjects} />
+            <SearchResults subjects={data?.subjects} />
           )}
         </Box>
       </Grid>

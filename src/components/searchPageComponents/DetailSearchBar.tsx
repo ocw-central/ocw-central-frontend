@@ -26,6 +26,7 @@ const SearchIconWrapper = styled("div")(({ theme }) => ({
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
+  color: "black",
 }));
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
@@ -40,6 +41,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
       height: "2.5em",
       mb: "1em",
     },
+    color: "black",
   },
 }));
 
@@ -69,7 +71,7 @@ const SearchBar = (props: {
   </Search>
 );
 
-export const DetailedSearchBar = ({
+export const DetailSearchBar = ({
   setSearchParams,
   searchFaculty,
   setSearchFaculty,
