@@ -11,6 +11,7 @@ export const SearchResults = (subjects: Subjects) => {
       {subjects.subjects?.map((subject) => (
         <SubjectCard
           id={subject.id}
+          key={subject.id}
           title={subject.title}
           faculty={subject.faculty}
           thumbnailLink={subject.thumbnailLink}

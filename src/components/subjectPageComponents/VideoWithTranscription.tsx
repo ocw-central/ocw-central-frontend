@@ -17,8 +17,8 @@ type Props = {
 };
 
 const removeParenthesis = (s: string) => {
-  let re_full = /(\(|（)[^\(\）\)]*(\)|）)/g;
-  let re_half = /[\(（].*?[\)）]/g;
+  const re_full = /(\(|（)[^(）)]*(\)|）)/g;
+  const re_half = /[(（].*?[)）]/g;
   return s.replace(re_full, " ").replace(re_half, " ");
 };
 
@@ -27,19 +27,17 @@ export function VideoWithTranscription(props: Props) {
   const [VideoStartTime, SetVideoStartTime] = useState(0);
   const [AutoPlayOn, SetAutoPlayOn] = useState(0);
   const [searchParams] = useSearchParams();
-  const initialVideoId = searchParams.get("video_id");
-  let FocusedVideoOrdering = props.focusedVideoOrdering;
-  let FocusedVideo = videos[FocusedVideoOrdering];
-  let FocusedYoutubeId = youtube_parser(FocusedVideo.link);
+
+  const FocusedVideoOrdering = props.focusedVideoOrdering;
+  const FocusedVideo = videos[FocusedVideoOrdering];
+  const FocusedYoutubeId = youtube_parser(FocusedVideo.link);
 
   useEffect(() => {
     //find Video with initialVideoId
+    const initialVideoId = searchParams.get("video_id");
     const initialVideo = videos.find((v) => v.id === initialVideoId);
     const initialVideoOrdering = initialVideo?.ordering ?? 0;
     props.setFocusedVideoOrdering(initialVideoOrdering);
-    FocusedVideoOrdering = initialVideoOrdering;
-    FocusedVideo = videos[FocusedVideoOrdering];
-    FocusedYoutubeId = youtube_parser(FocusedVideo.link);
   }, []);
 
   return (

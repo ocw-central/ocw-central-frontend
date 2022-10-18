@@ -19,8 +19,6 @@ type Params = {
 
 export function SearchPage() {
   const navigate = useNavigate();
-
-  // 講義名検索結果を持つstate
   const [searchTitle, setSearchTitle] = useState("");
   const [searchFaculty, setSearchFaculty] = useState("");
   const [searchAcademicField, setSearchAcademicField] = useState("");
@@ -28,7 +26,6 @@ export function SearchPage() {
   const [jpFieldOpen, setJpFieldOpen] = useState(false);
   const [enFieldOpen, setEnFieldOpen] = useState(false);
 
-  // stateに基づきsearch parameterを切り替える関数
   const setSearchParams = () => {
     const params: Params = {
       title: searchTitle,

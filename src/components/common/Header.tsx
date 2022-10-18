@@ -6,8 +6,6 @@ import { alpha, styled } from "@mui/material/styles";
 import * as React from "react";
 import { createSearchParams, Link, useNavigate } from "react-router-dom";
 
-const pages = ["Home", "詳細検索", "このサイトについて"];
-
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
   borderRadius: theme.shape.borderRadius,

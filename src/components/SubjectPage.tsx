@@ -26,8 +26,13 @@ export function SubjectPage() {
   const [FocusedVideoOrdering, SetFocusedVideoOrdering] = useState(0);
   let { id } = useParams();
   // FIXME: I don't know how to distinguish parameter and search parameter
-  id = id?.replace(/\&.+/, "");
+  id = id?.replace(/&.+/, "");
 
+  const removeParenthesis = (s: string) => {
+    const re_full = /(\(|（)[^(）)]*(\)|）)/g;
+    const re_half = /[(（].*?[)）]/g;
+    return s.replace(re_full, " ").replace(re_half, " ");
+  };
   const { data, loading, error } = useSubjectQuery({
     variables: {
       id: id ? id : "",

@@ -1,4 +1,11 @@
-# OCW-CENTRAL-FRONTEND
+<img align="left" src=https://user-images.githubusercontent.com/44559556/196192159-7684237a-ba00-4ea4-8c37-3395acb19492.png width="100" height="100">
+
+# ocw-central-frontend
+
+[![ESLint](https://github.com/ocw-central/ocw-central-frontend/actions/workflows/ESLint.yml/badge.svg)](https://github.com/ocw-central/ocw-central-frontend/actions/workflows/ESLint.yml)
+[![Prettier](https://github.com/ocw-central/ocw-central-frontend/actions/workflows/Prettier.yml/badge.svg)](https://github.com/ocw-central/ocw-central-frontend/actions/workflows/Prettier.yml)
+[![Jest](https://github.com/ocw-central/ocw-central-frontend/actions/workflows/Jest.yml/badge.svg)](https://github.com/ocw-central/ocw-central-frontend/actions/workflows/Jest.yml)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue)](https://img.shields.io/badge/license-MIT-blue)
 
 ## Requirement
 
@@ -62,7 +69,3 @@
 - [Vite](https://vitejs.dev/) for build tool.
 - [React](https://reactjs.org/) for building UI.
 - [ESLint](https://eslint.org/) and [Prettier](https://**prettier**.io/) for formatting.
-
-### Lisence
-
-MIT License

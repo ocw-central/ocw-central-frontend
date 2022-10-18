@@ -4,11 +4,9 @@ import { SubjectCard } from "@/components/searchPageComponents/SubjectCard";
 import { useRandomSubjectQuery } from "@/generated/graphql";
 import { theme } from "@/utils/themes";
 import { Divider, Grid, Typography } from "@mui/material";
-import { useNavigate } from "react-router-dom";
 import { ReactComponent as OwlImg } from "@/assets/ocwc-owl.svg";
 
 export function HomePage() {
-  const navigate = useNavigate();
   const GridRandomItems: JSX.Element[] = [];
 
   const { data, loading, error } = useRandomSubjectQuery({

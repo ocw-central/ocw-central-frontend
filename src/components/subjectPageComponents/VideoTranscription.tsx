@@ -54,7 +54,7 @@ export function VideoTranscription(props: Props) {
         },
         "&::-webkit-scrollbar-thumb": {
           backgroundColor: "darkgrey",
-          outline: `3px solid slategrey`,
+          outline: "3px solid slategrey",
 
           "&:hover": {
             backgroundColor: "grey",

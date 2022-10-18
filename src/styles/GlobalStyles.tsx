@@ -1,7 +1,7 @@
-import { css, Global, Theme } from "@emotion/react";
+import { css, Global } from "@emotion/react";
 import React from "react";
 
-const global = (theme: Theme) => css`
+const global = () => css`
   /*https://github.com/ebisucom/next-react-website/blob/main/blog/styles/globals.css*/
   :root {
     /* タイポグラフィ（フォントサイズ） */
