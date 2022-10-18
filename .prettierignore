@@ -1,0 +1,3 @@
+dist/*
+graphql.schema.json
+src/generated/*
