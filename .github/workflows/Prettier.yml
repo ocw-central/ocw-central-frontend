@@ -1,5 +1,4 @@
-# https://qiita.com/mball/items/224804386f671edf6cbc
-name: On pull request
+name: Prettier 
 
 on:
   pull_request:
