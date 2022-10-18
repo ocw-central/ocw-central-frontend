@@ -101,7 +101,12 @@ export function SearchPage() {
             mb: 2,
           }}
         >
-          <Typography variant="h5" component="div" align="left">
+          <Typography
+            variant="h5"
+            component="div"
+            align="left"
+            sx={{ color: "black" }}
+          >
             <b>詳細検索</b>
           </Typography>
           <Divider sx={{ mb: 2 }} />
@@ -116,7 +121,12 @@ export function SearchPage() {
             onSearch={() => setOnSearch(true)}
           />
           {onSearch && !title && !faculty && !field && (
-            <Typography variant="h5" component="div" align="center">
+            <Typography
+              variant="h5"
+              component="div"
+              align="center"
+              sx={{ color: "black" }}
+            >
               少なくとも一つの項目を入力してください
             </Typography>
           )}

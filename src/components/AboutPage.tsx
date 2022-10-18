@@ -39,6 +39,7 @@ export function AboutPage() {
               xs: "80%",
             },
             margin: "auto",
+            color: "black",
           }}
         >
           OCW Centralは大学によって無償で提供される教育資源であるOCW
@@ -72,6 +73,7 @@ export function AboutPage() {
               xs: "80%",
             },
             margin: "auto",
+            color: "black",
           }}
         >
           このサイトで公開されている資料は配布元の規約に基づき、
@@ -121,6 +123,7 @@ export function AboutPage() {
               xs: "80%",
             },
             margin: "auto",
+            color: "black",
           }}
         >
           このサイト上の教育資料や書き起こし等の掲載情報の正確性に関して、一切の保証をいたしかねます。
@@ -153,6 +156,7 @@ export function AboutPage() {
               xs: "80%",
             },
             margin: "auto",
+            color: "black",
           }}
         >
           <address>feedback@ocwcentral.com</address>

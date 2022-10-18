@@ -145,7 +145,7 @@ export function HomePage() {
               variant="h5"
               component="div"
               align="left"
-              sx={{ color: theme.palette.primary.dark }}
+              sx={{ color: "black" }}
             >
               <b>Feeling Lucky</b>
             </Typography>
