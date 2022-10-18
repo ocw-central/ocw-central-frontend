@@ -26,6 +26,8 @@
     "@types/react-window": "^1.8.5",
     "add": "^2.0.6",
     "darkreader": "^4.9.58",
+    "eslint-plugin-jest": "^27.1.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
     "graphql": "^16.6.0",
     "material-table": "^2.0.3",
     "react": "^18.2.0",

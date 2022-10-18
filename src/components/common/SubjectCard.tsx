@@ -2,8 +2,6 @@ import { Grid, ImageListItem, ImageListItemBar } from "@mui/material";
 import { alpha, styled } from "@mui/material/styles";
 import { Link } from "react-router-dom";
 
-const thumbnailBaseURL = "/subject_thumbnails/";
-
 type SubjectOnSearchPage = {
   id: string;
   title: string;

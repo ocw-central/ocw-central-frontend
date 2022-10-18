@@ -8,7 +8,7 @@ type Props = {
   title: string;
   subject_faculty: string;
   syllabus_faculty: string | undefined;
-  subject_year: any;
+  subject_year: string;
   syllabus_year: number | undefined;
   videos: Video[];
 };
@@ -23,9 +23,6 @@ export function SubjectCopyrightCard(props: Props) {
     videos,
   } = props;
 
-  const subject_year_str = subject_year
-    ? subject_year.toString().slice(0, 4)
-    : "";
   const syllabus_year_str = syllabus_year ? syllabus_year.toString() : "";
 
   const subject_faculty_str = subject_faculty;
@@ -44,12 +41,6 @@ export function SubjectCopyrightCard(props: Props) {
     : videos_faculty_str
     ? videos_faculty_str
     : "京都大学";
-
-  const year_copyright = subject_year_str
-    ? subject_year_str
-    : syllabus_year_str
-    ? syllabus_year_str
-    : "";
 
   return (
     <Card

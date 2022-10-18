@@ -18,7 +18,7 @@ type Subject = {
   category: string;
   location: string;
   department: string;
-  firstHeldOn?: any;
+  firstHeldOn?: string;
   faculty: string;
   language: string;
   freeDescription: string;
@@ -32,7 +32,7 @@ type Subject = {
     ordering: number;
     link: string;
     faculty: string;
-    lecturedOn: any;
+    lecturedOn: string;
     videoLength: number;
     language: string;
     chapters: {
