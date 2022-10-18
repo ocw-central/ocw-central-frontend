@@ -4,7 +4,7 @@ import PlayCircleIcon from "@mui/icons-material/PlayCircle";
 import { alpha, Box, List, ListItemIcon } from "@mui/material";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 type Subject = {
   __typename?: "Subject" | undefined;
@@ -13,7 +13,7 @@ type Subject = {
   category: string;
   location: string;
   department: string;
-  firstHeldOn?: any;
+  firstHeldOn?: string;
   faculty: string;
   language: string;
   freeDescription: string;
@@ -27,7 +27,7 @@ type Subject = {
     ordering: number;
     link: string;
     faculty: string;
-    lecturedOn: any;
+    lecturedOn: string;
     videoLength: number;
     language: string;
     chapters: {
@@ -94,19 +94,18 @@ type Props = {
 
 function secondsToHms(d: number) {
   d = Number(d);
-  var h = Math.floor(d / 3600);
-  var m = Math.floor((d % 3600) / 60);
-  var s = Math.floor((d % 3600) % 60);
+  const h = Math.floor(d / 3600);
+  const m = Math.floor((d % 3600) / 60);
+  const s = Math.floor((d % 3600) % 60);
 
-  var hDisplay = h > 0 ? h + "h" : "";
-  var mDisplay = m > 0 ? m + "m" : "";
-  var sDisplay = s > 0 ? s + "s" : "";
+  const hDisplay = h > 0 ? h + "h" : "";
+  const mDisplay = m > 0 ? m + "m" : "";
+  const sDisplay = s > 0 ? s + "s" : "";
   return hDisplay + mDisplay + sDisplay;
 }
 
 export function VideosBox(propsVideo: Props) {
   const navigate = useNavigate();
-  const location = useLocation();
 
   return (
     <List

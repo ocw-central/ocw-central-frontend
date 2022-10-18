@@ -15,7 +15,7 @@ export function VideoTranscription(props: Props) {
     //remove empty lines`
 
     const processedLines = lines.map((line) => {
-      const [startTime, endTime] = line.split(",");
+      const [startTime] = line.split(",");
       // text is everything after the second comma
       const text = line.slice(line.indexOf(",", line.indexOf(",") + 1) + 1);
       return { startTime, text };
@@ -26,8 +26,8 @@ export function VideoTranscription(props: Props) {
 
   // convert seconds to mm:ssz
   function convertSecondToTime(second: number) {
-    let mm: string = String(Math.floor(second / 60));
-    let ss: string = String(Math.floor(second % 60));
+    let mm = String(Math.floor(second / 60));
+    let ss = String(Math.floor(second % 60));
     if (mm.length === 1) {
       mm = `0${mm}`;
     }
@@ -55,7 +55,7 @@ export function VideoTranscription(props: Props) {
         },
         "&::-webkit-scrollbar-thumb": {
           backgroundColor: "darkgrey",
-          outline: `3px solid slategrey`,
+          outline: "3px solid slategrey",
 
           "&:hover": {
             backgroundColor: "grey",

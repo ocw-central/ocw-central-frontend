@@ -2,6 +2,9 @@
 
 # ocw-central-frontend
 
+[![ESLint](https://github.com/ocw-central/ocw-central-frontend/actions/workflows/ESLint.yml/badge.svg)](https://github.com/ocw-central/ocw-central-frontend/actions/workflows/ESLint.yml)
+[![Prettier](https://github.com/ocw-central/ocw-central-frontend/actions/workflows/Prettier.yml/badge.svg)](https://github.com/ocw-central/ocw-central-frontend/actions/workflows/Prettier.yml)
+[![Jest](https://github.com/ocw-central/ocw-central-frontend/actions/workflows/Jest.yml/badge.svg)](https://github.com/ocw-central/ocw-central-frontend/actions/workflows/Jest.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue)](https://img.shields.io/badge/license-MIT-blue)
 
 ## Requirement

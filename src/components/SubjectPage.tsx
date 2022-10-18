@@ -13,15 +13,20 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Accordion from "@mui/material/Accordion";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import AccordionSummary from "@mui/material/AccordionSummary";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { VideosBox } from "./subjectPageComponents/VideosBox";
 
 export function SubjectPage() {
   const [FocusedVideoOrdering, SetFocusedVideoOrdering] = useState(0);
   let { id } = useParams();
   // FIXME: I don't know how to distinguish parameter and search parameter
-  id = id?.replace(/\&.+/, "");
+  id = id?.replace(/&.+/, "");
 
+  const removeParenthesis = (s: string) => {
+    const re_full = /(\(|（)[^(）)]*(\)|）)/g;
+    const re_half = /[(（].*?[)）]/g;
+    return s.replace(re_full, " ").replace(re_half, " ");
+  };
   const { data, loading, error } = useSubjectQuery({
     variables: {
       id: id ? id : "",
@@ -58,12 +63,6 @@ export function SubjectPage() {
     subject.series ||
     subject.academicField;
   const hasSyllabus = subject.syllabus !== null;
-
-  const removeParenthesis = (s: string) => {
-    let re_full = /(\(|（)[^\(\）\)]*(\)|）)/g;
-    let re_half = /[\(（].*?[\)）]/g;
-    return s.replace(re_full, " ").replace(re_half, " ");
-  };
 
   return (
     <Grid container className="Subject" direction="column" sx={{ mt: 3 }}>

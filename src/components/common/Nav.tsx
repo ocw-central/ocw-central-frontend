@@ -14,33 +14,20 @@ export function Nav() {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
   );
-  const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
-    null
-  );
-
-  const [academicFields, setAcademicFields] =
-    React.useState<null | JSX.Element>(null);
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
   };
-  const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorElUser(event.currentTarget);
-  };
-
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
 
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
-  };
   return (
     <div>
       <nav>
         <ul className={styles.list}>
           {pages.map((page) => (
-            <li>
+            <li key={page.name}>
               <Box
                 mr={1}
                 sx={{
@@ -78,7 +65,6 @@ export function Nav() {
         </IconButton>
         <Menu
           id="menu-appbar"
-          anchorEl={anchorElNav}
           anchorOrigin={{
             vertical: "bottom",
             horizontal: "left",
@@ -95,7 +81,7 @@ export function Nav() {
           }}
         >
           {pages.map((page) => (
-            <Link to={page.link}>
+            <Link to={page.link} key={page.name}>
               <MenuItem key={page.name} onClick={handleCloseNavMenu}>
                 <Typography textAlign="center">{page.name}</Typography>
               </MenuItem>
