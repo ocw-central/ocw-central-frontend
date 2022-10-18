@@ -16,12 +16,6 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import { useState } from "react";
 import { VideosBox } from "./subjectPageComponents/VideosBox";
 
-const removeParenthesis = (s: string) => {
-  let re_full = /(\(|（)[^\(\）\)]*(\)|）)/g;
-  let re_half = /[\(（].*?[\)）]/g;
-  return s.replace(re_full, " ").replace(re_half, " ");
-};
-
 export function SubjectPage() {
   const [FocusedVideoOrdering, SetFocusedVideoOrdering] = useState(0);
   let { id } = useParams();

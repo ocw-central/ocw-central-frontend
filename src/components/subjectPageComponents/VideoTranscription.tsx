@@ -24,8 +24,8 @@ function processText(text: string) {
 }
 // convert seconds to mm:ssz
 function convertSecondToTime(second: number) {
-  let mm: string = String(Math.floor(second / 60));
-  let ss: string = String(Math.floor(second % 60));
+  let mm = String(Math.floor(second / 60));
+  let ss = String(Math.floor(second % 60));
   if (mm.length === 1) {
     mm = `0${mm}`;
   }
