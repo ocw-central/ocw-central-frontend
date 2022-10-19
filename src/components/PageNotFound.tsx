@@ -1,10 +1,14 @@
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 
 export function PageNotFound() {
   return (
-    <Box sx={{ marginTop: "8em" }}>
-      <h1>404 Not Found</h1>
-      <h2>お探しのページは見つかりませんでした。</h2>
+    <Box>
+      <Typography variant="h2" align="center" sx={{ color: "black" }}>
+        404 Not Found
+      </Typography>
+      <Typography variant="h3" align="center" sx={{ color: "black" }}>
+        お探しのページは見つかりませんでした。
+      </Typography>
     </Box>
   );
 }
