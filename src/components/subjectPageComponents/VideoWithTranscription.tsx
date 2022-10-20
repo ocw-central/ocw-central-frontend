@@ -1,12 +1,12 @@
 import { PlayerWrapper } from "@/components/subjectPageComponents/PlayerWrapper";
 import { VideoTranscription } from "@/components/subjectPageComponents/VideoTranscription";
 import { Video } from "@/generated/graphql";
+import { Subject } from "@/gqltypes/subject";
 import { theme } from "@/utils/themes";
 import { youtube_parser } from "@/utils/youtubeParser";
 import { Grid, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import { Subject } from "@/gqltypes/subject";
 
 type Props = {
   //setVideoIdFunc: (videoId: string) => void;
@@ -59,30 +59,37 @@ export function VideoWithTranscription(props: Props) {
         sx={{
           justifyContent: "center",
           ml: { xs: 0, sm: 0, md: 0 },
-          pb: 5,
+          pb: { xs: 3, sm: 5 },
           minHeight: {
             md: 420,
           },
         }}
       >
         <Typography
-          variant="h5"
-          sx={{ mb: 2, fontWeight: "bold", color: "black" }}
+          sx={{
+            mb: 2,
+            fontWeight: "bold",
+            color: "black",
+            fontSize: { xs: 20, sm: 30 },
+          }}
         >
           {props.subject.title}
         </Typography>
-        <Typography
-          variant="h5"
-          sx={{
-            mb: 2,
-            width: "100%",
-            fontWeight: "medium",
-            color: theme.palette.primary.dark,
-          }}
-        >
-          {FocusedVideo.title} |{" "}
-          {removeParenthesis(FocusedVideo.faculty.trim())}
-        </Typography>
+        {!props.subject.title.includes(FocusedVideo.title) && (
+          <Typography
+            variant="h5"
+            sx={{
+              mb: 2,
+              width: "100%",
+              fontWeight: "medium",
+              color: theme.palette.primary.dark,
+              fontSize: { xs: 18, sm: 28 },
+            }}
+          >
+            {FocusedVideo.title} |{" "}
+            {removeParenthesis(FocusedVideo.faculty.trim())}
+          </Typography>
+        )}
         <PlayerWrapper
           FocusedYoutubeId={FocusedYoutubeId}
           startAt={VideoStartTime}
@@ -90,7 +97,13 @@ export function VideoWithTranscription(props: Props) {
         />
       </Grid>
       {FocusedVideo.transcription && (
-        <Grid item md={4} sm={12} xs={12} sx={{ p: 3, pr: { md: 0 } }}>
+        <Grid
+          item
+          md={4}
+          sm={12}
+          xs={12}
+          sx={{ p: 3.5, pr: { md: 0 }, pt: { xs: 1, sm: 3 } }}
+        >
           <VideoTranscription
             transcription={FocusedVideo.transcription}
             setTime={SetVideoStartTime}

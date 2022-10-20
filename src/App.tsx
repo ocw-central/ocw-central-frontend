@@ -4,7 +4,7 @@ import "@/styles/App.css";
 import { theme } from "@/utils/themes";
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 import { ThemeProvider } from "@emotion/react";
-import { createTheme, Grid } from "@mui/material";
+import { Grid } from "@mui/material";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { AboutPage } from "./components/AboutPage";
 import { Header } from "./components/common/Header";

@@ -14,25 +14,13 @@ function processText(text: string) {
   //remove empty lines
   const lines = text.split(/\r?\n/);
   const processedLines = lines.map((line) => {
-    const [startTime, endTime] = line.split(",");
+    const [startTime] = line.split(",");
     // text is everything after the second comma
     const text = line.slice(line.indexOf(",", line.indexOf(",") + 1) + 1);
     return { startTime, text };
   });
   processedLines.pop(); //FIXME: last element is empty
   return processedLines;
-}
-// convert seconds to mm:ssz
-function convertSecondToTime(second: number) {
-  let mm = String(Math.floor(second / 60));
-  let ss = String(Math.floor(second % 60));
-  if (mm.length === 1) {
-    mm = `0${mm}`;
-  }
-  if (ss.length === 1) {
-    ss = `0${ss}`;
-  }
-  return `${mm}:${ss}`;
 }
 
 export function VideoTranscription(props: Props) {
