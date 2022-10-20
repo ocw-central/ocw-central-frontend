@@ -1,5 +1,5 @@
 import { theme } from "@/utils/themes";
-import { Box, List, Typography, Grid } from "@mui/material";
+import { Box, Grid, List, Typography } from "@mui/material";
 import ListItem from "@mui/material/ListItem";
 import { alpha } from "@mui/material/styles";
 
@@ -116,15 +116,15 @@ export function VideoTranscription(props: Props) {
                 >
                   <Typography
                     sx={{
-                      color: "black",
-                      fontWeight: "medium",
-                      fontSize: { xs: 10, sm: 12, md: 14 },
+                      color: "#c26421",
+                      fontWeight: "bold",
+                      fontSize: { xs: 12, sm: 14, md: 15 },
                       pt: 0.5,
                     }}
                   >
                     {`${convertSecondToTime(
                       Number(processedLines[index].startTime)
-                    )}`}
+                    )} `}
                   </Typography>
                 </Grid>
                 <Grid item xs={11} sm={11}>
@@ -133,7 +133,7 @@ export function VideoTranscription(props: Props) {
                       color: "black",
                       fontWeight: "medium",
                       fontSize: { xs: 16, sm: 20 },
-                      pl: { md: 3, sm: 0, xs: 0 },
+                      pl: { md: 3.5, sm: 3, xs: 3 },
                     }}
                   >{`${processedLines[index].text}`}</Typography>
                 </Grid>
