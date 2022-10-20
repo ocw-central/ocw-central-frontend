@@ -116,7 +116,7 @@ export function VideoTranscription(props: Props) {
                 >
                   <Typography
                     sx={{
-                      color: "#c26421",
+                      color: `${theme.palette.secondary.main}`,
                       fontWeight: "bold",
                       fontSize: { xs: 12, sm: 14, md: 15 },
                       pt: 0.5,
