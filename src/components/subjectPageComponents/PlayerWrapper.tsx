@@ -1,10 +1,13 @@
 type Props = {
-  FocusedYoutubeId: string;
+  FocusedYoutubeId: string | undefined;
   startAt: number;
   autoPlayOn: number; // 0: off, 1: on
 };
 
 export const PlayerWrapper = (props: Props) => {
+  if (props.FocusedYoutubeId === undefined) {
+    return <></>;
+  }
   return (
     <iframe
       style={{
