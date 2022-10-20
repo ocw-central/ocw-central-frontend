@@ -111,7 +111,7 @@ export function VideoTranscription(props: Props) {
                 primaryTypographyProps={{
                   color: "black",
                   fontWeight: "medium",
-                  fontSize: { xs: 14, sm: 20 },
+                  fontSize: { xs: 16, sm: 20 },
                 }}
               />
             </ListItem>

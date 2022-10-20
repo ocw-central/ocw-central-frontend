@@ -68,20 +68,24 @@ export function SubjectPage() {
     <Grid container className="Subject" direction="column" sx={{ mt: 3 }}>
       {!hasVideos && (
         <Typography
-          variant="h5"
-          sx={{ mb: 2, fontWeight: "bold", color: "black" }}
+          sx={{
+            mb: { xs: 1, sm: 2 },
+            fontWeight: "bold",
+            color: "black",
+            fontSize: { xs: 20, sm: 30 },
+          }}
         >
           {subject.title}
         </Typography>
       )}
       {!hasVideos && subject.faculty && (
         <Typography
-          variant="h5"
           sx={{
-            mb: 2,
+            mb: { xs: 1, sm: 2 },
             width: "100%",
             fontWeight: "medium",
             color: theme.palette.primary.dark,
+            fontSize: { xs: 18, sm: 28 },
           }}
         >
           {removeParenthesis(subject.faculty.trim())}
