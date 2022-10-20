@@ -3,7 +3,7 @@ import { VideoTranscription } from "@/components/subjectPageComponents/VideoTran
 import { Video } from "@/generated/graphql";
 import { Subject } from "@/gqltypes/subject";
 import { theme } from "@/utils/themes";
-import { Grid, Typography } from "@mui/material";
+import { Box, Grid, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import urlParser from "js-video-url-parser";
@@ -65,30 +65,48 @@ export function VideoWithTranscription(props: Props) {
           },
         }}
       >
-        <Typography
-          sx={{
-            mb: 2,
-            fontWeight: "bold",
-            color: "black",
-            fontSize: { xs: 20, sm: 30 },
-          }}
-        >
-          {props.subject.title}
-        </Typography>
+        {
+          // @NOTE: 講義名と動画名の表示に一貫性がないため、このままの制御だと不十分
+          props.subject.title.includes(FocusedVideo.title) && (
+            <Typography
+              sx={{
+                mb: 2,
+                fontWeight: "bold",
+                color: "black",
+                fontSize: { xs: 20, sm: 30 },
+              }}
+            >
+              {props.subject.title} |{" "}
+              {removeParenthesis(props.subject.faculty.trim())}
+            </Typography>
+          )
+        }
         {!props.subject.title.includes(FocusedVideo.title) && (
-          <Typography
-            variant="h5"
-            sx={{
-              mb: 2,
-              width: "100%",
-              fontWeight: "medium",
-              color: theme.palette.primary.dark,
-              fontSize: { xs: 18, sm: 28 },
-            }}
-          >
-            {FocusedVideo.title} |{" "}
-            {removeParenthesis(FocusedVideo.faculty.trim())}
-          </Typography>
+          <Box>
+            <Typography
+              sx={{
+                mb: 2,
+                fontWeight: "bold",
+                color: "black",
+                fontSize: { xs: 20, sm: 30 },
+              }}
+            >
+              {props.subject.title}
+            </Typography>
+            <Typography
+              variant="h5"
+              sx={{
+                mb: 2,
+                width: "100%",
+                fontWeight: "medium",
+                color: theme.palette.primary.dark,
+                fontSize: { xs: 18, sm: 28 },
+              }}
+            >
+              {FocusedVideo.title} |{" "}
+              {removeParenthesis(FocusedVideo.faculty.trim())}
+            </Typography>
+          </Box>
         )}
         <PlayerWrapper
           FocusedYoutubeId={FocusedYoutubeId}
