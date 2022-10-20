@@ -70,7 +70,7 @@ export function VideoTranscription(props: Props) {
       <List
         sx={{
           width: "100%",
-          maxHeight: 540,
+          maxHeight: { xs: 250, sm: 540 },
         }}
         subheader={
           <Typography

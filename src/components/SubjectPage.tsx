@@ -1,9 +1,9 @@
 import { Loading } from "@/components/common/Loading";
 import { SubjectCopyrightCard } from "@/components/subjectPageComponents/SubjectCopyrightCard";
 import { SubjectDetails } from "@/components/subjectPageComponents/SubjectDetails";
-import { VideoWithTranscription } from "@/components/subjectPageComponents/VideoWithTranscription";
 import { SubjectResources } from "@/components/subjectPageComponents/SubjectResources";
 import { SubjectSyllabus } from "@/components/subjectPageComponents/SubjectSyllabus";
+import { VideoWithTranscription } from "@/components/subjectPageComponents/VideoWithTranscription";
 import { useSubjectQuery } from "@/generated/graphql";
 import { theme } from "@/utils/themes";
 import { Grid, Typography } from "@mui/material";
@@ -99,7 +99,7 @@ export function SubjectPage() {
       <Grid
         container
         direction="column"
-        width={{ md: "60%", sm: "90%", xs: "90%" }}
+        width={{ md: "60%", sm: "90%", xs: "95%" }}
         sx={{ justifyContent: "center", mx: "auto" }}
       >
         {videos.length > 1 && (
