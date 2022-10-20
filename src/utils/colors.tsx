@@ -18,3 +18,7 @@ export const complementary = {
   100: "#5286AB",
   200: "#AB7752",
 };
+
+export const useful = {
+  100: "#c26421",
+};

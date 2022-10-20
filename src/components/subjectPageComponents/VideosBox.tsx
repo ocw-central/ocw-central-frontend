@@ -1,11 +1,11 @@
 import { Video } from "@/generated/graphql";
+import { Subject } from "@/gqltypes/subject";
 import { theme } from "@/utils/themes";
 import PlayCircleIcon from "@mui/icons-material/PlayCircle";
 import { alpha, Box, List, ListItemIcon } from "@mui/material";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
-import { useLocation, useNavigate } from "react-router-dom";
-import { Subject } from "@/gqltypes/subject";
+import { useNavigate } from "react-router-dom";
 
 type Props = {
   focusedVideoOrdering: number;
@@ -47,6 +47,7 @@ export function VideosBox(propsVideo: Props) {
                 propsVideo.focusedVideoOrdering === video.ordering
                   ? alpha(theme.palette.primary.main, 0.1)
                   : "unset",
+              cursor: "pointer",
               "&:hover, &:focus": {
                 bgcolor: alpha(theme.palette.primary.main, 0.1),
               },

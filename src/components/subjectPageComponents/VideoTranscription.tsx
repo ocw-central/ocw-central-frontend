@@ -1,7 +1,6 @@
 import { theme } from "@/utils/themes";
-import { Box, List, Typography } from "@mui/material";
+import { Box, Grid, List, Typography } from "@mui/material";
 import ListItem from "@mui/material/ListItem";
-import ListItemText from "@mui/material/ListItemText";
 import { alpha } from "@mui/material/styles";
 
 type Props = {
@@ -14,7 +13,7 @@ function processText(text: string) {
   //remove empty lines
   const lines = text.split(/\r?\n/);
   const processedLines = lines.map((line) => {
-    const [startTime, endTime] = line.split(",");
+    const [startTime] = line.split(",");
     // text is everything after the second comma
     const text = line.slice(line.indexOf(",", line.indexOf(",") + 1) + 1);
     return { startTime, text };
@@ -44,7 +43,7 @@ export function VideoTranscription(props: Props) {
       sx={{
         bgcolor: alpha(theme.palette.primary.main, 0.15),
         borderRadius: 0.5,
-        p: 4,
+        p: { xs: 2, sm: 3 },
         overflow: "auto",
         "&::-webkit-scrollbar": {
           width: 10,
@@ -70,11 +69,11 @@ export function VideoTranscription(props: Props) {
       <List
         sx={{
           width: "100%",
-          maxHeight: 540,
+          maxHeight: { xs: 250, sm: 540 },
         }}
         subheader={
           <Typography
-            variant="h5"
+            fontSize={{ xs: 15, sm: 25 }}
             component="div"
             align="left"
             sx={{
@@ -106,16 +105,39 @@ export function VideoTranscription(props: Props) {
                 },
               }}
             >
-              <ListItemText
-                primary={`${processedLines[index].text}`}
-                primaryTypographyProps={{
-                  color: "black",
-                  fontWeight: "medium",
-                }}
-                secondary={`${convertSecondToTime(
-                  Number(processedLines[index].startTime)
-                )}`}
-              />
+              <Grid container direction="row">
+                <Grid
+                  item
+                  xs={1}
+                  sm={1}
+                  sx={{
+                    justifySelf: "center",
+                  }}
+                >
+                  <Typography
+                    sx={{
+                      color: `${theme.palette.secondary.main}`,
+                      fontWeight: "bold",
+                      fontSize: { xs: 12, sm: 14, md: 15 },
+                      pt: 0.5,
+                    }}
+                  >
+                    {`${convertSecondToTime(
+                      Number(processedLines[index].startTime)
+                    )} `}
+                  </Typography>
+                </Grid>
+                <Grid item xs={11} sm={11}>
+                  <Typography
+                    sx={{
+                      color: "black",
+                      fontWeight: "medium",
+                      fontSize: { xs: 16, sm: 20 },
+                      pl: { md: 3.5, sm: 3, xs: 3 },
+                    }}
+                  >{`${processedLines[index].text}`}</Typography>
+                </Grid>
+              </Grid>
             </ListItem>
           );
         })}

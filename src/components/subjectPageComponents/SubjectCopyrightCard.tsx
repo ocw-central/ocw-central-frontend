@@ -14,16 +14,10 @@ type Props = {
 };
 
 export function SubjectCopyrightCard(props: Props) {
-  const {
-    title,
-    subject_faculty,
-    syllabus_faculty,
-    subject_year,
-    syllabus_year,
-    videos,
-  } = props;
-
-  const syllabus_year_str = syllabus_year ? syllabus_year.toString() : "";
+  const title = props.title;
+  const subject_faculty = props.subject_faculty;
+  const syllabus_faculty = props.syllabus_faculty;
+  const videos = props.videos;
 
   const subject_faculty_str = subject_faculty;
   const syllabus_faculty_str = syllabus_faculty;

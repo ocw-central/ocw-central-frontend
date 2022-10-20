@@ -5,7 +5,7 @@ export type Subject = {
   category: string;
   location: string;
   department: string;
-  firstHeldOn?: any;
+  firstHeldOn?: string;
   faculty: string;
   language: string;
   freeDescription: string;
@@ -19,7 +19,7 @@ export type Subject = {
     ordering: number;
     link: string;
     faculty: string;
-    lecturedOn: any;
+    lecturedOn: string;
     videoLength: number;
     language: string;
     transcription: string;

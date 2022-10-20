@@ -1,9 +1,9 @@
 import { Loading } from "@/components/common/Loading";
 import { SubjectCopyrightCard } from "@/components/subjectPageComponents/SubjectCopyrightCard";
 import { SubjectDetails } from "@/components/subjectPageComponents/SubjectDetails";
-import { VideoWithTranscription } from "@/components/subjectPageComponents/VideoWithTranscription";
 import { SubjectResources } from "@/components/subjectPageComponents/SubjectResources";
 import { SubjectSyllabus } from "@/components/subjectPageComponents/SubjectSyllabus";
+import { VideoWithTranscription } from "@/components/subjectPageComponents/VideoWithTranscription";
 import { useSubjectQuery } from "@/generated/graphql";
 import { theme } from "@/utils/themes";
 import { Grid, Typography } from "@mui/material";
@@ -68,20 +68,24 @@ export function SubjectPage() {
     <Grid container className="Subject" direction="column" sx={{ mt: 3 }}>
       {!hasVideos && (
         <Typography
-          variant="h5"
-          sx={{ mb: 2, fontWeight: "bold", color: "black" }}
+          sx={{
+            mb: { xs: 1, sm: 2 },
+            fontWeight: "bold",
+            color: "black",
+            fontSize: { xs: 20, sm: 30 },
+          }}
         >
           {subject.title}
         </Typography>
       )}
       {!hasVideos && subject.faculty && (
         <Typography
-          variant="h5"
           sx={{
-            mb: 2,
+            mb: { xs: 1, sm: 2 },
             width: "100%",
             fontWeight: "medium",
             color: theme.palette.primary.dark,
+            fontSize: { xs: 18, sm: 28 },
           }}
         >
           {removeParenthesis(subject.faculty.trim())}
@@ -99,7 +103,7 @@ export function SubjectPage() {
       <Grid
         container
         direction="column"
-        width={{ md: "60%", sm: "90%", xs: "90%" }}
+        width={{ md: "60%", sm: "90%", xs: "95%" }}
         sx={{ justifyContent: "center", mx: "auto" }}
       >
         {videos.length > 1 && (

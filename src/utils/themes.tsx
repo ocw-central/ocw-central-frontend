@@ -1,5 +1,5 @@
 import { createTheme } from "@mui/material/styles";
-import { complementary, primary, tetradic } from "./colors";
+import { complementary, primary, useful } from "./colors";
 
 export const theme = createTheme({
   typography: {
@@ -20,7 +20,7 @@ export const theme = createTheme({
       dark: primary[300],
     },
     secondary: {
-      main: tetradic[400],
+      main: useful[100],
       light: primary[500],
       dark: complementary[200],
     },
