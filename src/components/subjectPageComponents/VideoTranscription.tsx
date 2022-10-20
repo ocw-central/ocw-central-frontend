@@ -44,7 +44,7 @@ export function VideoTranscription(props: Props) {
       sx={{
         bgcolor: alpha(theme.palette.primary.main, 0.15),
         borderRadius: 0.5,
-        p: 4,
+        p: { xs: 2, sm: 3 },
         overflow: "auto",
         "&::-webkit-scrollbar": {
           width: 10,
@@ -74,7 +74,7 @@ export function VideoTranscription(props: Props) {
         }}
         subheader={
           <Typography
-            variant="h5"
+            fontSize={{ xs: 15, sm: 25 }}
             component="div"
             align="left"
             sx={{
@@ -111,10 +111,8 @@ export function VideoTranscription(props: Props) {
                 primaryTypographyProps={{
                   color: "black",
                   fontWeight: "medium",
+                  fontSize: { xs: 14, sm: 20 },
                 }}
-                secondary={`${convertSecondToTime(
-                  Number(processedLines[index].startTime)
-                )}`}
               />
             </ListItem>
           );
