@@ -14,10 +14,16 @@ import { SearchPage } from "./components/SearchPage";
 import { SubjectPage } from "./components/SubjectPage";
 import GlobalStyles from "./styles/GlobalStyles";
 
+let uri: string;
+if (import.meta.env.DEV) {
+  uri = "http://localhost:8080/query";
+} else if (APP_ENV == "DEV") {
+  uri = "https://dev-api-ocwcentral.onrender.com/query";
+} else {
+  uri = "https://api-ocwcentral.onrender.com/query";
+}
 const client = new ApolloClient({
-  uri: import.meta.env.DEV
-    ? "http://localhost:8080/query"
-    : "https://api-ocwcentral.onrender.com/query",
+  uri: uri,
   cache: new InMemoryCache(),
 });
 

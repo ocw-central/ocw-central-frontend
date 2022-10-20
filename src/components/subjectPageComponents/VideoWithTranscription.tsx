@@ -3,10 +3,10 @@ import { VideoTranscription } from "@/components/subjectPageComponents/VideoTran
 import { Video } from "@/generated/graphql";
 import { Subject } from "@/gqltypes/subject";
 import { theme } from "@/utils/themes";
-import { youtube_parser } from "@/utils/youtubeParser";
 import { Grid, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
+import urlParser from "js-video-url-parser";
 
 type Props = {
   //setVideoIdFunc: (videoId: string) => void;
@@ -30,7 +30,7 @@ export function VideoWithTranscription(props: Props) {
 
   const FocusedVideoOrdering = props.focusedVideoOrdering;
   const FocusedVideo = videos[FocusedVideoOrdering];
-  const FocusedYoutubeId = youtube_parser(FocusedVideo.link);
+  const FocusedYoutubeId = urlParser.parse(FocusedVideo.link)?.id;
 
   useEffect(() => {
     //find Video with initialVideoId
