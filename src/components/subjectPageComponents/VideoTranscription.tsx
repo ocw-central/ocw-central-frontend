@@ -1,7 +1,6 @@
 import { theme } from "@/utils/themes";
-import { Box, List, Typography } from "@mui/material";
+import { Box, List, Typography, Grid } from "@mui/material";
 import ListItem from "@mui/material/ListItem";
-import ListItemText from "@mui/material/ListItemText";
 import { alpha } from "@mui/material/styles";
 
 type Props = {
@@ -21,6 +20,18 @@ function processText(text: string) {
   });
   processedLines.pop(); //FIXME: last element is empty
   return processedLines;
+}
+// convert seconds to mm:ssz
+function convertSecondToTime(second: number) {
+  let mm = String(Math.floor(second / 60));
+  let ss = String(Math.floor(second % 60));
+  if (mm.length === 1) {
+    mm = `0${mm}`;
+  }
+  if (ss.length === 1) {
+    ss = `0${ss}`;
+  }
+  return `${mm}:${ss}`;
 }
 
 export function VideoTranscription(props: Props) {
@@ -94,14 +105,39 @@ export function VideoTranscription(props: Props) {
                 },
               }}
             >
-              <ListItemText
-                primary={`${processedLines[index].text}`}
-                primaryTypographyProps={{
-                  color: "black",
-                  fontWeight: "medium",
-                  fontSize: { xs: 16, sm: 20 },
-                }}
-              />
+              <Grid container direction="row">
+                <Grid
+                  item
+                  xs={1}
+                  sm={1}
+                  sx={{
+                    justifySelf: "center",
+                  }}
+                >
+                  <Typography
+                    sx={{
+                      color: "black",
+                      fontWeight: "medium",
+                      fontSize: { xs: 10, sm: 12, md: 14 },
+                      pt: 0.5,
+                    }}
+                  >
+                    {`${convertSecondToTime(
+                      Number(processedLines[index].startTime)
+                    )}`}
+                  </Typography>
+                </Grid>
+                <Grid item xs={11} sm={11}>
+                  <Typography
+                    sx={{
+                      color: "black",
+                      fontWeight: "medium",
+                      fontSize: { xs: 16, sm: 20 },
+                      pl: { md: 3, sm: 0, xs: 0 },
+                    }}
+                  >{`${processedLines[index].text}`}</Typography>
+                </Grid>
+              </Grid>
             </ListItem>
           );
         })}
