@@ -1,11 +1,11 @@
 import { theme } from "@/utils/themes";
+import SendIcon from "@mui/icons-material/Send";
 import {
   alpha,
   Box,
   Button,
   FormControl,
   FormControlLabel,
-  FormLabel,
   Modal,
   Radio,
   RadioGroup,
@@ -50,20 +50,22 @@ export function ReportButton(props: Props) {
   const handleClose = () => setOpen(false);
   const [type, setType] = useState("Bug");
   const [content, setContent] = useState("");
+
   return (
     <Box>
       <Button
         sx={{
-          bgcolor: theme.palette.primary.main,
+          bgcolor: alpha(theme.palette.secondary.main, 0.8),
           color: "white",
           my: 2,
           "&:hover, &:focus": {
-            bgcolor: alpha(theme.palette.primary.main, 0.6),
+            bgcolor: alpha(theme.palette.secondary.main, 0.6),
             cursor: "pointer",
             textDecoration: "none",
           },
         }}
         onClick={handleOpen}
+        endIcon={<SendIcon />}
       >
         {props.name}
       </Button>
@@ -78,29 +80,34 @@ export function ReportButton(props: Props) {
           }}
         >
           <FormControl sx={{ m: 2 }}>
-            <FormLabel>種類</FormLabel>
             <RadioGroup>
               <FormControlLabel
+                sx={{ color: "black" }}
                 value="Bug"
                 control={<Radio />}
-                label="不具合"
+                label="不具合報告"
                 onChange={(event) =>
                   setType((event.target as HTMLInputElement).value)
                 }
               />
               <FormControlLabel
+                sx={{
+                  color: "black",
+                  fontWeight: "bold",
+                  fontSize: "1.2rem",
+                }}
                 value="Opinion"
                 control={<Radio />}
-                label="意見"
+                label="御意見・御要望"
                 onChange={(event) =>
                   setType((event.target as HTMLInputElement).value)
                 }
               />
             </RadioGroup>
-            <FormLabel>ご報告内容</FormLabel>
             <TextField
               required
               multiline
+              helperText={"内容"}
               rows={4}
               onChange={(event) =>
                 setContent((event.target as HTMLInputElement).value)
@@ -110,6 +117,8 @@ export function ReportButton(props: Props) {
               sx={{
                 bgcolor: theme.palette.primary.main,
                 color: "white",
+                fontSize: "1.8rem",
+                fontWeight: "bold",
                 my: 2,
                 "&:hover, &:focus": {
                   bgcolor: alpha(theme.palette.primary.main, 0.6),
