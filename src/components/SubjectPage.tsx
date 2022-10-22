@@ -215,10 +215,13 @@ export function SubjectPage() {
         container
         sx={{
           justifyContent: "right",
-          pr: 1,
+          pr: 2,
         }}
       >
-        <ReportButton url={`${location.pathname}`} name="ご意見・不具合報告" />
+        <ReportButton
+          url={`${location.pathname}?video_id=${videos[FocusedVideoOrdering].id}`}
+          name="ご意見・不具合報告"
+        />
       </Grid>
     </Grid>
   );
