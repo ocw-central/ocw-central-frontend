@@ -15,6 +15,7 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import { useState } from "react";
 import { VideosBox } from "./subjectPageComponents/VideosBox";
+import { ReportButton } from "./common/ReportButton";
 
 export function SubjectPage() {
   const [FocusedVideoOrdering, SetFocusedVideoOrdering] = useState(0);
@@ -198,7 +199,7 @@ export function SubjectPage() {
           display: "flex",
           justifyContent: "center",
           alignContent: "center",
-          p: "2.5em",
+          pt: "2.5em",
         }}
       >
         <SubjectCopyrightCard
@@ -209,6 +210,15 @@ export function SubjectPage() {
           syllabus_year={syllabus?.academicYear}
           videos={videos}
         />
+      </Grid>
+      <Grid
+        container
+        sx={{
+          justifyContent: "right",
+          pr: 1,
+        }}
+      >
+        <ReportButton url={`${location.pathname}`} name="ご意見・不具合報告" />
       </Grid>
     </Grid>
   );
