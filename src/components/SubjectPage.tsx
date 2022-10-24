@@ -1,9 +1,11 @@
 import { Loading } from "@/components/common/Loading";
+import OGPTag from "@/components/common/OGPTag";
 import { SubjectCopyrightCard } from "@/components/subjectPageComponents/SubjectCopyrightCard";
 import { SubjectDetails } from "@/components/subjectPageComponents/SubjectDetails";
 import { SubjectResources } from "@/components/subjectPageComponents/SubjectResources";
 import { SubjectSyllabus } from "@/components/subjectPageComponents/SubjectSyllabus";
 import { VideoWithTranscription } from "@/components/subjectPageComponents/VideoWithTranscription";
+import { metadata } from "@/config/site-metadata";
 import { useSubjectQuery } from "@/generated/graphql";
 import { theme } from "@/utils/themes";
 import { Grid, Typography } from "@mui/material";
@@ -72,9 +74,23 @@ export function SubjectPage() {
     subject.series ||
     subject.academicField;
   const hasSyllabus = subject.syllabus !== null;
+  const description =
+    subject.faculty +
+    " " +
+    subject.academicField +
+    subject.freeDescription +
+    syllabus?.academicYear +
+    syllabus?.objective +
+    syllabus?.outline +
+    syllabus?.lessonPlan;
 
   return (
     <Grid container className="Subject" direction="column" sx={{ mt: 3 }}>
+      <OGPTag
+        isRoot={false}
+        title={`${subject.title} | ${metadata.siteTitle}`}
+        description={description.slice(0, 120)}
+      />
       {!hasVideos && (
         <Typography
           sx={{
@@ -200,23 +216,6 @@ export function SubjectPage() {
           </Accordion>
         )}
       </Grid>
-      <Box>
-        <TwitterShareButton
-          title={subject.title}
-          via="ocwcentral"
-          url={window.location.href}
-          related={["ocwcentral"]}
-          hashtags={["ocwcentral", "ocw"]}
-        >
-          <TwitterIcon size={64} round />
-        </TwitterShareButton>
-        <HatenaShareButton title={subject.title} url={window.location.href}>
-          <HatenaIcon size={64} round />
-        </HatenaShareButton>
-        <PocketShareButton title={subject.title} url={window.location.href}>
-          <PocketIcon size={64} round />
-        </PocketShareButton>
-      </Box>
       <Grid
         container
         className="CopyrightBox"
@@ -237,6 +236,23 @@ export function SubjectPage() {
           videos={videos}
         />
       </Grid>
+      <Box>
+        <TwitterShareButton
+          title={subject.title}
+          via="ocwcentral"
+          url={window.location.href}
+          related={["ocwcentral"]}
+          hashtags={["ocwcentral"]}
+        >
+          <TwitterIcon size={50} round />
+        </TwitterShareButton>
+        <HatenaShareButton title={subject.title} url={window.location.href}>
+          <HatenaIcon size={50} round />
+        </HatenaShareButton>
+        <PocketShareButton title={subject.title} url={window.location.href}>
+          <PocketIcon size={50} round />
+        </PocketShareButton>
+      </Box>
     </Grid>
   );
 }

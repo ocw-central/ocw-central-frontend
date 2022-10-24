@@ -1,10 +1,18 @@
-import { alpha, Box } from "@mui/material";
+import { ReactComponent as OwlImg } from "@/assets/ocwc-owl.svg";
 import { Loading } from "@/components/common/Loading";
+import OGPTag from "@/components/common/OGPTag";
 import { SubjectCard } from "@/components/searchPageComponents/SubjectCard";
 import { useRandomSubjectQuery } from "@/generated/graphql";
 import { theme } from "@/utils/themes";
-import { Divider, Grid, Typography } from "@mui/material";
-import { ReactComponent as OwlImg } from "@/assets/ocwc-owl.svg";
+import { alpha, Box, Divider, Grid, Typography } from "@mui/material";
+import {
+  HatenaIcon,
+  HatenaShareButton,
+  PocketIcon,
+  PocketShareButton,
+  TwitterIcon,
+  TwitterShareButton,
+} from "react-share";
 
 export function HomePage() {
   const GridRandomItems: JSX.Element[] = [];
@@ -43,6 +51,7 @@ export function HomePage() {
         flexDirection: "column",
       }}
     >
+      <OGPTag isRoot={true} />
       <Grid
         container
         sx={{
@@ -154,6 +163,23 @@ export function HomePage() {
           </Box>
         </Grid>
       </Grid>
+      <Box>
+        <TwitterShareButton
+          title={"OCW Central"}
+          via="ocwcentral"
+          url={window.location.href}
+          related={["ocwcentral"]}
+          hashtags={["ocwcentral"]}
+        >
+          <TwitterIcon size={50} round />
+        </TwitterShareButton>
+        <HatenaShareButton title={"OCW Central"} url={window.location.href}>
+          <HatenaIcon size={50} round />
+        </HatenaShareButton>
+        <PocketShareButton title={"OCW Central"} url={window.location.href}>
+          <PocketIcon size={50} round />
+        </PocketShareButton>
+      </Box>
     </Box>
   );
 }
