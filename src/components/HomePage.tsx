@@ -51,7 +51,6 @@ export function HomePage() {
         flexDirection: "column",
       }}
     >
-      <OGPTag isRoot={true} />
       <Grid
         container
         sx={{
