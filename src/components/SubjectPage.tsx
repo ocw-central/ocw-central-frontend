@@ -7,7 +7,16 @@ import { VideoWithTranscription } from "@/components/subjectPageComponents/Video
 import { useSubjectQuery } from "@/generated/graphql";
 import { theme } from "@/utils/themes";
 import { Grid, Typography } from "@mui/material";
+import { Box } from "@mui/system";
 import { useParams } from "react-router-dom";
+import {
+  HatenaIcon,
+  HatenaShareButton,
+  PocketIcon,
+  PocketShareButton,
+  TwitterIcon,
+  TwitterShareButton,
+} from "react-share";
 
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Accordion from "@mui/material/Accordion";
@@ -191,6 +200,23 @@ export function SubjectPage() {
           </Accordion>
         )}
       </Grid>
+      <Box>
+        <TwitterShareButton
+          title={subject.title}
+          via="ocwcentral"
+          url={window.location.href}
+          related={["ocwcentral"]}
+          hashtags={["ocwcentral", "ocw"]}
+        >
+          <TwitterIcon size={64} round />
+        </TwitterShareButton>
+        <HatenaShareButton title={subject.title} url={window.location.href}>
+          <HatenaIcon size={64} round />
+        </HatenaShareButton>
+        <PocketShareButton title={subject.title} url={window.location.href}>
+          <PocketIcon size={64} round />
+        </PocketShareButton>
+      </Box>
       <Grid
         container
         className="CopyrightBox"
@@ -199,6 +225,7 @@ export function SubjectPage() {
           justifyContent: "center",
           alignContent: "center",
           p: "2.5em",
+          pb: "1em",
         }}
       >
         <SubjectCopyrightCard
