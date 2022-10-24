@@ -239,7 +239,9 @@ export function SubjectPage() {
       </Grid>
       <Box>
         <TwitterShareButton
-          title={subject.title}
+          title={
+            subject.faculty ? subject.title + subject.faculty : subject.title
+          }
           via="ocwcentral"
           url={window.location.href}
           related={["ocwcentral"]}
