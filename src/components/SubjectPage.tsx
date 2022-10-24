@@ -90,6 +90,7 @@ export function SubjectPage() {
         isRoot={false}
         title={`${subject.title} | ${metadata.siteTitle}`}
         description={description.slice(0, 120)}
+        image_url={subject.thumbnailLink}
       />
       {!hasVideos && (
         <Typography

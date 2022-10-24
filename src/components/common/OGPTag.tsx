@@ -6,9 +6,15 @@ export type OGPTagProps = {
   isRoot?: boolean;
   title?: string;
   description?: string;
+  image_url?: string;
 };
 
-export default function OGPTag({ isRoot, title, description }: OGPTagProps) {
+export default function OGPTag({
+  isRoot,
+  title,
+  description,
+  image_url,
+}: OGPTagProps) {
   const type = isRoot ? "website" : "article";
 
   return (
@@ -22,7 +28,7 @@ export default function OGPTag({ isRoot, title, description }: OGPTagProps) {
       <meta property="og:url" content={metadata.siteUrl} />
       <meta property="og:type" content={type} />
       <meta property="og:site_name" content={metadata.siteTitle} />
-      <meta property="og:image" content={metadata.siteImageUrl} />
+      <meta property="og:image" content={image_url || metadata.siteImageUrl} />
       <meta name="twitter:card" content="summary" />
       <meta
         name="twitter:site"
