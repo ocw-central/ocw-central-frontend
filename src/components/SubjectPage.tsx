@@ -75,15 +75,7 @@ export function SubjectPage() {
     subject.academicField;
   const hasSyllabus = subject.syllabus !== null;
   const description =
-    subject.faculty +
-    " " +
-    subject.academicField +
-    subject.freeDescription +
-    syllabus?.academicYear +
-    syllabus?.objective +
-    syllabus?.outline +
-    syllabus?.lessonPlan;
-
+    subject.faculty + " " + subject.academicField + subject.freeDescription;
   return (
     <Grid container className="Subject" direction="column" sx={{ mt: 3 }}>
       <OGPTag
