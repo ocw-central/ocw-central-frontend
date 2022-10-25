@@ -160,7 +160,6 @@ export function HomePage() {
           via="ocwcentral"
           url={window.location.href}
           related={["ocwcentral"]}
-          hashtags={["ocwcentral"]}
         >
           <TwitterIcon size={50} round />
         </TwitterShareButton>
