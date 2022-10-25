@@ -9,7 +9,7 @@ export type OGPTagProps = {
   image_url?: string;
 };
 
-export default function OGPTag({
+export default function MetaTag({
   isRoot,
   title,
   description,

@@ -1,5 +1,5 @@
 import { Loading } from "@/components/common/Loading";
-import OGPTag from "@/components/common/OGPTag";
+import MetaTag from "@/components/common/MetaTag";
 import { SubjectCopyrightCard } from "@/components/subjectPageComponents/SubjectCopyrightCard";
 import { SubjectDetails } from "@/components/subjectPageComponents/SubjectDetails";
 import { SubjectResources } from "@/components/subjectPageComponents/SubjectResources";
@@ -71,7 +71,7 @@ export function SubjectPage() {
     subject.faculty + " " + subject.academicField + subject.freeDescription;
   return (
     <Grid container className="Subject" direction="column" sx={{ mt: 3 }}>
-      <OGPTag
+      <MetaTag
         isRoot={false}
         title={`${subject.title} | ${metadata.siteTitle}`}
         description={description.slice(0, 120)}
