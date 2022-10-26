@@ -1,13 +1,17 @@
 import { Loading } from "@/components/common/Loading";
+import MetaTag from "@/components/common/MetaTag";
 import { SubjectCopyrightCard } from "@/components/subjectPageComponents/SubjectCopyrightCard";
 import { SubjectDetails } from "@/components/subjectPageComponents/SubjectDetails";
 import { SubjectResources } from "@/components/subjectPageComponents/SubjectResources";
 import { SubjectSyllabus } from "@/components/subjectPageComponents/SubjectSyllabus";
 import { VideoWithTranscription } from "@/components/subjectPageComponents/VideoWithTranscription";
+import { metadata } from "@/config/site-metadata";
 import { useSubjectQuery } from "@/generated/graphql";
 import { theme } from "@/utils/themes";
 import { Grid, Typography } from "@mui/material";
+import { Box } from "@mui/system";
 import { useParams } from "react-router-dom";
+import { TwitterIcon, TwitterShareButton } from "react-share";
 
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Accordion from "@mui/material/Accordion";
@@ -64,9 +68,16 @@ export function SubjectPage() {
     subject.series ||
     subject.academicField;
   const hasSyllabus = subject.syllabus !== null;
-
+  const description =
+    subject.faculty + " " + subject.academicField + subject.freeDescription;
   return (
     <Grid container className="Subject" direction="column" sx={{ mt: 3 }}>
+      <MetaTag
+        isRoot={false}
+        title={`${subject.title} | ${metadata.siteTitle}`}
+        description={description.slice(0, 120)}
+        image_url={subject.thumbnailLink}
+      />
       {!hasVideos && (
         <Typography
           sx={{
@@ -200,6 +211,7 @@ export function SubjectPage() {
           justifyContent: "center",
           alignContent: "center",
           pt: "2.5em",
+          pb: "0",
         }}
       >
         <SubjectCopyrightCard
@@ -211,6 +223,20 @@ export function SubjectPage() {
           videos={videos}
         />
       </Grid>
+      <Box>
+        <TwitterShareButton
+          title={
+            subject.faculty
+              ? subject.title + " | " + subject.faculty
+              : subject.title
+          }
+          via="ocwcentral"
+          url={window.location.href}
+          related={["ocwcentral"]}
+        >
+          <TwitterIcon size={50} round />
+        </TwitterShareButton>
+      </Box>
       <Grid
         container
         sx={{

@@ -8,6 +8,7 @@ import { Grid } from "@mui/material";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { AboutPage } from "./components/AboutPage";
 import { Header } from "./components/common/Header";
+import MetaTag from "./components/common/MetaTag";
 import { ScrollToTop } from "./components/common/ScrollToTop";
 import { HomePage } from "./components/HomePage";
 import { SearchPage } from "./components/SearchPage";
@@ -31,6 +32,7 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <BrowserRouter>
+        <MetaTag isRoot={true} />
         <ScrollToTop />
         <ThemeProvider theme={theme}>
           <GlobalStyles />
