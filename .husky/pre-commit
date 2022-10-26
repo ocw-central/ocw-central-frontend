@@ -1,0 +1,4 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+[ -n "$CF_PAGES" ] && exit 0
+yarn lint-staged
