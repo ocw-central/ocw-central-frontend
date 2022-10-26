@@ -245,7 +245,9 @@ export function SubjectPage() {
         }}
       >
         <ReportButton
-          url={`${location.pathname}?video_id=${videos[FocusedVideoOrdering].id}`}
+          url={`${location.pathname}?video_id=${
+            videos.length >= 1 ? videos[FocusedVideoOrdering].id : ""
+          }`}
           name="ご意見・不具合報告"
         />
       </Grid>

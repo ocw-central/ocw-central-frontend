@@ -6,10 +6,12 @@ import {
   Button,
   FormControl,
   FormControlLabel,
+  Grid,
   Modal,
   Radio,
   RadioGroup,
   TextField,
+  Typography,
 } from "@mui/material";
 import { useState } from "react";
 
@@ -50,6 +52,9 @@ export function ReportButton(props: Props) {
   const handleClose = () => setOpen(false);
   const [type, setType] = useState("Bug");
   const [content, setContent] = useState("");
+  const [messageOpen, setMessageOpen] = useState(false);
+  const handleMessageOpen = () => setMessageOpen(true);
+  const handleMessageClose = () => setMessageOpen(false);
 
   return (
     <Box>
@@ -69,6 +74,27 @@ export function ReportButton(props: Props) {
       >
         {props.name}
       </Button>
+      <Modal open={messageOpen} onClose={handleMessageClose}>
+        <Grid
+          container
+          sx={{
+            position: "absolute",
+            top: "40%",
+            justifyContent: "center",
+          }}
+        >
+          <Typography
+            sx={{
+              bgcolor: "background.paper",
+              p: 2,
+              textAlign: "center",
+              width: {},
+            }}
+          >
+            ご意見ありがとうございます。ご意見を確認し、改善に反映させていただきます。
+          </Typography>
+        </Grid>
+      </Modal>
       <Modal open={open} onClose={handleClose}>
         <Box
           sx={{
@@ -77,9 +103,19 @@ export function ReportButton(props: Props) {
             left: "50%",
             transform: "translate(-50%, -50%)",
             bgcolor: "background.paper",
+            width: {
+              md: 600,
+              sm: 500,
+              xs: 350,
+            },
           }}
         >
-          <FormControl sx={{ m: 2 }}>
+          <FormControl
+            sx={{
+              p: 2,
+              width: "100%",
+            }}
+          >
             <RadioGroup>
               <FormControlLabel
                 sx={{ color: "black" }}
@@ -98,7 +134,7 @@ export function ReportButton(props: Props) {
                 }}
                 value="Opinion"
                 control={<Radio />}
-                label="御意見・御要望"
+                label="ご意見・ご要望"
                 onChange={(event) =>
                   setType((event.target as HTMLInputElement).value)
                 }
@@ -129,6 +165,10 @@ export function ReportButton(props: Props) {
               onClick={() => {
                 reportIssue(type, content, props.url);
                 handleClose();
+                handleMessageOpen();
+                setTimeout(() => {
+                  handleMessageClose();
+                }, 2000);
               }}
             >
               送信
