@@ -2,7 +2,7 @@ import Helmet from "react-helmet";
 
 import { metadata } from "@/config/site-metadata";
 
-export type OGPTagProps = {
+export type Props = {
   isRoot?: boolean;
   title?: string;
   description?: string;
@@ -14,7 +14,7 @@ export default function MetaTag({
   title,
   description,
   image_url,
-}: OGPTagProps) {
+}: Props) {
   const type = isRoot ? "website" : "article";
 
   return (
