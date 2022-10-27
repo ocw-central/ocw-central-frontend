@@ -13,8 +13,8 @@ const pages = [
 const mobilePages = [
   { link: "/", name: "Home" },
   { link: "/search", name: "詳細検索" },
-  { link: "/about", name: "このサイトについて" },
   { link: "/fields", name: "分野一覧" },
+  { link: "/about", name: "このサイトについて" },
 ];
 
 export function Nav() {
