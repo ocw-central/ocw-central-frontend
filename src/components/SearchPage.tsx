@@ -6,10 +6,12 @@ import { Box, Divider, Grid, Typography } from "@mui/material";
 import { useState } from "react";
 import {
   createSearchParams,
+  useLocation,
   useNavigate,
   useSearchParams,
 } from "react-router-dom";
 import { AcademicFieldsList } from "./common/AcademicFieldsList";
+import { ReportButton } from "@/components/common/ReportButton";
 
 type Params = {
   title?: string;
@@ -19,6 +21,7 @@ type Params = {
 
 export function SearchPage() {
   const navigate = useNavigate();
+  const location = useLocation();
   const [searchTitle, setSearchTitle] = useState("");
   const [searchFaculty, setSearchFaculty] = useState("");
   const [searchAcademicField, setSearchAcademicField] = useState("");
@@ -101,14 +104,31 @@ export function SearchPage() {
             mb: 2,
           }}
         >
-          <Typography
-            variant="h5"
-            component="div"
-            align="left"
-            sx={{ color: "black" }}
-          >
-            <b>詳細検索</b>
-          </Typography>
+          <Grid container direction="row">
+            <Grid
+              item
+              sx={{
+                alignSelf: "center",
+              }}
+            >
+              <Typography
+                variant="h5"
+                component="div"
+                align="left"
+                sx={{ color: "black", ml: { sm: 1, xs: 1 } }}
+              >
+                <b>詳細検索</b>
+              </Typography>
+            </Grid>
+
+            <Grid item sx={{ ml: "auto", mr: 1 }}>
+              <ReportButton
+                url={`${location.pathname}?title=${title}&faculty=${faculty}&field=${field}`}
+                name="ご意見・不具合報告"
+              />
+            </Grid>
+          </Grid>
+
           <Divider sx={{ mb: 2 }} />
           <DetailSearchBar
             setSearchParams={setSearchParams}
