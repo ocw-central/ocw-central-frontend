@@ -5,6 +5,7 @@ import { useRandomSubjectQuery } from "@/generated/graphql";
 import { theme } from "@/utils/themes";
 import { alpha, Box, Divider, Grid, Typography } from "@mui/material";
 import { TwitterIcon, TwitterShareButton } from "react-share";
+import { ReportButton } from "@/components/common/ReportButton";
 
 export function HomePage() {
   const GridRandomItems: JSX.Element[] = [];
@@ -164,6 +165,15 @@ export function HomePage() {
           <TwitterIcon size={50} round />
         </TwitterShareButton>
       </Box>
+      <Grid
+        container
+        sx={{
+          justifyContent: "right",
+          pr: 2,
+        }}
+      >
+        <ReportButton url="/" name="ご意見・不具合報告" />
+      </Grid>
     </Box>
   );
 }

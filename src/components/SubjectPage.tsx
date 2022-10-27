@@ -19,6 +19,7 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import { useState } from "react";
 import { VideosBox } from "./subjectPageComponents/VideosBox";
+import { ReportButton } from "@/components/common/ReportButton";
 
 export function SubjectPage() {
   const [FocusedVideoOrdering, SetFocusedVideoOrdering] = useState(0);
@@ -209,7 +210,7 @@ export function SubjectPage() {
           display: "flex",
           justifyContent: "center",
           alignContent: "center",
-          p: "2.5em",
+          pt: "2.5em",
           pb: "0",
         }}
       >
@@ -236,6 +237,20 @@ export function SubjectPage() {
           <TwitterIcon size={50} round />
         </TwitterShareButton>
       </Box>
+      <Grid
+        container
+        sx={{
+          justifyContent: "right",
+          pr: 2,
+        }}
+      >
+        <ReportButton
+          url={`${location.pathname}?video_id=${
+            videos.length >= 1 ? videos[FocusedVideoOrdering].id : ""
+          }`}
+          name="ご意見・不具合報告"
+        />
+      </Grid>
     </Grid>
   );
 }
