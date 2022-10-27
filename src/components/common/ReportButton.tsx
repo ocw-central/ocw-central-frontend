@@ -89,6 +89,7 @@ export function ReportButton(props: Props) {
               p: 2,
               textAlign: "center",
               width: {},
+              color: "black",
             }}
           >
             ご意見ありがとうございます。ご意見を確認し、改善に反映させていただきます。

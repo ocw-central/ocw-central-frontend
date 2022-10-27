@@ -19,7 +19,7 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import { useState } from "react";
 import { VideosBox } from "./subjectPageComponents/VideosBox";
-import { ReportButton } from "./common/ReportButton";
+import { ReportButton } from "@/components/common/ReportButton";
 
 export function SubjectPage() {
   const [FocusedVideoOrdering, SetFocusedVideoOrdering] = useState(0);

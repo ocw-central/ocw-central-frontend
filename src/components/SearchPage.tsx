@@ -11,7 +11,7 @@ import {
   useSearchParams,
 } from "react-router-dom";
 import { AcademicFieldsList } from "./common/AcademicFieldsList";
-import { ReportButton } from "./common/ReportButton";
+import { ReportButton } from "@/components/common/ReportButton";
 
 type Params = {
   title?: string;
