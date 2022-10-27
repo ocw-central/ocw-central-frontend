@@ -10,6 +10,7 @@ import { AboutPage } from "./components/AboutPage";
 import { Header } from "./components/common/Header";
 import MetaTag from "./components/common/MetaTag";
 import { ScrollToTop } from "./components/common/ScrollToTop";
+import { FieldsPage } from "./components/FieldsPage";
 import { HomePage } from "./components/HomePage";
 import { SearchPage } from "./components/SearchPage";
 import { SubjectPage } from "./components/SubjectPage";
@@ -51,6 +52,7 @@ function App() {
               <Route path="/subjects/:id" element={<SubjectPage />} />
               <Route path="/search" element={<SearchPage />}></Route>
               <Route path="/about" element={<AboutPage />} />
+              <Route path="/fields" element={<FieldsPage />} />
               <Route path="*" element={<PageNotFound />} />
             </Routes>
             <Footer />

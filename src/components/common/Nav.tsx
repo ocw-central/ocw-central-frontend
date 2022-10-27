@@ -10,6 +10,13 @@ const pages = [
   { link: "/about", name: "このサイトについて" },
 ];
 
+const mobilePages = [
+  { link: "/", name: "Home" },
+  { link: "/search", name: "詳細検索" },
+  { link: "/fields", name: "分野一覧" },
+  { link: "/about", name: "このサイトについて" },
+];
+
 export function Nav() {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
@@ -79,7 +86,7 @@ export function Nav() {
             display: { xs: "block", md: "none" },
           }}
         >
-          {pages.map((page) => (
+          {mobilePages.map((page) => (
             <Link to={page.link} key={page.link}>
               <MenuItem key={page.name} onClick={handleCloseNavMenu}>
                 <Typography textAlign="center">{page.name}</Typography>
