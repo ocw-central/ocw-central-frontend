@@ -1,9 +1,8 @@
-import { ReactComponent as OwlImg } from "@/assets/ocwc-owl.svg";
 import { Loading } from "@/components/common/Loading";
 import { SubjectCard } from "@/components/searchPageComponents/SubjectCard";
 import { useRandomSubjectQuery } from "@/generated/graphql";
 import { theme } from "@/utils/themes";
-import { alpha, Box, Divider, Grid, Typography } from "@mui/material";
+import { alpha, Box, Grid, Typography } from "@mui/material";
 import { TwitterIcon, TwitterShareButton } from "react-share";
 import { ReportButton } from "@/components/common/ReportButton";
 
@@ -46,85 +45,65 @@ export function HomePage() {
     >
       <Grid
         container
+        direction="row"
         sx={{
-          height: {
-            xs: 200,
-            sm: 300,
-            md: 400,
-            lg: 300,
+          pt: 2,
+          pb: {
+            xs: 2,
+            sm: 2,
+            md: 0,
           },
-          marginTop: "1em",
-          width: {
-            xs: "100%",
-            md: "80%",
-          },
-          p: {
-            xs: 1,
-            md: 4,
-          },
-          backgroundColor: alpha(theme.palette.primary.main, 1),
-          borderColor: alpha(theme.palette.primary.main, 1),
-          borderWidth: 20,
-          borderRadius: 2,
         }}
       >
-        <Grid
-          item
-          md={7}
-          sm={12}
-          xs={12}
-          sx={{
-            px: {
-              xs: 2,
-              md: 5,
-              ld: 10,
-            },
-            py: {
-              xs: 2,
-              md: 2,
-            },
-            m: {
-              xs: 2,
-              md: 0,
-            },
-          }}
-        >
-          <Typography
+        <Grid item md={12} sm={12} xs={12}>
+          <Box
             sx={{
-              typography: { xs: "h4", sm: "h2" },
-              textAlign: "center",
-              color: "white",
-              mb: {
-                xs: 2,
-                md: 4,
-              },
+              maxWidth: 800,
+              mx: "auto",
             }}
           >
-            <b>
-              Welcome to <br />
-              OCW Central!
-            </b>
+            <Typography
+              sx={{
+                typography: { xs: "h3", sm: "h2" },
+                textAlign: "center",
+                color: alpha(theme.palette.primary.main, 0),
+                background: {
+                  md: "linear-gradient(45deg, #5286AB 20%, #ff8e50 80%)",
+                  sm: "linear-gradient(45deg, #5286AB 20%, #ff8e50 80%)",
+                  xs: "linear-gradient(45deg, #5286AB 20%, #ff8e50 90%)",
+                },
+                "-webkit-background-clip": {
+                  md: "text",
+                  sm: "text",
+                  xs: "text",
+                },
+              }}
+            >
+              <b>Learn Deeply</b>
+            </Typography>
+          </Box>
+        </Grid>
+        <Grid item md={12} sm={12} xs={12}>
+          <Typography
+            sx={{
+              typography: { xs: "h3", sm: "h2" },
+              textAlign: "center",
+              color: "#213547",
+            }}
+          >
+            <b>with</b>
           </Typography>
         </Grid>
-        <Grid
-          item
-          md={5}
-          xs={0}
-          sm={0}
-          sx={{
-            display: {
-              xs: "none",
-              sm: "none",
-              md: "block",
-            },
-          }}
-        >
-          <OwlImg
-            style={{
-              width: "200px",
-              height: "250px",
+        <Grid item md={12} sm={12} xs={12}>
+          <Typography
+            sx={{
+              typography: { xs: "h3", sm: "h2" },
+              textAlign: "center",
+              color: "#213547",
             }}
-          />
+          >
+            <b>Quality Lectures</b>
+          </Typography>
         </Grid>
       </Grid>
       <Grid
@@ -142,15 +121,6 @@ export function HomePage() {
               pt: 1,
             }}
           >
-            <Typography
-              variant="h5"
-              component="div"
-              align="left"
-              sx={{ color: "black" }}
-            >
-              <b>Feeling Lucky</b>
-            </Typography>
-            <Divider sx={{ mb: 2 }} />
             <Grid container>{GridRandomItems}</Grid>
           </Box>
         </Grid>
