@@ -92,7 +92,7 @@ export function AboutPage() {
           <Link
             color="primary"
             underline="always"
-            href="https://github.com/orgs/ocw-central"
+            href="https://github.com/ocw-central"
           >
             GitHub
           </Link>
@@ -126,7 +126,7 @@ export function AboutPage() {
             color: "black",
           }}
         >
-          このサイト上の教育資料や書き起こし等の掲載情報の正確性に関して、一切の保証をいたしかねます。
+          このサイト上の教育資料や書き起こし等の掲載情報の正確性に関して、一切の保証をいたしません。
         </Typography>
         <br />
       </Grid>
