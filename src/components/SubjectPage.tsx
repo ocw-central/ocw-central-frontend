@@ -13,13 +13,13 @@ import { Box } from "@mui/system";
 import { useParams } from "react-router-dom";
 import { TwitterIcon, TwitterShareButton } from "react-share";
 
+import { ReportButton } from "@/components/common/ReportButton";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Accordion from "@mui/material/Accordion";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import { useState } from "react";
 import { VideosBox } from "./subjectPageComponents/VideosBox";
-import { ReportButton } from "@/components/common/ReportButton";
 
 export function SubjectPage() {
   const [FocusedVideoOrdering, SetFocusedVideoOrdering] = useState(0);
@@ -153,6 +153,7 @@ export function SubjectPage() {
               my: "0.5em",
               width: "100%",
             }}
+            defaultExpanded={!hasVideos}
           >
             <AccordionSummary
               expandIcon={<ExpandMoreIcon />}
