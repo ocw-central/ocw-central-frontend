@@ -180,9 +180,6 @@ const SubjectsRow = ({
               position: "relative",
             }}
           >
-            {scrollLeft > 0 && (
-              <Arrow scrollRef={scrollRef} direction={"left"} />
-            )}
             <div
               style={{ display: "flex", overflowX: "scroll", width: "100%" }}
               ref={measuredRef}
@@ -205,6 +202,9 @@ const SubjectsRow = ({
                 </Box>
               ))}
             </div>
+            {scrollLeft > 0 && (
+              <Arrow scrollRef={scrollRef} direction={"left"} />
+            )}
             {(scrollRef.current == null ||
               scrollLeft <
                 scrollRef.current.scrollWidth -
@@ -234,7 +234,6 @@ const Arrow = ({ scrollRef, direction }: ArrowProps) => {
     flexDirection: "row",
     justifyContent: "center",
     height: "100%",
-    zIndex: 1,
     animationDelay: "0.5s",
   };
 
