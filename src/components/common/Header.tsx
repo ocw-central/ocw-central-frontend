@@ -56,7 +56,7 @@ export function Header() {
       // ensure that the e.target is an input element
       const title = (e.target as HTMLInputElement).value;
       const searchParames = createSearchParams({ title });
-      navigate(`/search/?${searchParames}`);
+      navigate(`/search/?${searchParames}&subject`);
     }
   };
 
