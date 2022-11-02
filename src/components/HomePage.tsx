@@ -142,7 +142,6 @@ const SubjectsRow = ({
       scrollRef.current = node;
       node.addEventListener("scroll", () => {
         setScrollLeft(scrollRef.current.scrollLeft);
-        console.log(scrollRef.current.scrollLeft);
       });
     }
   }, []);
