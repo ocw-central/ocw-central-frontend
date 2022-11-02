@@ -31,10 +31,10 @@ export function HomePage() {
         flexDirection="column"
         alignItems="center"
       >
-        <Grid item>
+        <Grid item xs={12}>
           <HomeMessagePane />
         </Grid>
-        <Grid item>
+        <Grid item xs={12}>
           <SubjectsPane />
         </Grid>
 
@@ -56,13 +56,13 @@ export function HomePage() {
 const SubjectsPane = () => {
   return (
     <Grid container spacing={{ xs: 3, sm: 7 }}>
-      <Grid item>
+      <Grid item xs={12}>
         <RandomSubjectsPane />
       </Grid>
-      <Grid item>
+      <Grid item xs={12}>
         <YanakaShinyaPane />
       </Grid>
-      <Grid item>
+      <Grid item xs={12}>
         <ComputerScienceSubjectsPane />
       </Grid>
     </Grid>
@@ -73,17 +73,19 @@ const RandomSubjectsPane = () => {
   const { data, loading, error } = useRandomSubjectQuery({
     variables: {},
   });
-  if (loading) {
-    return <Loading size={"7em"} color={"primary"} />;
-  }
+
   if (error) {
-    return <div>Failed to fetch random lectures.</div>;
+    return <div>講義の取得に失敗しました</div>;
   }
   if (!data) {
     return <div>該当講義がありません</div>;
   }
   return (
-    <SubjectsRow subjects={data.randomSubjects} rowTitle="Random Subjects" />
+    <SubjectsRow
+      subjects={data.randomSubjects}
+      rowTitle="Random Subjects"
+      loading={loading}
+    />
   );
 };
 
@@ -95,16 +97,20 @@ const YanakaShinyaPane = () => {
       field: "",
     },
   });
-  if (loading) {
-    return <Loading size={"7em"} color={"primary"} />;
-  }
+
   if (error) {
-    return <div>Failed to fetch random lectures.</div>;
+    return <div>講義の取得に失敗しました</div>;
   }
   if (!data) {
     return <div>該当講義がありません</div>;
   }
-  return <SubjectsRow subjects={data.subjects} rowTitle="Yamanaka Shinya" />;
+  return (
+    <SubjectsRow
+      subjects={data.subjects}
+      rowTitle="Yamanaka Shinya"
+      loading={loading}
+    />
+  );
 };
 
 const ComputerScienceSubjectsPane = () => {
@@ -115,24 +121,31 @@ const ComputerScienceSubjectsPane = () => {
       field: "コンピュータサイエンス",
     },
   });
-  if (loading) {
-    return <Loading size={"7em"} color={"primary"} />;
-  }
+
   if (error) {
-    return <div>Failed to fetch random lectures.</div>;
+    return <div>講義の取得に失敗しました</div>;
   }
   if (!data) {
     return <div>該当講義がありません</div>;
   }
-  return <SubjectsRow subjects={data.subjects} rowTitle="Computer Science" />;
+
+  return (
+    <SubjectsRow
+      subjects={data.subjects}
+      rowTitle="Computer Science"
+      loading={loading}
+    />
+  );
 };
 
 const SubjectsRow = ({
   subjects,
   rowTitle,
+  loading,
 }: {
   subjects: SubjectOnSearchPage[];
   rowTitle: string;
+  loading: boolean;
 }) => {
   const [scrollLeft, setScrollLeft] = useState(0);
   const scrollRef = useRef<HTMLDivElement>(null!);
@@ -148,52 +161,58 @@ const SubjectsRow = ({
 
   return (
     <Grid container spacing={1}>
-      <Grid item>
+      <Grid item xs={12} textAlign="left">
         <Box sx={{ px: 2 }}>
           <Typography color="black" sx={{ fontWeight: "bold", fontSize: 25 }}>
             {rowTitle}
           </Typography>
         </Box>
       </Grid>
-      <Grid item>
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            width: "100%",
-            position: "relative",
-          }}
-        >
-          {scrollLeft > 0 && <Arrow scrollRef={scrollRef} direction={"left"} />}
-          <div
-            style={{ display: "flex", overflowX: "scroll" }}
-            ref={measuredRef}
+      <Grid item xs={12}>
+        {loading ? (
+          <Loading size={"4em"} color={"primary"} />
+        ) : (
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              width: "100%",
+              position: "relative",
+            }}
           >
-            {subjects.map((subject) => (
-              <Box
-                sx={{
-                  flexBasis: { xs: "350px", sm: "400px" },
-                  flexShrink: 0,
-                }}
-                key={subject.id}
-                px={0.5}
-              >
-                <SubjectCard
-                  id={subject.id}
-                  title={subject.title}
-                  faculty={subject.faculty}
-                  thumbnailLink={subject.thumbnailLink}
-                />
-              </Box>
-            ))}
-          </div>
-          {(scrollRef.current == null ||
-            scrollLeft <
-              scrollRef.current.scrollWidth -
-                scrollRef.current.clientWidth) && (
-            <Arrow scrollRef={scrollRef} direction={"right"} />
-          )}
-        </Box>
+            {scrollLeft > 0 && (
+              <Arrow scrollRef={scrollRef} direction={"left"} />
+            )}
+            <div
+              style={{ display: "flex", overflowX: "scroll" }}
+              ref={measuredRef}
+            >
+              {subjects.map((subject) => (
+                <Box
+                  sx={{
+                    flexBasis: { xs: "350px", sm: "400px" },
+                    flexShrink: 0,
+                  }}
+                  key={subject.id}
+                  px={0.5}
+                >
+                  <SubjectCard
+                    id={subject.id}
+                    title={subject.title}
+                    faculty={subject.faculty}
+                    thumbnailLink={subject.thumbnailLink}
+                  />
+                </Box>
+              ))}
+            </div>
+            {(scrollRef.current == null ||
+              scrollLeft <
+                scrollRef.current.scrollWidth -
+                  scrollRef.current.clientWidth) && (
+              <Arrow scrollRef={scrollRef} direction={"right"} />
+            )}
+          </Box>
+        )}
       </Grid>
     </Grid>
   );
@@ -249,10 +268,10 @@ const Arrow = ({ scrollRef, direction }: ArrowProps) => {
 const HomeMessagePane = () => {
   return (
     <Grid container direction="column" spacing={3}>
-      <Grid item>
+      <Grid item xs={12}>
         <CatchPhrase />
       </Grid>
-      <Grid item>
+      <Grid item xs={12}>
         <TwitterShareButton
           title={"OCW Central"}
           via="ocwcentral"
@@ -269,7 +288,7 @@ const HomeMessagePane = () => {
 const CatchPhrase = () => {
   return (
     <Grid container direction="column">
-      <Grid item>
+      <Grid item xs={12}>
         <Box
           sx={{
             maxWidth: 800,
@@ -297,7 +316,7 @@ const CatchPhrase = () => {
           </Typography>
         </Box>
       </Grid>
-      <Grid item>
+      <Grid item xs={12}>
         <Typography
           sx={{
             typography: { xs: "h3", sm: "h2" },
@@ -308,7 +327,7 @@ const CatchPhrase = () => {
           <b>with</b>
         </Typography>
       </Grid>
-      <Grid item>
+      <Grid item xs={12}>
         <Typography
           sx={{
             typography: { xs: "h3", sm: "h2" },
