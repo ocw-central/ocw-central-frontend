@@ -42,8 +42,6 @@ export function HomePage() {
 }
 
 const RandomSubjectsPane = () => {
-  const GridRandomItems: JSX.Element[] = [];
-
   const { data, loading, error } = useRandomSubjectQuery({
     variables: {},
   });
@@ -57,20 +55,7 @@ const RandomSubjectsPane = () => {
   if (!data) {
     return <div>該当講義がありません</div>;
   }
-  if (data) {
-    data.randomSubjects.map((subject) => {
-      GridRandomItems.push(
-        <Grid item xs={12} sm={4} md={4} sx={{ p: 0.5 }} key={subject.id}>
-          <SubjectCard
-            id={subject.id}
-            title={subject.title}
-            faculty={subject.faculty}
-            thumbnailLink={subject.thumbnailLink}
-          />
-        </Grid>
-      );
-    });
-  }
+
   return (
     <Grid
       container
@@ -87,7 +72,25 @@ const RandomSubjectsPane = () => {
             pt: 1,
           }}
         >
-          <Grid container>{GridRandomItems}</Grid>
+          <div style={{ display: "flex", overflowX: "scroll" }}>
+            {data.randomSubjects.map((subject) => (
+              <Box
+                sx={{
+                  flexBasis: { xs: "350px", sm: "400px" },
+                  flexShrink: 0,
+                }}
+                key={subject.id}
+                px={0.5}
+              >
+                <SubjectCard
+                  id={subject.id}
+                  title={subject.title}
+                  faculty={subject.faculty}
+                  thumbnailLink={subject.thumbnailLink}
+                />
+              </Box>
+            ))}
+          </div>
         </Box>
       </Grid>
     </Grid>
