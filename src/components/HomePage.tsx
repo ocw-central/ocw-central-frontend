@@ -15,32 +15,34 @@ export function HomePage() {
   return (
     <Box
       className="HomePage"
-      alignItems="center"
       sx={{
-        display: "flex",
-        flexDirection: "column",
+        pt: { xs: 5, sm: 10 },
+        px: 2,
+        pb: 1,
       }}
     >
-      <HomeMessagePane />
-      <RandomSubjectsPane />
-      <Box>
-        <TwitterShareButton
-          title={"OCW Central"}
-          via="ocwcentral"
-          url={window.location.href}
-          related={["ocwcentral"]}
-        >
-          <TwitterIcon size={50} round />
-        </TwitterShareButton>
-      </Box>
       <Grid
         container
-        sx={{
-          justifyContent: "right",
-          pr: 2,
-        }}
+        spacing={{ xs: 3, sm: 7 }}
+        flexDirection="column"
+        alignItems="center"
       >
-        <ReportButton url="/" name="ご意見・不具合報告" />
+        <Grid item>
+          <HomeMessagePane />
+        </Grid>
+        <Grid item>
+          <RandomSubjectsPane />
+        </Grid>
+        <Grid
+          item
+          container
+          sx={{
+            justifyContent: "right",
+            pr: 2,
+          }}
+        >
+          <ReportButton url="/" name="ご意見・不具合報告" />
+        </Grid>
       </Grid>
     </Box>
   );
@@ -75,60 +77,40 @@ const RandomSubjectsPane = () => {
   }
 
   return (
-    <Grid
-      container
-      sx={{ height: "100%", alignSelf: "center", justifyContent: "center" }}
+    <Box
+      sx={{
+        display: "flex",
+        justifyContent: "center",
+        width: "100%",
+        position: "relative",
+      }}
     >
-      <Box
-        sx={{
-          m: {
-            xs: 0,
-            md: 4,
-          },
-          mb: 2,
-          pt: 1,
-        }}
-      >
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            width: "100%",
-            position: "relative",
-          }}
-        >
-          {scrollLeft > 0 && <Arrow scrollRef={scrollRef} direction={"left"} />}
-          <div
-            style={{ display: "flex", overflowX: "scroll" }}
-            ref={measuredRef}
+      {scrollLeft > 0 && <Arrow scrollRef={scrollRef} direction={"left"} />}
+      <div style={{ display: "flex", overflowX: "scroll" }} ref={measuredRef}>
+        {data.randomSubjects.map((subject) => (
+          <Box
+            sx={{
+              flexBasis: { xs: "350px", sm: "400px" },
+              flexShrink: 0,
+            }}
+            key={subject.id}
+            px={0.5}
           >
-            {data.randomSubjects.map((subject) => (
-              <Box
-                sx={{
-                  flexBasis: { xs: "350px", sm: "400px" },
-                  flexShrink: 0,
-                }}
-                key={subject.id}
-                px={0.5}
-              >
-                <SubjectCard
-                  id={subject.id}
-                  title={subject.title}
-                  faculty={subject.faculty}
-                  thumbnailLink={subject.thumbnailLink}
-                />
-              </Box>
-            ))}
-          </div>
-          {(scrollRef.current == null ||
-            scrollLeft <
-              scrollRef.current.scrollWidth -
-                scrollRef.current.clientWidth) && (
-            <Arrow scrollRef={scrollRef} direction={"right"} />
-          )}
-        </Box>
-      </Box>
-    </Grid>
+            <SubjectCard
+              id={subject.id}
+              title={subject.title}
+              faculty={subject.faculty}
+              thumbnailLink={subject.thumbnailLink}
+            />
+          </Box>
+        ))}
+      </div>
+      {(scrollRef.current == null ||
+        scrollLeft <
+          scrollRef.current.scrollWidth - scrollRef.current.clientWidth) && (
+        <Arrow scrollRef={scrollRef} direction={"right"} />
+      )}
+    </Box>
   );
 };
 
@@ -181,19 +163,28 @@ const Arrow = ({ scrollRef, direction }: ArrowProps) => {
 
 const HomeMessagePane = () => {
   return (
-    <Grid
-      container
-      direction="row"
-      sx={{
-        pt: 2,
-        pb: {
-          xs: 2,
-          sm: 2,
-          md: 0,
-        },
-      }}
-    >
-      <Grid item md={12} sm={12} xs={12}>
+    <Grid container direction="column" spacing={3}>
+      <Grid item>
+        <CatchPhrase />
+      </Grid>
+      <Grid item>
+        <TwitterShareButton
+          title={"OCW Central"}
+          via="ocwcentral"
+          url={window.location.href}
+          related={["ocwcentral"]}
+        >
+          <TwitterIcon size={50} round />
+        </TwitterShareButton>
+      </Grid>
+    </Grid>
+  );
+};
+
+const CatchPhrase = () => {
+  return (
+    <Grid container direction="column">
+      <Grid item>
         <Box
           sx={{
             maxWidth: 800,
@@ -221,7 +212,7 @@ const HomeMessagePane = () => {
           </Typography>
         </Box>
       </Grid>
-      <Grid item md={12} sm={12} xs={12}>
+      <Grid item>
         <Typography
           sx={{
             typography: { xs: "h3", sm: "h2" },
@@ -232,7 +223,7 @@ const HomeMessagePane = () => {
           <b>with</b>
         </Typography>
       </Grid>
-      <Grid item md={12} sm={12} xs={12}>
+      <Grid item>
         <Typography
           sx={{
             typography: { xs: "h3", sm: "h2" },
