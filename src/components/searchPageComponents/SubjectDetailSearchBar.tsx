@@ -71,7 +71,7 @@ const SearchBar = (props: {
   </Search>
 );
 
-export const DetailSearchBar = ({
+export const SubjectDetailSearchBar = ({
   setSearchParams,
   searchFaculty,
   setSearchFaculty,

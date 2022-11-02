@@ -2,7 +2,7 @@ import { SubjectCard } from "@/components/searchPageComponents/SubjectCard";
 import { Grid, Typography } from "@mui/material";
 import { Subjects } from "@/gqltypes/subjects";
 
-export const SearchResults = (subjects: Subjects) => {
+export const SubjectSearchResults = (subjects: Subjects) => {
   if (subjects.subjects?.length === 0) {
     return (
       <Typography

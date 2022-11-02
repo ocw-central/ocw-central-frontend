@@ -1,45 +1,27 @@
-import { Loading } from "@/components/common/Loading";
-import { DetailSearchBar } from "@/components/searchPageComponents/DetailSearchBar";
-import { SearchResults } from "@/components/searchPageComponents/SearchResults";
-import { useSubjectOnSearchPageQuery } from "@/generated/graphql";
-import { Box, Divider, Grid, Typography } from "@mui/material";
+import { Box, Grid, Tab, Tabs } from "@mui/material";
 import { useState } from "react";
-import {
-  createSearchParams,
-  useLocation,
-  useNavigate,
-  useSearchParams,
-} from "react-router-dom";
+import { useLocation, useSearchParams } from "react-router-dom";
 import { AcademicFieldsList } from "./common/AcademicFieldsList";
 import { ReportButton } from "@/components/common/ReportButton";
+import { SubjectSearchPanel } from "./searchPageComponents/SubjectSearchPanel";
+import { VideoSearchPanel } from "./searchPageComponents/VideoSearchPanel";
 
-type Params = {
-  title?: string;
-  faculty?: string;
-  field?: string;
+type TabPanelProps = {
+  children?: React.ReactNode;
+  index: number;
+  value: number;
 };
 
+function TabPanel(props: TabPanelProps) {
+  return <Box hidden={props.value !== props.index}>{props.children}</Box>;
+}
+
 export function SearchPage() {
-  const navigate = useNavigate();
-  const location = useLocation();
-  const [searchTitle, setSearchTitle] = useState("");
-  const [searchFaculty, setSearchFaculty] = useState("");
-  const [searchAcademicField, setSearchAcademicField] = useState("");
-  const [onSearch, setOnSearch] = useState(false);
   const [jpFieldOpen, setJpFieldOpen] = useState(false);
   const [enFieldOpen, setEnFieldOpen] = useState(false);
 
-  const setSearchParams = () => {
-    const params: Params = {
-      title: searchTitle,
-      faculty: searchFaculty,
-      field: searchAcademicField,
-    };
-    const searchParams = createSearchParams(params);
-
-    navigate(`?${searchParams}`);
-  };
-
+  // for report button
+  const location = useLocation();
   const [searchParams] = useSearchParams();
   const titleParam = searchParams.get("title");
   const title: string = titleParam !== null ? titleParam : "";
@@ -47,21 +29,15 @@ export function SearchPage() {
   const faculty: string = facultyParam !== null ? facultyParam : "";
   const academicFieldParam = searchParams.get("field");
   const field: string = academicFieldParam !== null ? academicFieldParam : "";
-
-  const { data, loading, error } = useSubjectOnSearchPageQuery({
-    variables: {
-      title: title,
-      faculty: faculty,
-      field: field,
-    },
-    skip: title === "" && faculty === "" && field === "",
-  });
-  if (loading) {
-    return <Loading size={"7em"} color={"primary"} />;
-  }
-  if (error) {
-    return <div>Error</div>;
-  }
+  const isVideoSearch = searchParams.get("video") !== null;
+  const url = isVideoSearch
+    ? `${location.pathname}?title=${title}&faculty=${faculty}&field=${field}&video`
+    : `${location.pathname}?title=${title}&faculty=${faculty}&field=${field}&subject`;
+  // for tab
+  const [selectedTabIndex, setSelectedTabIndex] = useState(0);
+  const handleTabChange = (event: React.SyntheticEvent, newValue: number) => {
+    setSelectedTabIndex(newValue);
+  };
 
   return (
     <Grid container>
@@ -97,62 +73,36 @@ export function SearchPage() {
       >
         <Box
           sx={{
-            m: {
+            mx: {
               xs: 0,
               md: 4,
             },
             mb: 2,
+            mt: 2,
           }}
         >
           <Grid container direction="row">
-            <Grid
-              item
-              sx={{
-                alignSelf: "center",
-              }}
-            >
-              <Typography
-                variant="h5"
-                component="div"
-                align="left"
-                sx={{ color: "black", ml: { sm: 1, xs: 1 } }}
-              >
-                <b>詳細検索</b>
-              </Typography>
-            </Grid>
-
             <Grid item sx={{ ml: "auto", mr: 1 }}>
-              <ReportButton
-                url={`${location.pathname}?title=${title}&faculty=${faculty}&field=${field}`}
-                name="ご意見・不具合報告"
-              />
+              <ReportButton url={url} name="ご意見・不具合報告" />
             </Grid>
           </Grid>
-
-          <Divider sx={{ mb: 2 }} />
-          <DetailSearchBar
-            setSearchParams={setSearchParams}
-            searchTitle={searchTitle}
-            setSearchTitle={setSearchTitle}
-            searchFaculty={searchFaculty}
-            setSearchFaculty={setSearchFaculty}
-            searchAcademicField={searchAcademicField}
-            setSearchAcademicField={setSearchAcademicField}
-            onSearch={() => setOnSearch(true)}
-          />
-          {onSearch && !title && !faculty && !field && (
-            <Typography
-              variant="h5"
-              component="div"
-              align="center"
-              sx={{ color: "black" }}
+          <Box>
+            <Tabs
+              value={selectedTabIndex}
+              onChange={handleTabChange}
+              aria-label="basic tabs example"
+              variant="fullWidth"
             >
-              少なくとも一つの項目を入力してください
-            </Typography>
-          )}
-          {(title || faculty || field) && (
-            <SearchResults subjects={data?.subjects} />
-          )}
+              <Tab label="科目検索" />
+              <Tab label="講義動画検索" />
+            </Tabs>
+          </Box>
+          <TabPanel value={selectedTabIndex} index={0}>
+            <SubjectSearchPanel />
+          </TabPanel>
+          <TabPanel value={selectedTabIndex} index={1}>
+            <VideoSearchPanel />
+          </TabPanel>
         </Box>
       </Grid>
     </Grid>
