@@ -1,5 +1,5 @@
-import { gql } from "@apollo/client";
-import * as Apollo from "@apollo/client";
+import { gql } from '@apollo/client';
+import * as Apollo from '@apollo/client';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
@@ -18,24 +18,24 @@ export type Scalars = {
 };
 
 export type AcademicField = {
-  __typename?: "AcademicField";
-  name: Scalars["String"];
+  __typename?: 'AcademicField';
+  name: Scalars['String'];
 };
 
 export type Chapter = Node & {
-  __typename?: "Chapter";
-  id: Scalars["ID"];
-  startAt: Scalars["Int"];
-  thumbnailLink: Scalars["String"];
-  topic: Scalars["String"];
+  __typename?: 'Chapter';
+  id: Scalars['ID'];
+  startAt: Scalars['Int'];
+  thumbnailLink: Scalars['String'];
+  topic: Scalars['String'];
 };
 
 export type Node = {
-  id: Scalars["ID"];
+  id: Scalars['ID'];
 };
 
 export type Query = {
-  __typename?: "Query";
+  __typename?: 'Query';
   academicFields: Array<AcademicField>;
   randomSubjects: Array<Subject>;
   subject: Subject;
@@ -44,141 +44,141 @@ export type Query = {
 
 
 export type QuerySubjectArgs = {
-  id: Scalars["ID"];
+  id: Scalars['ID'];
 };
 
 
 export type QuerySubjectsArgs = {
-  academicField: Scalars["String"];
-  faculty: Scalars["String"];
-  title: Scalars["String"];
+  academicField: Scalars['String'];
+  faculty: Scalars['String'];
+  title: Scalars['String'];
 };
 
 export type RelatedSubject = Node & {
-  __typename?: "RelatedSubject";
-  academicField: Scalars["String"];
-  category: Scalars["String"];
-  department: Scalars["String"];
-  faculty: Scalars["String"];
-  firstHeldOn: Scalars["Time"];
-  freeDescription: Scalars["String"];
-  id: Scalars["ID"];
-  language: Scalars["String"];
-  location: Scalars["String"];
-  relatedSubjectIds: Array<Scalars["ID"]>;
-  resourceIds: Array<Scalars["ID"]>;
-  series: Scalars["String"];
-  syllabusId: Scalars["ID"];
-  thumbnailLink: Scalars["String"];
-  title: Scalars["String"];
-  videoIds: Array<Scalars["ID"]>;
+  __typename?: 'RelatedSubject';
+  academicField: Scalars['String'];
+  category: Scalars['String'];
+  department: Scalars['String'];
+  faculty: Scalars['String'];
+  firstHeldOn: Scalars['Time'];
+  freeDescription: Scalars['String'];
+  id: Scalars['ID'];
+  language: Scalars['String'];
+  location: Scalars['String'];
+  relatedSubjectIds: Array<Scalars['ID']>;
+  resourceIds: Array<Scalars['ID']>;
+  series: Scalars['String'];
+  syllabusId: Scalars['ID'];
+  thumbnailLink: Scalars['String'];
+  title: Scalars['String'];
+  videoIds: Array<Scalars['ID']>;
 };
 
 export type Resource = Node & {
-  __typename?: "Resource";
-  description: Scalars["String"];
-  id: Scalars["ID"];
-  link: Scalars["String"];
-  ordering: Scalars["Int"];
-  title: Scalars["String"];
+  __typename?: 'Resource';
+  description: Scalars['String'];
+  id: Scalars['ID'];
+  link: Scalars['String'];
+  ordering: Scalars['Int'];
+  title: Scalars['String'];
 };
 
 export type Subject = Node & {
-  __typename?: "Subject";
-  academicField: Scalars["String"];
-  category: Scalars["String"];
-  department: Scalars["String"];
-  faculty: Scalars["String"];
-  firstHeldOn?: Maybe<Scalars["Time"]>;
-  freeDescription: Scalars["String"];
-  id: Scalars["ID"];
-  language: Scalars["String"];
-  location: Scalars["String"];
+  __typename?: 'Subject';
+  academicField: Scalars['String'];
+  category: Scalars['String'];
+  department: Scalars['String'];
+  faculty: Scalars['String'];
+  firstHeldOn?: Maybe<Scalars['Time']>;
+  freeDescription: Scalars['String'];
+  id: Scalars['ID'];
+  language: Scalars['String'];
+  location: Scalars['String'];
   relatedSubjects: Array<RelatedSubject>;
   resources: Array<Resource>;
-  series: Scalars["String"];
+  series: Scalars['String'];
   syllabus?: Maybe<Syllabus>;
-  thumbnailLink: Scalars["String"];
-  title: Scalars["String"];
+  thumbnailLink: Scalars['String'];
+  title: Scalars['String'];
   videos: Array<Video>;
 };
 
 export type Subpage = Node & {
-  __typename?: "Subpage";
-  content: Scalars["String"];
-  id: Scalars["ID"];
+  __typename?: 'Subpage';
+  content: Scalars['String'];
+  id: Scalars['ID'];
 };
 
 export type Syllabus = Node & {
-  __typename?: "Syllabus";
-  academicYear: Scalars["Int"];
-  assignedGrade: Scalars["String"];
-  courseDayPeriod: Scalars["String"];
-  courseFormat: Scalars["String"];
-  courseRequirement: Scalars["String"];
-  faculty: Scalars["String"];
-  gradingMethod: Scalars["String"];
-  id: Scalars["ID"];
-  language: Scalars["String"];
-  lessonPlan: Scalars["String"];
-  numCredit: Scalars["Int"];
-  objective: Scalars["String"];
-  outClassLearning: Scalars["String"];
-  outline: Scalars["String"];
-  reference: Scalars["String"];
-  remark: Scalars["String"];
-  semester: Scalars["String"];
-  subjectNumbering: Scalars["String"];
+  __typename?: 'Syllabus';
+  academicYear: Scalars['Int'];
+  assignedGrade: Scalars['String'];
+  courseDayPeriod: Scalars['String'];
+  courseFormat: Scalars['String'];
+  courseRequirement: Scalars['String'];
+  faculty: Scalars['String'];
+  gradingMethod: Scalars['String'];
+  id: Scalars['ID'];
+  language: Scalars['String'];
+  lessonPlan: Scalars['String'];
+  numCredit: Scalars['Int'];
+  objective: Scalars['String'];
+  outClassLearning: Scalars['String'];
+  outline: Scalars['String'];
+  reference: Scalars['String'];
+  remark: Scalars['String'];
+  semester: Scalars['String'];
+  subjectNumbering: Scalars['String'];
   subpages: Array<Subpage>;
-  targetedAudience: Scalars["String"];
+  targetedAudience: Scalars['String'];
 };
 
 export type Video = Node & {
-  __typename?: "Video";
+  __typename?: 'Video';
   chapters: Array<Chapter>;
-  faculty: Scalars["String"];
-  id: Scalars["ID"];
-  language: Scalars["String"];
-  lecturedOn: Scalars["Time"];
-  link: Scalars["String"];
-  ordering: Scalars["Int"];
-  title: Scalars["String"];
-  transcription: Scalars["String"];
-  videoLength: Scalars["Int"];
+  faculty: Scalars['String'];
+  id: Scalars['ID'];
+  language: Scalars['String'];
+  lecturedOn: Scalars['Time'];
+  link: Scalars['String'];
+  ordering: Scalars['Int'];
+  title: Scalars['String'];
+  transcription: Scalars['String'];
+  videoLength: Scalars['Int'];
 };
 
 export type AcademicFieldsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type AcademicFieldsQuery = { __typename?: "Query", academicFields: Array<{ __typename?: "AcademicField", name: string }> };
+export type AcademicFieldsQuery = { __typename?: 'Query', academicFields: Array<{ __typename?: 'AcademicField', name: string }> };
 
 export type SubjectOnSearchPageQueryVariables = Exact<{
-  title: Scalars["String"];
-  faculty: Scalars["String"];
-  field: Scalars["String"];
+  title: Scalars['String'];
+  faculty: Scalars['String'];
+  field: Scalars['String'];
 }>;
 
 
-export type SubjectOnSearchPageQuery = { __typename?: "Query", subjects: Array<{ __typename?: "Subject", id: string, title: string, thumbnailLink: string, faculty: string }> };
+export type SubjectOnSearchPageQuery = { __typename?: 'Query', subjects: Array<{ __typename?: 'Subject', id: string, title: string, thumbnailLink: string, faculty: string }> };
 
 export type SubjectQueryVariables = Exact<{
-  id: Scalars["ID"];
+  id: Scalars['ID'];
 }>;
 
 
-export type SubjectQuery = { __typename?: "Query", subject: { __typename?: "Subject", id: string, title: string, category: string, location: string, department: string, firstHeldOn?: any | null, faculty: string, language: string, freeDescription: string, series: string, academicField: string, thumbnailLink: string, videos: Array<{ __typename?: "Video", id: string, title: string, ordering: number, link: string, faculty: string, lecturedOn: any, videoLength: number, language: string, transcription: string, chapters: Array<{ __typename?: "Chapter", id: string, startAt: number, topic: string, thumbnailLink: string }> }>, resources: Array<{ __typename?: "Resource", id: string, title: string, ordering: number, description: string, link: string }>, relatedSubjects: Array<{ __typename?: "RelatedSubject", id: string, title: string, thumbnailLink: string, faculty: string }>, syllabus?: { __typename?: "Syllabus", id: string, faculty: string, language: string, subjectNumbering: string, academicYear: number, semester: string, numCredit: number, courseFormat: string, assignedGrade: string, targetedAudience: string, courseDayPeriod: string, outline: string, objective: string, lessonPlan: string, gradingMethod: string, courseRequirement: string, outClassLearning: string, reference: string, remark: string, subpages: Array<{ __typename?: "Subpage", id: string, content: string }> } | null } };
+export type SubjectQuery = { __typename?: 'Query', subject: { __typename?: 'Subject', id: string, title: string, category: string, location: string, department: string, firstHeldOn?: any | null, faculty: string, language: string, freeDescription: string, series: string, academicField: string, thumbnailLink: string, videos: Array<{ __typename?: 'Video', id: string, title: string, ordering: number, link: string, faculty: string, lecturedOn: any, videoLength: number, language: string, transcription: string, chapters: Array<{ __typename?: 'Chapter', id: string, startAt: number, topic: string, thumbnailLink: string }> }>, resources: Array<{ __typename?: 'Resource', id: string, title: string, ordering: number, description: string, link: string }>, relatedSubjects: Array<{ __typename?: 'RelatedSubject', id: string, title: string, thumbnailLink: string, faculty: string }>, syllabus?: { __typename?: 'Syllabus', id: string, faculty: string, language: string, subjectNumbering: string, academicYear: number, semester: string, numCredit: number, courseFormat: string, assignedGrade: string, targetedAudience: string, courseDayPeriod: string, outline: string, objective: string, lessonPlan: string, gradingMethod: string, courseRequirement: string, outClassLearning: string, reference: string, remark: string, subpages: Array<{ __typename?: 'Subpage', id: string, content: string }> } | null } };
 
 export type SubjectOnHomepageQueryVariables = Exact<{
-  id: Scalars["ID"];
+  id: Scalars['ID'];
 }>;
 
 
-export type SubjectOnHomepageQuery = { __typename?: "Query", subject: { __typename?: "Subject", id: string, title: string, thumbnailLink: string, faculty: string } };
+export type SubjectOnHomepageQuery = { __typename?: 'Query', subject: { __typename?: 'Subject', id: string, title: string, thumbnailLink: string, faculty: string } };
 
 export type RandomSubjectQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type RandomSubjectQuery = { __typename?: "Query", randomSubjects: Array<{ __typename?: "Subject", id: string, title: string, thumbnailLink: string, faculty: string }> };
+export type RandomSubjectQuery = { __typename?: 'Query', randomSubjects: Array<{ __typename?: 'Subject', id: string, title: string, thumbnailLink: string, faculty: string }> };
 
 
 export const AcademicFieldsDocument = gql`
@@ -205,11 +205,11 @@ export const AcademicFieldsDocument = gql`
  * });
  */
 export function useAcademicFieldsQuery(baseOptions?: Apollo.QueryHookOptions<AcademicFieldsQuery, AcademicFieldsQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions};
+        const options = {...defaultOptions, ...baseOptions}
         return Apollo.useQuery<AcademicFieldsQuery, AcademicFieldsQueryVariables>(AcademicFieldsDocument, options);
       }
 export function useAcademicFieldsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AcademicFieldsQuery, AcademicFieldsQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions};
+          const options = {...defaultOptions, ...baseOptions}
           return Apollo.useLazyQuery<AcademicFieldsQuery, AcademicFieldsQueryVariables>(AcademicFieldsDocument, options);
         }
 export type AcademicFieldsQueryHookResult = ReturnType<typeof useAcademicFieldsQuery>;
@@ -245,11 +245,11 @@ export const SubjectOnSearchPageDocument = gql`
  * });
  */
 export function useSubjectOnSearchPageQuery(baseOptions: Apollo.QueryHookOptions<SubjectOnSearchPageQuery, SubjectOnSearchPageQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions};
+        const options = {...defaultOptions, ...baseOptions}
         return Apollo.useQuery<SubjectOnSearchPageQuery, SubjectOnSearchPageQueryVariables>(SubjectOnSearchPageDocument, options);
       }
 export function useSubjectOnSearchPageLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<SubjectOnSearchPageQuery, SubjectOnSearchPageQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions};
+          const options = {...defaultOptions, ...baseOptions}
           return Apollo.useLazyQuery<SubjectOnSearchPageQuery, SubjectOnSearchPageQueryVariables>(SubjectOnSearchPageDocument, options);
         }
 export type SubjectOnSearchPageQueryHookResult = ReturnType<typeof useSubjectOnSearchPageQuery>;
@@ -347,11 +347,11 @@ export const SubjectDocument = gql`
  * });
  */
 export function useSubjectQuery(baseOptions: Apollo.QueryHookOptions<SubjectQuery, SubjectQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions};
+        const options = {...defaultOptions, ...baseOptions}
         return Apollo.useQuery<SubjectQuery, SubjectQueryVariables>(SubjectDocument, options);
       }
 export function useSubjectLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<SubjectQuery, SubjectQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions};
+          const options = {...defaultOptions, ...baseOptions}
           return Apollo.useLazyQuery<SubjectQuery, SubjectQueryVariables>(SubjectDocument, options);
         }
 export type SubjectQueryHookResult = ReturnType<typeof useSubjectQuery>;
@@ -385,11 +385,11 @@ export const SubjectOnHomepageDocument = gql`
  * });
  */
 export function useSubjectOnHomepageQuery(baseOptions: Apollo.QueryHookOptions<SubjectOnHomepageQuery, SubjectOnHomepageQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions};
+        const options = {...defaultOptions, ...baseOptions}
         return Apollo.useQuery<SubjectOnHomepageQuery, SubjectOnHomepageQueryVariables>(SubjectOnHomepageDocument, options);
       }
 export function useSubjectOnHomepageLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<SubjectOnHomepageQuery, SubjectOnHomepageQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions};
+          const options = {...defaultOptions, ...baseOptions}
           return Apollo.useLazyQuery<SubjectOnHomepageQuery, SubjectOnHomepageQueryVariables>(SubjectOnHomepageDocument, options);
         }
 export type SubjectOnHomepageQueryHookResult = ReturnType<typeof useSubjectOnHomepageQuery>;
@@ -422,11 +422,11 @@ export const RandomSubjectDocument = gql`
  * });
  */
 export function useRandomSubjectQuery(baseOptions?: Apollo.QueryHookOptions<RandomSubjectQuery, RandomSubjectQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions};
+        const options = {...defaultOptions, ...baseOptions}
         return Apollo.useQuery<RandomSubjectQuery, RandomSubjectQueryVariables>(RandomSubjectDocument, options);
       }
 export function useRandomSubjectLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<RandomSubjectQuery, RandomSubjectQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions};
+          const options = {...defaultOptions, ...baseOptions}
           return Apollo.useLazyQuery<RandomSubjectQuery, RandomSubjectQueryVariables>(RandomSubjectDocument, options);
         }
 export type RandomSubjectQueryHookResult = ReturnType<typeof useRandomSubjectQuery>;
