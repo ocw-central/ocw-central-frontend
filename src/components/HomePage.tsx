@@ -45,69 +45,7 @@ export function HomePage() {
         flexDirection: "column",
       }}
     >
-      <Grid
-        container
-        direction="row"
-        sx={{
-          pt: 2,
-          pb: {
-            xs: 2,
-            sm: 2,
-            md: 0,
-          },
-        }}
-      >
-        <Grid item md={12} sm={12} xs={12}>
-          <Box
-            sx={{
-              maxWidth: 800,
-              mx: "auto",
-            }}
-          >
-            <Typography
-              sx={{
-                typography: { xs: "h3", sm: "h2" },
-                textAlign: "center",
-                color: alpha(theme.palette.primary.main, 0),
-                background: {
-                  md: "linear-gradient(45deg, #5286AB 20%, #ff8e50 80%)",
-                  sm: "linear-gradient(45deg, #5286AB 20%, #ff8e50 80%)",
-                  xs: "linear-gradient(45deg, #5286AB 20%, #ff8e50 90%)",
-                },
-                "-webkit-background-clip": {
-                  md: "text",
-                  sm: "text",
-                  xs: "text",
-                },
-              }}
-            >
-              <b>Learn Deeply</b>
-            </Typography>
-          </Box>
-        </Grid>
-        <Grid item md={12} sm={12} xs={12}>
-          <Typography
-            sx={{
-              typography: { xs: "h3", sm: "h2" },
-              textAlign: "center",
-              color: "#213547",
-            }}
-          >
-            <b>with</b>
-          </Typography>
-        </Grid>
-        <Grid item md={12} sm={12} xs={12}>
-          <Typography
-            sx={{
-              typography: { xs: "h3", sm: "h2" },
-              textAlign: "center",
-              color: "#213547",
-            }}
-          >
-            <b>Quality Lectures</b>
-          </Typography>
-        </Grid>
-      </Grid>
+      <HomeMessagePane />
       <Grid
         container
         sx={{ height: "100%", alignSelf: "center", justifyContent: "center" }}
@@ -149,3 +87,71 @@ export function HomePage() {
     </Box>
   );
 }
+
+const HomeMessagePane = () => {
+  return (
+    <Grid
+      container
+      direction="row"
+      sx={{
+        pt: 2,
+        pb: {
+          xs: 2,
+          sm: 2,
+          md: 0,
+        },
+      }}
+    >
+      <Grid item md={12} sm={12} xs={12}>
+        <Box
+          sx={{
+            maxWidth: 800,
+            mx: "auto",
+          }}
+        >
+          <Typography
+            sx={{
+              typography: { xs: "h3", sm: "h2" },
+              textAlign: "center",
+              color: alpha(theme.palette.primary.main, 0),
+              background: {
+                md: "linear-gradient(45deg, #5286AB 20%, #ff8e50 80%)",
+                sm: "linear-gradient(45deg, #5286AB 20%, #ff8e50 80%)",
+                xs: "linear-gradient(45deg, #5286AB 20%, #ff8e50 90%)",
+              },
+              "-webkit-background-clip": {
+                md: "text",
+                sm: "text",
+                xs: "text",
+              },
+            }}
+          >
+            <b>Learn Deeply</b>
+          </Typography>
+        </Box>
+      </Grid>
+      <Grid item md={12} sm={12} xs={12}>
+        <Typography
+          sx={{
+            typography: { xs: "h3", sm: "h2" },
+            textAlign: "center",
+            color: "#213547",
+          }}
+        >
+          <b>with</b>
+        </Typography>
+      </Grid>
+      <Grid item md={12} sm={12} xs={12}>
+        <Typography
+          sx={{
+            typography: { xs: "h3", sm: "h2" },
+            textAlign: "center",
+            color: "#213547",
+          }}
+        >
+          <b>Quality Lectures</b>
+        </Typography>
+      </Grid>
+    </Grid>
+  );
+};
