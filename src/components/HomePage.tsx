@@ -1,7 +1,10 @@
 import { useState, useRef, useCallback } from "react";
 import { Loading } from "@/components/common/Loading";
 import { SubjectCard } from "@/components/searchPageComponents/SubjectCard";
-import { useRandomSubjectQuery } from "@/generated/graphql";
+import {
+  useRandomSubjectQuery,
+  useSubjectOnSearchPageQuery,
+} from "@/generated/graphql";
 import { theme } from "@/utils/themes";
 import { alpha, Box, Button, Grid, Typography } from "@mui/material";
 import {
@@ -10,6 +13,7 @@ import {
 } from "@mui/icons-material";
 import { TwitterIcon, TwitterShareButton } from "react-share";
 import { ReportButton } from "@/components/common/ReportButton";
+import { SubjectOnSearchPage } from "@/gqltypes/subjectsOnSearchPage";
 
 export function HomePage() {
   return (
@@ -17,7 +21,7 @@ export function HomePage() {
       className="HomePage"
       sx={{
         pt: { xs: 5, sm: 10 },
-        px: 2,
+        px: { xs: 2, sm: 5 },
         pb: 1,
       }}
     >
@@ -31,8 +35,9 @@ export function HomePage() {
           <HomeMessagePane />
         </Grid>
         <Grid item>
-          <RandomSubjectsPane />
+          <SubjectsPane />
         </Grid>
+
         <Grid
           item
           container
@@ -48,11 +53,87 @@ export function HomePage() {
   );
 }
 
+const SubjectsPane = () => {
+  return (
+    <Grid container spacing={{ xs: 3, sm: 7 }}>
+      <Grid item>
+        <RandomSubjectsPane />
+      </Grid>
+      <Grid item>
+        <YanakaShinyaPane />
+      </Grid>
+      <Grid item>
+        <ComputerScienceSubjectsPane />
+      </Grid>
+    </Grid>
+  );
+};
+
 const RandomSubjectsPane = () => {
   const { data, loading, error } = useRandomSubjectQuery({
     variables: {},
   });
+  if (loading) {
+    return <Loading size={"7em"} color={"primary"} />;
+  }
+  if (error) {
+    return <div>Failed to fetch random lectures.</div>;
+  }
+  if (!data) {
+    return <div>該当講義がありません</div>;
+  }
+  return (
+    <SubjectsRow subjects={data.randomSubjects} rowTitle="Random Subjects" />
+  );
+};
 
+const YanakaShinyaPane = () => {
+  const { data, loading, error } = useSubjectOnSearchPageQuery({
+    variables: {
+      title: "",
+      faculty: "山中",
+      field: "",
+    },
+  });
+  if (loading) {
+    return <Loading size={"7em"} color={"primary"} />;
+  }
+  if (error) {
+    return <div>Failed to fetch random lectures.</div>;
+  }
+  if (!data) {
+    return <div>該当講義がありません</div>;
+  }
+  return <SubjectsRow subjects={data.subjects} rowTitle="Yamanaka Shinya" />;
+};
+
+const ComputerScienceSubjectsPane = () => {
+  const { data, loading, error } = useSubjectOnSearchPageQuery({
+    variables: {
+      title: "",
+      faculty: "",
+      field: "コンピュータサイエンス",
+    },
+  });
+  if (loading) {
+    return <Loading size={"7em"} color={"primary"} />;
+  }
+  if (error) {
+    return <div>Failed to fetch random lectures.</div>;
+  }
+  if (!data) {
+    return <div>該当講義がありません</div>;
+  }
+  return <SubjectsRow subjects={data.subjects} rowTitle="Computer Science" />;
+};
+
+const SubjectsRow = ({
+  subjects,
+  rowTitle,
+}: {
+  subjects: SubjectOnSearchPage[];
+  rowTitle: string;
+}) => {
   const [scrollLeft, setScrollLeft] = useState(0);
   const scrollRef = useRef<HTMLDivElement>(null!);
 
@@ -66,51 +147,56 @@ const RandomSubjectsPane = () => {
     }
   }, []);
 
-  if (loading) {
-    return <Loading size={"7em"} color={"primary"} />;
-  }
-  if (error) {
-    return <div>Failed to fetch random lectures.</div>;
-  }
-  if (!data) {
-    return <div>該当講義がありません</div>;
-  }
-
   return (
-    <Box
-      sx={{
-        display: "flex",
-        justifyContent: "center",
-        width: "100%",
-        position: "relative",
-      }}
-    >
-      {scrollLeft > 0 && <Arrow scrollRef={scrollRef} direction={"left"} />}
-      <div style={{ display: "flex", overflowX: "scroll" }} ref={measuredRef}>
-        {data.randomSubjects.map((subject) => (
-          <Box
-            sx={{
-              flexBasis: { xs: "350px", sm: "400px" },
-              flexShrink: 0,
-            }}
-            key={subject.id}
-            px={0.5}
+    <Grid container spacing={1}>
+      <Grid item>
+        <Box sx={{ px: 2 }}>
+          <Typography color="black" sx={{ fontWeight: "bold", fontSize: 25 }}>
+            {rowTitle}
+          </Typography>
+        </Box>
+      </Grid>
+      <Grid item>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            width: "100%",
+            position: "relative",
+          }}
+        >
+          {scrollLeft > 0 && <Arrow scrollRef={scrollRef} direction={"left"} />}
+          <div
+            style={{ display: "flex", overflowX: "scroll" }}
+            ref={measuredRef}
           >
-            <SubjectCard
-              id={subject.id}
-              title={subject.title}
-              faculty={subject.faculty}
-              thumbnailLink={subject.thumbnailLink}
-            />
-          </Box>
-        ))}
-      </div>
-      {(scrollRef.current == null ||
-        scrollLeft <
-          scrollRef.current.scrollWidth - scrollRef.current.clientWidth) && (
-        <Arrow scrollRef={scrollRef} direction={"right"} />
-      )}
-    </Box>
+            {subjects.map((subject) => (
+              <Box
+                sx={{
+                  flexBasis: { xs: "350px", sm: "400px" },
+                  flexShrink: 0,
+                }}
+                key={subject.id}
+                px={0.5}
+              >
+                <SubjectCard
+                  id={subject.id}
+                  title={subject.title}
+                  faculty={subject.faculty}
+                  thumbnailLink={subject.thumbnailLink}
+                />
+              </Box>
+            ))}
+          </div>
+          {(scrollRef.current == null ||
+            scrollLeft <
+              scrollRef.current.scrollWidth -
+                scrollRef.current.clientWidth) && (
+            <Arrow scrollRef={scrollRef} direction={"right"} />
+          )}
+        </Box>
+      </Grid>
+    </Grid>
   );
 };
 
