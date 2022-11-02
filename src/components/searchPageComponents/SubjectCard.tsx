@@ -1,13 +1,7 @@
 import { ImageListItem, ImageListItemBar } from "@mui/material";
 import { alpha, styled } from "@mui/material/styles";
 import { Link } from "react-router-dom";
-
-type SubjectOnSearchPage = {
-  id: string;
-  title: string;
-  faculty: string;
-  thumbnailLink: string;
-};
+import { SubjectOnSearchPage } from "@/gqltypes/subjectsOnSearchPage";
 
 const MyImageListItemBar = styled(ImageListItemBar)({
   color: "white",
