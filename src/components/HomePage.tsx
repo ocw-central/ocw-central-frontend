@@ -184,7 +184,7 @@ const SubjectsRow = ({
               <Arrow scrollRef={scrollRef} direction={"left"} />
             )}
             <div
-              style={{ display: "flex", overflowX: "scroll" }}
+              style={{ display: "flex", overflowX: "scroll", width: "100%" }}
               ref={measuredRef}
             >
               {subjects.map((subject) => (
