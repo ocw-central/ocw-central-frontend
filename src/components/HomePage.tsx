@@ -7,6 +7,41 @@ import { TwitterIcon, TwitterShareButton } from "react-share";
 import { ReportButton } from "@/components/common/ReportButton";
 
 export function HomePage() {
+  return (
+    <Box
+      className="HomePage"
+      alignItems="center"
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+      }}
+    >
+      <HomeMessagePane />
+      <RandomSubjectsPane />
+      <Box>
+        <TwitterShareButton
+          title={"OCW Central"}
+          via="ocwcentral"
+          url={window.location.href}
+          related={["ocwcentral"]}
+        >
+          <TwitterIcon size={50} round />
+        </TwitterShareButton>
+      </Box>
+      <Grid
+        container
+        sx={{
+          justifyContent: "right",
+          pr: 2,
+        }}
+      >
+        <ReportButton url="/" name="ご意見・不具合報告" />
+      </Grid>
+    </Box>
+  );
+}
+
+const RandomSubjectsPane = () => {
   const GridRandomItems: JSX.Element[] = [];
 
   const { data, loading, error } = useRandomSubjectQuery({
@@ -37,56 +72,27 @@ export function HomePage() {
     });
   }
   return (
-    <Box
-      className="HomePage"
-      alignItems="center"
-      sx={{
-        display: "flex",
-        flexDirection: "column",
-      }}
+    <Grid
+      container
+      sx={{ height: "100%", alignSelf: "center", justifyContent: "center" }}
     >
-      <HomeMessagePane />
-      <Grid
-        container
-        sx={{ height: "100%", alignSelf: "center", justifyContent: "center" }}
-      >
-        <Grid item xs={12} md={15}>
-          <Box
-            sx={{
-              m: {
-                xs: 0,
-                md: 4,
-              },
-              mb: 2,
-              pt: 1,
-            }}
-          >
-            <Grid container>{GridRandomItems}</Grid>
-          </Box>
-        </Grid>
-      </Grid>
-      <Box>
-        <TwitterShareButton
-          title={"OCW Central"}
-          via="ocwcentral"
-          url={window.location.href}
-          related={["ocwcentral"]}
+      <Grid item xs={12} md={15}>
+        <Box
+          sx={{
+            m: {
+              xs: 0,
+              md: 4,
+            },
+            mb: 2,
+            pt: 1,
+          }}
         >
-          <TwitterIcon size={50} round />
-        </TwitterShareButton>
-      </Box>
-      <Grid
-        container
-        sx={{
-          justifyContent: "right",
-          pr: 2,
-        }}
-      >
-        <ReportButton url="/" name="ご意見・不具合報告" />
+          <Grid container>{GridRandomItems}</Grid>
+        </Box>
       </Grid>
-    </Box>
+    </Grid>
   );
-}
+};
 
 const HomeMessagePane = () => {
   return (
