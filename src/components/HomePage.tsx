@@ -1,3 +1,4 @@
+import { useState, useRef, useCallback } from "react";
 import { Loading } from "@/components/common/Loading";
 import { SubjectCard } from "@/components/searchPageComponents/SubjectCard";
 import { useRandomSubjectQuery } from "@/generated/graphql";
@@ -50,6 +51,19 @@ const RandomSubjectsPane = () => {
     variables: {},
   });
 
+  const [scrollLeft, setScrollLeft] = useState(0);
+  const scrollRef = useRef<HTMLDivElement>(null!);
+
+  const measuredRef = useCallback((node: HTMLDivElement) => {
+    if (node !== null) {
+      scrollRef.current = node;
+      node.addEventListener("scroll", () => {
+        setScrollLeft(scrollRef.current.scrollLeft);
+        console.log(scrollRef.current.scrollLeft);
+      });
+    }
+  }, []);
+
   if (loading) {
     return <Loading size={"7em"} color={"primary"} />;
   }
@@ -65,18 +79,29 @@ const RandomSubjectsPane = () => {
       container
       sx={{ height: "100%", alignSelf: "center", justifyContent: "center" }}
     >
-      <Grid item xs={12} md={15}>
+      <Box
+        sx={{
+          m: {
+            xs: 0,
+            md: 4,
+          },
+          mb: 2,
+          pt: 1,
+        }}
+      >
         <Box
           sx={{
-            m: {
-              xs: 0,
-              md: 4,
-            },
-            mb: 2,
-            pt: 1,
+            display: "flex",
+            justifyContent: "center",
+            width: "100%",
+            position: "relative",
           }}
         >
-          <div style={{ display: "flex", overflowX: "scroll" }}>
+          {scrollLeft > 0 && <Arrow scrollRef={scrollRef} direction={"left"} />}
+          <div
+            style={{ display: "flex", overflowX: "scroll" }}
+            ref={measuredRef}
+          >
             {data.randomSubjects.map((subject) => (
               <Box
                 sx={{
@@ -95,8 +120,14 @@ const RandomSubjectsPane = () => {
               </Box>
             ))}
           </div>
+          {(scrollRef.current == null ||
+            scrollLeft <
+              scrollRef.current.scrollWidth -
+                scrollRef.current.clientWidth) && (
+            <Arrow scrollRef={scrollRef} direction={"right"} />
+          )}
         </Box>
-      </Grid>
+      </Box>
     </Grid>
   );
 };
