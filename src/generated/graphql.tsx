@@ -40,7 +40,6 @@ export type Query = {
   randomSubjects: Array<Subject>;
   subject: Subject;
   subjects: Array<Subject>;
-  subjectsWithSpecifiedVideos: Array<SubjectWithSpecifiedVideos>;
 };
 
 
@@ -55,19 +54,13 @@ export type QuerySubjectsArgs = {
   title: Scalars['String'];
 };
 
-
-export type QuerySubjectsWithSpecifiedVideosArgs = {
-  faculty: Scalars['String'];
-  title: Scalars['String'];
-};
-
 export type RelatedSubject = Node & {
   __typename?: 'RelatedSubject';
   academicField: Scalars['String'];
   category: Scalars['String'];
   department: Scalars['String'];
   faculty: Scalars['String'];
-  firstHeldOn?: Maybe<Scalars['Time']>;
+  firstHeldOn: Scalars['Time'];
   freeDescription: Scalars['String'];
   id: Scalars['ID'];
   language: Scalars['String'];
@@ -110,12 +103,6 @@ export type Subject = Node & {
   videos: Array<Video>;
 };
 
-export type SubjectWithSpecifiedVideos = {
-  __typename?: 'SubjectWithSpecifiedVideos';
-  subject: Subject;
-  videos: Array<Video>;
-};
-
 export type Subpage = Node & {
   __typename?: 'Subpage';
   content: Scalars['String'];
@@ -152,7 +139,7 @@ export type Video = Node & {
   faculty: Scalars['String'];
   id: Scalars['ID'];
   language: Scalars['String'];
-  lecturedOn?: Maybe<Scalars['Time']>;
+  lecturedOn: Scalars['Time'];
   link: Scalars['String'];
   ordering: Scalars['Int'];
   title: Scalars['String'];
@@ -174,20 +161,12 @@ export type SubjectOnSearchPageQueryVariables = Exact<{
 
 export type SubjectOnSearchPageQuery = { __typename?: 'Query', subjects: Array<{ __typename?: 'Subject', id: string, title: string, thumbnailLink: string, faculty: string }> };
 
-export type SearchVideosQueryVariables = Exact<{
-  title: Scalars['String'];
-  faculty: Scalars['String'];
-}>;
-
-
-export type SearchVideosQuery = { __typename?: 'Query', subjectsWithSpecifiedVideos: Array<{ __typename?: 'SubjectWithSpecifiedVideos', subject: { __typename?: 'Subject', id: string, thumbnailLink: string }, videos: Array<{ __typename?: 'Video', id: string, title: string, ordering: number, faculty: string }> }> };
-
 export type SubjectQueryVariables = Exact<{
   id: Scalars['ID'];
 }>;
 
 
-export type SubjectQuery = { __typename?: 'Query', subject: { __typename?: 'Subject', id: string, title: string, category: string, location: string, department: string, firstHeldOn?: any | null, faculty: string, language: string, freeDescription: string, series: string, academicField: string, thumbnailLink: string, videos: Array<{ __typename?: 'Video', id: string, title: string, ordering: number, link: string, faculty: string, lecturedOn?: any | null, videoLength: number, language: string, transcription: string, chapters: Array<{ __typename?: 'Chapter', id: string, startAt: number, topic: string, thumbnailLink: string }> }>, resources: Array<{ __typename?: 'Resource', id: string, title: string, ordering: number, description: string, link: string }>, relatedSubjects: Array<{ __typename?: 'RelatedSubject', id: string, title: string, thumbnailLink: string, faculty: string }>, syllabus?: { __typename?: 'Syllabus', id: string, faculty: string, language: string, subjectNumbering: string, academicYear: number, semester: string, numCredit: number, courseFormat: string, assignedGrade: string, targetedAudience: string, courseDayPeriod: string, outline: string, objective: string, lessonPlan: string, gradingMethod: string, courseRequirement: string, outClassLearning: string, reference: string, remark: string, subpages: Array<{ __typename?: 'Subpage', id: string, content: string }> } | null } };
+export type SubjectQuery = { __typename?: 'Query', subject: { __typename?: 'Subject', id: string, title: string, category: string, location: string, department: string, firstHeldOn?: any | null, faculty: string, language: string, freeDescription: string, series: string, academicField: string, thumbnailLink: string, videos: Array<{ __typename?: 'Video', id: string, title: string, ordering: number, link: string, faculty: string, lecturedOn: any, videoLength: number, language: string, transcription: string, chapters: Array<{ __typename?: 'Chapter', id: string, startAt: number, topic: string, thumbnailLink: string }> }>, resources: Array<{ __typename?: 'Resource', id: string, title: string, ordering: number, description: string, link: string }>, relatedSubjects: Array<{ __typename?: 'RelatedSubject', id: string, title: string, thumbnailLink: string, faculty: string }>, syllabus?: { __typename?: 'Syllabus', id: string, faculty: string, language: string, subjectNumbering: string, academicYear: number, semester: string, numCredit: number, courseFormat: string, assignedGrade: string, targetedAudience: string, courseDayPeriod: string, outline: string, objective: string, lessonPlan: string, gradingMethod: string, courseRequirement: string, outClassLearning: string, reference: string, remark: string, subpages: Array<{ __typename?: 'Subpage', id: string, content: string }> } | null } };
 
 export type SubjectOnHomepageQueryVariables = Exact<{
   id: Scalars['ID'];
@@ -276,51 +255,6 @@ export function useSubjectOnSearchPageLazyQuery(baseOptions?: Apollo.LazyQueryHo
 export type SubjectOnSearchPageQueryHookResult = ReturnType<typeof useSubjectOnSearchPageQuery>;
 export type SubjectOnSearchPageLazyQueryHookResult = ReturnType<typeof useSubjectOnSearchPageLazyQuery>;
 export type SubjectOnSearchPageQueryResult = Apollo.QueryResult<SubjectOnSearchPageQuery, SubjectOnSearchPageQueryVariables>;
-export const SearchVideosDocument = gql`
-    query searchVideos($title: String!, $faculty: String!) {
-  subjectsWithSpecifiedVideos(title: $title, faculty: $faculty) {
-    subject {
-      id
-      thumbnailLink
-    }
-    videos {
-      id
-      title
-      ordering
-      faculty
-    }
-  }
-}
-    `;
-
-/**
- * __useSearchVideosQuery__
- *
- * To run a query within a React component, call `useSearchVideosQuery` and pass it any options that fit your needs.
- * When your component renders, `useSearchVideosQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useSearchVideosQuery({
- *   variables: {
- *      title: // value for 'title'
- *      faculty: // value for 'faculty'
- *   },
- * });
- */
-export function useSearchVideosQuery(baseOptions: Apollo.QueryHookOptions<SearchVideosQuery, SearchVideosQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<SearchVideosQuery, SearchVideosQueryVariables>(SearchVideosDocument, options);
-      }
-export function useSearchVideosLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<SearchVideosQuery, SearchVideosQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<SearchVideosQuery, SearchVideosQueryVariables>(SearchVideosDocument, options);
-        }
-export type SearchVideosQueryHookResult = ReturnType<typeof useSearchVideosQuery>;
-export type SearchVideosLazyQueryHookResult = ReturnType<typeof useSearchVideosLazyQuery>;
-export type SearchVideosQueryResult = Apollo.QueryResult<SearchVideosQuery, SearchVideosQueryVariables>;
 export const SubjectDocument = gql`
     query subject($id: ID!) {
   subject(id: $id) {
