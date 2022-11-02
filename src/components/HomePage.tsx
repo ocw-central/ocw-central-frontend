@@ -2,7 +2,11 @@ import { Loading } from "@/components/common/Loading";
 import { SubjectCard } from "@/components/searchPageComponents/SubjectCard";
 import { useRandomSubjectQuery } from "@/generated/graphql";
 import { theme } from "@/utils/themes";
-import { alpha, Box, Grid, Typography } from "@mui/material";
+import { alpha, Box, Button, Grid, Typography } from "@mui/material";
+import {
+  KeyboardDoubleArrowLeft,
+  KeyboardDoubleArrowRight,
+} from "@mui/icons-material";
 import { TwitterIcon, TwitterShareButton } from "react-share";
 import { ReportButton } from "@/components/common/ReportButton";
 
@@ -94,6 +98,53 @@ const RandomSubjectsPane = () => {
         </Box>
       </Grid>
     </Grid>
+  );
+};
+
+type Direction = "right" | "left";
+
+type ArrowProps = {
+  scrollRef: React.MutableRefObject<HTMLDivElement>;
+  direction: Direction;
+};
+
+const Arrow = ({ scrollRef, direction }: ArrowProps) => {
+  const divStyle: React.CSSProperties = {
+    backgroundColor: "black",
+    opacity: 0.7,
+    position: "absolute",
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "center",
+    height: "100%",
+    zIndex: 1,
+    animationDelay: "0.5s",
+  };
+
+  if (direction === "left") {
+    divStyle.left = 0;
+  } else {
+    divStyle.right = 0;
+  }
+
+  return (
+    <div style={divStyle}>
+      <Button
+        sx={{ height: "100%", color: "white" }}
+        onClick={() => {
+          scrollRef.current.scrollBy({
+            left: direction == "left" ? -1000 : 1000,
+            behavior: "smooth",
+          });
+        }}
+      >
+        {direction == "left" ? (
+          <KeyboardDoubleArrowLeft />
+        ) : (
+          <KeyboardDoubleArrowRight />
+        )}
+      </Button>
+    </div>
   );
 };
 
