@@ -252,23 +252,25 @@ const Arrow = ({ scrollRef, direction }: ArrowProps) => {
   }
 
   return (
-    <div style={divStyle}>
-      <Button
-        sx={{ height: "100%", color: "white" }}
-        onClick={() => {
-          scrollRef.current.scrollBy({
-            left: direction == "left" ? -1000 : 1000,
-            behavior: "smooth",
-          });
-        }}
-      >
-        {direction == "left" ? (
-          <KeyboardDoubleArrowLeft />
-        ) : (
-          <KeyboardDoubleArrowRight />
-        )}
-      </Button>
-    </div>
+    <Box sx={{ display: { xs: "none", sm: "initial" } }}>
+      <div style={divStyle}>
+        <Button
+          sx={{ height: "100%", color: "white" }}
+          onClick={() => {
+            scrollRef.current.scrollBy({
+              left: direction == "left" ? -1000 : 1000,
+              behavior: "smooth",
+            });
+          }}
+        >
+          {direction == "left" ? (
+            <KeyboardDoubleArrowLeft />
+          ) : (
+            <KeyboardDoubleArrowRight />
+          )}
+        </Button>
+      </div>
+    </Box>
   );
 };
 
