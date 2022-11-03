@@ -201,7 +201,7 @@ const RowContent = ({
         {subjects.map((subject) => (
           <Box
             sx={{
-              flexBasis: { xs: "350px", sm: "400px" },
+              flexBasis: { xs: "320px", sm: "400px" },
               flexShrink: 0,
             }}
             key={subject.id}
