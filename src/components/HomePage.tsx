@@ -294,7 +294,9 @@ const HomeMessagePane = () => {
         <Link to={"/search"}>
           <Button variant="contained" disableElevation size="large">
             <Search />
-            <Box p={1}>Search Subjects</Box>
+            <Box p={1} sx={{ fontSize: 20 }}>
+              講義を検索
+            </Box>
           </Button>
         </Link>
       </Grid>
