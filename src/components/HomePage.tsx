@@ -37,7 +37,16 @@ export function HomePage() {
         <Grid item xs={12}>
           <SubjectsPane />
         </Grid>
-
+        <Grid item>
+          <TwitterShareButton
+            title={"OCW Central"}
+            via="ocwcentral"
+            url={window.location.href}
+            related={["ocwcentral"]}
+          >
+            <TwitterIcon size={50} round />
+          </TwitterShareButton>
+        </Grid>
         <Grid
           item
           container
@@ -70,21 +79,14 @@ const SubjectsPane = () => {
 };
 
 const RandomSubjectsPane = () => {
-  const { data, loading, error } = useRandomSubjectQuery({
-    variables: {},
-  });
+  const { data, loading, error } = useRandomSubjectQuery();
 
-  if (error) {
-    return <div>講義の取得に失敗しました</div>;
-  }
-  if (!data) {
-    return <div>該当講義がありません</div>;
-  }
   return (
     <SubjectsRow
-      subjects={data.randomSubjects}
+      subjects={data ? data.randomSubjects : []}
       rowTitle="Random Subjects"
       loading={loading}
+      error={error !== undefined}
     />
   );
 };
@@ -98,17 +100,12 @@ const YanakaShinyaPane = () => {
     },
   });
 
-  if (error) {
-    return <div>講義の取得に失敗しました</div>;
-  }
-  if (!data) {
-    return <div>該当講義がありません</div>;
-  }
   return (
     <SubjectsRow
-      subjects={data.subjects}
+      subjects={data ? data.subjects : []}
       rowTitle="Yamanaka Shinya"
       loading={loading}
+      error={error !== undefined}
     />
   );
 };
@@ -122,18 +119,12 @@ const ComputerScienceSubjectsPane = () => {
     },
   });
 
-  if (error) {
-    return <div>講義の取得に失敗しました</div>;
-  }
-  if (!data) {
-    return <div>該当講義がありません</div>;
-  }
-
   return (
     <SubjectsRow
-      subjects={data.subjects}
+      subjects={data ? data.subjects : []}
       rowTitle="Computer Science"
       loading={loading}
+      error={error !== undefined}
     />
   );
 };
@@ -142,10 +133,37 @@ const SubjectsRow = ({
   subjects,
   rowTitle,
   loading,
+  error,
 }: {
   subjects: SubjectOnSearchPage[];
   rowTitle: string;
   loading: boolean;
+  error: boolean;
+}) => {
+  return (
+    <Grid container spacing={1}>
+      <Grid item xs={12} textAlign="left">
+        <Box sx={{ px: 2 }}>
+          <Typography color="black" sx={{ fontWeight: "bold", fontSize: 25 }}>
+            {rowTitle}
+          </Typography>
+        </Box>
+      </Grid>
+      <Grid item xs={12}>
+        <RowContent subjects={subjects} loading={loading} error={error} />
+      </Grid>
+    </Grid>
+  );
+};
+
+const RowContent = ({
+  subjects,
+  loading,
+  error,
+}: {
+  subjects: SubjectOnSearchPage[];
+  loading: boolean;
+  error: boolean;
 }) => {
   const [scrollLeft, setScrollLeft] = useState(0);
   const scrollRef = useRef<HTMLDivElement>(null!);
@@ -159,62 +177,52 @@ const SubjectsRow = ({
     }
   }, []);
 
+  if (loading) {
+    return <Loading size={"4em"} color={"primary"} />;
+  }
+
+  if (error) {
+    return <div>講義の取得に失敗しました</div>;
+  }
+
   return (
-    <Grid container spacing={1}>
-      <Grid item xs={12} textAlign="left">
-        <Box sx={{ px: 2 }}>
-          <Typography color="black" sx={{ fontWeight: "bold", fontSize: 25 }}>
-            {rowTitle}
-          </Typography>
-        </Box>
-      </Grid>
-      <Grid item xs={12}>
-        {loading ? (
-          <Loading size={"4em"} color={"primary"} />
-        ) : (
+    <Box
+      sx={{
+        display: "flex",
+        justifyContent: "center",
+        width: "100%",
+        position: "relative",
+      }}
+    >
+      <div
+        style={{ display: "flex", overflowX: "scroll", width: "100%" }}
+        ref={measuredRef}
+      >
+        {subjects.map((subject) => (
           <Box
             sx={{
-              display: "flex",
-              justifyContent: "center",
-              width: "100%",
-              position: "relative",
+              flexBasis: { xs: "350px", sm: "400px" },
+              flexShrink: 0,
             }}
+            key={subject.id}
+            px={0.5}
           >
-            <div
-              style={{ display: "flex", overflowX: "scroll", width: "100%" }}
-              ref={measuredRef}
-            >
-              {subjects.map((subject) => (
-                <Box
-                  sx={{
-                    flexBasis: { xs: "350px", sm: "400px" },
-                    flexShrink: 0,
-                  }}
-                  key={subject.id}
-                  px={0.5}
-                >
-                  <SubjectCard
-                    id={subject.id}
-                    title={subject.title}
-                    faculty={subject.faculty}
-                    thumbnailLink={subject.thumbnailLink}
-                  />
-                </Box>
-              ))}
-            </div>
-            {scrollLeft > 0 && (
-              <Arrow scrollRef={scrollRef} direction={"left"} />
-            )}
-            {(scrollRef.current == null ||
-              scrollLeft <
-                scrollRef.current.scrollWidth -
-                  scrollRef.current.clientWidth) && (
-              <Arrow scrollRef={scrollRef} direction={"right"} />
-            )}
+            <SubjectCard
+              id={subject.id}
+              title={subject.title}
+              faculty={subject.faculty}
+              thumbnailLink={subject.thumbnailLink}
+            />
           </Box>
-        )}
-      </Grid>
-    </Grid>
+        ))}
+      </div>
+      {scrollLeft > 0 && <Arrow scrollRef={scrollRef} direction={"left"} />}
+      {(scrollRef.current == null ||
+        scrollLeft <
+          scrollRef.current.scrollWidth - scrollRef.current.clientWidth) && (
+        <Arrow scrollRef={scrollRef} direction={"right"} />
+      )}
+    </Box>
   );
 };
 
@@ -266,19 +274,22 @@ const Arrow = ({ scrollRef, direction }: ArrowProps) => {
 
 const HomeMessagePane = () => {
   return (
-    <Grid container direction="column" spacing={3}>
+    <Grid container direction="column" spacing={5}>
       <Grid item xs={12}>
         <CatchPhrase />
       </Grid>
+      <Grid item xs={8}>
+        <Typography color="black">
+          OCW
+          Centralは京都大学を中心とした日本の大学の講義動画を集めたサイトです。
+          <br />
+          全国のハイレベルな講義をもとに新たな学習の機会を提供します。
+        </Typography>
+      </Grid>
       <Grid item xs={12}>
-        <TwitterShareButton
-          title={"OCW Central"}
-          via="ocwcentral"
-          url={window.location.href}
-          related={["ocwcentral"]}
-        >
-          <TwitterIcon size={50} round />
-        </TwitterShareButton>
+        <Button variant="contained" disableElevation size="large">
+          <Box p={1}>Search Subjects</Box>
+        </Button>
       </Grid>
     </Grid>
   );
@@ -296,7 +307,7 @@ const CatchPhrase = () => {
         >
           <Typography
             sx={{
-              typography: { xs: "h3", sm: "h2" },
+              typography: { xs: "h4", sm: "h3" },
               textAlign: "center",
               color: alpha(theme.palette.primary.main, 0),
               background: {
@@ -318,7 +329,7 @@ const CatchPhrase = () => {
       <Grid item xs={12}>
         <Typography
           sx={{
-            typography: { xs: "h3", sm: "h2" },
+            typography: { xs: "h4", sm: "h3" },
             textAlign: "center",
             color: "#213547",
           }}
@@ -329,7 +340,7 @@ const CatchPhrase = () => {
       <Grid item xs={12}>
         <Typography
           sx={{
-            typography: { xs: "h3", sm: "h2" },
+            typography: { xs: "h4", sm: "h3" },
             textAlign: "center",
             color: "#213547",
           }}
