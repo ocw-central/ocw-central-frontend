@@ -14,6 +14,7 @@ import {
 import { TwitterIcon, TwitterShareButton } from "react-share";
 import { ReportButton } from "@/components/common/ReportButton";
 import { SubjectOnSearchPage } from "@/gqltypes/subjectsOnSearchPage";
+import { Link } from "react-router-dom";
 
 export function HomePage() {
   return (
@@ -289,9 +290,11 @@ const HomeMessagePane = () => {
         </Typography>
       </Grid>
       <Grid item xs={12}>
-        <Button variant="contained" disableElevation size="large">
-          <Box p={1}>Search Subjects</Box>
-        </Button>
+        <Link to={"/search"}>
+          <Button variant="contained" disableElevation size="large">
+            <Box p={1}>Search Subjects</Box>
+          </Button>
+        </Link>
       </Grid>
     </Grid>
   );
