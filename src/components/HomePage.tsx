@@ -10,6 +10,7 @@ import { alpha, Box, Button, Grid, Typography } from "@mui/material";
 import {
   KeyboardDoubleArrowLeft,
   KeyboardDoubleArrowRight,
+  Search,
 } from "@mui/icons-material";
 import { TwitterIcon, TwitterShareButton } from "react-share";
 import { ReportButton } from "@/components/common/ReportButton";
@@ -292,6 +293,7 @@ const HomeMessagePane = () => {
       <Grid item xs={12}>
         <Link to={"/search"}>
           <Button variant="contained" disableElevation size="large">
+            <Search />
             <Box p={1}>Search Subjects</Box>
           </Button>
         </Link>
