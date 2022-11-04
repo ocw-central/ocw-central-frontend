@@ -285,14 +285,11 @@ const HomeMessagePane = () => {
       <Grid item xs={8}>
         <Typography
           color="black"
-          sx={{ typography: { xs: "body2", sm: "h5" } }}
+          sx={{ typography: { xs: "body2", sm: "h6" } }}
         >
-          <b>
-            OCW
-            CentralはOCW(大学によって提供される教育資料)のポータルサイトです。
-          </b>
+          OCW CentralはOCW(大学によって提供される教育資料)のポータルサイトです。
           <br />
-          <b>AIモデルによる自動書き起こしでOCWの利便性を向上させます。</b>
+          AIモデルによる自動書き起こしでOCWの利便性を向上させます。
         </Typography>
       </Grid>
       <Grid item xs={12}>
