@@ -1,21 +1,21 @@
-import { useState, useRef, useCallback } from "react";
 import { Loading } from "@/components/common/Loading";
+import { ReportButton } from "@/components/common/ReportButton";
 import { SubjectCard } from "@/components/searchPageComponents/SubjectCard";
 import {
   useRandomSubjectQuery,
   useSubjectOnSearchPageQuery,
 } from "@/generated/graphql";
+import { SubjectOnSearchPage } from "@/gqltypes/subjectsOnSearchPage";
 import { theme } from "@/utils/themes";
-import { alpha, Box, Button, Grid, Typography } from "@mui/material";
 import {
   KeyboardDoubleArrowLeft,
   KeyboardDoubleArrowRight,
   Search,
 } from "@mui/icons-material";
-import { TwitterIcon, TwitterShareButton } from "react-share";
-import { ReportButton } from "@/components/common/ReportButton";
-import { SubjectOnSearchPage } from "@/gqltypes/subjectsOnSearchPage";
+import { alpha, Box, Button, Grid, Typography } from "@mui/material";
+import { useCallback, useRef, useState } from "react";
 import { Link } from "react-router-dom";
+import { TwitterIcon, TwitterShareButton } from "react-share";
 
 export function HomePage() {
   return (
@@ -283,11 +283,16 @@ const HomeMessagePane = () => {
         <CatchPhrase />
       </Grid>
       <Grid item xs={8}>
-        <Typography color="black">
-          OCW
-          Centralは京都大学を中心とした日本の大学の講義動画を集めたサイトです。
+        <Typography
+          color="black"
+          sx={{ typography: { xs: "body2", sm: "h5" } }}
+        >
+          <b>
+            OCW
+            CentralはOCW(大学によって提供される教育資料)のポータルサイトです。
+          </b>
           <br />
-          全国のハイレベルな講義をもとに新たな学習の機会を提供します。
+          <b>AIモデルによる自動書き起こしでOCWの利便性を向上させます。</b>
         </Typography>
       </Grid>
       <Grid item xs={12}>
@@ -315,6 +320,7 @@ const CatchPhrase = () => {
           }}
         >
           <Typography
+            fontFamily={"Poppins"}
             sx={{
               typography: { xs: "h4", sm: "h3" },
               textAlign: "center",
@@ -337,6 +343,7 @@ const CatchPhrase = () => {
       </Grid>
       <Grid item xs={12}>
         <Typography
+          fontFamily={"Poppins"}
           sx={{
             typography: { xs: "h4", sm: "h3" },
             textAlign: "center",
@@ -348,6 +355,7 @@ const CatchPhrase = () => {
       </Grid>
       <Grid item xs={12}>
         <Typography
+          fontFamily={"Poppins"}
           sx={{
             typography: { xs: "h4", sm: "h3" },
             textAlign: "center",
