@@ -69,7 +69,3 @@
 - [Vite](https://vitejs.dev/) for build tool.
 - [React](https://reactjs.org/) for building UI.
 - [ESLint](https://eslint.org/) and [Prettier](https://**prettier**.io/) for formatting.
-
-## License
-
-Thumbnails in `~/public/subject_thumbnails` are lisenced under CC BY-NC-SA 4.0. Besides, the rest of the code is licensed under MIT.
