@@ -44,7 +44,7 @@ export function AboutPage() {
         >
           OCW Centralは大学によって無償で提供される教育資源であるOCW
           (OpenCourseWare) のポータルサイトです。
-          公益性の高い教育資源の保全とアクセス向上を目指し京都大学情報学研究科の学生有志により運営されています。
+          教育資源の保全とアクセス向上を目指し京都大学情報学研究科の学生有志により運営されています。
         </Typography>
       </Grid>
       <Grid item md={12} xs={12}>
