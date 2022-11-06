@@ -57,7 +57,7 @@
 
 ### GraphQL Client ([Apollo Client](https://www.apollographql.com/docs/react))
 
-- Add schemas for GraphQL queries to `~/src/document`
+- Add schemas for GraphQL queries to `~/src/documents`
 - Generate type definitions of queries
   ```bash
   yarn generate
