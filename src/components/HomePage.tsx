@@ -1,10 +1,7 @@
 import { Loading } from "@/components/common/Loading";
 import { ReportButton } from "@/components/common/ReportButton";
 import { SubjectCard } from "@/components/searchPageComponents/SubjectCard";
-import {
-  useRandomSubjectQuery,
-  useSubjectOnSearchPageQuery,
-} from "@/generated/graphql";
+import { useRandomSubjectQuery } from "@/generated/graphql";
 import { SubjectOnSearchPage } from "@/gqltypes/subjectsOnSearchPage";
 import { theme } from "@/utils/themes";
 import {
@@ -68,63 +65,72 @@ const SubjectsPane = () => {
   return (
     <Grid container spacing={{ xs: 3, sm: 7 }}>
       <Grid item xs={12}>
-        <RandomSubjectsPane />
+        <FinalLecturesPane />
       </Grid>
       <Grid item xs={12}>
-        <YanakaShinyaPane />
+        <ComputerSciencePane />
       </Grid>
       <Grid item xs={12}>
-        <ComputerScienceSubjectsPane />
+        <PhysicsPane />
       </Grid>
     </Grid>
   );
 };
 
-const RandomSubjectsPane = () => {
-  const { data, loading, error } = useRandomSubjectQuery();
+const FinalLecturesPane = () => {
+  const { data, loading, error } = useRandomSubjectQuery({
+    variables: {
+      category: "final-lecture",
+      series: "",
+      academicField: "",
+      numSubjects: 12,
+    },
+  });
 
   return (
     <SubjectsRow
       subjects={data ? data.randomSubjects : []}
-      rowTitle="Random Subjects"
+      rowTitle="最終講義"
       loading={loading}
       error={error !== undefined}
     />
   );
 };
 
-const YanakaShinyaPane = () => {
-  const { data, loading, error } = useSubjectOnSearchPageQuery({
+const ComputerSciencePane = () => {
+  const { data, loading, error } = useRandomSubjectQuery({
     variables: {
-      title: "",
-      faculty: "山中",
-      field: "",
+      category: "",
+      series: "",
+      academicField: "コンピュータサイエンス",
+      numSubjects: 12,
     },
   });
 
   return (
     <SubjectsRow
-      subjects={data ? data.subjects : []}
-      rowTitle="Yamanaka Shinya"
+      subjects={data ? data.randomSubjects : []}
+      rowTitle="コンピューターサイエンス"
       loading={loading}
       error={error !== undefined}
     />
   );
 };
 
-const ComputerScienceSubjectsPane = () => {
-  const { data, loading, error } = useSubjectOnSearchPageQuery({
+const PhysicsPane = () => {
+  const { data, loading, error } = useRandomSubjectQuery({
     variables: {
-      title: "",
-      faculty: "",
-      field: "コンピュータサイエンス",
+      category: "",
+      series: "",
+      academicField: "物理学",
+      numSubjects: 12,
     },
   });
 
   return (
     <SubjectsRow
-      subjects={data ? data.subjects : []}
-      rowTitle="Computer Science"
+      subjects={data ? data.randomSubjects : []}
+      rowTitle="物理学"
       loading={loading}
       error={error !== undefined}
     />
