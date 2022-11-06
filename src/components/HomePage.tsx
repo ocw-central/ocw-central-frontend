@@ -317,7 +317,6 @@ const CatchPhrase = () => {
           }}
         >
           <Typography
-            fontFamily={"Poppins"}
             sx={{
               typography: { xs: "h4", sm: "h3" },
               textAlign: "center",
@@ -340,7 +339,6 @@ const CatchPhrase = () => {
       </Grid>
       <Grid item xs={12}>
         <Typography
-          fontFamily={"Poppins"}
           sx={{
             typography: { xs: "h4", sm: "h3" },
             textAlign: "center",
@@ -352,7 +350,6 @@ const CatchPhrase = () => {
       </Grid>
       <Grid item xs={12}>
         <Typography
-          fontFamily={"Poppins"}
           sx={{
             typography: { xs: "h4", sm: "h3" },
             textAlign: "center",
