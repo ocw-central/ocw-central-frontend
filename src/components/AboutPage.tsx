@@ -44,7 +44,7 @@ export function AboutPage() {
         >
           OCW Centralは大学によって無償で提供される教育資源であるOCW
           (OpenCourseWare) のポータルサイトです。
-          公益性の高い教育資源の保全とアクセス向上を目指し京都大学情報学研究科の学生有志により運営されています。
+          教育資源の保全とアクセス向上を目指し京都大学情報学研究科の学生有志により運営されています。
         </Typography>
       </Grid>
       <Grid item md={12} xs={12}>
@@ -85,14 +85,14 @@ export function AboutPage() {
             クリエイティブ・コモンズ・ライセンス 表示-非営利-継承 4.0 国際 (CC
             BY-NC-SA 4.0)
           </Link>
-          に基づき公開されます。このサイト上の全ての資料について、著作権は作成者の先生方に帰属します。
+          のもとで公開されます。このサイト上の全ての資料について、著作権は作成者の先生方に帰属します。
           ライセンス表記に関するご指摘や機能追加のご要望がありましたら下記のメールアドレスまでご連絡ください。
           <br />
           このウェブサービスのソースコードはMITライセンスのもとで
           <Link
             color="primary"
             underline="always"
-            href="https://github.com/orgs/ocw-central"
+            href="https://github.com/ocw-central"
           >
             GitHub
           </Link>
@@ -126,7 +126,7 @@ export function AboutPage() {
             color: "black",
           }}
         >
-          このサイト上の教育資料や書き起こし等の掲載情報の正確性に関して、一切の保証をいたしかねます。
+          このサイト上の教育資料や書き起こし等の掲載情報の正確性に関して、一切の保証をいたしません。
         </Typography>
         <br />
       </Grid>
