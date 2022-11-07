@@ -5,7 +5,7 @@ import { alpha } from "@mui/material/styles";
 
 type Props = {
   transcription: string;
-  setTime: (time: number) => void;
+  setTime: (time: { start: number }) => void;
   setAutoPlayOn: (autoPlayOn: number) => void;
 };
 
@@ -93,7 +93,7 @@ export function VideoTranscription(props: Props) {
               key={index}
               button
               onClick={() => {
-                props.setTime(Number(line.startTime));
+                props.setTime({ start: Number(line.startTime) });
                 props.setAutoPlayOn(1);
               }}
               sx={{
@@ -122,9 +122,7 @@ export function VideoTranscription(props: Props) {
                       pt: 0.5,
                     }}
                   >
-                    {`${convertSecondToTime(
-                      Number(processedLines[index].startTime)
-                    )} `}
+                    {`${convertSecondToTime(Number(line.startTime))} `}
                   </Typography>
                 </Grid>
                 <Grid item xs={11} sm={11}>
@@ -135,7 +133,7 @@ export function VideoTranscription(props: Props) {
                       fontSize: { xs: 16, sm: 20 },
                       pl: { md: 3.5, sm: 3, xs: 3 },
                     }}
-                  >{`${processedLines[index].text}`}</Typography>
+                  >{`${line.text}`}</Typography>
                 </Grid>
               </Grid>
             </ListItem>
