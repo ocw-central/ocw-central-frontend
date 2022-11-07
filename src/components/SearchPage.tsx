@@ -1,10 +1,11 @@
-import { Box, Grid, Tab, Tabs } from "@mui/material";
+import { Box, Grid, Tab, Tabs, Typography } from "@mui/material";
 import { useState } from "react";
 import { useLocation, useSearchParams } from "react-router-dom";
-import { AcademicFieldsList } from "./common/AcademicFieldsList";
+import { AcademicFieldsList } from "./searchPageComponents/AcademicFieldsList";
 import { ReportButton } from "@/components/common/ReportButton";
-import { SubjectSearchPanel } from "./searchPageComponents/SubjectSearchPanel";
-import { VideoSearchPanel } from "./searchPageComponents/VideoSearchPanel";
+import { SubjectPanel } from "./searchPageComponents/SubjectPanel";
+import { VideoPanel } from "./searchPageComponents/VideoPanel";
+import { DetailSearchBar } from "./searchPageComponents/DetailSearchBar";
 
 type TabPanelProps = {
   children?: React.ReactNode;
@@ -29,10 +30,8 @@ export function SearchPage() {
   const faculty: string = facultyParam !== null ? facultyParam : "";
   const academicFieldParam = searchParams.get("field");
   const field: string = academicFieldParam !== null ? academicFieldParam : "";
-  const isVideoSearch = searchParams.get("video") !== null;
-  const url = isVideoSearch
-    ? `${location.pathname}?title=${title}&faculty=${faculty}&field=${field}&video`
-    : `${location.pathname}?title=${title}&faculty=${faculty}&field=${field}&subject`;
+  const url = `${location.pathname}?title=${title}&faculty=${faculty}&field=${field}`;
+
   // for tab
   const [selectedTabIndex, setSelectedTabIndex] = useState(0);
   const handleTabChange = (event: React.SyntheticEvent, newValue: number) => {
@@ -81,9 +80,29 @@ export function SearchPage() {
             mt: 2,
           }}
         >
-          <Grid container direction="row">
-            <Grid item sx={{ ml: "auto", mr: 1 }}>
-              <ReportButton url={url} name="ご意見・不具合報告" />
+          <Grid container direction="column">
+            <Grid container direction="row">
+              <Grid
+                item
+                sx={{
+                  alignSelf: "center",
+                }}
+              >
+                <Typography
+                  variant="h5"
+                  component="div"
+                  align="left"
+                  sx={{ color: "black", ml: { sm: 2, xs: 2 } }}
+                >
+                  <b>詳細検索</b>
+                </Typography>
+              </Grid>
+              <Grid item sx={{ ml: "auto", mr: 1 }}>
+                <ReportButton url={url} name="ご意見・不具合報告" />
+              </Grid>
+            </Grid>
+            <Grid item>
+              <DetailSearchBar />
             </Grid>
           </Grid>
           <Box>
@@ -93,15 +112,15 @@ export function SearchPage() {
               aria-label="basic tabs example"
               variant="fullWidth"
             >
-              <Tab label="科目検索" />
-              <Tab label="講義動画検索" />
+              <Tab label="科目" />
+              <Tab label="講義動画" />
             </Tabs>
           </Box>
           <TabPanel value={selectedTabIndex} index={0}>
-            <SubjectSearchPanel />
+            <SubjectPanel />
           </TabPanel>
           <TabPanel value={selectedTabIndex} index={1}>
-            <VideoSearchPanel />
+            <VideoPanel />
           </TabPanel>
         </Box>
       </Grid>

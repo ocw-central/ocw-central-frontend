@@ -101,7 +101,7 @@ export function FieldsPage() {
                 const academicFieldParames = createSearchParams({
                   field: field,
                 });
-                navigate(`/search/?${academicFieldParames}&subject`);
+                navigate(`/search/?${academicFieldParames}`);
               }}
               sx={{
                 fullWidth: "true",
@@ -139,7 +139,7 @@ export function FieldsPage() {
               const academicFieldParames = createSearchParams({
                 field: field,
               });
-              navigate(`/search/?${academicFieldParames}&subject`);
+              navigate(`/search/?${academicFieldParames}`);
             }}
             sx={{
               fullWidth: "true",

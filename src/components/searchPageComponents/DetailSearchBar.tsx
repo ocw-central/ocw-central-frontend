@@ -1,10 +1,11 @@
 import { Box, Grid, InputBase, Typography } from "@mui/material";
 import Button from "@mui/material/Button";
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 
 import SearchIcon from "@mui/icons-material/Search";
 import { alpha, styled } from "@mui/material/styles";
 import * as React from "react";
+import { createSearchParams, useNavigate } from "react-router-dom";
 
 const Search = styled(Box)(({ theme }) => ({
   position: "relative",
@@ -71,25 +72,27 @@ const SearchBar = (props: {
   </Search>
 );
 
-export const SubjectDetailSearchBar = ({
-  setSearchParams,
-  searchFaculty,
-  setSearchFaculty,
-  searchTitle,
-  setSearchTitle,
-  searchAcademicField,
-  setSearchAcademicField,
-  onSearch,
-}: {
-  setSearchParams: () => void;
-  searchTitle: string;
-  setSearchTitle: Dispatch<SetStateAction<string>>;
-  searchFaculty: string;
-  setSearchFaculty: Dispatch<SetStateAction<string>>;
-  searchAcademicField: string;
-  setSearchAcademicField: Dispatch<SetStateAction<string>>;
-  onSearch: () => void;
-}) => {
+type Params = {
+  title?: string;
+  faculty?: string;
+  field?: string;
+};
+export function DetailSearchBar() {
+  const [searchTitle, setSearchTitle] = useState("");
+  const [searchFaculty, setSearchFaculty] = useState("");
+  const [searchAcademicField, setSearchAcademicField] = useState("");
+
+  const navigate = useNavigate();
+  const setSearchParams = () => {
+    const params: Params = {
+      title: searchTitle,
+      faculty: searchFaculty,
+      field: searchAcademicField,
+    };
+    const searchParams = createSearchParams(params);
+
+    navigate(`?${searchParams}`);
+  };
   return (
     <Box
       sx={{
@@ -136,9 +139,9 @@ export const SubjectDetailSearchBar = ({
         aria-label="search"
         onClick={() => {
           setSearchParams();
-          onSearch();
         }}
         size="large"
+        disabled={!searchTitle && !searchFaculty && !searchAcademicField}
         sx={{
           mt: 2,
           width: "15em",
@@ -151,4 +154,4 @@ export const SubjectDetailSearchBar = ({
       </Button>
     </Box>
   );
-};
+}

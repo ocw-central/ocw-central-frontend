@@ -87,7 +87,7 @@ export function AcademicFieldsList(props: Props) {
                   });
                   props.setJpFieldOpen(true);
                   props.onClick && props.onClick();
-                  navigate(`/search/?${academicFieldParames}&subject`);
+                  navigate(`/search/?${academicFieldParames}`);
                 }}
                 sx={{
                   fullWidth: "true",
@@ -138,7 +138,7 @@ export function AcademicFieldsList(props: Props) {
                 });
                 props.setEnFieldOpen(true);
                 props.onClick && props.onClick();
-                navigate(`/search/?${academicFieldParames}&subject`);
+                navigate(`/search/?${academicFieldParames}`);
               }}
               sx={{
                 fullWidth: "true",
