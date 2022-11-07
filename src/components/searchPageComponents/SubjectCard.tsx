@@ -1,13 +1,7 @@
-import { Grid, ImageListItem, ImageListItemBar } from "@mui/material";
+import { ImageListItem, ImageListItemBar } from "@mui/material";
 import { alpha, styled } from "@mui/material/styles";
 import { Link } from "react-router-dom";
-
-type SubjectOnSearchPage = {
-  id: string;
-  title: string;
-  faculty: string;
-  thumbnailLink: string;
-};
+import { SubjectOnSearchPage } from "@/gqltypes/subjectsOnSearchPage";
 
 const MyImageListItemBar = styled(ImageListItemBar)({
   color: "white",
@@ -22,20 +16,15 @@ const MyImageListItem = styled(ImageListItem)({
 
 export const SubjectCard = (subject: SubjectOnSearchPage) => {
   return (
-    <Grid item xs={12} sm={4} md={4} sx={{ p: 0.5 }}>
-      <Link to={`/subjects/${subject.id}`}>
-        <MyImageListItem>
-          <img
-            src={`${subject.thumbnailLink}`}
-            loading="lazy"
-            style={{ height: 280 }}
-          />
-          <MyImageListItemBar
-            title={subject.title}
-            subtitle={subject.faculty}
-          />
-        </MyImageListItem>
-      </Link>
-    </Grid>
+    <Link to={`/subjects/${subject.id}`}>
+      <MyImageListItem>
+        <img
+          src={`${subject.thumbnailLink}`}
+          loading="lazy"
+          style={{ height: 280 }}
+        />
+        <MyImageListItemBar title={subject.title} subtitle={subject.faculty} />
+      </MyImageListItem>
+    </Link>
   );
 };

@@ -40,6 +40,15 @@ export type Query = {
   randomSubjects: Array<Subject>;
   subject: Subject;
   subjects: Array<Subject>;
+  subjectsWithSpecifiedVideos: Array<SubjectWithSpecifiedVideos>;
+};
+
+
+export type QueryRandomSubjectsArgs = {
+  academicField: Scalars['String'];
+  category: Scalars['String'];
+  numSubjects: Scalars['Int'];
+  series: Scalars['String'];
 };
 
 
@@ -54,13 +63,19 @@ export type QuerySubjectsArgs = {
   title: Scalars['String'];
 };
 
+
+export type QuerySubjectsWithSpecifiedVideosArgs = {
+  faculty: Scalars['String'];
+  title: Scalars['String'];
+};
+
 export type RelatedSubject = Node & {
   __typename?: 'RelatedSubject';
   academicField: Scalars['String'];
   category: Scalars['String'];
   department: Scalars['String'];
   faculty: Scalars['String'];
-  firstHeldOn: Scalars['Time'];
+  firstHeldOn?: Maybe<Scalars['Time']>;
   freeDescription: Scalars['String'];
   id: Scalars['ID'];
   language: Scalars['String'];
@@ -103,6 +118,12 @@ export type Subject = Node & {
   videos: Array<Video>;
 };
 
+export type SubjectWithSpecifiedVideos = {
+  __typename?: 'SubjectWithSpecifiedVideos';
+  subject: Subject;
+  videos: Array<Video>;
+};
+
 export type Subpage = Node & {
   __typename?: 'Subpage';
   content: Scalars['String'];
@@ -139,7 +160,7 @@ export type Video = Node & {
   faculty: Scalars['String'];
   id: Scalars['ID'];
   language: Scalars['String'];
-  lecturedOn: Scalars['Time'];
+  lecturedOn?: Maybe<Scalars['Time']>;
   link: Scalars['String'];
   ordering: Scalars['Int'];
   title: Scalars['String'];
@@ -166,7 +187,7 @@ export type SubjectQueryVariables = Exact<{
 }>;
 
 
-export type SubjectQuery = { __typename?: 'Query', subject: { __typename?: 'Subject', id: string, title: string, category: string, location: string, department: string, firstHeldOn?: any | null, faculty: string, language: string, freeDescription: string, series: string, academicField: string, thumbnailLink: string, videos: Array<{ __typename?: 'Video', id: string, title: string, ordering: number, link: string, faculty: string, lecturedOn: any, videoLength: number, language: string, transcription: string, chapters: Array<{ __typename?: 'Chapter', id: string, startAt: number, topic: string, thumbnailLink: string }> }>, resources: Array<{ __typename?: 'Resource', id: string, title: string, ordering: number, description: string, link: string }>, relatedSubjects: Array<{ __typename?: 'RelatedSubject', id: string, title: string, thumbnailLink: string, faculty: string }>, syllabus?: { __typename?: 'Syllabus', id: string, faculty: string, language: string, subjectNumbering: string, academicYear: number, semester: string, numCredit: number, courseFormat: string, assignedGrade: string, targetedAudience: string, courseDayPeriod: string, outline: string, objective: string, lessonPlan: string, gradingMethod: string, courseRequirement: string, outClassLearning: string, reference: string, remark: string, subpages: Array<{ __typename?: 'Subpage', id: string, content: string }> } | null } };
+export type SubjectQuery = { __typename?: 'Query', subject: { __typename?: 'Subject', id: string, title: string, category: string, location: string, department: string, firstHeldOn?: any | null, faculty: string, language: string, freeDescription: string, series: string, academicField: string, thumbnailLink: string, videos: Array<{ __typename?: 'Video', id: string, title: string, ordering: number, link: string, faculty: string, lecturedOn?: any | null, videoLength: number, language: string, transcription: string, chapters: Array<{ __typename?: 'Chapter', id: string, startAt: number, topic: string, thumbnailLink: string }> }>, resources: Array<{ __typename?: 'Resource', id: string, title: string, ordering: number, description: string, link: string }>, relatedSubjects: Array<{ __typename?: 'RelatedSubject', id: string, title: string, thumbnailLink: string, faculty: string }>, syllabus?: { __typename?: 'Syllabus', id: string, faculty: string, language: string, subjectNumbering: string, academicYear: number, semester: string, numCredit: number, courseFormat: string, assignedGrade: string, targetedAudience: string, courseDayPeriod: string, outline: string, objective: string, lessonPlan: string, gradingMethod: string, courseRequirement: string, outClassLearning: string, reference: string, remark: string, subpages: Array<{ __typename?: 'Subpage', id: string, content: string }> } | null } };
 
 export type SubjectOnHomepageQueryVariables = Exact<{
   id: Scalars['ID'];
@@ -175,7 +196,12 @@ export type SubjectOnHomepageQueryVariables = Exact<{
 
 export type SubjectOnHomepageQuery = { __typename?: 'Query', subject: { __typename?: 'Subject', id: string, title: string, thumbnailLink: string, faculty: string } };
 
-export type RandomSubjectQueryVariables = Exact<{ [key: string]: never; }>;
+export type RandomSubjectQueryVariables = Exact<{
+  category: Scalars['String'];
+  series: Scalars['String'];
+  academicField: Scalars['String'];
+  numSubjects: Scalars['Int'];
+}>;
 
 
 export type RandomSubjectQuery = { __typename?: 'Query', randomSubjects: Array<{ __typename?: 'Subject', id: string, title: string, thumbnailLink: string, faculty: string }> };
@@ -396,8 +422,13 @@ export type SubjectOnHomepageQueryHookResult = ReturnType<typeof useSubjectOnHom
 export type SubjectOnHomepageLazyQueryHookResult = ReturnType<typeof useSubjectOnHomepageLazyQuery>;
 export type SubjectOnHomepageQueryResult = Apollo.QueryResult<SubjectOnHomepageQuery, SubjectOnHomepageQueryVariables>;
 export const RandomSubjectDocument = gql`
-    query randomSubject {
-  randomSubjects {
+    query randomSubject($category: String!, $series: String!, $academicField: String!, $numSubjects: Int!) {
+  randomSubjects(
+    category: $category
+    series: $series
+    academicField: $academicField
+    numSubjects: $numSubjects
+  ) {
     id
     title
     thumbnailLink
@@ -418,10 +449,14 @@ export const RandomSubjectDocument = gql`
  * @example
  * const { data, loading, error } = useRandomSubjectQuery({
  *   variables: {
+ *      category: // value for 'category'
+ *      series: // value for 'series'
+ *      academicField: // value for 'academicField'
+ *      numSubjects: // value for 'numSubjects'
  *   },
  * });
  */
-export function useRandomSubjectQuery(baseOptions?: Apollo.QueryHookOptions<RandomSubjectQuery, RandomSubjectQueryVariables>) {
+export function useRandomSubjectQuery(baseOptions: Apollo.QueryHookOptions<RandomSubjectQuery, RandomSubjectQueryVariables>) {
         const options = {...defaultOptions, ...baseOptions}
         return Apollo.useQuery<RandomSubjectQuery, RandomSubjectQueryVariables>(RandomSubjectDocument, options);
       }

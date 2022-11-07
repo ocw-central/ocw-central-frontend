@@ -89,8 +89,18 @@ query subjectOnHomepage($id: ID!) {
   }
 }
 
-query randomSubject {
-  randomSubjects {
+query randomSubject(
+  $category: String!
+  $series: String!
+  $academicField: String!
+  $numSubjects: Int!
+) {
+  randomSubjects(
+    category: $category
+    series: $series
+    academicField: $academicField
+    numSubjects: $numSubjects
+  ) {
     id
     title
     thumbnailLink
