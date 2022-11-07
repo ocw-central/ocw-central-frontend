@@ -19,7 +19,7 @@ export type Subject = {
     ordering: number;
     link: string;
     faculty: string;
-    lecturedOn: string;
+    lecturedOn?: string;
     videoLength: number;
     language: string;
     transcription: string;
