@@ -18,13 +18,15 @@ export const SubjectSearchResults = (subjects: Subjects) => {
   return (
     <Grid container sx={{ height: 400 }}>
       {subjects.subjects?.map((subject) => (
-        <SubjectCard
-          id={subject.id}
-          key={subject.id}
-          title={subject.title}
-          faculty={subject.faculty}
-          thumbnailLink={subject.thumbnailLink}
-        />
+        <Grid item xs={12} sm={4} md={4} sx={{ p: 0.5 }} key={subject.id}>
+          <SubjectCard
+            id={subject.id}
+            key={subject.id}
+            title={subject.title}
+            faculty={subject.faculty}
+            thumbnailLink={subject.thumbnailLink}
+          />
+        </Grid>
       ))}
     </Grid>
   );

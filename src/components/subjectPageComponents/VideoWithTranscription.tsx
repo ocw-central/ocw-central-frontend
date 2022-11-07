@@ -24,7 +24,7 @@ const removeParenthesis = (s: string) => {
 
 export function VideoWithTranscription(props: Props) {
   const videos = props.videos ?? []; //already sorted by `ordering` field
-  const [VideoStartTime, SetVideoStartTime] = useState(0);
+  const [VideoStartTime, SetVideoStartTime] = useState({ start: 0 });
   const [AutoPlayOn, SetAutoPlayOn] = useState(0);
   const [searchParams] = useSearchParams();
 
@@ -110,7 +110,7 @@ export function VideoWithTranscription(props: Props) {
         )}
         <PlayerWrapper
           FocusedYoutubeId={FocusedYoutubeId}
-          startAt={VideoStartTime}
+          startAt={VideoStartTime.start}
           autoPlayOn={AutoPlayOn}
         />
       </Grid>

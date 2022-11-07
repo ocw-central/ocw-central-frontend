@@ -44,6 +44,14 @@ export type Query = {
 };
 
 
+export type QueryRandomSubjectsArgs = {
+  academicField: Scalars['String'];
+  category: Scalars['String'];
+  numSubjects: Scalars['Int'];
+  series: Scalars['String'];
+};
+
+
 export type QuerySubjectArgs = {
   id: Scalars['ID'];
 };
@@ -196,7 +204,12 @@ export type SubjectOnHomepageQueryVariables = Exact<{
 
 export type SubjectOnHomepageQuery = { __typename?: 'Query', subject: { __typename?: 'Subject', id: string, title: string, thumbnailLink: string, faculty: string } };
 
-export type RandomSubjectQueryVariables = Exact<{ [key: string]: never; }>;
+export type RandomSubjectQueryVariables = Exact<{
+  category: Scalars['String'];
+  series: Scalars['String'];
+  academicField: Scalars['String'];
+  numSubjects: Scalars['Int'];
+}>;
 
 
 export type RandomSubjectQuery = { __typename?: 'Query', randomSubjects: Array<{ __typename?: 'Subject', id: string, title: string, thumbnailLink: string, faculty: string }> };
@@ -462,8 +475,13 @@ export type SubjectOnHomepageQueryHookResult = ReturnType<typeof useSubjectOnHom
 export type SubjectOnHomepageLazyQueryHookResult = ReturnType<typeof useSubjectOnHomepageLazyQuery>;
 export type SubjectOnHomepageQueryResult = Apollo.QueryResult<SubjectOnHomepageQuery, SubjectOnHomepageQueryVariables>;
 export const RandomSubjectDocument = gql`
-    query randomSubject {
-  randomSubjects {
+    query randomSubject($category: String!, $series: String!, $academicField: String!, $numSubjects: Int!) {
+  randomSubjects(
+    category: $category
+    series: $series
+    academicField: $academicField
+    numSubjects: $numSubjects
+  ) {
     id
     title
     thumbnailLink
@@ -484,10 +502,14 @@ export const RandomSubjectDocument = gql`
  * @example
  * const { data, loading, error } = useRandomSubjectQuery({
  *   variables: {
+ *      category: // value for 'category'
+ *      series: // value for 'series'
+ *      academicField: // value for 'academicField'
+ *      numSubjects: // value for 'numSubjects'
  *   },
  * });
  */
-export function useRandomSubjectQuery(baseOptions?: Apollo.QueryHookOptions<RandomSubjectQuery, RandomSubjectQueryVariables>) {
+export function useRandomSubjectQuery(baseOptions: Apollo.QueryHookOptions<RandomSubjectQuery, RandomSubjectQueryVariables>) {
         const options = {...defaultOptions, ...baseOptions}
         return Apollo.useQuery<RandomSubjectQuery, RandomSubjectQueryVariables>(RandomSubjectDocument, options);
       }

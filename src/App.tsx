@@ -50,7 +50,7 @@ function App() {
             <Routes>
               <Route path="/" element={<HomePage />} />
               <Route path="/subjects/:id" element={<SubjectPage />} />
-              <Route path="/search" element={<SearchPage />}></Route>
+              <Route path="/search" element={<SearchPage />} />
               <Route path="/about" element={<AboutPage />} />
               <Route path="/fields" element={<FieldsPage />} />
               <Route path="*" element={<PageNotFound />} />
