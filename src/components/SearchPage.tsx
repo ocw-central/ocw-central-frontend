@@ -106,7 +106,7 @@ export function SearchPage() {
               <DetailSearchBar />
             </Grid>
           </Grid>
-          <Box>
+          <Box sx={{ pb: "1em" }}>
             <Tabs
               value={selectedTabIndex}
               onChange={handleTabChange}
