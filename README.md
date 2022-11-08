@@ -6,6 +6,7 @@
 [![Prettier](https://github.com/ocw-central/ocw-central-frontend/actions/workflows/Prettier.yml/badge.svg)](https://github.com/ocw-central/ocw-central-frontend/actions/workflows/Prettier.yml)
 [![Jest](https://github.com/ocw-central/ocw-central-frontend/actions/workflows/Jest.yml/badge.svg)](https://github.com/ocw-central/ocw-central-frontend/actions/workflows/Jest.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue)](https://img.shields.io/badge/license-MIT-blue)
+[![Gitter](https://badges.gitter.im/ocw-central/community.svg)](https://gitter.im/ocw-central/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
 ## Requirement
 
