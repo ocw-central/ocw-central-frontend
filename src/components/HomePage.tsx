@@ -26,9 +26,10 @@ export function HomePage() {
     >
       <Grid
         container
+        direction="row"
         spacing={{ xs: 3, sm: 7 }}
         flexDirection="column"
-        alignItems="center"
+        alignItems="right"
       >
         <Grid item xs={12}>
           <HomeMessagePane />
@@ -37,24 +38,25 @@ export function HomePage() {
           <SubjectsPane />
         </Grid>
         <Grid item>
-          <TwitterShareButton
-            title={"OCW Central"}
-            via="ocwcentral"
-            url={window.location.href}
-            related={["ocwcentral"]}
+          <Box>
+            <TwitterShareButton
+              title={"OCW Central"}
+              via="ocwcentral"
+              url={window.location.href}
+              related={["ocwcentral"]}
+            >
+              <TwitterIcon size={50} round />
+            </TwitterShareButton>
+          </Box>
+          <Grid
+            container
+            sx={{
+              justifyContent: "right",
+              pr: 2,
+            }}
           >
-            <TwitterIcon size={50} round />
-          </TwitterShareButton>
-        </Grid>
-        <Grid
-          item
-          container
-          sx={{
-            justifyContent: "right",
-            pr: 2,
-          }}
-        >
-          <ReportButton url="/" name="ご意見・不具合報告" />
+            <ReportButton url="/" name="ご意見・不具合報告" />
+          </Grid>
         </Grid>
       </Grid>
     </Box>
