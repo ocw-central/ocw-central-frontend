@@ -1,12 +1,13 @@
+import { ReportButton } from "@/components/common/ReportButton";
+import ClassIcon from "@mui/icons-material/Class";
+import OndemandVideoIcon from "@mui/icons-material/OndemandVideo";
 import { Box, Grid, Tab, Tabs, Typography } from "@mui/material";
 import { useState } from "react";
 import { useLocation, useSearchParams } from "react-router-dom";
 import { AcademicFieldsList } from "./searchPageComponents/AcademicFieldsList";
-import { ReportButton } from "@/components/common/ReportButton";
+import { DetailSearchBar } from "./searchPageComponents/DetailSearchBar";
 import { SubjectPanel } from "./searchPageComponents/SubjectPanel";
 import { VideoPanel } from "./searchPageComponents/VideoPanel";
-import { DetailSearchBar } from "./searchPageComponents/DetailSearchBar";
-
 type TabPanelProps = {
   children?: React.ReactNode;
   index: number;
@@ -109,11 +110,23 @@ export function SearchPage() {
             <Tabs
               value={selectedTabIndex}
               onChange={handleTabChange}
-              aria-label="basic tabs example"
+              textColor="primary"
+              indicatorColor="primary"
+              aria-label="search tabs"
               variant="fullWidth"
             >
-              <Tab label="科目" />
-              <Tab label="講義動画" />
+              <Tab
+                icon={<ClassIcon />}
+                iconPosition="start"
+                label="科目"
+                sx={{ fontSize: 20, fontWeight: "bold" }}
+              />
+              <Tab
+                icon={<OndemandVideoIcon />}
+                iconPosition="start"
+                label="講義動画"
+                sx={{ fontSize: 20, fontWeight: "bold" }}
+              />
             </Tabs>
           </Box>
           <TabPanel value={selectedTabIndex} index={0}>
