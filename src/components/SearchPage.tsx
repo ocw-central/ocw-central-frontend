@@ -19,7 +19,7 @@ function TabPanel(props: TabPanelProps) {
 }
 
 export function SearchPage() {
-  const [jpFieldOpen, setJpFieldOpen] = useState(false);
+  const [jpFieldOpen, setJpFieldOpen] = useState(true);
   const [enFieldOpen, setEnFieldOpen] = useState(false);
 
   // for report button

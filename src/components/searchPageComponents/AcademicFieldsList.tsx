@@ -62,7 +62,7 @@ export function AcademicFieldsList(props: Props) {
   );
 
   return (
-    <List sx={{ margin: "2em" }}>
+    <List sx={{ m: "2em", mr: "1em" }}>
       <Accordion defaultExpanded={props.jpFieldOpen}>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
