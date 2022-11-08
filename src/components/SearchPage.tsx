@@ -32,6 +32,9 @@ export function SearchPage() {
   const academicFieldParam = searchParams.get("field");
   const field: string = academicFieldParam !== null ? academicFieldParam : "";
   const url = `${location.pathname}?title=${title}&faculty=${faculty}&field=${field}`;
+  // disable video tab when only academic field is filled
+  const disableVideoTab =
+    title.length == 0 && faculty.length == 0 && field.length != 0;
 
   // for tab
   const [selectedTabIndex, setSelectedTabIndex] = useState(0);
@@ -107,27 +110,53 @@ export function SearchPage() {
             </Grid>
           </Grid>
           <Box sx={{ pb: "1em" }}>
-            <Tabs
-              value={selectedTabIndex}
-              onChange={handleTabChange}
-              textColor="primary"
-              indicatorColor="primary"
-              aria-label="search tabs"
-              variant="fullWidth"
-            >
-              <Tab
-                icon={<ClassIcon />}
-                iconPosition="start"
-                label="科目"
-                sx={{ fontSize: 20, fontWeight: "bold" }}
-              />
-              <Tab
-                icon={<OndemandVideoIcon />}
-                iconPosition="start"
-                label="講義動画"
-                sx={{ fontSize: 20, fontWeight: "bold" }}
-              />
-            </Tabs>
+            {!disableVideoTab && (
+              <Tabs
+                value={selectedTabIndex}
+                onChange={handleTabChange}
+                textColor="primary"
+                indicatorColor="primary"
+                aria-label="search tabs"
+                variant="fullWidth"
+              >
+                <Tab
+                  icon={<ClassIcon />}
+                  iconPosition="start"
+                  label="科目"
+                  sx={{ fontSize: 20, fontWeight: "bold" }}
+                />
+                <Tab
+                  icon={<OndemandVideoIcon />}
+                  iconPosition="start"
+                  label="講義動画"
+                  sx={{ fontSize: 20, fontWeight: "bold" }}
+                />
+              </Tabs>
+            )}
+            {disableVideoTab && (
+              <Tabs
+                value={selectedTabIndex}
+                onChange={handleTabChange}
+                textColor="primary"
+                indicatorColor="primary"
+                aria-label="search tabs"
+                variant="fullWidth"
+              >
+                <Tab
+                  icon={<ClassIcon />}
+                  iconPosition="start"
+                  label="科目"
+                  sx={{ fontSize: 20, fontWeight: "bold" }}
+                />
+                <Tab
+                  icon={<OndemandVideoIcon />}
+                  iconPosition="start"
+                  disabled
+                  label="講義動画"
+                  sx={{ fontSize: 20, fontWeight: "bold" }}
+                />
+              </Tabs>
+            )}
           </Box>
           <TabPanel value={selectedTabIndex} index={0}>
             <SubjectPanel />
