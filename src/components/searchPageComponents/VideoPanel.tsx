@@ -1,6 +1,7 @@
 import { Loading } from "@/components/common/Loading";
 import { useSearchVideosQuery } from "@/generated/graphql";
 import { Grid, Typography } from "@mui/material";
+import urlParser from "js-video-url-parser";
 import { useSearchParams } from "react-router-dom";
 import { VideoCard } from "./VideoCard";
 
@@ -11,6 +12,9 @@ export function VideoPanel() {
   const title: string = titleParam !== null ? titleParam : "";
   const facultyParam = searchParams.get("faculty");
   const faculty: string = facultyParam !== null ? facultyParam : "";
+  function getYoutubeThumbnailLink(link: string) {
+    return `https://i3.ytimg.com/vi/${urlParser.parse(link)?.id}/0.jpg`;
+  }
 
   const { data, loading, error } = useSearchVideosQuery({
     variables: {
@@ -56,9 +60,7 @@ export function VideoPanel() {
           subjectWithSpecifiedVideos.videos.map((video) => (
             <VideoCard
               subjectId={subjectWithSpecifiedVideos.subject.id}
-              subjectThumbnailLink={
-                subjectWithSpecifiedVideos.subject.thumbnailLink
-              }
+              subjectThumbnailLink={getYoutubeThumbnailLink(video.link)}
               videoId={video.id}
               videoTitle={video.title}
               videoFaculty={video.faculty}

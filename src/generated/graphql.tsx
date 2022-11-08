@@ -188,7 +188,7 @@ export type SearchVideosQueryVariables = Exact<{
 }>;
 
 
-export type SearchVideosQuery = { __typename?: 'Query', subjectsWithSpecifiedVideos: Array<{ __typename?: 'SubjectWithSpecifiedVideos', subject: { __typename?: 'Subject', id: string, thumbnailLink: string }, videos: Array<{ __typename?: 'Video', id: string, title: string, ordering: number, faculty: string }> }> };
+export type SearchVideosQuery = { __typename?: 'Query', subjectsWithSpecifiedVideos: Array<{ __typename?: 'SubjectWithSpecifiedVideos', subject: { __typename?: 'Subject', id: string, thumbnailLink: string }, videos: Array<{ __typename?: 'Video', id: string, title: string, ordering: number, faculty: string, link: string }> }> };
 
 export type SubjectQueryVariables = Exact<{
   id: Scalars['ID'];
@@ -301,6 +301,7 @@ export const SearchVideosDocument = gql`
       title
       ordering
       faculty
+      link
     }
   }
 }
