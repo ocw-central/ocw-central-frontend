@@ -182,6 +182,14 @@ export type SubjectOnSearchPageQueryVariables = Exact<{
 
 export type SubjectOnSearchPageQuery = { __typename?: 'Query', subjects: Array<{ __typename?: 'Subject', id: string, title: string, thumbnailLink: string, faculty: string }> };
 
+export type SearchVideosQueryVariables = Exact<{
+  title: Scalars['String'];
+  faculty: Scalars['String'];
+}>;
+
+
+export type SearchVideosQuery = { __typename?: 'Query', subjectsWithSpecifiedVideos: Array<{ __typename?: 'SubjectWithSpecifiedVideos', subject: { __typename?: 'Subject', id: string, thumbnailLink: string }, videos: Array<{ __typename?: 'Video', id: string, title: string, ordering: number, faculty: string, link: string }> }> };
+
 export type SubjectQueryVariables = Exact<{
   id: Scalars['ID'];
 }>;
@@ -281,6 +289,52 @@ export function useSubjectOnSearchPageLazyQuery(baseOptions?: Apollo.LazyQueryHo
 export type SubjectOnSearchPageQueryHookResult = ReturnType<typeof useSubjectOnSearchPageQuery>;
 export type SubjectOnSearchPageLazyQueryHookResult = ReturnType<typeof useSubjectOnSearchPageLazyQuery>;
 export type SubjectOnSearchPageQueryResult = Apollo.QueryResult<SubjectOnSearchPageQuery, SubjectOnSearchPageQueryVariables>;
+export const SearchVideosDocument = gql`
+    query searchVideos($title: String!, $faculty: String!) {
+  subjectsWithSpecifiedVideos(title: $title, faculty: $faculty) {
+    subject {
+      id
+      thumbnailLink
+    }
+    videos {
+      id
+      title
+      ordering
+      faculty
+      link
+    }
+  }
+}
+    `;
+
+/**
+ * __useSearchVideosQuery__
+ *
+ * To run a query within a React component, call `useSearchVideosQuery` and pass it any options that fit your needs.
+ * When your component renders, `useSearchVideosQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useSearchVideosQuery({
+ *   variables: {
+ *      title: // value for 'title'
+ *      faculty: // value for 'faculty'
+ *   },
+ * });
+ */
+export function useSearchVideosQuery(baseOptions: Apollo.QueryHookOptions<SearchVideosQuery, SearchVideosQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<SearchVideosQuery, SearchVideosQueryVariables>(SearchVideosDocument, options);
+      }
+export function useSearchVideosLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<SearchVideosQuery, SearchVideosQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<SearchVideosQuery, SearchVideosQueryVariables>(SearchVideosDocument, options);
+        }
+export type SearchVideosQueryHookResult = ReturnType<typeof useSearchVideosQuery>;
+export type SearchVideosLazyQueryHookResult = ReturnType<typeof useSearchVideosLazyQuery>;
+export type SearchVideosQueryResult = Apollo.QueryResult<SearchVideosQuery, SearchVideosQueryVariables>;
 export const SubjectDocument = gql`
     query subject($id: ID!) {
   subject(id: $id) {

@@ -7,6 +7,22 @@ query subjectOnSearchPage($title: String!, $faculty: String!, $field: String!) {
   }
 }
 
+query searchVideos($title: String!, $faculty: String!) {
+  subjectsWithSpecifiedVideos(title: $title, faculty: $faculty) {
+    subject {
+      id
+      thumbnailLink
+    }
+    videos {
+      id
+      title
+      ordering
+      faculty
+      link
+    }
+  }
+}
+
 query subject($id: ID!) {
   subject(id: $id) {
     id
