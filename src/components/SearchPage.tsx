@@ -1,45 +1,29 @@
-import { Loading } from "@/components/common/Loading";
-import { DetailSearchBar } from "@/components/searchPageComponents/DetailSearchBar";
-import { SearchResults } from "@/components/searchPageComponents/SearchResults";
-import { useSubjectOnSearchPageQuery } from "@/generated/graphql";
-import { Box, Divider, Grid, Typography } from "@mui/material";
-import { useState } from "react";
-import {
-  createSearchParams,
-  useLocation,
-  useNavigate,
-  useSearchParams,
-} from "react-router-dom";
-import { AcademicFieldsList } from "./common/AcademicFieldsList";
 import { ReportButton } from "@/components/common/ReportButton";
-
-type Params = {
-  title?: string;
-  faculty?: string;
-  field?: string;
+import ClassIcon from "@mui/icons-material/Class";
+import OndemandVideoIcon from "@mui/icons-material/OndemandVideo";
+import { Box, Grid, Tab, Tabs, Typography } from "@mui/material";
+import { useState } from "react";
+import { useLocation, useSearchParams } from "react-router-dom";
+import { AcademicFieldsList } from "./searchPageComponents/AcademicFieldsList";
+import { DetailSearchBar } from "./searchPageComponents/DetailSearchBar";
+import { SubjectPanel } from "./searchPageComponents/SubjectPanel";
+import { VideoPanel } from "./searchPageComponents/VideoPanel";
+type TabPanelProps = {
+  children?: React.ReactNode;
+  index: number;
+  value: number;
 };
 
+function TabPanel(props: TabPanelProps) {
+  return <Box hidden={props.value !== props.index}>{props.children}</Box>;
+}
+
 export function SearchPage() {
-  const navigate = useNavigate();
-  const location = useLocation();
-  const [searchTitle, setSearchTitle] = useState("");
-  const [searchFaculty, setSearchFaculty] = useState("");
-  const [searchAcademicField, setSearchAcademicField] = useState("");
-  const [onSearch, setOnSearch] = useState(false);
-  const [jpFieldOpen, setJpFieldOpen] = useState(false);
+  const [jpFieldOpen, setJpFieldOpen] = useState(true);
   const [enFieldOpen, setEnFieldOpen] = useState(false);
 
-  const setSearchParams = () => {
-    const params: Params = {
-      title: searchTitle,
-      faculty: searchFaculty,
-      field: searchAcademicField,
-    };
-    const searchParams = createSearchParams(params);
-
-    navigate(`?${searchParams}`);
-  };
-
+  // for report button
+  const location = useLocation();
   const [searchParams] = useSearchParams();
   const titleParam = searchParams.get("title");
   const title: string = titleParam !== null ? titleParam : "";
@@ -47,21 +31,16 @@ export function SearchPage() {
   const faculty: string = facultyParam !== null ? facultyParam : "";
   const academicFieldParam = searchParams.get("field");
   const field: string = academicFieldParam !== null ? academicFieldParam : "";
+  const url = `${location.pathname}?title=${title}&faculty=${faculty}&field=${field}`;
+  // disable video tab when only academic field is filled
+  const disableVideoTab =
+    title.length == 0 && faculty.length == 0 && field.length != 0;
 
-  const { data, loading, error } = useSubjectOnSearchPageQuery({
-    variables: {
-      title: title,
-      faculty: faculty,
-      field: field,
-    },
-    skip: title === "" && faculty === "" && field === "",
-  });
-  if (loading) {
-    return <Loading size={"7em"} color={"primary"} />;
-  }
-  if (error) {
-    return <div>Error</div>;
-  }
+  // for tab
+  const [selectedTabIndex, setSelectedTabIndex] = useState(0);
+  const handleTabChange = (event: React.SyntheticEvent, newValue: number) => {
+    setSelectedTabIndex(newValue);
+  };
 
   return (
     <Grid container>
@@ -97,62 +76,94 @@ export function SearchPage() {
       >
         <Box
           sx={{
-            m: {
+            mx: {
               xs: 0,
               md: 4,
             },
             mb: 2,
+            mt: 2,
           }}
         >
-          <Grid container direction="row">
-            <Grid
-              item
-              sx={{
-                alignSelf: "center",
-              }}
-            >
-              <Typography
-                variant="h5"
-                component="div"
-                align="left"
-                sx={{ color: "black", ml: { sm: 1, xs: 1 } }}
+          <Grid container direction="column">
+            <Grid container direction="row">
+              <Grid
+                item
+                sx={{
+                  alignSelf: "center",
+                }}
               >
-                <b>詳細検索</b>
-              </Typography>
+                <Typography
+                  variant="h5"
+                  component="div"
+                  align="left"
+                  sx={{ color: "black", ml: { sm: 2, xs: 2 } }}
+                >
+                  <b>詳細検索</b>
+                </Typography>
+              </Grid>
+              <Grid item sx={{ ml: "auto", mr: 1 }}>
+                <ReportButton url={url} name="ご意見・不具合報告" />
+              </Grid>
             </Grid>
-
-            <Grid item sx={{ ml: "auto", mr: 1 }}>
-              <ReportButton
-                url={`${location.pathname}?title=${title}&faculty=${faculty}&field=${field}`}
-                name="ご意見・不具合報告"
-              />
+            <Grid item>
+              <DetailSearchBar />
             </Grid>
           </Grid>
-
-          <Divider sx={{ mb: 2 }} />
-          <DetailSearchBar
-            setSearchParams={setSearchParams}
-            searchTitle={searchTitle}
-            setSearchTitle={setSearchTitle}
-            searchFaculty={searchFaculty}
-            setSearchFaculty={setSearchFaculty}
-            searchAcademicField={searchAcademicField}
-            setSearchAcademicField={setSearchAcademicField}
-            onSearch={() => setOnSearch(true)}
-          />
-          {onSearch && !title && !faculty && !field && (
-            <Typography
-              variant="h5"
-              component="div"
-              align="center"
-              sx={{ color: "black" }}
-            >
-              少なくとも一つの項目を入力してください
-            </Typography>
-          )}
-          {(title || faculty || field) && (
-            <SearchResults subjects={data?.subjects} />
-          )}
+          <Box sx={{ pb: "1em" }}>
+            {!disableVideoTab && (
+              <Tabs
+                value={selectedTabIndex}
+                onChange={handleTabChange}
+                textColor="primary"
+                indicatorColor="primary"
+                aria-label="search tabs"
+                variant="fullWidth"
+              >
+                <Tab
+                  icon={<ClassIcon />}
+                  iconPosition="start"
+                  label="科目"
+                  sx={{ fontSize: 20, fontWeight: "bold" }}
+                />
+                <Tab
+                  icon={<OndemandVideoIcon />}
+                  iconPosition="start"
+                  label="講義動画"
+                  sx={{ fontSize: 20, fontWeight: "bold" }}
+                />
+              </Tabs>
+            )}
+            {disableVideoTab && (
+              <Tabs
+                value={selectedTabIndex}
+                onChange={handleTabChange}
+                textColor="primary"
+                indicatorColor="primary"
+                aria-label="search tabs"
+                variant="fullWidth"
+              >
+                <Tab
+                  icon={<ClassIcon />}
+                  iconPosition="start"
+                  label="科目"
+                  sx={{ fontSize: 20, fontWeight: "bold" }}
+                />
+                <Tab
+                  icon={<OndemandVideoIcon />}
+                  iconPosition="start"
+                  disabled
+                  label="講義動画"
+                  sx={{ fontSize: 20, fontWeight: "bold" }}
+                />
+              </Tabs>
+            )}
+          </Box>
+          <TabPanel value={selectedTabIndex} index={0}>
+            <SubjectPanel />
+          </TabPanel>
+          <TabPanel value={selectedTabIndex} index={1}>
+            <VideoPanel />
+          </TabPanel>
         </Box>
       </Grid>
     </Grid>
