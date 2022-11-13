@@ -4,6 +4,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import { AppBar, Box, Container, InputBase, Toolbar } from "@mui/material";
 import { alpha, styled } from "@mui/material/styles";
 import * as React from "react";
+import { useTranslation } from "react-i18next";
 import { createSearchParams, Link, useNavigate } from "react-router-dom";
 
 const Search = styled("div")(({ theme }) => ({
@@ -59,6 +60,7 @@ export function Header() {
       navigate(`/search/?${searchParames}`);
     }
   };
+  const { t, i18n } = useTranslation();
 
   return (
     <Box sx={{ position: "sticky", top: "0", zIndex: 1 }}>
@@ -80,7 +82,7 @@ export function Header() {
                 <SearchIcon />
               </SearchIconWrapper>
               <StyledInputBase
-                placeholder="講義名で検索"
+                placeholder={`${t("nav.search_bar")}`}
                 inputProps={{ "aria-label": "search" }}
                 onKeyDown={(e) => {
                   onEnterDown(e);

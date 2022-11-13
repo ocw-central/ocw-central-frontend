@@ -2,22 +2,23 @@ import styles from "@/styles/nav.module.css";
 import MenuIcon from "@mui/icons-material/Menu";
 import { Box, IconButton, Menu, MenuItem, Typography } from "@mui/material";
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
-const pages = [
-  { link: "/", name: "Home" },
-  { link: "/search", name: "詳細検索" },
-  { link: "/about", name: "このサイトについて" },
-];
-
-const mobilePages = [
-  { link: "/", name: "Home" },
-  { link: "/search", name: "詳細検索" },
-  { link: "/fields", name: "分野一覧" },
-  { link: "/about", name: "このサイトについて" },
-];
-
 export function Nav() {
+  const { t, i18n } = useTranslation();
+  const pages = [
+    { link: "/", name: `${t("header.nav.home")}` },
+    { link: "/search", name: `${t("header.nav.detailed_search")}` },
+    { link: "/about", name: "このサイトについて" },
+  ];
+
+  const mobilePages = [
+    { link: "/", name: "Home" },
+    { link: "/search", name: "詳細検索" },
+    { link: "/fields", name: "分野一覧" },
+    { link: "/about", name: "このサイトについて" },
+  ];
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
   );
@@ -27,6 +28,7 @@ export function Nav() {
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
+
   return (
     <div>
       <nav>

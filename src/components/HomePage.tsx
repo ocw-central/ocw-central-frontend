@@ -1,5 +1,5 @@
-import { Loading } from "@/components/common/Loading";
 import { ReportButton } from "@/components/common/ReportButton";
+import { Spinner } from "@/components/common/Spinner";
 import { SubjectCard } from "@/components/searchPageComponents/SubjectCard";
 import { useRandomSubjectQuery } from "@/generated/graphql";
 import { SubjectOnSearchPage } from "@/gqltypes/subjectsOnSearchPage";
@@ -188,7 +188,7 @@ const RowContent = ({
   }, []);
 
   if (loading) {
-    return <Loading size={"4em"} color={"primary"} />;
+    return <Spinner size={"4em"} color={"primary"} />;
   }
 
   if (error) {

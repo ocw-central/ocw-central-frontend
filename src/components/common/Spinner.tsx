@@ -13,7 +13,7 @@ type Props = {
     | undefined;
 };
 
-export function Loading(props: Props) {
+export function Spinner(props: Props) {
   return (
     <Box sx={{ display: "flex", marginTop: "2em" }}>
       <CircularProgress
