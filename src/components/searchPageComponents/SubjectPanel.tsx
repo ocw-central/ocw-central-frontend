@@ -1,4 +1,4 @@
-import { Loading } from "@/components/common/Loading";
+import { Spinner } from "@/components/common/Spinner";
 import { useSubjectOnSearchPageQuery } from "@/generated/graphql";
 import { Grid, Typography } from "@mui/material";
 import { useSearchParams } from "react-router-dom";
@@ -23,7 +23,7 @@ export function SubjectPanel() {
     skip: title === "" && faculty === "" && field === "",
   });
   if (loading) {
-    return <Loading size={"7em"} color={"primary"} />;
+    return <Spinner size={"7em"} color={"primary"} />;
   }
   if (error) {
     return <div>Error</div>;

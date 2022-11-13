@@ -57,7 +57,7 @@ export function HomePage() {
               pr: 2,
             }}
           >
-            <ReportButton url="/" name="ご意見・不具合報告" />
+            <ReportButton url="/" name={`${t("translation.report.label")}`} />
           </Grid>
         </Grid>
       </Grid>

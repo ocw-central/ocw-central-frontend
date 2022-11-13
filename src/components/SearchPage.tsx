@@ -1,20 +1,11 @@
 import { AcademicFieldsList } from "@/components/common/AcademicFieldsList";
 import { ReportButton } from "@/components/common/ReportButton";
-import { Spinner } from "@/components/common/Spinner";
-import { DetailSearchBar } from "@/components/searchPageComponents/DetailSearchBar";
-import { useSubjectOnSearchPageQuery } from "@/generated/graphql";
-import { Box, Grid, Typography } from "@mui/material";
-import { useState } from "react";
-import { useLocation, useSearchParams } from "react-router-dom";
-type Params = {
-  title?: string;
-  faculty?: string;
-  field?: string;
-};
-
 import ClassIcon from "@mui/icons-material/Class";
 import OndemandVideoIcon from "@mui/icons-material/OndemandVideo";
-import { Tab, Tabs } from "@mui/material";
+import { Box, Grid, Tab, Tabs, Typography } from "@mui/material";
+import { useState } from "react";
+import { useLocation, useSearchParams } from "react-router-dom";
+import { DetailSearchBar } from "./searchPageComponents/DetailSearchBar";
 import { SubjectPanel } from "./searchPageComponents/SubjectPanel";
 import { VideoPanel } from "./searchPageComponents/VideoPanel";
 type TabPanelProps = {
@@ -45,20 +36,6 @@ export function SearchPage() {
   const disableVideoTab =
     title.length == 0 && faculty.length == 0 && field.length != 0;
 
-  const { data, loading, error } = useSubjectOnSearchPageQuery({
-    variables: {
-      title: title,
-      faculty: faculty,
-      field: field,
-    },
-    skip: title === "" && faculty === "" && field === "",
-  });
-  if (loading) {
-    return <Spinner size={"7em"} color={"primary"} />;
-  }
-  if (error) {
-    return <div>Error</div>;
-  }
   // for tab
   const [selectedTabIndex, setSelectedTabIndex] = useState(0);
   const handleTabChange = (event: React.SyntheticEvent, newValue: number) => {
