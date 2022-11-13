@@ -14,10 +14,10 @@ export function Nav() {
   ];
 
   const mobilePages = [
-    { link: "/", name: "Home" },
-    { link: "/search", name: "詳細検索" },
-    { link: "/fields", name: "分野一覧" },
-    { link: "/about", name: "このサイトについて" },
+    { link: "/", name: `${t("header.nav.home")}` },
+    { link: "/search", name: `${t("header.nav.detailed_search")}` },
+    { link: "/fields", name: `${t("header.nav.academic_fields")}` },
+    { link: "/about", name: `${t("header.nav.about")}` },
   ];
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
