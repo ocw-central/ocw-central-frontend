@@ -14,6 +14,7 @@ import {
   Typography,
 } from "@mui/material";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 const reportIssue = (type: string, content: string, url: string) => {
   let env = "LOCAL";
@@ -55,6 +56,7 @@ export function ReportButton(props: Props) {
   const [messageOpen, setMessageOpen] = useState(false);
   const handleMessageOpen = () => setMessageOpen(true);
   const handleMessageClose = () => setMessageOpen(false);
+  const { t, i18n } = useTranslation();
 
   return (
     <Box>
@@ -135,7 +137,7 @@ export function ReportButton(props: Props) {
                 }}
                 value="Opinion"
                 control={<Radio />}
-                label="ご意見・ご要望"
+                label={`${t("translation.report.label")}`}
                 onChange={(event) =>
                   setType((event.target as HTMLInputElement).value)
                 }

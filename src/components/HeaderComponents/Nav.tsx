@@ -8,16 +8,16 @@ import { Link } from "react-router-dom";
 export function Nav() {
   const { t, i18n } = useTranslation();
   const pages = [
-    { link: "/", name: `${t("header.nav.home")}` },
-    { link: "/search", name: `${t("header.nav.detailed_search")}` },
-    { link: "/about", name: `${t("header.nav.about")}` },
+    { link: "/", name: `${t("translation.header.nav.home")}` },
+    { link: "/search", name: `${t("translation.header.nav.detailed_search")}` },
+    { link: "/about", name: `${t("translation.header.nav.about")}` },
   ];
 
   const mobilePages = [
-    { link: "/", name: `${t("header.nav.home")}` },
-    { link: "/search", name: `${t("header.nav.detailed_search")}` },
-    { link: "/fields", name: `${t("header.nav.academic_fields")}` },
-    { link: "/about", name: `${t("header.nav.about")}` },
+    { link: "/", name: `${t("translation.header.nav.home")}` },
+    { link: "/search", name: `${t("translation.header.nav.detailed_search")}` },
+    { link: "/fields", name: `${t("translation.header.nav.academic_fields")}` },
+    { link: "/about", name: `${t("translation.header.nav.about")}` },
   ];
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null

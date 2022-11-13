@@ -10,8 +10,6 @@ import { useTranslation } from "react-i18next";
 function LanguageSwitcher() {
   const { i18n } = useTranslation();
 
-  const [language, setLanguage] = React.useState("");
-
   return (
     <Box sx={{ minWidth: 120 }}>
       <FormControl fullWidth>

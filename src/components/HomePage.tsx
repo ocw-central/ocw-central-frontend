@@ -11,10 +11,12 @@ import {
 } from "@mui/icons-material";
 import { alpha, Box, Button, Grid, Typography } from "@mui/material";
 import { useCallback, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { TwitterIcon, TwitterShareButton } from "react-share";
 
 export function HomePage() {
+  const { t, i18n } = useTranslation();
   return (
     <Box
       className="HomePage"
@@ -285,6 +287,7 @@ const Arrow = ({ scrollRef, direction }: ArrowProps) => {
 };
 
 const HomeMessagePane = () => {
+  const { t, i18n } = useTranslation();
   return (
     <Grid container direction="column" spacing={5}>
       <Grid item xs={12}>
@@ -295,9 +298,9 @@ const HomeMessagePane = () => {
           color="black"
           sx={{ typography: { xs: "body2", sm: "h6" } }}
         >
-          OCW CentralはOCW(大学によって提供される教育資料)のポータルサイトです。
+          {t("translation.home.message.sentence1")}
           <br />
-          AIモデルによる自動書き起こしでOCWの利便性を向上させます。
+          {t("translation.home.message.sentence2")}
         </Typography>
       </Grid>
       <Grid item xs={12}>
@@ -305,7 +308,7 @@ const HomeMessagePane = () => {
           <Button variant="contained" disableElevation size="large">
             <Search />
             <Box p={1} sx={{ fontSize: 20 }}>
-              講義を検索
+              {t("translation.home.message.search_button")}
             </Box>
           </Button>
         </Link>

@@ -1,17 +1,23 @@
 {
-  "header": {
-    "search_bar": "講義名",
-    "nav": {
-      "home": "ホーム",
-      "detailed_search": "詳細検索",
-      "academic_fields": "学術分野一覧",
-      "about": "このサイトについて"
-    }
-  },
-  "home": {
-    "message": {
-      "sentence1": "OCW CentralはOCW(大学によって提供される教育資料)のポータルサイトです。",
-      "sentence2": "AIモデルによる自動書き起こしでOCWをより便利にします。"
+  "translation": {
+    "header": {
+      "search_bar": "講義名",
+      "nav": {
+        "home": "ホーム",
+        "detailed_search": "詳細検索",
+        "academic_fields": "学術分野一覧",
+        "about": "このサイトについて"
+      }
+    },
+    "home": {
+      "message": {
+        "sentence1": "OCW CentralはOCW(大学によって提供される教育資料)のポータルサイトです。",
+        "sentence2": "AIモデルによる自動書き起こしでOCWをより便利にします。",
+        "search_button": "講義を検索"
+      }
+    },
+    "report": {
+      "label": "ご意見・不具合報告"
     }
   }
 }

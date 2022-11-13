@@ -1,17 +1,23 @@
 {
-  "header": {
-    "search_bar": "Course Title",
-    "nav": {
-      "home": "Home",
-      "detailed_search": "Adavanced Search",
-      "academic_fields": "Academic Fields",
-      "about": "About"
-    }
-  },
-  "home": {
-    "message": {
-      "sentence1": "OCW Central is a portal site for OCW (OpenCourseWare).",
-      "sentence2": " It augments OCW with automatic transcription by AI models."
+  "translation": {
+    "header": {
+      "search_bar": "Course Title",
+      "nav": {
+        "home": "Home",
+        "detailed_search": "Adavanced Search",
+        "academic_fields": "Academic Fields",
+        "about": "About"
+      }
+    },
+    "home": {
+      "message": {
+        "sentence1": "OCW Central is a portal site for OCW (OpenCourseWare).",
+        "sentence2": " It augments OCW with automatic transcription by AI models.",
+        "search_button": "Search"
+      }
+    },
+    "report": {
+      "label": "feedback"
     }
   }
 }
