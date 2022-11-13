@@ -1,9 +1,17 @@
-{ "header":{
-  "search_box": "Find Course Title"
-},
+{
+  "header": {
+    "search_bar": "Find Course Title",
     "nav": {
-    "home": "Home",
-    "detailed_search": "Adavanced Search",
-    "about": "About"
+      "home": "Home",
+      "detailed_search": "Adavanced Search",
+      "academic_fields": "Academic Fields",
+      "about": "About"
+    }
+  },
+  "home": {
+    "message": {
+      "sentence1": "OCW Central is a portal site for OCW (OpenCourseWare).",
+      "sentence2": " It augments OCW with automatic transcription by AI models."
+    }
   }
 }

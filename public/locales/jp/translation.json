@@ -1,10 +1,17 @@
 {
   "header": {
-    "search_box": "講義名で検索"
+    "search_bar": "講義名で検索",
+    "nav": {
+      "home": "Home",
+      "detailed_search": "詳細検索",
+      "academic_fields": "学術分野一覧",
+      "about": "このサイトについて"
+    }
   },
-  "nav": {
-    "home": "Home",
-    "detailed_search": "詳細検索",
-    "about": "このサイトについて"
+  "home": {
+    "message": {
+      "sentence1": "OCW CentralはOCW(大学によって提供される教育資料)のポータルサイトです。",
+      "sentence2": "AIモデルによる自動書き起こしでOCWをより便利にします。"
+    }
   }
 }
