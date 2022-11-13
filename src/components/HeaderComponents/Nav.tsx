@@ -10,7 +10,7 @@ export function Nav() {
   const pages = [
     { link: "/", name: `${t("header.nav.home")}` },
     { link: "/search", name: `${t("header.nav.detailed_search")}` },
-    { link: "/about", name: "このサイトについて" },
+    { link: "/about", name: `${t("header.nav.about")}` },
   ];
 
   const mobilePages = [

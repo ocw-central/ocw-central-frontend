@@ -6,7 +6,7 @@ import "./i18n";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
-    <Suspense fallback="ロード中">
+    <Suspense>
       <App />
     </Suspense>
   </React.StrictMode>
