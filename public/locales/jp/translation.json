@@ -1,0 +1,10 @@
+{
+  "header": {
+    "search_box": "講義名で検索"
+  },
+  "nav": {
+    "home": "Home",
+    "detailed_search": "詳細検索",
+    "about": "このサイトについて"
+  }
+}

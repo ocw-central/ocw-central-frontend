@@ -1,0 +1,9 @@
+{ "header":{
+  "search_box": "Find Course Title"
+},
+    "nav": {
+    "home": "Home",
+    "detailed_search": "Adavanced Search",
+    "about": "About"
+  }
+}
