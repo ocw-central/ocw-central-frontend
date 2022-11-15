@@ -1,4 +1,4 @@
-import { Loading } from "@/components/common/Loading";
+import { Spinner } from "@/components/common/Spinner";
 import { useSearchVideosQuery } from "@/generated/graphql";
 import { Grid, Typography } from "@mui/material";
 import urlParser from "js-video-url-parser";
@@ -24,7 +24,7 @@ export function VideoPanel() {
     skip: title === "" && faculty === "",
   });
   if (loading) {
-    return <Loading size={"7em"} color={"primary"} />;
+    return <Spinner size={"7em"} color={"primary"} />;
   }
   if (error) {
     return <div>Error</div>;

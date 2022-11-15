@@ -1,4 +1,4 @@
-import { Loading } from "@/components/common/Loading";
+import { Spinner } from "@/components/common/Spinner";
 import { useAcademicFieldsQuery } from "@/generated/graphql";
 import { theme } from "@/utils/themes";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
@@ -44,7 +44,7 @@ export function AcademicFieldsList(props: Props) {
   const navigate = useNavigate();
 
   if (loading) {
-    return <Loading size={"5em"} color={"primary"} />;
+    return <Spinner size={"5em"} color={"primary"} />;
   }
 
   if (error) {

@@ -1,5 +1,7 @@
+import { Spinner } from "@/components/common/Spinner";
 import { useAcademicFieldsQuery } from "@/generated/graphql";
 import { theme } from "@/utils/themes";
+import SchoolIcon from "@mui/icons-material/School";
 import {
   alpha,
   Box,
@@ -11,10 +13,8 @@ import {
   Tabs,
   Typography,
 } from "@mui/material";
-import { createSearchParams, useNavigate } from "react-router-dom";
-import { Loading } from "@/components/common/Loading";
-import SchoolIcon from "@mui/icons-material/School";
 import { useState } from "react";
+import { createSearchParams, useNavigate } from "react-router-dom";
 
 type TabPanelProps = {
   children?: React.ReactNode;
@@ -51,7 +51,7 @@ export function FieldsPage() {
   const navigate = useNavigate();
 
   if (loading) {
-    return <Loading size={"5em"} color={"primary"} />;
+    return <Spinner size={"5em"} color={"primary"} />;
   }
 
   if (error) {
