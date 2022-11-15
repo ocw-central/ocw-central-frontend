@@ -1,5 +1,5 @@
-import { Loading } from "@/components/common/Loading";
 import MetaTag from "@/components/common/MetaTag";
+import { Spinner } from "@/components/common/Spinner";
 import { SubjectCopyrightCard } from "@/components/subjectPageComponents/SubjectCopyrightCard";
 import { SubjectDetails } from "@/components/subjectPageComponents/SubjectDetails";
 import { SubjectResources } from "@/components/subjectPageComponents/SubjectResources";
@@ -39,7 +39,7 @@ export function SubjectPage() {
   });
 
   if (loading) {
-    return <Loading size={"7em"} color={"primary"} />;
+    return <Spinner size={"7em"} color={"primary"} />;
   }
 
   if (error) {
