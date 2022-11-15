@@ -17,7 +17,11 @@
       }
     },
     "report": {
-      "label": "feedback"
+      "label": "Feedback",
+      "message": "Thank you for your feedback. We will review your feedback and reflect it in our improvements.",
+      "bug_report": "Bug Report",
+      "content": "Content",
+      "send": "Send"
     }
   }
 }

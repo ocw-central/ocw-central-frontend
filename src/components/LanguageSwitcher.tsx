@@ -1,17 +1,20 @@
-import React from "react";
-
-import Box from "@mui/material/Box";
+import TranslateIcon from "@mui/icons-material/Translate";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
+import Paper from "@mui/material/Paper";
 import Select from "@mui/material/Select";
 import { useTranslation } from "react-i18next";
 
-function LanguageSwitcher() {
+export default function LanguageSwitcher() {
   const { i18n } = useTranslation();
 
   return (
-    <Box sx={{ minWidth: 120 }}>
+    <Paper
+      component="form"
+      sx={{ p: "2px 4px", display: "flex", alignItems: "center", width: 200 }}
+    >
+      <TranslateIcon />
       <FormControl fullWidth>
         <InputLabel id="locale-select-label">Language</InputLabel>
         <Select
@@ -25,8 +28,6 @@ function LanguageSwitcher() {
           <MenuItem value="en">English</MenuItem>
         </Select>
       </FormControl>
-    </Box>
+    </Paper>
   );
 }
-
-export default LanguageSwitcher;

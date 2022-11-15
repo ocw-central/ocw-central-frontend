@@ -16,7 +16,7 @@ import { Link } from "react-router-dom";
 import { TwitterIcon, TwitterShareButton } from "react-share";
 
 export function HomePage() {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   return (
     <Box
       className="HomePage"

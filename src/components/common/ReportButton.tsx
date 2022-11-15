@@ -94,7 +94,7 @@ export function ReportButton(props: Props) {
               color: "black",
             }}
           >
-            ご意見ありがとうございます。ご意見を確認し、改善に反映させていただきます。
+            {t("report.message")}
           </Typography>
         </Grid>
       </Modal>
@@ -124,7 +124,7 @@ export function ReportButton(props: Props) {
                 sx={{ color: "black" }}
                 value="Bug"
                 control={<Radio />}
-                label="不具合報告"
+                label={t("translation.report.bug_report")}
                 onChange={(event) =>
                   setType((event.target as HTMLInputElement).value)
                 }
@@ -146,7 +146,7 @@ export function ReportButton(props: Props) {
             <TextField
               required
               multiline
-              helperText={"内容"}
+              helperText={t("translation.report.content")}
               rows={4}
               onChange={(event) =>
                 setContent((event.target as HTMLInputElement).value)
@@ -174,7 +174,7 @@ export function ReportButton(props: Props) {
                 }, 2000);
               }}
             >
-              送信
+              {t("translation.report.send")}
             </Button>
           </FormControl>
         </Box>
