@@ -56,9 +56,9 @@ export function SubjectCopyrightCard(props: Props) {
           color="black"
         >
           {t("translation.subject.copyright_sentence1")}
-          {title}
+          {title.trim()}
           {t("translation.subject.copyright_sentence2")}
-          {faculty_copyright}
+          {faculty_copyright.trim()}
           {t("translation.subject.copyright_sentence3")}
           <Link
             href="https://ocw.kyoto-u.ac.jp/guideline/"
