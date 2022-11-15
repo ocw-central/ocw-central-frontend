@@ -73,9 +73,6 @@ const SubjectsPane = () => {
         <EconomicsPane />
       </Grid>
       <Grid item xs={12}>
-        <PhysicsPane />
-      </Grid>
-      <Grid item xs={12}>
         <PedagogyPane />
       </Grid>
       <Grid item xs={12}>
