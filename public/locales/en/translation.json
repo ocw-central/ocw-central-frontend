@@ -99,6 +99,9 @@
       "disclaimer": "Disclaimer",
       "disclaimer_sentence": "We make no guarantee as to the accuracy of the educational materials, transcriptions, or other information posted on this site.",
       "contact": "Contact"
+    },
+    "page_not_found": {
+      "message": "The page you are looking for does not exist."
     }
   }
 }
