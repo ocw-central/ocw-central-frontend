@@ -67,6 +67,15 @@
         "reference": "教科書・参考書等"
       }
     },
+    "search": {
+      "advanced_search": "詳細検索",
+      "subject_tab": "科目",
+      "video_tab": "講義動画",
+      "subject_title": "講義タイトル",
+      "faculty_name": "教員名",
+      "academic_field": "分野名",
+      "search": "検索"
+    },
     "report": {
       "label": "ご意見・不具合報告",
       "message": "ご意見ありがとうございます。ご意見を確認し、改善に反映させていただきます。",
