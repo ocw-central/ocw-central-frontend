@@ -10,6 +10,7 @@ import {
   Search,
 } from "@mui/icons-material";
 import { alpha, Box, Button, Grid, Typography } from "@mui/material";
+import { t } from "i18next";
 import { useCallback, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
@@ -72,10 +73,22 @@ const SubjectsPane = () => {
         <FinalLecturesPane />
       </Grid>
       <Grid item xs={12}>
+        <EconomicsPane />
+      </Grid>
+      <Grid item xs={12}>
         <ComputerSciencePane />
       </Grid>
       <Grid item xs={12}>
+        <PedagogyPane />
+      </Grid>
+      <Grid item xs={12}>
+        <HumanitiesPane />
+      </Grid>
+      <Grid item xs={12}>
         <PhysicsPane />
+      </Grid>
+      <Grid item xs={12}>
+        <MathematicsPane />
       </Grid>
     </Grid>
   );
@@ -94,7 +107,67 @@ const FinalLecturesPane = () => {
   return (
     <SubjectsRow
       subjects={data ? data.randomSubjects : []}
-      rowTitle="最終講義"
+      rowTitle={t("translation.home.academic_fields.final_lecture")}
+      loading={loading}
+      error={error !== undefined}
+    />
+  );
+};
+
+const EconomicsPane = () => {
+  const { data, loading, error } = useRandomSubjectQuery({
+    variables: {
+      category: "",
+      series: "",
+      academicField: "経済学・金融",
+      numSubjects: 12,
+    },
+  });
+
+  return (
+    <SubjectsRow
+      subjects={data ? data.randomSubjects : []}
+      rowTitle={`${t("translation.home.academic_fields.economics")}`}
+      loading={loading}
+      error={error !== undefined}
+    />
+  );
+};
+
+const PedagogyPane = () => {
+  const { data, loading, error } = useRandomSubjectQuery({
+    variables: {
+      category: "",
+      series: "",
+      academicField: "教育学",
+      numSubjects: 12,
+    },
+  });
+
+  return (
+    <SubjectsRow
+      subjects={data ? data.randomSubjects : []}
+      rowTitle={`${t("translation.home.academic_fields.pedagogy")}`}
+      loading={loading}
+      error={error !== undefined}
+    />
+  );
+};
+
+const HumanitiesPane = () => {
+  const { data, loading, error } = useRandomSubjectQuery({
+    variables: {
+      category: "",
+      series: "",
+      academicField: "人文科学",
+      numSubjects: 12,
+    },
+  });
+
+  return (
+    <SubjectsRow
+      subjects={data ? data.randomSubjects : []}
+      rowTitle={`${t("translation.home.academic_fields.humanities")}`}
       loading={loading}
       error={error !== undefined}
     />
@@ -114,7 +187,7 @@ const ComputerSciencePane = () => {
   return (
     <SubjectsRow
       subjects={data ? data.randomSubjects : []}
-      rowTitle="コンピューターサイエンス"
+      rowTitle={`${t("translation.home.academic_fields.computer_science")}`}
       loading={loading}
       error={error !== undefined}
     />
@@ -134,7 +207,27 @@ const PhysicsPane = () => {
   return (
     <SubjectsRow
       subjects={data ? data.randomSubjects : []}
-      rowTitle="物理学"
+      rowTitle={`${t("translation.home.academic_fields.physics")}`}
+      loading={loading}
+      error={error !== undefined}
+    />
+  );
+};
+
+const MathematicsPane = () => {
+  const { data, loading, error } = useRandomSubjectQuery({
+    variables: {
+      category: "",
+      series: "",
+      academicField: "数学",
+      numSubjects: 12,
+    },
+  });
+
+  return (
+    <SubjectsRow
+      subjects={data ? data.randomSubjects : []}
+      rowTitle={`${t("translation.home.academic_fields.mathematics")}`}
       loading={loading}
       error={error !== undefined}
     />
@@ -287,7 +380,7 @@ const Arrow = ({ scrollRef, direction }: ArrowProps) => {
 };
 
 const HomeMessagePane = () => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   return (
     <Grid container direction="column" spacing={5}>
       <Grid item xs={12}>
