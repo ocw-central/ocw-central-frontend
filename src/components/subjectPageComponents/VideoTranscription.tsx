@@ -2,6 +2,7 @@ import { theme } from "@/utils/themes";
 import { Box, Grid, List, Typography } from "@mui/material";
 import ListItem from "@mui/material/ListItem";
 import { alpha } from "@mui/material/styles";
+import { useTranslation } from "react-i18next";
 
 type Props = {
   transcription: string;
@@ -35,6 +36,7 @@ function convertSecondToTime(second: number) {
 }
 
 export function VideoTranscription(props: Props) {
+  const { t } = useTranslation();
   const processedLines = processText(props.transcription);
 
   return (
@@ -83,7 +85,7 @@ export function VideoTranscription(props: Props) {
               fontWeight: "bold",
             }}
           >
-            自動書き起こし
+            {t("translation.subject.transcription")}
           </Typography>
         }
       >

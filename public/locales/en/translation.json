@@ -28,6 +28,7 @@
     },
     "subject": {
       "video_list": "Video List",
+      "transcription": "Automatic Transcription",
       "course_resource": "Course Resource",
       "course_details": "Course Details",
       "subject_syllabus": "Syllabus",
