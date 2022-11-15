@@ -56,6 +56,63 @@ export function Nav() {
               </Box>
             </li>
           ))}
+          <li>
+            <Box>
+              <Typography
+                display="inline"
+                sx={{
+                  "&:hover": {
+                    color: "rgba(255,255,255,0.7)",
+                    cursor: "pointer",
+                  },
+                  display: {
+                    xs: "none",
+                    sm: "none",
+                    md: "inline-block",
+                    fontWeight: "bold",
+                  },
+                  color:
+                    i18n.language === "jp" ? "rgba(255,255,255,0.7)" : "white",
+                }}
+                onClick={() => i18n.changeLanguage("jp")}
+              >
+                日本語
+              </Typography>
+              <Typography
+                sx={{
+                  ml: 0.5,
+                  mr: 0.5,
+                  display: {
+                    xs: "none",
+                    sm: "none",
+                    md: "inline-block",
+                    fontWeight: "bold",
+                  },
+                }}
+              >
+                /
+              </Typography>
+              <Typography
+                sx={{
+                  "&:hover": {
+                    color: "rgba(255,255,255,0.7)",
+                    cursor: "pointer",
+                  },
+                  display: {
+                    xs: "none",
+                    sm: "none",
+                    md: "inline-block",
+                    fontWeight: "bold",
+                  },
+                  color:
+                    i18n.language === "en" ? "rgba(255,255,255,0.7)" : "white",
+                }}
+                onClick={() => i18n.changeLanguage("en")}
+              >
+                English
+              </Typography>
+            </Box>
+          </li>
         </ul>
       </nav>
       {/* for mobile */}

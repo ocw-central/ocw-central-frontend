@@ -1,6 +1,5 @@
 import { ReactComponent as OwlImg } from "@/assets/ocwc-owl.svg";
 import { Nav } from "@/components/HeaderComponents/Nav";
-import LanguageSwitcher from "@/components/LanguageSwitcher";
 import SearchIcon from "@mui/icons-material/Search";
 import { AppBar, Box, Container, InputBase, Toolbar } from "@mui/material";
 import { alpha, styled } from "@mui/material/styles";
@@ -91,12 +90,8 @@ export function Header() {
               />
             </Search>
             <Box sx={{ flexGrow: 1 }}></Box>
-            <LanguageSwitcher />
             <Nav />
             {/* for PC */}
-            <Box
-              sx={{ flexGrow: 0, display: { xs: "none", md: "flex" } }}
-            ></Box>
           </Toolbar>
         </Container>
       </AppBar>
