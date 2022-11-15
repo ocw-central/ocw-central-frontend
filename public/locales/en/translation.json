@@ -30,12 +30,41 @@
       "video_list": "Video List",
       "course_resource": "Course Resource",
       "course_details": "Course Details",
-      "syllabus": "Syllabus",
+      "subject_syllabus": "Syllabus",
       "copyright_notice": "Copyright Notice",
       "copyright_sentence1": "This material is published on the Kyoto University OCW website, titled",
       "copyright_sentence2": "and is copyrighted by",
       "copyright_sentence3": "",
-      "copyright_sentence4": "Learn more"
+      "copyright_sentence4": "Learn more",
+      "details": {
+        "first_held_on": "Day of Opening",
+        "category": "Category",
+        "location": "Location",
+        "department": "Department",
+        "faculty": "Faculty",
+        "language": "Language",
+        "free_description": "Overview",
+        "series": "Series",
+        "academic_field": "Academic Field"
+      },
+      "syllabus": {
+        "academic_year": "Academic Year",
+        "semester": "Semester",
+        "num_credit": "Credits",
+        "assigned_grade": "Assigned Grade",
+        "course_format": "Course Format",
+        "targeted_audience": "Targeted Audience",
+        "language": "Language",
+        "course_day_period": "Period",
+        "faculty": "Faculty",
+        "outline": "Outline",
+        "objective": "Objective",
+        "lesson_plan": "Lesson Plan",
+        "grading_method": "Grading Method",
+        "course_requirement": "Requirements",
+        "outclass_learning": "Outclass Learning",
+        "reference": "Reference"
+      }
     },
     "report": {
       "label": "Feedback",

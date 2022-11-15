@@ -201,7 +201,7 @@ export function SubjectPage() {
               id="syllabus"
             >
               <Typography sx={{ variant: "h6", fontWeight: "bold" }}>
-                {t("translation.subject.syllabus")}
+                {t("translation.subject.subject_syllabus")}
               </Typography>
             </AccordionSummary>
             <AccordionDetails>
