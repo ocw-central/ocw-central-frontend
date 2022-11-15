@@ -21,9 +21,10 @@ function TabPanel(props: TabPanelProps) {
 }
 
 export function SearchPage() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const currentLanguage = i18n.language;
   const [jpFieldOpen, setJpFieldOpen] = useState(true);
-  const [enFieldOpen, setEnFieldOpen] = useState(false);
+  const [enFieldOpen, setEnFieldOpen] = useState(true);
 
   // for report button
   const location = useLocation();
@@ -59,6 +60,7 @@ export function SearchPage() {
         }}
       >
         <AcademicFieldsList
+          currentLanguage={currentLanguage}
           jpFieldOpen={jpFieldOpen}
           setJpFieldOpen={setJpFieldOpen}
           enFieldOpen={enFieldOpen}

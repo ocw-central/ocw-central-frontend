@@ -74,7 +74,11 @@
       "subject_title": "Title",
       "faculty_name": "Instructor",
       "academic_field": "Academic Field",
-      "search": "Search"
+      "search": "Search",
+      "academic_field_panel": {
+        "japanese_field": "Academic Fields (Japanese Leccutres)",
+        "english_field": "Academic Fields"
+      }
     },
     "report": {
       "label": "Feedback",
