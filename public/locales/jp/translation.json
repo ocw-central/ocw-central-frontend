@@ -30,12 +30,41 @@
       "video_list": "講義一覧",
       "course_resource": "講義資料",
       "course_details": "講義詳細",
-      "syllabus": "シラバス",
+      "subject_syllabus": "シラバス",
       "copyright_notice": "著作権表記",
       "copyright_sentence1": "この資料は京都大学OCWウェブサイトに掲載されている",
       "copyright_sentence2": "の資料であり、その著作権は",
       "copyright_sentence3": "に帰属します。",
-      "copyright_sentence4": "より詳しく"
+      "copyright_sentence4": "より詳しく",
+      "details": {
+        "first_held_on": "開講日",
+        "category": "カテゴリ",
+        "location": "開催場所",
+        "department": "開講学部",
+        "faculty": "担当教員",
+        "language": "言語",
+        "free_description": "概要",
+        "series": "シリーズ",
+        "academic_field": "学術分野"
+      },
+      "syllabus": {
+        "academic_year": "開講年度・開講期",
+        "semester": "開講学期",
+        "num_credit": "単位数",
+        "assigned_grade": "配当学年",
+        "course_format": "授業形態",
+        "targeted_audience": "対象学生",
+        "language": "使用言語",
+        "course_day_period": "曜時限",
+        "faculty": "教員",
+        "outline": "授業概要",
+        "objective": "授業の概要・目的",
+        "lesson_plan": "授業計画と内容",
+        "grading_method": "成績評価の方法・観点",
+        "course_requirement": "履修要件",
+        "outclass_learning": "授業外学習（予習・復習）等",
+        "reference": "教科書・参考書等"
+      }
     },
     "report": {
       "label": "ご意見・不具合報告",
