@@ -2,11 +2,14 @@ import { theme } from "@/utils/themes";
 import { Box, Grid, List, Typography } from "@mui/material";
 import ListItem from "@mui/material/ListItem";
 import { alpha } from "@mui/material/styles";
+import { useState } from "react";
 
 type Props = {
   transcription: string;
   setTime: (time: { start: number }) => void;
   setAutoPlayOn: (autoPlayOn: number) => void;
+  playedSeconds: number;
+  playing: boolean;
 };
 
 function processText(text: string) {
@@ -35,8 +38,9 @@ function convertSecondToTime(second: number) {
 }
 
 export function VideoTranscription(props: Props) {
+  console.log(props.playing);
+  console.log(props.playedSeconds);
   const processedLines = processText(props.transcription);
-
   return (
     <Box
       className="VideoTranscription"
@@ -105,7 +109,20 @@ export function VideoTranscription(props: Props) {
                 },
               }}
             >
-              <Grid container direction="row">
+              <Grid
+                container
+                direction="row"
+                sx={{
+                  backgroundColor:
+                    Number(processedLines[index].startTime) <=
+                      props.playedSeconds &&
+                    (index == processedLines.length - 1 ||
+                      Number(processedLines[index + 1].startTime) >
+                        props.playedSeconds)
+                      ? alpha(theme.palette.primary.main, 0.3)
+                      : "transparent",
+                }}
+              >
                 <Grid
                   item
                   xs={1}

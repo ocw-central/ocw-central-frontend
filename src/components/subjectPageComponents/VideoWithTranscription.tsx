@@ -4,7 +4,7 @@ import { Video } from "@/generated/graphql";
 import { Subject } from "@/gqltypes/subject";
 import { theme } from "@/utils/themes";
 import { Box, Grid, Typography } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import urlParser from "js-video-url-parser";
 
@@ -27,6 +27,8 @@ export function VideoWithTranscription(props: Props) {
   const [VideoStartTime, SetVideoStartTime] = useState({ start: 0 });
   const [AutoPlayOn, SetAutoPlayOn] = useState(0);
   const [searchParams] = useSearchParams();
+  const [playedSeconds, setPlayedSeconds] = useState(0);
+  const [playing, setPlaying] = useState(false);
 
   const FocusedVideoOrdering = props.focusedVideoOrdering;
   const FocusedVideo = videos[FocusedVideoOrdering];
@@ -39,7 +41,18 @@ export function VideoWithTranscription(props: Props) {
     const initialVideoOrdering = initialVideo?.ordering ?? 0;
     props.setFocusedVideoOrdering(initialVideoOrdering);
   }, []);
-
+  const PlayerWrapperMemo = useMemo(
+    () => (
+      <PlayerWrapper
+        FocusedYoutubeId={FocusedYoutubeId}
+        startAt={VideoStartTime.start}
+        autoPlayOn={AutoPlayOn}
+        setPlayedSeconds={setPlayedSeconds}
+        setPlaying={setPlaying}
+      />
+    ),
+    [FocusedYoutubeId, VideoStartTime.start, AutoPlayOn, setPlayedSeconds]
+  );
   return (
     <Grid
       container
@@ -108,11 +121,7 @@ export function VideoWithTranscription(props: Props) {
             </Typography>
           </Box>
         )}
-        <PlayerWrapper
-          FocusedYoutubeId={FocusedYoutubeId}
-          startAt={VideoStartTime.start}
-          autoPlayOn={AutoPlayOn}
-        />
+        {PlayerWrapperMemo}
       </Grid>
       {FocusedVideo.transcription && (
         <Grid
@@ -126,6 +135,8 @@ export function VideoWithTranscription(props: Props) {
             transcription={FocusedVideo.transcription}
             setTime={SetVideoStartTime}
             setAutoPlayOn={SetAutoPlayOn}
+            playedSeconds={playedSeconds}
+            playing={playing}
           />
         </Grid>
       )}
