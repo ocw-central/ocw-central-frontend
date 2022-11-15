@@ -26,6 +26,12 @@
         "mathematics": "Mathematics"
       }
     },
+    "subject": {
+      "video_list": "Video List",
+      "course_resource": "Course Resource",
+      "course_details": "Course Details",
+      "syllabus": "Syllabus"
+    },
     "report": {
       "label": "Feedback",
       "message": "Thank you for your feedback. We will review your feedback and reflect it in our improvements.",
