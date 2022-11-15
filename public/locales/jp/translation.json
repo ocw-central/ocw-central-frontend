@@ -30,7 +30,12 @@
       "video_list": "講義一覧",
       "course_resource": "講義資料",
       "course_details": "講義詳細",
-      "syllabus": "シラバス"
+      "syllabus": "シラバス",
+      "copyright_notice": "著作権表記",
+      "copyright_sentence1": "この資料は京都大学OCWウェブサイトに掲載されている",
+      "copyright_sentence2": "の資料であり、その著作権は",
+      "copyright_sentence3": "に帰属します。",
+      "copyright_sentence4": "より詳しく"
     },
     "report": {
       "label": "ご意見・不具合報告",
