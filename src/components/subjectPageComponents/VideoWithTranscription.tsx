@@ -124,6 +124,7 @@ export function VideoWithTranscription(props: Props) {
         >
           <VideoTranscription
             transcription={FocusedVideo.transcription}
+            translations={FocusedVideo.translations}
             setTime={SetVideoStartTime}
             setAutoPlayOn={SetAutoPlayOn}
           />
