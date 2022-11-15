@@ -14,6 +14,16 @@
         "sentence1": "OCW Central is a portal site for OCW (OpenCourseWare).",
         "sentence2": " It augments OCW with automatic transcription by AI models.",
         "search_button": "Search"
+      },
+      "academic_fields": {
+        "final_lecture": "Final Lecture",
+        "economics": "Economics",
+        "pedagogy": "Pedagogy",
+        "medicine": "Medicine",
+        "humanities": "Humanities",
+        "computer_science": "Computer Science",
+        "physics": "Physics",
+        "mathematics": "Mathematics"
       }
     },
     "report": {

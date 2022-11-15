@@ -14,6 +14,16 @@
         "sentence1": "OCW CentralはOCW(大学によって提供される教育資料)のポータルサイトです。",
         "sentence2": "AIモデルによる自動書き起こしでOCWをより便利にします。",
         "search_button": "講義を検索"
+      },
+      "academic_fields": {
+        "final_lecture": "最終講義",
+        "economics": "経済学",
+        "pedagogy": "教育学",
+        "medicine": "医学",
+        "humanities": "人文科学",
+        "computer_science": "コンピュータサイエンス",
+        "physics": "物理学",
+        "mathematics": "数学"
       }
     },
     "report": {
