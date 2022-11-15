@@ -1,5 +1,5 @@
-import { Loading } from "@/components/common/Loading";
 import { ReportButton } from "@/components/common/ReportButton";
+import { Spinner } from "@/components/common/Spinner";
 import { SubjectCard } from "@/components/searchPageComponents/SubjectCard";
 import { useRandomSubjectQuery } from "@/generated/graphql";
 import { SubjectOnSearchPage } from "@/gqltypes/subjectsOnSearchPage";
@@ -70,10 +70,25 @@ const SubjectsPane = () => {
         <FinalLecturesPane />
       </Grid>
       <Grid item xs={12}>
+        <EconomicsPane />
+      </Grid>
+      <Grid item xs={12}>
+        <PhysicsPane />
+      </Grid>
+      <Grid item xs={12}>
+        <PedagogyPane />
+      </Grid>
+      <Grid item xs={12}>
+        <HumanitiesPane />
+      </Grid>
+      <Grid item xs={12}>
         <ComputerSciencePane />
       </Grid>
       <Grid item xs={12}>
         <PhysicsPane />
+      </Grid>
+      <Grid item xs={12}>
+        <MathematicsPane />
       </Grid>
     </Grid>
   );
@@ -93,6 +108,46 @@ const FinalLecturesPane = () => {
     <SubjectsRow
       subjects={data ? data.randomSubjects : []}
       rowTitle="最終講義"
+      loading={loading}
+      error={error !== undefined}
+    />
+  );
+};
+
+const EconomicsPane = () => {
+  const { data, loading, error } = useRandomSubjectQuery({
+    variables: {
+      category: "",
+      series: "",
+      academicField: "経済学・金融",
+      numSubjects: 12,
+    },
+  });
+
+  return (
+    <SubjectsRow
+      subjects={data ? data.randomSubjects : []}
+      rowTitle="経済学・金融"
+      loading={loading}
+      error={error !== undefined}
+    />
+  );
+};
+
+const PedagogyPane = () => {
+  const { data, loading, error } = useRandomSubjectQuery({
+    variables: {
+      category: "",
+      series: "",
+      academicField: "教育学",
+      numSubjects: 12,
+    },
+  });
+
+  return (
+    <SubjectsRow
+      subjects={data ? data.randomSubjects : []}
+      rowTitle="教育学"
       loading={loading}
       error={error !== undefined}
     />
@@ -133,6 +188,46 @@ const PhysicsPane = () => {
     <SubjectsRow
       subjects={data ? data.randomSubjects : []}
       rowTitle="物理学"
+      loading={loading}
+      error={error !== undefined}
+    />
+  );
+};
+
+const HumanitiesPane = () => {
+  const { data, loading, error } = useRandomSubjectQuery({
+    variables: {
+      category: "",
+      series: "",
+      academicField: "人文科学",
+      numSubjects: 12,
+    },
+  });
+
+  return (
+    <SubjectsRow
+      subjects={data ? data.randomSubjects : []}
+      rowTitle="人文科学"
+      loading={loading}
+      error={error !== undefined}
+    />
+  );
+};
+
+const MathematicsPane = () => {
+  const { data, loading, error } = useRandomSubjectQuery({
+    variables: {
+      category: "",
+      series: "",
+      academicField: "数学",
+      numSubjects: 12,
+    },
+  });
+
+  return (
+    <SubjectsRow
+      subjects={data ? data.randomSubjects : []}
+      rowTitle="数学"
       loading={loading}
       error={error !== undefined}
     />
@@ -188,7 +283,7 @@ const RowContent = ({
   }, []);
 
   if (loading) {
-    return <Loading size={"4em"} color={"primary"} />;
+    return <Spinner size={"4em"} color={"primary"} />;
   }
 
   if (error) {
