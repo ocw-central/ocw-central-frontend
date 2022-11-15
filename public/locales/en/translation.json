@@ -32,6 +32,19 @@
       "bug_report": "Bug Report",
       "content": "Content",
       "send": "Send"
+    },
+    "about": {
+      "about": "About",
+      "about_message": "OCW Central is a portal site for OCW (OpenCourseWare), an educational resource provided free of charge by universities. It is operated by student volunteers of the Graduate School of Informatics, Kyoto University, with the aim of preserving and improving access to educational resources.",
+      "license": "License",
+      "license_sentence1": "The materials on this site are released under the",
+      "license_sentence2": " Creative Commons License Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)",
+      "license_sentence3": " in accordance with the terms of the original distribution. All materials on this site are copyrighted by the author(s). If you have any comments about the license notice or requests for additional features, please contact us at the e-mail address below.",
+      "license_sentence4": "The source code for this web service is available on ",
+      "license_sentence5": " under the MIT License. Bug reports and pull requests are welcome.",
+      "disclaimer": "Disclaimer",
+      "disclaimer_sentence": "We make no guarantee as to the accuracy of the educational materials, transcriptions, or other information posted on this site.",
+      "contact": "Contact"
     }
   }
 }
