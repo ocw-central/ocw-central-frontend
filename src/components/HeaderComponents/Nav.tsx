@@ -72,9 +72,9 @@ export function Nav() {
                     fontWeight: "bold",
                   },
                   color:
-                    i18n.language === "jp" ? "rgba(255,255,255,0.7)" : "white",
+                    i18n.language === "ja" ? "rgba(255,255,255,0.7)" : "white",
                 }}
-                onClick={() => i18n.changeLanguage("jp")}
+                onClick={() => i18n.changeLanguage("ja")}
               >
                 日本語
               </Typography>

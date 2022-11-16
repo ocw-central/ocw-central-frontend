@@ -66,7 +66,7 @@ export function AcademicFieldsList(props: Props) {
 
   return (
     <List sx={{ m: "2em", mr: "1em" }}>
-      {props.currentLanguage == "jp" && (
+      {props.currentLanguage == "ja" && (
         <Accordion defaultExpanded={props.jpFieldOpen}>
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}

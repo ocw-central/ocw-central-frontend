@@ -60,7 +60,7 @@ export function Header() {
       navigate(`/search/?${searchParames}`);
     }
   };
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
 
   return (
     <Box sx={{ position: "sticky", top: "0", zIndex: 1 }}>
