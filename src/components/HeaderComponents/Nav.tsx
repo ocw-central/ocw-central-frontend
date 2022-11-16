@@ -1,12 +1,25 @@
 import styles from "@/styles/nav.module.css";
 import MenuIcon from "@mui/icons-material/Menu";
-import { Box, IconButton, Menu, MenuItem, Typography } from "@mui/material";
-import React from "react";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import {
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
+  Box,
+  IconButton,
+  Menu,
+  MenuItem,
+  Typography,
+} from "@mui/material";
+import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
 export function Nav() {
   const { t, i18n } = useTranslation();
+  const setLanguage = (language: string) => {
+    i18n.changeLanguage(language);
+  };
   const pages = [
     { link: "/", name: `${t("translation.header.nav.home")}` },
     { link: "/search", name: `${t("translation.header.nav.detailed_search")}` },
@@ -28,6 +41,7 @@ export function Nav() {
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
+  const [openMobileLanguageTab, setOpenMobileLanguageTab] = useState(false);
 
   return (
     <div>
@@ -74,7 +88,7 @@ export function Nav() {
                   color:
                     i18n.language === "ja" ? "rgba(255,255,255,0.7)" : "white",
                 }}
-                onClick={() => i18n.changeLanguage("ja")}
+                onClick={() => setLanguage("ja")}
               >
                 日本語
               </Typography>
@@ -107,7 +121,7 @@ export function Nav() {
                   color:
                     i18n.language === "en" ? "rgba(255,255,255,0.7)" : "white",
                 }}
-                onClick={() => i18n.changeLanguage("en")}
+                onClick={() => setLanguage("en")}
               >
                 English
               </Typography>
@@ -152,6 +166,46 @@ export function Nav() {
               </MenuItem>
             </Link>
           ))}
+          <Accordion
+            expanded={openMobileLanguageTab}
+            onChange={() => setOpenMobileLanguageTab(!openMobileLanguageTab)}
+            sx={{
+              border: "none",
+              boxShadow: "none",
+            }}
+          >
+            <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+              <Typography>{t("translation.header.nav.language")}</Typography>
+            </AccordionSummary>
+            <AccordionDetails
+              sx={{
+                px: 0,
+                py: 0,
+              }}
+            >
+              <MenuItem
+                onClick={() => {
+                  setLanguage("ja");
+                }}
+              >
+                <Typography
+                  textAlign="center"
+                  onClick={() => {
+                    setLanguage("ja");
+                  }}
+                >
+                  日本語
+                </Typography>
+              </MenuItem>
+              <MenuItem
+                onClick={() => {
+                  setLanguage("en");
+                }}
+              >
+                <Typography textAlign="center">English</Typography>
+              </MenuItem>
+            </AccordionDetails>
+          </Accordion>
         </Menu>
       </Box>
     </div>
