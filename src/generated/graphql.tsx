@@ -154,6 +154,13 @@ export type Syllabus = Node & {
   targetedAudience: Scalars['String'];
 };
 
+export type Translation = Node & {
+  __typename?: 'Translation';
+  id: Scalars['ID'];
+  languageCode: Scalars['String'];
+  translation: Scalars['String'];
+};
+
 export type Video = Node & {
   __typename?: 'Video';
   chapters: Array<Chapter>;
@@ -165,6 +172,7 @@ export type Video = Node & {
   ordering: Scalars['Int'];
   title: Scalars['String'];
   transcription: Scalars['String'];
+  translations: Array<Maybe<Translation>>;
   videoLength: Scalars['Int'];
 };
 
@@ -195,7 +203,7 @@ export type SubjectQueryVariables = Exact<{
 }>;
 
 
-export type SubjectQuery = { __typename?: 'Query', subject: { __typename?: 'Subject', id: string, title: string, category: string, location: string, department: string, firstHeldOn?: any | null, faculty: string, language: string, freeDescription: string, series: string, academicField: string, thumbnailLink: string, videos: Array<{ __typename?: 'Video', id: string, title: string, ordering: number, link: string, faculty: string, lecturedOn?: any | null, videoLength: number, language: string, transcription: string, chapters: Array<{ __typename?: 'Chapter', id: string, startAt: number, topic: string, thumbnailLink: string }> }>, resources: Array<{ __typename?: 'Resource', id: string, title: string, ordering: number, description: string, link: string }>, relatedSubjects: Array<{ __typename?: 'RelatedSubject', id: string, title: string, thumbnailLink: string, faculty: string }>, syllabus?: { __typename?: 'Syllabus', id: string, faculty: string, language: string, subjectNumbering: string, academicYear: number, semester: string, numCredit: number, courseFormat: string, assignedGrade: string, targetedAudience: string, courseDayPeriod: string, outline: string, objective: string, lessonPlan: string, gradingMethod: string, courseRequirement: string, outClassLearning: string, reference: string, remark: string, subpages: Array<{ __typename?: 'Subpage', id: string, content: string }> } | null } };
+export type SubjectQuery = { __typename?: 'Query', subject: { __typename?: 'Subject', id: string, title: string, category: string, location: string, department: string, firstHeldOn?: any | null, faculty: string, language: string, freeDescription: string, series: string, academicField: string, thumbnailLink: string, videos: Array<{ __typename?: 'Video', id: string, title: string, ordering: number, link: string, faculty: string, lecturedOn?: any | null, videoLength: number, language: string, transcription: string, chapters: Array<{ __typename?: 'Chapter', id: string, startAt: number, topic: string, thumbnailLink: string }>, translations: Array<{ __typename?: 'Translation', id: string, languageCode: string, translation: string } | null> }>, resources: Array<{ __typename?: 'Resource', id: string, title: string, ordering: number, description: string, link: string }>, relatedSubjects: Array<{ __typename?: 'RelatedSubject', id: string, title: string, thumbnailLink: string, faculty: string }>, syllabus?: { __typename?: 'Syllabus', id: string, faculty: string, language: string, subjectNumbering: string, academicYear: number, semester: string, numCredit: number, courseFormat: string, assignedGrade: string, targetedAudience: string, courseDayPeriod: string, outline: string, objective: string, lessonPlan: string, gradingMethod: string, courseRequirement: string, outClassLearning: string, reference: string, remark: string, subpages: Array<{ __typename?: 'Subpage', id: string, content: string }> } | null } };
 
 export type SubjectOnHomepageQueryVariables = Exact<{
   id: Scalars['ID'];
@@ -358,6 +366,11 @@ export const SubjectDocument = gql`
       videoLength
       language
       transcription
+      translations {
+        id
+        languageCode
+        translation
+      }
     }
     location
     resources {
