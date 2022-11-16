@@ -10,8 +10,9 @@ import {
   Search,
 } from "@mui/icons-material";
 import { alpha, Box, Button, Grid, Typography } from "@mui/material";
+import { t } from "i18next";
 import { useCallback, useRef, useState } from "react";
-import { t, useTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { TwitterIcon, TwitterShareButton } from "react-share";
 
@@ -113,26 +114,6 @@ const FinalLecturesPane = () => {
   );
 };
 
-const HumanitiesPane = () => {
-  const { data, loading, error } = useRandomSubjectQuery({
-    variables: {
-      category: "",
-      series: "",
-      academicField: "人文科学",
-      numSubjects: 12,
-    },
-  });
-
-  return (
-    <SubjectsRow
-      subjects={data ? data.randomSubjects : []}
-      rowTitle={`${t("translation.home.academic_fields.humanities")}`}
-      loading={loading}
-      error={error !== undefined}
-    />
-  );
-};
-
 const EconomicsPane = () => {
   const { data, loading, error } = useRandomSubjectQuery({
     variables: {
@@ -146,7 +127,7 @@ const EconomicsPane = () => {
   return (
     <SubjectsRow
       subjects={data ? data.randomSubjects : []}
-      rowTitle="経済学・金融"
+      rowTitle={`${t("translation.home.academic_fields.economics")}`}
       loading={loading}
       error={error !== undefined}
     />
@@ -166,7 +147,27 @@ const PedagogyPane = () => {
   return (
     <SubjectsRow
       subjects={data ? data.randomSubjects : []}
-      rowTitle="教育学"
+      rowTitle={`${t("translation.home.academic_fields.pedagogy")}`}
+      loading={loading}
+      error={error !== undefined}
+    />
+  );
+};
+
+const HumanitiesPane = () => {
+  const { data, loading, error } = useRandomSubjectQuery({
+    variables: {
+      category: "",
+      series: "",
+      academicField: "人文科学",
+      numSubjects: 12,
+    },
+  });
+
+  return (
+    <SubjectsRow
+      subjects={data ? data.randomSubjects : []}
+      rowTitle={`${t("translation.home.academic_fields.humanities")}`}
       loading={loading}
       error={error !== undefined}
     />
