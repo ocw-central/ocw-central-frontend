@@ -3,6 +3,20 @@ import LanguageDetector from "i18next-browser-languagedetector";
 import Backend from "i18next-http-backend";
 import { initReactI18next } from "react-i18next";
 
+const options = {
+  // order and from where user language should be detected
+  order: [
+    "navigator",
+    "querystring",
+    "cookie",
+    "localStorage",
+    "sessionStorage",
+    "htmlTag",
+    "path",
+    "subdomain",
+  ],
+};
+
 i18n
   // i18next-http-backend
   // loads translations from your server
@@ -16,7 +30,9 @@ i18n
   // init i18next
   // for all options read: https://www.i18next.com/overview/configuration-options
   .init({
-    debug: true,
+    debug: false,
+    supportedLngs: ["en", "ja"],
+    detection: options,
     fallbackLng: "en",
 
     interpolation: {
