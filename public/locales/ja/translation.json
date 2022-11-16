@@ -76,6 +76,7 @@
       "faculty_name": "教員名",
       "academic_field": "分野名",
       "search": "検索",
+      "no_subject": "該当する講義がありません。",
       "academic_field_panel": {
         "japanese_field": "学問分野",
         "english_field": "学問分野(外国語講義)"

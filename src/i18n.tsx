@@ -32,6 +32,7 @@ i18n
   .init({
     debug: false,
     supportedLngs: ["en", "ja"],
+    nonExplicitSupportedLngs: true, // https://stackoverflow.com/questions/71665807/i18next-not-detecting-language-variation-eg-en-us
     detection: options,
     fallbackLng: "en",
 
