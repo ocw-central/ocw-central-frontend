@@ -10,11 +10,14 @@ import {
   Search,
 } from "@mui/icons-material";
 import { alpha, Box, Button, Grid, Typography } from "@mui/material";
+import { t } from "i18next";
 import { useCallback, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { TwitterIcon, TwitterShareButton } from "react-share";
 
 export function HomePage() {
+  const { t } = useTranslation();
   return (
     <Box
       className="HomePage"
@@ -55,7 +58,7 @@ export function HomePage() {
               pr: 2,
             }}
           >
-            <ReportButton url="/" name="ご意見・不具合報告" />
+            <ReportButton url="/" name={`${t("translation.report.label")}`} />
           </Grid>
         </Grid>
       </Grid>
@@ -73,13 +76,13 @@ const SubjectsPane = () => {
         <EconomicsPane />
       </Grid>
       <Grid item xs={12}>
+        <ComputerSciencePane />
+      </Grid>
+      <Grid item xs={12}>
         <PedagogyPane />
       </Grid>
       <Grid item xs={12}>
         <HumanitiesPane />
-      </Grid>
-      <Grid item xs={12}>
-        <ComputerSciencePane />
       </Grid>
       <Grid item xs={12}>
         <PhysicsPane />
@@ -104,7 +107,7 @@ const FinalLecturesPane = () => {
   return (
     <SubjectsRow
       subjects={data ? data.randomSubjects : []}
-      rowTitle="最終講義"
+      rowTitle={t("translation.home.academic_fields.final_lecture")}
       loading={loading}
       error={error !== undefined}
     />
@@ -124,7 +127,7 @@ const EconomicsPane = () => {
   return (
     <SubjectsRow
       subjects={data ? data.randomSubjects : []}
-      rowTitle="経済学・金融"
+      rowTitle={`${t("translation.home.academic_fields.economics")}`}
       loading={loading}
       error={error !== undefined}
     />
@@ -144,47 +147,7 @@ const PedagogyPane = () => {
   return (
     <SubjectsRow
       subjects={data ? data.randomSubjects : []}
-      rowTitle="教育学"
-      loading={loading}
-      error={error !== undefined}
-    />
-  );
-};
-
-const ComputerSciencePane = () => {
-  const { data, loading, error } = useRandomSubjectQuery({
-    variables: {
-      category: "",
-      series: "",
-      academicField: "コンピュータサイエンス",
-      numSubjects: 12,
-    },
-  });
-
-  return (
-    <SubjectsRow
-      subjects={data ? data.randomSubjects : []}
-      rowTitle="コンピューターサイエンス"
-      loading={loading}
-      error={error !== undefined}
-    />
-  );
-};
-
-const PhysicsPane = () => {
-  const { data, loading, error } = useRandomSubjectQuery({
-    variables: {
-      category: "",
-      series: "",
-      academicField: "物理学",
-      numSubjects: 12,
-    },
-  });
-
-  return (
-    <SubjectsRow
-      subjects={data ? data.randomSubjects : []}
-      rowTitle="物理学"
+      rowTitle={`${t("translation.home.academic_fields.pedagogy")}`}
       loading={loading}
       error={error !== undefined}
     />
@@ -204,7 +167,47 @@ const HumanitiesPane = () => {
   return (
     <SubjectsRow
       subjects={data ? data.randomSubjects : []}
-      rowTitle="人文科学"
+      rowTitle={`${t("translation.home.academic_fields.humanities")}`}
+      loading={loading}
+      error={error !== undefined}
+    />
+  );
+};
+
+const ComputerSciencePane = () => {
+  const { data, loading, error } = useRandomSubjectQuery({
+    variables: {
+      category: "",
+      series: "",
+      academicField: "コンピュータサイエンス",
+      numSubjects: 12,
+    },
+  });
+
+  return (
+    <SubjectsRow
+      subjects={data ? data.randomSubjects : []}
+      rowTitle={`${t("translation.home.academic_fields.computer_science")}`}
+      loading={loading}
+      error={error !== undefined}
+    />
+  );
+};
+
+const PhysicsPane = () => {
+  const { data, loading, error } = useRandomSubjectQuery({
+    variables: {
+      category: "",
+      series: "",
+      academicField: "物理学",
+      numSubjects: 12,
+    },
+  });
+
+  return (
+    <SubjectsRow
+      subjects={data ? data.randomSubjects : []}
+      rowTitle={`${t("translation.home.academic_fields.physics")}`}
       loading={loading}
       error={error !== undefined}
     />
@@ -224,7 +227,7 @@ const MathematicsPane = () => {
   return (
     <SubjectsRow
       subjects={data ? data.randomSubjects : []}
-      rowTitle="数学"
+      rowTitle={`${t("translation.home.academic_fields.mathematics")}`}
       loading={loading}
       error={error !== undefined}
     />
@@ -377,6 +380,7 @@ const Arrow = ({ scrollRef, direction }: ArrowProps) => {
 };
 
 const HomeMessagePane = () => {
+  const { t } = useTranslation();
   return (
     <Grid container direction="column" spacing={5}>
       <Grid item xs={12}>
@@ -387,9 +391,9 @@ const HomeMessagePane = () => {
           color="black"
           sx={{ typography: { xs: "body2", sm: "h6" } }}
         >
-          OCW CentralはOCW(大学によって提供される教育資料)のポータルサイトです。
+          {t("translation.home.message.sentence1")}
           <br />
-          AIモデルによる自動書き起こしでOCWの利便性を向上させます。
+          {t("translation.home.message.sentence2")}
         </Typography>
       </Grid>
       <Grid item xs={12}>
@@ -397,7 +401,7 @@ const HomeMessagePane = () => {
           <Button variant="contained" disableElevation size="large">
             <Search />
             <Box p={1} sx={{ fontSize: 20 }}>
-              講義を検索
+              {t("translation.home.message.search_button")}
             </Box>
           </Button>
         </Link>

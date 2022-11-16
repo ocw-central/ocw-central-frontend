@@ -1,6 +1,7 @@
 import { Box, Grid, InputBase, Typography } from "@mui/material";
 import Button from "@mui/material/Button";
 import { Dispatch, SetStateAction, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 import SearchIcon from "@mui/icons-material/Search";
 import { alpha, styled } from "@mui/material/styles";
@@ -78,6 +79,7 @@ type Params = {
   field?: string;
 };
 export function DetailSearchBar() {
+  const { t } = useTranslation();
   const [searchTitle, setSearchTitle] = useState("");
   const [searchFaculty, setSearchFaculty] = useState("");
   const [searchAcademicField, setSearchAcademicField] = useState("");
@@ -111,7 +113,7 @@ export function DetailSearchBar() {
       <Grid container spacing={2} sx={{ width: "100%" }}>
         <Grid item xs={12} sm={12} md={4}>
           <SearchBar
-            label="講義タイトル"
+            label={`${t("translation.search.subject_title")}`}
             value={searchTitle}
             setValue={setSearchTitle}
             setSearchParams={setSearchParams}
@@ -119,7 +121,7 @@ export function DetailSearchBar() {
         </Grid>
         <Grid item xs={12} sm={12} md={4}>
           <SearchBar
-            label="教授名"
+            label={`${t("translation.search.faculty_name")}`}
             value={searchFaculty}
             setValue={setSearchFaculty}
             setSearchParams={setSearchParams}
@@ -127,7 +129,7 @@ export function DetailSearchBar() {
         </Grid>
         <Grid item xs={12} sm={12} md={4}>
           <SearchBar
-            label="分野名"
+            label={`${t("translation.search.academic_field")}`}
             value={searchAcademicField}
             setValue={setSearchAcademicField}
             setSearchParams={setSearchParams}
@@ -149,7 +151,7 @@ export function DetailSearchBar() {
         }}
       >
         <Typography variant="h6">
-          <b>検索</b>
+          <b>{`${t("translation.search.search")}`}</b>
         </Typography>
       </Button>
     </Box>

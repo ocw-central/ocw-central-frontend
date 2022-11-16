@@ -1,17 +1,18 @@
 import { Maybe, Translation } from "@/generated/graphql";
 import { theme } from "@/utils/themes";
 import {
+  FormControl,
   Grid,
   List,
-  Typography,
+  MenuItem,
   Select,
   SelectChangeEvent,
-  MenuItem,
-  FormControl,
+  Typography,
 } from "@mui/material";
 import ListItem from "@mui/material/ListItem";
 import { alpha } from "@mui/material/styles";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 type Props = {
   transcription: string;
@@ -49,6 +50,7 @@ function convertSecondToTime(second: number) {
 }
 
 export function VideoTranscription(props: Props) {
+  const { t } = useTranslation();
   const [language, setLanguage] = useState("original");
   const handleLanguageChange = (event: SelectChangeEvent) => {
     setLanguage(event.target.value as string);
@@ -124,7 +126,7 @@ export function VideoTranscription(props: Props) {
               fontWeight: "bold",
             }}
           >
-            自動書き起こし
+            {t("translation.subject.transcription")}
           </Typography>
         </Grid>
       </Grid>

@@ -1,3 +1,4 @@
+import { Subject } from "@/gqltypes/subject";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableCell from "@mui/material/TableCell";
@@ -5,9 +6,10 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import { Box } from "@mui/system";
-import { Subject } from "@/gqltypes/subject";
+import { useTranslation } from "react-i18next";
 
 export function SubjectSyllabus({ subject }: { subject: Subject }) {
+  const { t } = useTranslation();
   const syllabus = subject.syllabus;
 
   return (
@@ -18,82 +20,82 @@ export function SubjectSyllabus({ subject }: { subject: Subject }) {
             <TableRow>
               {syllabus?.academicYear !== 0 && (
                 <TableCell>
-                  <b>開講年度・開講期</b>
+                  <b>{t("translation.subject.syllabus.academic_year")} </b>
                 </TableCell>
               )}
               {syllabus?.semester && (
                 <TableCell>
-                  <b>開講学期</b>
+                  <b>{t("translation.subject.syllabus.semester")} </b>
                 </TableCell>
               )}
               {syllabus?.numCredit !== 0 && (
                 <TableCell>
-                  <b>単位数</b>
+                  <b>{t("translation.subject.syllabus.num_credit")} </b>
                 </TableCell>
               )}
               {syllabus?.assignedGrade && (
                 <TableCell>
-                  <b>配当学年</b>
+                  <b>{t("translation.subject.syllabus.assighned_grade")} </b>
                 </TableCell>
               )}
               {syllabus?.courseFormat && (
                 <TableCell>
-                  <b>授業形態</b>
+                  <b>{t("translation.subject.syllabus.course_format")} </b>
                 </TableCell>
               )}
               {syllabus?.targetedAudience && (
                 <TableCell>
-                  <b>対象学生</b>
+                  <b>{t("translation.subject.syllabus.targeted_audience")} </b>
                 </TableCell>
               )}
               {syllabus?.language && (
                 <TableCell>
-                  <b>使用言語</b>
+                  <b>{t("translation.subject.syllabus.language")} </b>
                 </TableCell>
               )}
               {syllabus?.courseDayPeriod && (
                 <TableCell>
-                  <b>曜時限</b>
+                  <b>{t("translation.subject.syllabus.course_day_period")} </b>
                 </TableCell>
               )}
               {syllabus?.faculty && (
                 <TableCell>
-                  <b>教員</b>
+                  <b>{t("translation.subject.syllabus.faculty")} </b>
                 </TableCell>
               )}
               {syllabus?.outline && (
                 <TableCell>
-                  <b>授業概要</b>
+                  <b>{t("translation.subject.syllabus.outline")} </b>
                 </TableCell>
               )}
               {syllabus?.objective && (
                 <TableCell>
-                  <b>授業の概要・目的</b>
+                  <b>{t("translation.subject.syllabus.objective")} </b>
                 </TableCell>
               )}
               {syllabus?.lessonPlan && (
                 <TableCell>
-                  <b>授業計画と内容</b>
+                  <b>{t("translation.subject.syllabus.lesson_plan")} </b>
                 </TableCell>
               )}
               {syllabus?.gradingMethod && (
                 <TableCell>
-                  <b>成績評価の方法・観点</b>
+                  <b>{t("translation.subject.syllabus.grading_method")} </b>
                 </TableCell>
               )}
               {syllabus?.courseRequirement && (
                 <TableCell>
-                  <b>履修要件</b>
+                  <b>{t("translation.subject.syllabus.course_requirement")} </b>
                 </TableCell>
               )}
               {syllabus?.outClassLearning && (
                 <TableCell>
-                  <b>授業外学習（予習・復習）等</b>
+                  <b>{t("translation.subject.syllabus.outclass_learning")} </b>
                 </TableCell>
               )}
               {syllabus?.reference && (
                 <TableCell>
-                  <b>教科書・参考書等</b>
+                  <b>{t("translation.subject.syllabus.reference")} </b>
                 </TableCell>
               )}
             </TableRow>

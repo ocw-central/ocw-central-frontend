@@ -3,6 +3,7 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Link from "@mui/material/Link";
 import Typography from "@mui/material/Typography";
+import { useTranslation } from "react-i18next";
 
 type Props = {
   title: string;
@@ -14,6 +15,7 @@ type Props = {
 };
 
 export function SubjectCopyrightCard(props: Props) {
+  const { t } = useTranslation();
   const title = props.title;
   const subject_faculty = props.subject_faculty;
   const syllabus_faculty = props.syllabus_faculty;
@@ -47,21 +49,23 @@ export function SubjectCopyrightCard(props: Props) {
     >
       <CardContent>
         <Typography sx={{ fontSize: "1.2em" }} color="black" gutterBottom>
-          <b>著作権表記</b>
+          <b>{t("translation.subject.copyright_notice")}</b>
         </Typography>
         <Typography
           sx={{ mb: 1.5, fontSize: "1em", textAlign: "left" }}
           color="black"
         >
-          この資料は京都大学OCWウェブサイトに掲載されている
-          {title}の資料であり、その著作権は{faculty_copyright}
-          に帰属します。
+          {t("translation.subject.copyright_sentence1")}
+          {title.trim()}
+          {t("translation.subject.copyright_sentence2")}
+          {faculty_copyright.trim()}
+          {t("translation.subject.copyright_sentence3")}
           <Link
             href="https://ocw.kyoto-u.ac.jp/guideline/"
             target="_blank"
             rel="noopener noreferrer"
           >
-            より詳しく
+            {t("translation.subject.copyright_sentence4")}
           </Link>
         </Typography>
       </CardContent>
