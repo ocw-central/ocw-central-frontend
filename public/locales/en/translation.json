@@ -75,6 +75,7 @@
       "faculty_name": "Instructor",
       "academic_field": "Academic Field",
       "search": "Search",
+      "no_subject": "There are no applicable lectures.",
       "academic_field_panel": {
         "japanese_field": "Academic Fields (Japanese Leccutres)",
         "english_field": "Academic Fields"
