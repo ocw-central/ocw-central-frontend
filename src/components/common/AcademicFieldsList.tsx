@@ -122,7 +122,7 @@ export function AcademicFieldsList(props: Props) {
           </AccordionDetails>
         </Accordion>
       )}
-      {props.currentLanguage == "en" && (
+      {props.currentLanguage != "ja" && (
         <Accordion defaultExpanded={props.enFieldOpen}>
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
