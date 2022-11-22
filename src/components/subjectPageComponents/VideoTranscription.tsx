@@ -66,6 +66,8 @@ export function VideoTranscription(props: Props) {
   const processedLines = processText(transcription);
 
   const languages = ["original", ...translations.keys()];
+  // if there is only one language, don't show the language selector
+  const showLanguageSelector = languages.length > 1;
   const language_map: { [key: string]: string } = {
     original: "オリジナル",
     en: "English",
@@ -90,30 +92,32 @@ export function VideoTranscription(props: Props) {
           mb: 1,
         }}
       >
-        <Grid
-          container
-          xs={12}
-          sx={{
-            justifyContent: "end",
-            pr: 2,
-          }}
-        >
-          <FormControl size="small">
-            <Select
-              value={language}
-              onChange={handleLanguageChange}
-              sx={{
-                height: 30,
-              }}
-            >
-              {languages.map((l) => (
-                <MenuItem key={l} value={l}>
-                  {language_map[l]}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-        </Grid>
+        {showLanguageSelector && (
+          <Grid
+            container
+            xs={12}
+            sx={{
+              justifyContent: "end",
+              pr: 2,
+            }}
+          >
+            <FormControl size="small">
+              <Select
+                value={language}
+                onChange={handleLanguageChange}
+                sx={{
+                  height: 30,
+                }}
+              >
+                {languages.map((l) => (
+                  <MenuItem key={l} value={l}>
+                    {language_map[l]}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </Grid>
+        )}
         <Grid item xs={12}>
           <Typography
             fontSize={{ xs: 20, sm: 20 }}
@@ -130,7 +134,6 @@ export function VideoTranscription(props: Props) {
           </Typography>
         </Grid>
       </Grid>
-
       <List
         sx={{
           width: "100%",
