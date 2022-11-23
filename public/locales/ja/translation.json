@@ -29,6 +29,9 @@
     },
     "subject": {
       "video_list": "講義一覧",
+      "original_translation": "オリジナル",
+      "english_translation": "英語",
+      "japanese_translation": "日本語",
       "transcription": "自動書き起こし",
       "course_resource": "講義資料",
       "course_details": "講義詳細",
