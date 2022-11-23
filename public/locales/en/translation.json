@@ -1,0 +1,112 @@
+{
+  "translation": {
+    "header": {
+      "search_bar": "Course Title",
+      "nav": {
+        "home": "Home",
+        "detailed_search": "Adavanced Search",
+        "academic_fields": "Academic Fields",
+        "about": "About",
+        "language": "Language"
+      }
+    },
+    "home": {
+      "message": {
+        "sentence1": "OCW Central is a portal site for OCW (OpenCourseWare).",
+        "sentence2": " It augments OCW with automatic transcription by AI models.",
+        "search_button": "Search"
+      },
+      "academic_fields": {
+        "final_lecture": "Final Lecture",
+        "economics": "Economics/Finance",
+        "pedagogy": "Pedagogy",
+        "medicine": "Medicine",
+        "humanities": "Humanities",
+        "computer_science": "Computer Science",
+        "physics": "Physics",
+        "mathematics": "Mathematics"
+      }
+    },
+    "subject": {
+      "video_list": "Video List",
+      "original_translation": "Original",
+      "english_translation": "English",
+      "japanese_translation": "Japanese",
+      "transcription": "Automatic Transcription",
+      "course_resource": "Course Resource",
+      "course_details": "Course Details",
+      "subject_syllabus": "Syllabus",
+      "copyright_notice": "Copyright Notice",
+      "copyright_sentence1": "This material is published on the Kyoto University OCW website, titled ",
+      "copyright_sentence2": " and is copyrighted by ",
+      "copyright_sentence3": "",
+      "copyright_sentence4": " Learn more",
+      "details": {
+        "first_held_on": "Day of Opening",
+        "category": "Category",
+        "location": "Location",
+        "department": "Department",
+        "faculty": "Faculty",
+        "language": "Language",
+        "free_description": "Overview",
+        "series": "Series",
+        "academic_field": "Academic Field"
+      },
+      "syllabus": {
+        "academic_year": "Academic Year",
+        "semester": "Semester",
+        "num_credit": "Credits",
+        "assigned_grade": "Assigned Grade",
+        "course_format": "Course Format",
+        "targeted_audience": "Targeted Audience",
+        "language": "Language",
+        "course_day_period": "Period",
+        "faculty": "Faculty",
+        "outline": "Outline",
+        "objective": "Objective",
+        "lesson_plan": "Lesson Plan",
+        "grading_method": "Grading Method",
+        "course_requirement": "Requirements",
+        "outclass_learning": "Outclass Learning",
+        "reference": "Reference"
+      }
+    },
+    "search": {
+      "advanced_search": "Advanced Search",
+      "subject_tab": "Course",
+      "video_tab": "Lecture Video",
+      "subject_title": "Title",
+      "faculty_name": "Instructor",
+      "academic_field": "Academic Field",
+      "search": "Search",
+      "no_subject": "There are no applicable lectures.",
+      "academic_field_panel": {
+        "japanese_field": "Academic Fields (Japanese Leccutres)",
+        "english_field": "Academic Fields"
+      }
+    },
+    "report": {
+      "label": "Feedback",
+      "message": "Thank you for your feedback. We will review your feedback and reflect it in our improvements.",
+      "bug_report": "Bug Report",
+      "content": "Content",
+      "send": "Send"
+    },
+    "about": {
+      "about": "About",
+      "about_message": "OCW Central is a portal site for OCW (OpenCourseWare), an educational resource provided free of charge by universities. It is operated by student volunteers of the Graduate School of Informatics, Kyoto University, with the aim of preserving and improving access to educational resources.",
+      "license": "License",
+      "license_sentence1": "The materials on this site are released under the",
+      "license_sentence2": " Creative Commons License Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)",
+      "license_sentence3": " in accordance with the terms of the original distribution. All materials on this site are copyrighted by the author(s). If you have any comments about the license notice or requests for additional features, please contact us at the e-mail address below.",
+      "license_sentence4": "The source code for this web service is available on ",
+      "license_sentence5": " under the MIT License. Bug reports and pull requests are welcome.",
+      "disclaimer": "Disclaimer",
+      "disclaimer_sentence": "We make no guarantee as to the accuracy of the educational materials, transcriptions, or other information posted on this site.",
+      "contact": "Contact"
+    },
+    "page_not_found": {
+      "message": "The page you are looking for does not exist."
+    }
+  }
+}

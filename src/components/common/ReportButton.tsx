@@ -14,6 +14,7 @@ import {
   Typography,
 } from "@mui/material";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 const reportIssue = (type: string, content: string, url: string) => {
   let env = "LOCAL";
@@ -55,6 +56,7 @@ export function ReportButton(props: Props) {
   const [messageOpen, setMessageOpen] = useState(false);
   const handleMessageOpen = () => setMessageOpen(true);
   const handleMessageClose = () => setMessageOpen(false);
+  const { t, i18n } = useTranslation();
 
   return (
     <Box>
@@ -92,7 +94,7 @@ export function ReportButton(props: Props) {
               color: "black",
             }}
           >
-            ご意見ありがとうございます。ご意見を確認し、改善に反映させていただきます。
+            {t("report.message")}
           </Typography>
         </Grid>
       </Modal>
@@ -122,7 +124,7 @@ export function ReportButton(props: Props) {
                 sx={{ color: "black" }}
                 value="Bug"
                 control={<Radio />}
-                label="不具合報告"
+                label={t("translation.report.bug_report")}
                 onChange={(event) =>
                   setType((event.target as HTMLInputElement).value)
                 }
@@ -135,7 +137,7 @@ export function ReportButton(props: Props) {
                 }}
                 value="Opinion"
                 control={<Radio />}
-                label="ご意見・ご要望"
+                label={`${t("translation.report.label")}`}
                 onChange={(event) =>
                   setType((event.target as HTMLInputElement).value)
                 }
@@ -144,7 +146,7 @@ export function ReportButton(props: Props) {
             <TextField
               required
               multiline
-              helperText={"内容"}
+              helperText={t("translation.report.content")}
               rows={4}
               onChange={(event) =>
                 setContent((event.target as HTMLInputElement).value)
@@ -172,7 +174,7 @@ export function ReportButton(props: Props) {
                 }, 2000);
               }}
             >
-              送信
+              {t("translation.report.send")}
             </Button>
           </FormControl>
         </Box>

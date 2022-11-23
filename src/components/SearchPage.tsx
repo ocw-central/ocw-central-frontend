@@ -1,13 +1,15 @@
+import { AcademicFieldsList } from "@/components/common/AcademicFieldsList";
 import { ReportButton } from "@/components/common/ReportButton";
 import ClassIcon from "@mui/icons-material/Class";
 import OndemandVideoIcon from "@mui/icons-material/OndemandVideo";
 import { Box, Grid, Tab, Tabs, Typography } from "@mui/material";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useLocation, useSearchParams } from "react-router-dom";
-import { AcademicFieldsList } from "./searchPageComponents/AcademicFieldsList";
 import { DetailSearchBar } from "./searchPageComponents/DetailSearchBar";
 import { SubjectPanel } from "./searchPageComponents/SubjectPanel";
 import { VideoPanel } from "./searchPageComponents/VideoPanel";
+
 type TabPanelProps = {
   children?: React.ReactNode;
   index: number;
@@ -19,8 +21,10 @@ function TabPanel(props: TabPanelProps) {
 }
 
 export function SearchPage() {
+  const { t, i18n } = useTranslation();
+  const currentLanguage = i18n.language;
   const [jpFieldOpen, setJpFieldOpen] = useState(true);
-  const [enFieldOpen, setEnFieldOpen] = useState(false);
+  const [enFieldOpen, setEnFieldOpen] = useState(true);
 
   // for report button
   const location = useLocation();
@@ -56,6 +60,7 @@ export function SearchPage() {
         }}
       >
         <AcademicFieldsList
+          currentLanguage={currentLanguage}
           jpFieldOpen={jpFieldOpen}
           setJpFieldOpen={setJpFieldOpen}
           enFieldOpen={enFieldOpen}
@@ -98,11 +103,14 @@ export function SearchPage() {
                   align="left"
                   sx={{ color: "black", ml: { sm: 2, xs: 2 } }}
                 >
-                  <b>詳細検索</b>
+                  <b>{t("translation.search.advanced_search")}</b>
                 </Typography>
               </Grid>
               <Grid item sx={{ ml: "auto", mr: 1 }}>
-                <ReportButton url={url} name="ご意見・不具合報告" />
+                <ReportButton
+                  url={url}
+                  name={`${t("translation.report.label")}`}
+                />
               </Grid>
             </Grid>
             <Grid item>
@@ -122,13 +130,13 @@ export function SearchPage() {
                 <Tab
                   icon={<ClassIcon />}
                   iconPosition="start"
-                  label="科目"
+                  label={`${t("translation.search.subject_tab")}`}
                   sx={{ fontSize: 20, fontWeight: "bold" }}
                 />
                 <Tab
                   icon={<OndemandVideoIcon />}
                   iconPosition="start"
-                  label="講義動画"
+                  label={`${t("translation.search.video_tab")}`}
                   sx={{ fontSize: 20, fontWeight: "bold" }}
                 />
               </Tabs>
@@ -145,14 +153,14 @@ export function SearchPage() {
                 <Tab
                   icon={<ClassIcon />}
                   iconPosition="start"
-                  label="科目"
+                  label={`${t("translation.search.subject_tab")}`}
                   sx={{ fontSize: 20, fontWeight: "bold" }}
                 />
                 <Tab
                   icon={<OndemandVideoIcon />}
                   iconPosition="start"
                   disabled
-                  label="講義動画"
+                  label={`${t("translation.search.subject_tab")}`}
                   sx={{ fontSize: 20, fontWeight: "bold" }}
                 />
               </Tabs>
