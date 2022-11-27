@@ -160,7 +160,7 @@ export function SearchPage() {
                   icon={<OndemandVideoIcon />}
                   iconPosition="start"
                   disabled
-                  label={`${t("translation.search.subject_tab")}`}
+                  label={`${t("translation.search.video_tab")}`}
                   sx={{ fontSize: 20, fontWeight: "bold" }}
                 />
               </Tabs>

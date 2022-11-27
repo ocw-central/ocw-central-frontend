@@ -174,6 +174,8 @@ export function VideoTranscription(props: Props) {
                 props.setAutoPlayOn(1);
               }}
               sx={{
+                pt: 0.3,
+                pb: 0.3,
                 color: "white",
                 "&:hover, &:focus": {
                   bgcolor: alpha(theme.palette.primary.main, 0.3),
