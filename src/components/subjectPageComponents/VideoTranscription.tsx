@@ -4,12 +4,12 @@ import {
   FormControl,
   Grid,
   List,
+  ListItemButton,
   MenuItem,
   Select,
   SelectChangeEvent,
   Typography,
 } from "@mui/material";
-import ListItem from "@mui/material/ListItem";
 import { alpha } from "@mui/material/styles";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -166,12 +166,13 @@ export function VideoTranscription(props: Props) {
       >
         {processedLines.map((line, index) => {
           return (
-            <ListItem
+            <ListItemButton
               key={index}
-              button
               onClick={() => {
-                props.setTime({ start: Number(line.startTime) });
-                props.setAutoPlayOn(1);
+                if (window.getSelection()?.toString() === "") {
+                  props.setTime({ start: Number(line.startTime) });
+                  props.setAutoPlayOn(1);
+                }
               }}
               sx={{
                 pt: 0.3,
@@ -181,6 +182,7 @@ export function VideoTranscription(props: Props) {
                   bgcolor: alpha(theme.palette.primary.main, 0.3),
                   cursor: "pointer",
                 },
+                userSelect: "text",
               }}
             >
               <Grid container direction="row">
@@ -214,7 +216,7 @@ export function VideoTranscription(props: Props) {
                   >{`${line.text}`}</Typography>
                 </Grid>
               </Grid>
-            </ListItem>
+            </ListItemButton>
           );
         })}
       </List>
