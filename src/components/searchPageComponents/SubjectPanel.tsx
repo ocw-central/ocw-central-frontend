@@ -1,10 +1,12 @@
-import { Loading } from "@/components/common/Loading";
+import { Spinner } from "@/components/common/Spinner";
 import { useSubjectOnSearchPageQuery } from "@/generated/graphql";
 import { Grid, Typography } from "@mui/material";
+import { useTranslation } from "react-i18next";
 import { useSearchParams } from "react-router-dom";
 import { SubjectCard } from "./SubjectCard";
 
 export function SubjectPanel() {
+  const { t } = useTranslation();
   const [searchParams] = useSearchParams();
 
   const titleParam = searchParams.get("title");
@@ -23,7 +25,7 @@ export function SubjectPanel() {
     skip: title === "" && faculty === "" && field === "",
   });
   if (loading) {
-    return <Loading size={"7em"} color={"primary"} />;
+    return <Spinner size={"7em"} color={"primary"} />;
   }
   if (error) {
     return <div>Error</div>;
@@ -51,7 +53,7 @@ export function SubjectPanel() {
               color: "black",
             }}
           >
-            該当する科目がありません
+            {t("translation.search.no_subject")}
           </Typography>
         </Grid>
       ) : (

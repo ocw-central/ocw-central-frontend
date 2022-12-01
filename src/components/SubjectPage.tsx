@@ -1,5 +1,5 @@
-import { Loading } from "@/components/common/Loading";
 import MetaTag from "@/components/common/MetaTag";
+import { Spinner } from "@/components/common/Spinner";
 import { SubjectCopyrightCard } from "@/components/subjectPageComponents/SubjectCopyrightCard";
 import { SubjectDetails } from "@/components/subjectPageComponents/SubjectDetails";
 import { SubjectResources } from "@/components/subjectPageComponents/SubjectResources";
@@ -19,9 +19,11 @@ import Accordion from "@mui/material/Accordion";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { VideosBox } from "./subjectPageComponents/VideosBox";
 
 export function SubjectPage() {
+  const { t } = useTranslation();
   const [FocusedVideoOrdering, SetFocusedVideoOrdering] = useState(0);
   let { id } = useParams();
   // FIXME: I don't know how to distinguish parameter and search parameter
@@ -39,7 +41,7 @@ export function SubjectPage() {
   });
 
   if (loading) {
-    return <Loading size={"7em"} color={"primary"} />;
+    return <Spinner size={"7em"} color={"primary"} />;
   }
 
   if (error) {
@@ -133,7 +135,7 @@ export function SubjectPage() {
               id="videos"
             >
               <Typography sx={{ fontWeight: "bold" }}>
-                講義一覧 ({videos.length})
+                {t("translation.subject.video_list")} ({videos.length})
               </Typography>
             </AccordionSummary>
             <AccordionDetails>
@@ -160,7 +162,9 @@ export function SubjectPage() {
               aria-controls="resource"
               id="resource"
             >
-              <Typography sx={{ fontWeight: "bold" }}>講義資料</Typography>
+              <Typography sx={{ fontWeight: "bold" }}>
+                {t("translation.subject.course_resource")}
+              </Typography>
             </AccordionSummary>
             <AccordionDetails>
               <SubjectResources subject={subject} />
@@ -180,7 +184,9 @@ export function SubjectPage() {
               aria-controls="details"
               id="details"
             >
-              <Typography sx={{ fontWeight: "bold" }}>講義詳細</Typography>
+              <Typography sx={{ fontWeight: "bold" }}>
+                {t("translation.subject.course_details")}
+              </Typography>
             </AccordionSummary>
             <SubjectDetails subject={subject} />
           </Accordion>
@@ -195,7 +201,7 @@ export function SubjectPage() {
               id="syllabus"
             >
               <Typography sx={{ variant: "h6", fontWeight: "bold" }}>
-                シラバス
+                {t("translation.subject.subject_syllabus")}
               </Typography>
             </AccordionSummary>
             <AccordionDetails>
@@ -249,7 +255,7 @@ export function SubjectPage() {
           url={`${location.pathname}?video_id=${
             videos.length >= 1 ? videos[FocusedVideoOrdering].id : ""
           }`}
-          name="ご意見・不具合報告"
+          name={`${t("translation.report.label")}`}
         />
       </Grid>
     </Grid>

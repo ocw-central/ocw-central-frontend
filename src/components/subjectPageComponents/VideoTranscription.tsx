@@ -1,11 +1,25 @@
+import { Maybe, Translation } from "@/generated/graphql";
 import { theme } from "@/utils/themes";
-import { Box, Grid, List, Typography } from "@mui/material";
-import ListItem from "@mui/material/ListItem";
+import {
+  FormControl,
+  Grid,
+  List,
+  ListItem,
+  MenuItem,
+  Select,
+  SelectChangeEvent,
+  Typography,
+} from "@mui/material";
 import { alpha } from "@mui/material/styles";
 import { memo, useEffect } from "react";
+import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
-function processText(text: string) {
+function processText(text?: string) {
   //remove empty lines
+  if (text === undefined) {
+    return [];
+  }
   const lines = text.split(/\r?\n/);
   const processedLines = lines.map((line) => {
     const [startTime] = line.split(",");
@@ -124,6 +138,7 @@ const TranscriptionLineMemo = memo(function TranscriptionLine(
 
 type VideoTranscriptionProps = {
   transcription: string;
+  translations: Maybe<Translation>[];
   playedSeconds: number;
   playing: boolean;
   setStartTime: (time: { start: number }) => void;
@@ -132,7 +147,28 @@ type VideoTranscriptionProps = {
 };
 
 export function VideoTranscription(props: VideoTranscriptionProps) {
-  const processedLines = processText(props.transcription);
+  const { t } = useTranslation();
+  const [language, setLanguage] = useState("original");
+  const handleLanguageChange = (event: SelectChangeEvent) => {
+    setLanguage(event.target.value as string);
+  };
+  const translations = new Map<string, string>();
+  for (const t of props.translations) {
+    if (t) {
+      translations.set(t.languageCode, t.translation);
+    }
+  }
+  const languages = ["original", ...translations.keys()];
+  // if there is only one language, don't show the language selector
+  const showLanguageSelector = languages.length > 1;
+  const language_map: { [key: string]: string } = {
+    original: `${t("translation.subject.original_translation")}`,
+    en: `${t("translation.subject.english_translation")}`,
+    ja: `${t("translation.subject.japanese_translation")}`,
+  };
+  const transcription =
+    language == "original" ? props.transcription : translations.get(language);
+  const processedLines = processText(transcription);
   const nearestIdx = searchNearestTranscriptionIdx(
     processedLines,
     props.playedSeconds
@@ -159,54 +195,94 @@ export function VideoTranscription(props: VideoTranscriptionProps) {
   }, [props.playing, props.playedSeconds]);
 
   return (
-    <Box
+    <Grid
+      container
       className="VideoTranscription"
       sx={{
         bgcolor: alpha(theme.palette.primary.main, 0.15),
         borderRadius: 0.5,
-        p: { xs: 2, sm: 3 },
-        overflow: "auto",
-        "&::-webkit-scrollbar": {
-          width: 10,
-        },
-        "&::-webkit-scrollbar-track": {
-          backgroundColor: alpha(theme.palette.primary.dark, 0.3),
-        },
-        "&::-webkit-scrollbar-thumb": {
-          backgroundColor: "darkgrey",
-          outline: "3px solid slategrey",
-
-          "&:hover": {
-            backgroundColor: "grey",
-            cursor: "pointer",
-          },
-        },
-        "&::-webkit-scrollbar-thumb:hover": {
-          background: "#555",
-          cursor: "grabbing",
-        },
+        pt: 1,
       }}
     >
-      <List
+      <Grid
+        container
+        direction="row"
         sx={{
-          width: "100%",
-          maxHeight: { xs: 250, sm: 540 },
+          mt: 1,
+          mb: 1,
         }}
-        subheader={
+      >
+        {showLanguageSelector && (
+          <Grid
+            container
+            xs={12}
+            sx={{
+              justifyContent: "end",
+              pr: 2,
+            }}
+          >
+            <FormControl size="small">
+              <Select
+                value={language}
+                onChange={handleLanguageChange}
+                sx={{
+                  height: 30,
+                }}
+              >
+                {languages.map((l) => (
+                  <MenuItem key={l} value={l}>
+                    {language_map[l]}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </Grid>
+        )}
+        <Grid item xs={12}>
           <Typography
-            fontSize={{ xs: 15, sm: 25 }}
-            component="div"
+            fontSize={{ xs: 20, sm: 20 }}
             align="left"
             sx={{
               borderLeft: 1,
-              p: 1,
+              ml: 2,
+              pl: 1,
               color: theme.palette.primary.dark,
               fontWeight: "bold",
             }}
           >
-            自動書き起こし
+            {t("translation.subject.transcription")}
           </Typography>
-        }
+        </Grid>
+      </Grid>
+      <List
+        sx={{
+          width: "100%",
+          maxHeight: { xs: 250, sm: 540 },
+          px: {
+            xs: 2,
+            md: 2,
+          },
+          overflow: "auto",
+          "&::-webkit-scrollbar": {
+            width: 10,
+          },
+          "&::-webkit-scrollbar-track": {
+            backgroundColor: alpha(theme.palette.primary.dark, 0.3),
+          },
+          "&::-webkit-scrollbar-thumb": {
+            backgroundColor: "darkgrey",
+            outline: "3px solid slategrey",
+
+            "&:hover": {
+              backgroundColor: "grey",
+              cursor: "pointer",
+            },
+          },
+          "&::-webkit-scrollbar-thumb:hover": {
+            background: "#555",
+            cursor: "grabbing",
+          },
+        }}
       >
         {processedLines.map((line, idx) => {
           return (
@@ -221,6 +297,6 @@ export function VideoTranscription(props: VideoTranscriptionProps) {
           );
         })}
       </List>
-    </Box>
+    </Grid>
   );
 }

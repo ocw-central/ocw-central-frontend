@@ -1,8 +1,10 @@
 import { theme } from "@/utils/themes";
 import { Grid, Typography } from "@mui/material";
 import Link from "@mui/material/Link";
+import { useTranslation } from "react-i18next";
 
 export function AboutPage() {
+  const { t } = useTranslation();
   return (
     <Grid
       container
@@ -24,7 +26,7 @@ export function AboutPage() {
             my: 2,
           }}
         >
-          About
+          {t("translation.about.about")}
         </Typography>
       </Grid>
       <Grid item md={12} xs={12}>
@@ -42,9 +44,7 @@ export function AboutPage() {
             color: "black",
           }}
         >
-          OCW Centralは大学によって無償で提供される教育資源であるOCW
-          (OpenCourseWare) のポータルサイトです。
-          教育資源の保全とアクセス向上を目指し京都大学情報学研究科の学生有志により運営されています。
+          {t("translation.about.about_message")}
         </Typography>
       </Grid>
       <Grid item md={12} xs={12}>
@@ -58,7 +58,7 @@ export function AboutPage() {
             my: 2,
           }}
         >
-          License
+          {t("translation.about.license")}
         </Typography>
       </Grid>
       <Grid item md={12} xs={12}>
@@ -76,19 +76,17 @@ export function AboutPage() {
             color: "black",
           }}
         >
-          このサイトで公開されている資料は配布元の規約に基づき、
+          {t("translation.about.license_sentence1")}
           <Link
             color="primary"
             underline="always"
             href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ja"
           >
-            クリエイティブ・コモンズ・ライセンス 表示-非営利-継承 4.0 国際 (CC
-            BY-NC-SA 4.0)
+            {t("translation.about.license_sentence2")}
           </Link>
-          のもとで公開されます。このサイト上の全ての資料について、著作権は作成者の先生方に帰属します。
-          ライセンス表記に関するご指摘や機能追加のご要望がありましたら下記のメールアドレスまでご連絡ください。
+          {t("translation.about.license_sentence3")}
           <br />
-          このウェブサービスのソースコードはMITライセンスのもとで
+          {t("translation.about.license_sentence4")}
           <Link
             color="primary"
             underline="always"
@@ -96,7 +94,7 @@ export function AboutPage() {
           >
             GitHub
           </Link>
-          で公開されています。バグレポートやプルリクを歓迎します。
+          {t("translation.about.license_sentence5")}
         </Typography>
       </Grid>
       <Grid item md={12} xs={12}>
@@ -110,7 +108,7 @@ export function AboutPage() {
             my: 2,
           }}
         >
-          Disclaimer
+          {t("translation.about.disclaimer")}
         </Typography>
         <Typography
           variant="h6"
@@ -126,7 +124,7 @@ export function AboutPage() {
             color: "black",
           }}
         >
-          このサイト上の教育資料や書き起こし等の掲載情報の正確性に関して、一切の保証をいたしません。
+          {t("translation.about.disclaimer_sentence")}
         </Typography>
         <br />
       </Grid>
@@ -141,7 +139,7 @@ export function AboutPage() {
             my: 0,
           }}
         >
-          Contact
+          {t("translation.about.contact")}
         </Typography>
       </Grid>
       <Grid item md={12} xs={12}>

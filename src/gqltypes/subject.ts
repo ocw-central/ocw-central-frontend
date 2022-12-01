@@ -30,6 +30,12 @@ export type Subject = {
       topic: string;
       thumbnailLink: string;
     }[];
+    translations: ({
+      __typename?: "Translation" | undefined;
+      id: string;
+      languageCode: string;
+      translation: string;
+    } | null)[];
   }[];
   resources: {
     __typename?: "Resource" | undefined;

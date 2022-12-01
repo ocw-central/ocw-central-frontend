@@ -1,0 +1,112 @@
+{
+  "translation": {
+    "header": {
+      "search_bar": "講義名",
+      "nav": {
+        "home": "ホーム",
+        "detailed_search": "詳細検索",
+        "academic_fields": "学術分野一覧",
+        "about": "このサイトについて",
+        "language": "言語設定"
+      }
+    },
+    "home": {
+      "message": {
+        "sentence1": "OCW CentralはOCW(大学によって提供される教育資料)のポータルサイトです。",
+        "sentence2": "AIモデルによる自動書き起こしでOCWをより便利にします。",
+        "search_button": "講義を検索"
+      },
+      "academic_fields": {
+        "final_lecture": "最終講義",
+        "economics": "経済学・金融",
+        "pedagogy": "教育学",
+        "medicine": "医学",
+        "humanities": "人文科学",
+        "computer_science": "コンピュータサイエンス",
+        "physics": "物理学",
+        "mathematics": "数学"
+      }
+    },
+    "subject": {
+      "video_list": "講義一覧",
+      "original_translation": "オリジナル",
+      "english_translation": "英語",
+      "japanese_translation": "日本語",
+      "transcription": "自動書き起こし",
+      "course_resource": "講義資料",
+      "course_details": "講義詳細",
+      "subject_syllabus": "シラバス",
+      "copyright_notice": "著作権表記",
+      "copyright_sentence1": "この資料は京都大学OCWウェブサイトに掲載されている",
+      "copyright_sentence2": "の資料であり、その著作権は",
+      "copyright_sentence3": "に帰属します。",
+      "copyright_sentence4": " 詳しく",
+      "details": {
+        "first_held_on": "開講日",
+        "category": "カテゴリ",
+        "location": "開催場所",
+        "department": "開講学部",
+        "faculty": "担当教員",
+        "language": "言語",
+        "free_description": "概要",
+        "series": "シリーズ",
+        "academic_field": "学術分野"
+      },
+      "syllabus": {
+        "academic_year": "開講年度・開講期",
+        "semester": "開講学期",
+        "num_credit": "単位数",
+        "assigned_grade": "配当学年",
+        "course_format": "授業形態",
+        "targeted_audience": "対象学生",
+        "language": "使用言語",
+        "course_day_period": "曜時限",
+        "faculty": "教員",
+        "outline": "授業概要",
+        "objective": "授業の概要・目的",
+        "lesson_plan": "授業計画と内容",
+        "grading_method": "成績評価の方法・観点",
+        "course_requirement": "履修要件",
+        "outclass_learning": "授業外学習（予習・復習）等",
+        "reference": "教科書・参考書等"
+      }
+    },
+    "search": {
+      "advanced_search": "詳細検索",
+      "subject_tab": "科目",
+      "video_tab": "講義動画",
+      "subject_title": "講義タイトル",
+      "faculty_name": "教員名",
+      "academic_field": "分野名",
+      "search": "検索",
+      "no_subject": "該当する講義がありません。",
+      "academic_field_panel": {
+        "japanese_field": "学問分野",
+        "english_field": "学問分野(外国語講義)"
+      }
+    },
+    "report": {
+      "label": "ご意見・不具合報告",
+      "message": "ご意見ありがとうございます。ご意見を確認し、改善に反映させていただきます。",
+      "bug_report": "不具合報告",
+      "content": "内容",
+      "send": "送信"
+    },
+    "about": {
+      "about": "このサイトについて",
+      "about_message": "OCW Centralは大学によって無償で提供される教育資源であるOCW(OpenCourseWare) のポータルサイトです。教育資源の保全とアクセス向上を目指し京都大学情報学研究科の学生有志により運営されています。",
+      "license": "ライセンス",
+      "license_sentence1": "このサイトで公開されている資料は配布元の規約に基づき、",
+      "license_sentence2": "クリエイティブ・コモンズ・ライセンス 表示-非営利-継承 4.0 国際 (CC BY-NC-SA 4.0)",
+      "license_sentence3": "のもとで公開されます。このサイト上の全ての資料について、著作権は作成者の先生方に帰属します。 ライセンス表記に関するご指摘や機能追加のご要望がありましたら下記のメールアドレスまでご連絡ください。",
+      "license_sentence4": "このウェブサービスのソースコードはMITライセンスのもとで",
+      "license_sentence5": "で公開されています。バグレポートやプルリクを歓迎します。",
+      "disclaimer": "免責事項",
+      "disclaimer_sentence": "このサイト上の教育資料や書き起こし等の掲載情報の正確性に関して、一切の保証をいたしません。",
+      "contact": "お問い合わせ"
+    },
+    "page_not_found": {
+      "message": "お探しのページは見つかりませんでした。"
+    }
+  }
+}

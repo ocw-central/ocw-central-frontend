@@ -45,6 +45,11 @@ query subject($id: ID!) {
       videoLength
       language
       transcription
+      translations {
+        id
+        languageCode
+        translation
+      }
     }
     location
     resources {
