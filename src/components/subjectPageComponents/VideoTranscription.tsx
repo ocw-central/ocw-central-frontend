@@ -2,15 +2,7 @@ import { theme } from "@/utils/themes";
 import { Box, Grid, List, Typography } from "@mui/material";
 import ListItem from "@mui/material/ListItem";
 import { alpha } from "@mui/material/styles";
-import { useState } from "react";
-
-type Props = {
-  transcription: string;
-  setTime: (time: { start: number }) => void;
-  setAutoPlayOn: (autoPlayOn: number) => void;
-  playedSeconds: number;
-  playing: boolean;
-};
+import { memo, useState } from "react";
 
 function processText(text: string) {
   //remove empty lines
@@ -37,10 +29,125 @@ function convertSecondToTime(second: number) {
   return `${mm}:${ss}`;
 }
 
+// TODO: binary searchへ変更
+function searchNearestTranscriptionIdx(
+  processedLines: { startTime: string; text: string }[],
+  playedSeconds: number
+) {
+  let nearestIdx = 0;
+  let nearestDiff = Infinity;
+  processedLines.forEach((line, idx) => {
+    const lineTime = Number(line.startTime);
+    const diff = Math.abs(lineTime - playedSeconds);
+    if (diff < nearestDiff) {
+      nearestIdx = idx;
+      nearestDiff = diff;
+    }
+  });
+  return nearestIdx;
+}
+
+type TranscriptionLineProps = {
+  idx: number;
+  text: string;
+  startTime: string;
+  isCurrent: boolean;
+  setTime: (time: { start: number }) => void;
+  setAutoPlayOn: (autoPlayOn: number) => void;
+  setCurrentIdx: (idx: number) => void;
+};
+const TranscriptionLineMemo = memo(function TranscriptionLine(
+  props: TranscriptionLineProps
+) {
+  return (
+    <ListItem
+      button
+      onClick={() => {
+        props.setTime({ start: Number(props.startTime) });
+        props.setAutoPlayOn(1);
+        props.setCurrentIdx(props.idx);
+      }}
+      sx={{
+        color: "white",
+        p: 0,
+        "&:hover, &:focus": {
+          bgcolor: alpha(theme.palette.primary.main, 0.3),
+          cursor: "pointer",
+        },
+      }}
+    >
+      <Grid
+        container
+        direction="row"
+        sx={{
+          backgroundColor: props.isCurrent
+            ? alpha(theme.palette.primary.main, 0.3)
+            : "transparent",
+        }}
+      >
+        <Grid
+          item
+          xs={1}
+          sm={1}
+          sx={{
+            justifySelf: "center",
+          }}
+        >
+          <Typography
+            sx={{
+              color: `${theme.palette.secondary.main}`,
+              fontWeight: "bold",
+              fontSize: { xs: 12, sm: 14, md: 15 },
+              pt: 0.5,
+            }}
+          >
+            {`${convertSecondToTime(Number(props.startTime))} `}
+          </Typography>
+        </Grid>
+        <Grid item xs={11} sm={11}>
+          <Typography
+            sx={{
+              color: "black",
+              fontWeight: "medium",
+              fontSize: { xs: 16, sm: 20 },
+              pl: { md: 3.5, sm: 3, xs: 3 },
+            }}
+          >
+            {`${props.text}`}
+          </Typography>
+        </Grid>
+      </Grid>
+    </ListItem>
+  );
+});
+
+type Props = {
+  transcription: string;
+  setTime: (time: { start: number }) => void;
+  setAutoPlayOn: (autoPlayOn: number) => void;
+  playedSeconds: number;
+  playing: boolean;
+};
+
 export function VideoTranscription(props: Props) {
-  console.log(props.playing);
   console.log(props.playedSeconds);
   const processedLines = processText(props.transcription);
+  const nearestIdx = searchNearestTranscriptionIdx(
+    processedLines,
+    props.playedSeconds
+  );
+  const [currentIdx, setCurrentIdx] = useState(nearestIdx);
+  console.log(processedLines[currentIdx + 1].startTime);
+  const interval =
+    Number(processedLines[currentIdx + 1].startTime) -
+    Number(processedLines[currentIdx].startTime);
+  setTimeout(() => {
+    // TODO: props.playedSecondsを用いた計算
+    if (props.playing) {
+      setCurrentIdx(currentIdx + 1);
+    }
+  }, interval * 1000);
+
   return (
     <Box
       className="VideoTranscription"
@@ -91,69 +198,18 @@ export function VideoTranscription(props: Props) {
           </Typography>
         }
       >
-        {processedLines.map((line, index) => {
+        {processedLines.map((line, idx) => {
           return (
-            <ListItem
-              key={index}
-              button
-              onClick={() => {
-                props.setTime({ start: Number(line.startTime) });
-                props.setAutoPlayOn(1);
-              }}
-              sx={{
-                color: "white",
-                p: 0,
-                "&:hover, &:focus": {
-                  bgcolor: alpha(theme.palette.primary.main, 0.3),
-                  cursor: "pointer",
-                },
-              }}
-            >
-              <Grid
-                container
-                direction="row"
-                sx={{
-                  backgroundColor:
-                    Number(processedLines[index].startTime) <=
-                      props.playedSeconds &&
-                    (index == processedLines.length - 1 ||
-                      Number(processedLines[index + 1].startTime) >
-                        props.playedSeconds)
-                      ? alpha(theme.palette.primary.main, 0.3)
-                      : "transparent",
-                }}
-              >
-                <Grid
-                  item
-                  xs={1}
-                  sm={1}
-                  sx={{
-                    justifySelf: "center",
-                  }}
-                >
-                  <Typography
-                    sx={{
-                      color: `${theme.palette.secondary.main}`,
-                      fontWeight: "bold",
-                      fontSize: { xs: 12, sm: 14, md: 15 },
-                      pt: 0.5,
-                    }}
-                  >
-                    {`${convertSecondToTime(Number(line.startTime))} `}
-                  </Typography>
-                </Grid>
-                <Grid item xs={11} sm={11}>
-                  <Typography
-                    sx={{
-                      color: "black",
-                      fontWeight: "medium",
-                      fontSize: { xs: 16, sm: 20 },
-                      pl: { md: 3.5, sm: 3, xs: 3 },
-                    }}
-                  >{`${line.text}`}</Typography>
-                </Grid>
-              </Grid>
-            </ListItem>
+            <TranscriptionLineMemo
+              key={idx}
+              idx={idx}
+              text={line.text}
+              startTime={line.startTime}
+              isCurrent={idx === currentIdx}
+              setTime={props.setTime}
+              setAutoPlayOn={props.setAutoPlayOn}
+              setCurrentIdx={setCurrentIdx}
+            />
           );
         })}
       </List>
