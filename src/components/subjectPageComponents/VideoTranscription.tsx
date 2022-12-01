@@ -176,15 +176,18 @@ export function VideoTranscription(props: VideoTranscriptionProps) {
   // stateで管理することが難しいため、constで定義
   // ただし、この場合はintervalごとにsearchNearestTranscriptionIdxが呼ばれる
   const currentIdx = nearestIdx;
-  // 途中で再生した場合にprops.playedSecondsとprocessedLines[currentIdx].startTimeが一致しない問題に対処
-  const interval =
-    Math.floor(props.playedSeconds) !=
-    Number(processedLines[currentIdx].startTime)
-      ? Number(processedLines[currentIdx + 1].startTime) - props.playedSeconds
-      : Number(processedLines[currentIdx + 1].startTime) -
-        Number(processedLines[currentIdx].startTime);
   useEffect(() => {
-    if (props.playing) {
+    if (currentIdx == processedLines.length - 1) {
+      return;
+    } else if (props.playing) {
+      // 途中で再生した場合にprops.playedSecondsとprocessedLines[currentIdx].startTimeが一致しない問題に対処
+      const interval =
+        Math.floor(props.playedSeconds) !=
+        Number(processedLines[currentIdx].startTime)
+          ? Number(processedLines[currentIdx + 1].startTime) -
+            props.playedSeconds
+          : Number(processedLines[currentIdx + 1].startTime) -
+            Number(processedLines[currentIdx].startTime);
       const timer = setTimeout(() => {
         props.setPlayedSeconds(
           Number(processedLines[currentIdx + 1].startTime)
