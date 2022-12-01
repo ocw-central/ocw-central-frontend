@@ -1,4 +1,4 @@
-import { createRef, useRef } from "react";
+import { useRef } from "react";
 import ReactPlayer from "react-player/youtube";
 
 type Props = {
@@ -32,15 +32,11 @@ export const PlayerWrapper = (props: Props) => {
   if (props.FocusedYoutubeId === undefined) {
     return <></>;
   }
-  console.log(
-    `https://www.youtube.com/watch?v=${props.FocusedYoutubeId}?start=${props.startAt}&autoplay=${props.autoPlayOn}&mute=0` +
-      `&randomNumberJustForTellingReactToReRender=${Math.random()}`
-  );
   return (
     <ReactPlayer
       ref={ref}
       url={
-        `https://www.youtube.com/watch?v=${props.FocusedYoutubeId}?start=${props.startAt}&autoplay=${props.autoPlayOn}&mute=0` +
+        `https://www.youtube.com/watch?v=${props.FocusedYoutubeId}?start=${props.startAt}` +
         `&randomNumberJustForTellingReactToReRender=${Math.random()}`
       }
       playsInline
@@ -59,29 +55,7 @@ export const PlayerWrapper = (props: Props) => {
       onBuffer={handleOnBuffer}
       onEnded={handleOnEnded}
       onError={handleOnError}
-    />
-  );
-};
-
-export const PlayerWrapper2 = (props: Props) => {
-  if (props.FocusedYoutubeId === undefined) {
-    return <></>;
-  }
-  return (
-    <iframe
-      style={{
-        aspectRatio: "16 / 9",
-        width: "100%",
-        maxWidth: 960,
-        height: "95%",
-        maxHeight: 540,
-      }}
-      src={
-        `https://www.youtube.com/embed/${props.FocusedYoutubeId}?start=${props.startAt}&autoplay=${props.autoPlayOn}&mute=0` +
-        `&randomNumberJustForTellingReactToReRender=${Math.random()}`
-      }
-      allow="fullscreen; picture-in-picture; accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; muted"
-      key={props.FocusedYoutubeId}
+      playing={props.autoPlayOn === 1}
     />
   );
 };

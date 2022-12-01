@@ -2,7 +2,7 @@ import { theme } from "@/utils/themes";
 import { Box, Grid, List, Typography } from "@mui/material";
 import ListItem from "@mui/material/ListItem";
 import { alpha } from "@mui/material/styles";
-import { memo, useState } from "react";
+import { memo, useEffect } from "react";
 
 function processText(text: string) {
   //remove empty lines
@@ -39,7 +39,9 @@ function searchNearestTranscriptionIdx(
   processedLines.forEach((line, idx) => {
     const lineTime = Number(line.startTime);
     const diff = Math.abs(lineTime - playedSeconds);
-    if (diff < nearestDiff) {
+    // 最も近い書き起こしは必ず実際の再生時間よりも前にあるようにする
+    // -> intervalの計算における仮定を満たすため
+    if (lineTime <= playedSeconds && diff < nearestDiff) {
       nearestIdx = idx;
       nearestDiff = diff;
     }
@@ -48,13 +50,11 @@ function searchNearestTranscriptionIdx(
 }
 
 type TranscriptionLineProps = {
-  idx: number;
   text: string;
   startTime: string;
   isCurrent: boolean;
   setTime: (time: { start: number }) => void;
   setAutoPlayOn: (autoPlayOn: number) => void;
-  setCurrentIdx: (idx: number) => void;
 };
 const TranscriptionLineMemo = memo(function TranscriptionLine(
   props: TranscriptionLineProps
@@ -63,14 +63,15 @@ const TranscriptionLineMemo = memo(function TranscriptionLine(
     <ListItem
       button
       onClick={() => {
+        // Playerの再生時間を変更
         props.setTime({ start: Number(props.startTime) });
+        // Playerの自動再生を設定
         props.setAutoPlayOn(1);
-        props.setCurrentIdx(props.idx);
       }}
       sx={{
         color: "white",
         p: 0,
-        "&:hover, &:focus": {
+        "&:hover": {
           bgcolor: alpha(theme.palette.primary.main, 0.3),
           cursor: "pointer",
         },
@@ -121,32 +122,41 @@ const TranscriptionLineMemo = memo(function TranscriptionLine(
   );
 });
 
-type Props = {
+type VideoTranscriptionProps = {
   transcription: string;
-  setTime: (time: { start: number }) => void;
-  setAutoPlayOn: (autoPlayOn: number) => void;
   playedSeconds: number;
   playing: boolean;
+  setStartTime: (time: { start: number }) => void;
+  setAutoPlayOn: (autoPlayOn: number) => void;
+  setPlayedSeconds: (playedSeconds: number) => void;
 };
 
-export function VideoTranscription(props: Props) {
-  console.log(props.playedSeconds);
+export function VideoTranscription(props: VideoTranscriptionProps) {
   const processedLines = processText(props.transcription);
   const nearestIdx = searchNearestTranscriptionIdx(
     processedLines,
     props.playedSeconds
   );
-  const [currentIdx, setCurrentIdx] = useState(nearestIdx);
-  console.log(processedLines[currentIdx + 1].startTime);
+  // stateで管理することが難しいため、constで定義
+  // ただし、この場合はintervalごとにsearchNearestTranscriptionIdxが呼ばれる
+  const currentIdx = nearestIdx;
+  // 途中で再生した場合にprops.playedSecondsとprocessedLines[currentIdx].startTimeが一致しない問題に対処
   const interval =
-    Number(processedLines[currentIdx + 1].startTime) -
-    Number(processedLines[currentIdx].startTime);
-  setTimeout(() => {
-    // TODO: props.playedSecondsを用いた計算
+    Math.floor(props.playedSeconds) !=
+    Number(processedLines[currentIdx].startTime)
+      ? Number(processedLines[currentIdx + 1].startTime) - props.playedSeconds
+      : Number(processedLines[currentIdx + 1].startTime) -
+        Number(processedLines[currentIdx].startTime);
+  useEffect(() => {
     if (props.playing) {
-      setCurrentIdx(currentIdx + 1);
+      const timer = setTimeout(() => {
+        props.setPlayedSeconds(
+          Number(processedLines[currentIdx + 1].startTime)
+        );
+      }, interval * 1000);
+      return () => clearTimeout(timer);
     }
-  }, interval * 1000);
+  }, [props.playing, props.playedSeconds]);
 
   return (
     <Box
@@ -202,13 +212,11 @@ export function VideoTranscription(props: Props) {
           return (
             <TranscriptionLineMemo
               key={idx}
-              idx={idx}
               text={line.text}
               startTime={line.startTime}
               isCurrent={idx === currentIdx}
-              setTime={props.setTime}
+              setTime={props.setStartTime}
               setAutoPlayOn={props.setAutoPlayOn}
-              setCurrentIdx={setCurrentIdx}
             />
           );
         })}
