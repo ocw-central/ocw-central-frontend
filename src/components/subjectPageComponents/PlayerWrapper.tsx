@@ -1,4 +1,5 @@
 import { useRef } from "react";
+import YouTubePlayer from "react-player/youtube";
 import ReactPlayer from "react-player/youtube";
 
 type Props = {
@@ -10,7 +11,7 @@ type Props = {
 };
 
 export const PlayerWrapper = (props: Props) => {
-  const ref = useRef(null);
+  const ref = useRef<YouTubePlayer>(null);
   const handleOnPlay = () => {
     if (ref.current) {
       props.setPlayedSeconds(ref.current.getCurrentTime());
@@ -34,11 +35,11 @@ export const PlayerWrapper = (props: Props) => {
   }
   return (
     <ReactPlayer
-      ref={ref}
       url={
         `https://www.youtube.com/watch?v=${props.FocusedYoutubeId}?start=${props.startAt}` +
         `&randomNumberJustForTellingReactToReRender=${Math.random()}`
       }
+      ref={ref}
       playsInline
       width="100%"
       height="100%"
