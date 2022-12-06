@@ -56,7 +56,7 @@ export function ReportButton(props: Props) {
   const [messageOpen, setMessageOpen] = useState(false);
   const handleMessageOpen = () => setMessageOpen(true);
   const handleMessageClose = () => setMessageOpen(false);
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
 
   return (
     <Box>
