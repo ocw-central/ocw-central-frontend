@@ -35,7 +35,7 @@ export function SubjectSyllabus({ subject }: { subject: Subject }) {
               )}
               {syllabus?.assignedGrade && (
                 <TableCell>
-                  <b>{t("translation.subject.syllabus.assighned_grade")} </b>
+                  <b>{t("translation.subject.syllabus.assigned_grade")} </b>
                 </TableCell>
               )}
               {syllabus?.courseFormat && (
