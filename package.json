@@ -78,5 +78,6 @@
       "eslint --fix",
       "prettier --write"
     ]
-  }
+  },
+  "license": "MIT"
 }
