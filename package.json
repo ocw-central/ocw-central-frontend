@@ -77,6 +77,9 @@
     "src/**/*.{ts,tsx}": [
       "eslint --fix",
       "prettier --write"
+    ],
+    "public/**/*.{json}": [
+      "prettier --write"
     ]
   },
   "license": "MIT"
