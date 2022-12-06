@@ -85,6 +85,11 @@
         "english_field": "Academic Fields"
       }
     },
+    "academic_field_page": {
+      "academic_field": "Academic Fields",
+      "japanese_lecture": "Japanese lectures",
+      "english_lecture": "English lectures"
+    },
     "report": {
       "label": "Feedback",
       "message": "Thank you for your feedback. We will review your feedback and reflect it in our improvements.",

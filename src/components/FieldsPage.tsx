@@ -14,6 +14,7 @@ import {
   Typography,
 } from "@mui/material";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { createSearchParams, useNavigate } from "react-router-dom";
 
 type TabPanelProps = {
@@ -42,6 +43,7 @@ function separateEnglishAndJapaneseWords(word: string[]) {
 }
 /* This is only for mobile */
 export function FieldsPage() {
+  const { t } = useTranslation();
   const [selectedTabIndex, setSelectedTabIndex] = useState(0);
   const handleTabChange = (event: React.SyntheticEvent, newValue: number) => {
     setSelectedTabIndex(newValue);
@@ -76,7 +78,7 @@ export function FieldsPage() {
         align="left"
         sx={{ color: "black", pl: 2, pt: 2 }}
       >
-        <b>分野一覧</b>
+        <b>{t("translation.academic_field_page.academic_field")}</b>
       </Typography>
       <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
         <Tabs
@@ -85,8 +87,12 @@ export function FieldsPage() {
           aria-label="basic tabs example"
           variant="fullWidth"
         >
-          <Tab label="日本語講義" />
-          <Tab label="英語講義" />
+          <Tab
+            label={`${t("translation.academic_field_page.japanese_lecture")}`}
+          />
+          <Tab
+            label={`${t("translation.academic_field_page.english_lecture")}`}
+          />
         </Tabs>
       </Box>
       <TabPanel value={selectedTabIndex} index={0}>
