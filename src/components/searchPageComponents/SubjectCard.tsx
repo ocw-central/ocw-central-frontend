@@ -1,7 +1,7 @@
+import { SubjectOnSearchPage } from "@/gqltypes/subjectsOnSearchPage";
 import { ImageListItem, ImageListItemBar } from "@mui/material";
 import { alpha, styled } from "@mui/material/styles";
 import { Link } from "react-router-dom";
-import { SubjectOnSearchPage } from "@/gqltypes/subjectsOnSearchPage";
 
 const MyImageListItemBar = styled(ImageListItemBar)({
   color: "white",
@@ -19,7 +19,7 @@ export const SubjectCard = (subject: SubjectOnSearchPage) => {
     <Link to={`/subjects/${subject.id}`}>
       <MyImageListItem>
         <img
-          src={`${subject.thumbnailLink}`}
+          src={`${"https://storage.ocwcentral.com/" + subject.id + ".webp"}`}
           loading="lazy"
           style={{ height: 280 }}
         />
