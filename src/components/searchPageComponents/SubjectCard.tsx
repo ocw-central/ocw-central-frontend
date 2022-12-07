@@ -19,7 +19,7 @@ export const SubjectCard = (subject: SubjectOnSearchPage) => {
     <Link to={`/subjects/${subject.id}`}>
       <MyImageListItem>
         <img
-          src={`${"https://storage.ocwcentral.com/" + subject.id + ".webp"}`}
+          src={`https://storage.ocwcentral.com/${subject.id}.webp`}
           loading="lazy"
           style={{ height: 280 }}
         />
