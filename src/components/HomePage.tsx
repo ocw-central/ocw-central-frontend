@@ -1,8 +1,6 @@
 import { ReportButton } from "@/components/common/ReportButton";
-import { Spinner } from "@/components/common/Spinner";
-import { SubjectCard } from "@/components/searchPageComponents/SubjectCard";
+import { SubjectsRow } from "@/components/common/SubjectsRow";
 import { useRandomSubjectQuery } from "@/generated/graphql";
-import { SubjectOnSearchPage } from "@/gqltypes/subjectsOnSearchPage";
 import { theme } from "@/utils/themes";
 import {
   KeyboardDoubleArrowLeft,
@@ -11,7 +9,6 @@ import {
 } from "@mui/icons-material";
 import { alpha, Box, Button, Grid, Typography } from "@mui/material";
 import { t } from "i18next";
-import { useCallback, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { TwitterIcon, TwitterShareButton } from "react-share";
@@ -231,103 +228,6 @@ const MathematicsPane = () => {
       loading={loading}
       error={error !== undefined}
     />
-  );
-};
-
-const SubjectsRow = ({
-  subjects,
-  rowTitle,
-  loading,
-  error,
-}: {
-  subjects: SubjectOnSearchPage[];
-  rowTitle: string;
-  loading: boolean;
-  error: boolean;
-}) => {
-  return (
-    <Grid container spacing={1}>
-      <Grid item xs={12} textAlign="left">
-        <Box sx={{ px: 2 }}>
-          <Typography color="black" sx={{ fontWeight: "bold", fontSize: 25 }}>
-            {rowTitle}
-          </Typography>
-        </Box>
-      </Grid>
-      <Grid item xs={12}>
-        <RowContent subjects={subjects} loading={loading} error={error} />
-      </Grid>
-    </Grid>
-  );
-};
-
-const RowContent = ({
-  subjects,
-  loading,
-  error,
-}: {
-  subjects: SubjectOnSearchPage[];
-  loading: boolean;
-  error: boolean;
-}) => {
-  const [scrollLeft, setScrollLeft] = useState(0);
-  const scrollRef = useRef<HTMLDivElement>(null!);
-
-  const measuredRef = useCallback((node: HTMLDivElement) => {
-    if (node !== null) {
-      scrollRef.current = node;
-      node.addEventListener("scroll", () => {
-        setScrollLeft(scrollRef.current.scrollLeft);
-      });
-    }
-  }, []);
-
-  if (loading) {
-    return <Spinner size={"4em"} color={"primary"} />;
-  }
-
-  if (error) {
-    return <div>講義の取得に失敗しました</div>;
-  }
-
-  return (
-    <Box
-      sx={{
-        display: "flex",
-        justifyContent: "center",
-        width: "100%",
-        position: "relative",
-      }}
-    >
-      <div
-        style={{ display: "flex", overflowX: "scroll", width: "100%" }}
-        ref={measuredRef}
-      >
-        {subjects.map((subject) => (
-          <Box
-            sx={{
-              flexBasis: { xs: "320px", sm: "400px" },
-              flexShrink: 0,
-            }}
-            key={subject.id}
-            px={0.5}
-          >
-            <SubjectCard
-              id={subject.id}
-              title={subject.title}
-              faculty={subject.faculty}
-              thumbnailLink={subject.thumbnailLink}
-            />
-          </Box>
-        ))}
-      </div>
-      {scrollLeft > 0 && <Arrow scrollRef={scrollRef} direction={"left"} />}
-      {(scrollRef.current == null ||
-        scrollLeft <
-          scrollRef.current.scrollWidth - scrollRef.current.clientWidth) && (
-        <Arrow scrollRef={scrollRef} direction={"right"} />
-      )}
-    </Box>
   );
 };
 
