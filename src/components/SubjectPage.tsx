@@ -1,5 +1,6 @@
 import MetaTag from "@/components/common/MetaTag";
 import { Spinner } from "@/components/common/Spinner";
+import { SubjectsPane } from "@/components/common/SubjectsPane";
 import { SubjectCopyrightCard } from "@/components/subjectPageComponents/SubjectCopyrightCard";
 import { SubjectDetails } from "@/components/subjectPageComponents/SubjectDetails";
 import { SubjectResources } from "@/components/subjectPageComponents/SubjectResources";
@@ -208,6 +209,24 @@ export function SubjectPage() {
               <SubjectSyllabus subject={subject} />
             </AccordionDetails>
           </Accordion>
+        )}
+        {subject.academicField && (
+          <SubjectsPane
+            category={""}
+            series={""}
+            academicField={subject.academicField}
+            numSubjects={16}
+            rowTitle={t("translation.subject.related_subjects")}
+          />
+        )}
+        {!subject.academicField && (
+          <SubjectsPane
+            category={""}
+            series={""}
+            academicField={""}
+            numSubjects={16}
+            rowTitle={t("translation.subject.related_subjects")}
+          />
         )}
       </Grid>
       <Grid

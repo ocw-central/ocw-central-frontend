@@ -2,11 +2,7 @@ import { ReportButton } from "@/components/common/ReportButton";
 import { SubjectsRow } from "@/components/common/SubjectsRow";
 import { useRandomSubjectQuery } from "@/generated/graphql";
 import { theme } from "@/utils/themes";
-import {
-  KeyboardDoubleArrowLeft,
-  KeyboardDoubleArrowRight,
-  Search,
-} from "@mui/icons-material";
+import { Search } from "@mui/icons-material";
 import { alpha, Box, Button, Grid, Typography } from "@mui/material";
 import { t } from "i18next";
 import { useTranslation } from "react-i18next";
@@ -35,7 +31,7 @@ export function HomePage() {
           <HomeMessagePane />
         </Grid>
         <Grid item xs={12}>
-          <SubjectsPane />
+          <FieldsPane />
         </Grid>
         <Grid item>
           <Box>
@@ -63,7 +59,7 @@ export function HomePage() {
   );
 }
 
-const SubjectsPane = () => {
+const FieldsPane = () => {
   return (
     <Grid container spacing={{ xs: 3, sm: 7 }}>
       <Grid item xs={12}>
@@ -228,54 +224,6 @@ const MathematicsPane = () => {
       loading={loading}
       error={error !== undefined}
     />
-  );
-};
-
-type Direction = "right" | "left";
-
-type ArrowProps = {
-  scrollRef: React.MutableRefObject<HTMLDivElement>;
-  direction: Direction;
-};
-
-const Arrow = ({ scrollRef, direction }: ArrowProps) => {
-  const divStyle: React.CSSProperties = {
-    backgroundColor: "black",
-    opacity: 0.7,
-    position: "absolute",
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "center",
-    height: "100%",
-    animationDelay: "0.5s",
-  };
-
-  if (direction === "left") {
-    divStyle.left = 0;
-  } else {
-    divStyle.right = 0;
-  }
-
-  return (
-    <Box sx={{ display: { xs: "none", sm: "initial" } }}>
-      <div style={divStyle}>
-        <Button
-          sx={{ height: "100%", color: "white" }}
-          onClick={() => {
-            scrollRef.current.scrollBy({
-              left: direction == "left" ? -1000 : 1000,
-              behavior: "smooth",
-            });
-          }}
-        >
-          {direction == "left" ? (
-            <KeyboardDoubleArrowLeft />
-          ) : (
-            <KeyboardDoubleArrowRight />
-          )}
-        </Button>
-      </div>
-    </Box>
   );
 };
 
