@@ -215,7 +215,7 @@ export function SubjectPage() {
             category={""}
             series={""}
             academicField={subject.academicField}
-            numSubjects={16}
+            numSubjects={12}
             rowTitle={t("translation.subject.related_subjects")}
           />
         )}
@@ -224,7 +224,7 @@ export function SubjectPage() {
             category={""}
             series={""}
             academicField={""}
-            numSubjects={16}
+            numSubjects={12}
             rowTitle={t("translation.subject.related_subjects")}
           />
         )}

@@ -21,6 +21,7 @@ export function SubjectsPane(props: SubjectsPaneProps) {
     },
   });
 
+  console.log(data);
   return (
     <SubjectsRow
       subjects={data ? data.randomSubjects : []}
