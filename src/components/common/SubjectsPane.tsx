@@ -8,6 +8,7 @@ type SubjectsPaneProps = {
   academicField: string;
   numSubjects: number;
   rowTitle: string;
+  pageSubjectId?: string;
 };
 
 export function SubjectsPane(props: SubjectsPaneProps) {
@@ -20,10 +21,21 @@ export function SubjectsPane(props: SubjectsPaneProps) {
       numSubjects: props.numSubjects,
     },
   });
+  let relatedSubjects = data?.randomSubjects;
+  // remove the subject itself from the list
+  if (props.pageSubjectId) {
+    relatedSubjects = data?.randomSubjects.filter(
+      (subject) => subject.id !== props.pageSubjectId
+    );
+  }
+  // no related subjects
+  if (relatedSubjects?.length === 0) {
+    return <></>;
+  }
 
   return (
     <SubjectsRow
-      subjects={data ? data.randomSubjects : []}
+      subjects={relatedSubjects ? relatedSubjects : []}
       rowTitle={`${t(props.rowTitle)}`}
       loading={loading}
       error={error !== undefined}

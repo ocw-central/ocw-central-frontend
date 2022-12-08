@@ -1,6 +1,7 @@
 import MetaTag from "@/components/common/MetaTag";
+import { ReportButton } from "@/components/common/ReportButton";
 import { Spinner } from "@/components/common/Spinner";
-import { SubjectsPane } from "@/components/common/SubjectsPane";
+import { RelatedSubjectsPane } from "@/components/subjectPageComponents/RelatedSubjectsPane";
 import { SubjectCopyrightCard } from "@/components/subjectPageComponents/SubjectCopyrightCard";
 import { SubjectDetails } from "@/components/subjectPageComponents/SubjectDetails";
 import { SubjectResources } from "@/components/subjectPageComponents/SubjectResources";
@@ -9,18 +10,16 @@ import { VideoWithTranscription } from "@/components/subjectPageComponents/Video
 import { metadata } from "@/config/site-metadata";
 import { useSubjectQuery } from "@/generated/graphql";
 import { theme } from "@/utils/themes";
-import { Grid, Typography } from "@mui/material";
-import { Box } from "@mui/system";
-import { useParams } from "react-router-dom";
-import { TwitterIcon, TwitterShareButton } from "react-share";
-
-import { ReportButton } from "@/components/common/ReportButton";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { Grid, Typography } from "@mui/material";
 import Accordion from "@mui/material/Accordion";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import AccordionSummary from "@mui/material/AccordionSummary";
+import { Box } from "@mui/system";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useParams } from "react-router-dom";
+import { TwitterIcon, TwitterShareButton } from "react-share";
 import { VideosBox } from "./subjectPageComponents/VideosBox";
 
 export function SubjectPage() {
@@ -210,24 +209,13 @@ export function SubjectPage() {
             </AccordionDetails>
           </Accordion>
         )}
-        {subject.academicField && (
-          <SubjectsPane
-            category={""}
-            series={""}
-            academicField={subject.academicField}
-            numSubjects={12}
-            rowTitle={t("translation.subject.related_subjects")}
-          />
-        )}
-        {!subject.academicField && (
-          <SubjectsPane
-            category={""}
-            series={""}
-            academicField={""}
-            numSubjects={12}
-            rowTitle={t("translation.subject.related_subjects")}
-          />
-        )}
+        <RelatedSubjectsPane
+          category={""}
+          series={""}
+          academicField={subject.academicField}
+          numSubjects={12}
+          pageSubjectId={subject.id}
+        />
       </Grid>
       <Grid
         container
