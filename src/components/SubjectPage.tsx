@@ -209,6 +209,8 @@ export function SubjectPage() {
             </AccordionDetails>
           </Accordion>
         )}
+      </Grid>
+      <Grid sx={{ pl: { xs: 2, md: 4 }, pr: { xs: 2, md: 4 } }}>
         <RelatedSubjectsPane
           category={""}
           series={""}
