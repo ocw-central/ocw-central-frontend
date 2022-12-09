@@ -186,11 +186,11 @@ export function VideoTranscription(props: VideoTranscriptionProps) {
     processedLines,
     props.playedSeconds
   );
-  const transcriptionLineRefs = useRef<RefObject<HTMLInputElement>[]>([]);
+  const transcriptionLineRefs = useRef<RefObject<HTMLDivElement>[]>([]);
   useEffect(() => {
     // 初回レンダリング時にrefを作成
     processedLines.forEach((_, idx) => {
-      transcriptionLineRefs.current[idx] = createRef<HTMLInputElement>();
+      transcriptionLineRefs.current[idx] = createRef<HTMLDivElement>();
     });
   }, []);
 
@@ -199,7 +199,7 @@ export function VideoTranscription(props: VideoTranscriptionProps) {
     setCurrentIdx(nearestIdx);
     transcriptionLineRefs.current[nearestIdx].current?.scrollIntoView({
       behavior: "smooth",
-      block: "center",
+      block: "nearest",
     });
   }, [nearestIdx]);
 
