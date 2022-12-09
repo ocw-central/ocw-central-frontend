@@ -24,7 +24,7 @@ export function SubjectsPane(props: SubjectsPaneProps) {
   let relatedSubjects = data?.randomSubjects;
   // remove the subject itself from the list
   if (props.pageSubjectId) {
-    relatedSubjects = data?.randomSubjects.filter(
+    relatedSubjects = relatedSubjects?.filter(
       (subject) => subject.id !== props.pageSubjectId
     );
   }

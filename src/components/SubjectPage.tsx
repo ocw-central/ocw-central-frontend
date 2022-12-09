@@ -1,7 +1,7 @@
 import MetaTag from "@/components/common/MetaTag";
 import { ReportButton } from "@/components/common/ReportButton";
 import { Spinner } from "@/components/common/Spinner";
-import { RelatedSubjectsPane } from "@/components/subjectPageComponents/RelatedSubjectsPane";
+import { SubjectsPane } from "@/components/common/SubjectsPane";
 import { SubjectCopyrightCard } from "@/components/subjectPageComponents/SubjectCopyrightCard";
 import { SubjectDetails } from "@/components/subjectPageComponents/SubjectDetails";
 import { SubjectResources } from "@/components/subjectPageComponents/SubjectResources";
@@ -211,12 +211,13 @@ export function SubjectPage() {
         )}
       </Grid>
       <Grid sx={{ pl: { xs: 2, md: 4 }, pr: { xs: 2, md: 4 } }}>
-        <RelatedSubjectsPane
+        <SubjectsPane
           category={""}
           series={""}
           academicField={subject.academicField}
           numSubjects={12}
           pageSubjectId={subject.id}
+          rowTitle={t("translation.subject.related_subjects")}
         />
       </Grid>
       <Grid
