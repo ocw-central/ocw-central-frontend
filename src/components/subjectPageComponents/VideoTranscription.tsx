@@ -11,7 +11,14 @@ import {
   Typography,
 } from "@mui/material";
 import { alpha } from "@mui/material/styles";
-import { memo, RefObject, useEffect } from "react";
+import {
+  createRef,
+  forwardRef,
+  memo,
+  RefObject,
+  useEffect,
+  useRef,
+} from "react";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import YouTubePlayer from "react-player/youtube";
@@ -71,74 +78,76 @@ type TranscriptionLineProps = {
   setAutoPlayOn: (autoPlayOn: number) => void;
   playerRef: RefObject<YouTubePlayer>;
 };
-const TranscriptionLineMemo = memo(function TranscriptionLine(
-  props: TranscriptionLineProps
-) {
-  return (
-    <ListItemButton
-      onClick={() => {
-        // コピーのための選択時は無効にする
-        if (window.getSelection()?.toString() === "") {
-          // Playerの再生時間を変更
-          props.playerRef.current?.seekTo(Number(props.startTime), "seconds");
-          // Playerの自動再生を設定
-          props.setAutoPlayOn(1);
-        }
-      }}
-      sx={{
-        color: "white",
-        p: 0,
-        "&:hover": {
-          bgcolor: alpha(theme.palette.primary.main, 0.3),
-          cursor: "pointer",
-        },
-        userSelect: "text",
-      }}
-    >
-      <Grid
-        container
-        direction="row"
+const TranscriptionLine = forwardRef<HTMLDivElement, TranscriptionLineProps>(
+  function TranscriptionLine(props, ref) {
+    return (
+      <ListItemButton
+        ref={ref}
+        onClick={() => {
+          // コピーのための選択時は無効にする?
+          if (window.getSelection()?.toString() === "") {
+            // Playerの再生時間を変更
+            props.playerRef.current?.seekTo(Number(props.startTime), "seconds");
+            // Playerの自動再生を設定
+            props.setAutoPlayOn(1);
+          }
+        }}
         sx={{
-          backgroundColor: props.isCurrent
-            ? alpha(theme.palette.primary.main, 0.3)
-            : "transparent",
+          color: "white",
+          p: 0,
+          "&:hover": {
+            bgcolor: alpha(theme.palette.primary.main, 0.3),
+            cursor: "pointer",
+          },
+          userSelect: "text",
         }}
       >
         <Grid
-          item
-          xs={1}
-          sm={1}
+          container
+          direction="row"
           sx={{
-            justifySelf: "center",
+            backgroundColor: props.isCurrent
+              ? alpha(theme.palette.primary.main, 0.3)
+              : "transparent",
           }}
         >
-          <Typography
+          <Grid
+            item
+            xs={1}
+            sm={1}
             sx={{
-              color: `${theme.palette.secondary.main}`,
-              fontWeight: "bold",
-              fontSize: { xs: 12, sm: 14, md: 15 },
-              pt: 0.5,
+              justifySelf: "center",
             }}
           >
-            {`${convertSecondToTime(Number(props.startTime))} `}
-          </Typography>
+            <Typography
+              sx={{
+                color: `${theme.palette.secondary.main}`,
+                fontWeight: "bold",
+                fontSize: { xs: 12, sm: 14, md: 15 },
+                pt: 0.5,
+              }}
+            >
+              {`${convertSecondToTime(Number(props.startTime))} `}
+            </Typography>
+          </Grid>
+          <Grid item xs={11} sm={11}>
+            <Typography
+              sx={{
+                color: "black",
+                fontWeight: "medium",
+                fontSize: { xs: 16, sm: 20 },
+                pl: { md: 3.5, sm: 3, xs: 3 },
+              }}
+            >
+              {`${props.text}`}
+            </Typography>
+          </Grid>
         </Grid>
-        <Grid item xs={11} sm={11}>
-          <Typography
-            sx={{
-              color: "black",
-              fontWeight: "medium",
-              fontSize: { xs: 16, sm: 20 },
-              pl: { md: 3.5, sm: 3, xs: 3 },
-            }}
-          >
-            {`${props.text}`}
-          </Typography>
-        </Grid>
-      </Grid>
-    </ListItemButton>
-  );
-});
+      </ListItemButton>
+    );
+  }
+);
+const TranscriptionLineMemo = memo(TranscriptionLine);
 
 type VideoTranscriptionProps = {
   transcription: string;
@@ -177,9 +186,21 @@ export function VideoTranscription(props: VideoTranscriptionProps) {
     processedLines,
     props.playedSeconds
   );
+  const transcriptionLineRefs = useRef<RefObject<HTMLInputElement>[]>([]);
+  useEffect(() => {
+    // 初回レンダリング時にrefを作成
+    processedLines.forEach((_, idx) => {
+      transcriptionLineRefs.current[idx] = createRef<HTMLInputElement>();
+    });
+  }, []);
+
   const [currentIdx, setCurrentIdx] = useState(nearestIdx);
   useEffect(() => {
     setCurrentIdx(nearestIdx);
+    transcriptionLineRefs.current[nearestIdx].current?.scrollIntoView({
+      behavior: "smooth",
+      block: "center",
+    });
   }, [nearestIdx]);
 
   return (
@@ -275,6 +296,7 @@ export function VideoTranscription(props: VideoTranscriptionProps) {
         {processedLines.map((line, idx) => {
           return (
             <TranscriptionLineMemo
+              ref={transcriptionLineRefs.current[idx]}
               key={idx}
               text={line.text}
               startTime={line.startTime}
