@@ -4,16 +4,17 @@ import {
   FormControl,
   Grid,
   List,
-  ListItem,
+  ListItemButton,
   MenuItem,
   Select,
   SelectChangeEvent,
   Typography,
 } from "@mui/material";
 import { alpha } from "@mui/material/styles";
-import { memo, useEffect } from "react";
+import { memo, RefObject, useEffect } from "react";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import YouTubePlayer from "react-player/youtube";
 
 function processText(text?: string) {
   //remove empty lines
@@ -67,20 +68,22 @@ type TranscriptionLineProps = {
   text: string;
   startTime: string;
   isCurrent: boolean;
-  setTime: (time: { start: number }) => void;
   setAutoPlayOn: (autoPlayOn: number) => void;
+  playerRef: RefObject<YouTubePlayer>;
 };
 const TranscriptionLineMemo = memo(function TranscriptionLine(
   props: TranscriptionLineProps
 ) {
   return (
-    <ListItem
-      button
+    <ListItemButton
       onClick={() => {
-        // Playerの再生時間を変更
-        props.setTime({ start: Number(props.startTime) });
-        // Playerの自動再生を設定
-        props.setAutoPlayOn(1);
+        // コピーのための選択時は無効にする
+        if (window.getSelection()?.toString() === "") {
+          // Playerの再生時間を変更
+          props.playerRef.current?.seekTo(Number(props.startTime), "seconds");
+          // Playerの自動再生を設定
+          props.setAutoPlayOn(1);
+        }
       }}
       sx={{
         color: "white",
@@ -89,6 +92,7 @@ const TranscriptionLineMemo = memo(function TranscriptionLine(
           bgcolor: alpha(theme.palette.primary.main, 0.3),
           cursor: "pointer",
         },
+        userSelect: "text",
       }}
     >
       <Grid
@@ -132,7 +136,7 @@ const TranscriptionLineMemo = memo(function TranscriptionLine(
           </Typography>
         </Grid>
       </Grid>
-    </ListItem>
+    </ListItemButton>
   );
 });
 
@@ -140,8 +144,7 @@ type VideoTranscriptionProps = {
   transcription: string;
   translations: Maybe<Translation>[];
   playedSeconds: number;
-  playing: boolean;
-  setStartTime: (time: { start: number }) => void;
+  playerRef: RefObject<YouTubePlayer>;
   setAutoPlayOn: (autoPlayOn: number) => void;
   setPlayedSeconds: (playedSeconds: number) => void;
 };
@@ -168,34 +171,16 @@ export function VideoTranscription(props: VideoTranscriptionProps) {
   };
   const transcription =
     language == "original" ? props.transcription : translations.get(language);
+
   const processedLines = processText(transcription);
   const nearestIdx = searchNearestTranscriptionIdx(
     processedLines,
     props.playedSeconds
   );
-  // stateで管理することが難しいため、constで定義
-  // ただし、この場合はintervalごとにsearchNearestTranscriptionIdxが呼ばれる
-  const currentIdx = nearestIdx;
+  const [currentIdx, setCurrentIdx] = useState(nearestIdx);
   useEffect(() => {
-    if (currentIdx == processedLines.length - 1) {
-      return;
-    } else if (props.playing) {
-      // 途中で再生した場合にprops.playedSecondsとprocessedLines[currentIdx].startTimeが一致しない問題に対処
-      const interval =
-        Math.floor(props.playedSeconds) !=
-        Number(processedLines[currentIdx].startTime)
-          ? Number(processedLines[currentIdx + 1].startTime) -
-            props.playedSeconds
-          : Number(processedLines[currentIdx + 1].startTime) -
-            Number(processedLines[currentIdx].startTime);
-      const timer = setTimeout(() => {
-        props.setPlayedSeconds(
-          Number(processedLines[currentIdx + 1].startTime)
-        );
-      }, interval * 1000);
-      return () => clearTimeout(timer);
-    }
-  }, [props.playing, props.playedSeconds]);
+    setCurrentIdx(nearestIdx);
+  }, [nearestIdx]);
 
   return (
     <Grid
@@ -294,8 +279,8 @@ export function VideoTranscription(props: VideoTranscriptionProps) {
               text={line.text}
               startTime={line.startTime}
               isCurrent={idx === currentIdx}
-              setTime={props.setStartTime}
               setAutoPlayOn={props.setAutoPlayOn}
+              playerRef={props.playerRef}
             />
           );
         })}

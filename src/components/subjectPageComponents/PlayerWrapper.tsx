@@ -7,28 +7,12 @@ type Props = {
   startAt: number;
   autoPlayOn: number; // 0: off, 1: on
   setPlayedSeconds: (playedSeconds: number) => void;
-  setPlaying: (playing: boolean) => void;
 };
 
 export const PlayerWrapper = (props: Props) => {
   const ref = useRef<YouTubePlayer>(null);
-  const handleOnPlay = () => {
-    if (ref.current) {
-      props.setPlayedSeconds(ref.current.getCurrentTime());
-      props.setPlaying(true);
-    }
-  };
-  const handleOnPause = () => {
-    props.setPlaying(false);
-  };
-  const handleOnBuffer = () => {
-    props.setPlaying(false);
-  };
-  const handleOnEnded = () => {
-    props.setPlaying(false);
-  };
-  const handleOnError = () => {
-    props.setPlaying(false);
+  const handleOnProgress = (state: { playedSeconds: number }) => {
+    props.setPlayedSeconds(state.playedSeconds);
   };
   if (props.FocusedYoutubeId === undefined) {
     return <></>;
@@ -51,11 +35,7 @@ export const PlayerWrapper = (props: Props) => {
         maxWidth: 960,
         maxHeight: 540,
       }}
-      onPlay={handleOnPlay}
-      onPause={handleOnPause}
-      onBuffer={handleOnBuffer}
-      onEnded={handleOnEnded}
-      onError={handleOnError}
+      onProgress={handleOnProgress}
       playing={props.autoPlayOn === 1}
     />
   );

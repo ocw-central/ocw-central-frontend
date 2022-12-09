@@ -1,4 +1,3 @@
-import { PlayerWrapper } from "@/components/subjectPageComponents/PlayerWrapper";
 import { VideoTranscription } from "@/components/subjectPageComponents/VideoTranscription";
 import { Video } from "@/generated/graphql";
 import { Subject } from "@/gqltypes/subject";
@@ -7,6 +6,9 @@ import { Box, Grid, Typography } from "@mui/material";
 import { useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import urlParser from "js-video-url-parser";
+import { useRef } from "react";
+import YouTubePlayer from "react-player/youtube";
+import ReactPlayer from "react-player/youtube";
 
 type Props = {
   //setVideoIdFunc: (videoId: string) => void;
@@ -24,11 +26,9 @@ const removeParenthesis = (s: string) => {
 
 export function VideoWithTranscription(props: Props) {
   const videos = props.videos ?? []; //already sorted by `ordering` field
-  const [startTime, SetStartTime] = useState({ start: 0 });
   const [AutoPlayOn, SetAutoPlayOn] = useState(0);
   const [searchParams] = useSearchParams();
   const [playedSeconds, setPlayedSeconds] = useState(0);
-  const [playing, setPlaying] = useState(false);
 
   const FocusedVideoOrdering = props.focusedVideoOrdering;
   const FocusedVideo = videos[FocusedVideoOrdering];
@@ -41,17 +41,32 @@ export function VideoWithTranscription(props: Props) {
     const initialVideoOrdering = initialVideo?.ordering ?? 0;
     props.setFocusedVideoOrdering(initialVideoOrdering);
   }, []);
-  const PlayerWrapperMemo = useMemo(
+
+  const playerRef = useRef<YouTubePlayer>(null);
+  const handleOnProgress = (state: { playedSeconds: number }) => {
+    setPlayedSeconds(state.playedSeconds);
+  };
+  const PlayerMemo = useMemo(
     () => (
-      <PlayerWrapper
-        FocusedYoutubeId={FocusedYoutubeId}
-        startAt={startTime.start}
-        autoPlayOn={AutoPlayOn}
-        setPlayedSeconds={setPlayedSeconds}
-        setPlaying={setPlaying}
+      <ReactPlayer
+        url={`https://www.youtube.com/watch?v=${FocusedYoutubeId}`}
+        ref={playerRef}
+        playsInline
+        width="100%"
+        height="100%"
+        pip={true}
+        controls={true}
+        muted={true}
+        style={{
+          aspectRatio: "16 / 9",
+          maxWidth: 960,
+          maxHeight: 540,
+        }}
+        onProgress={handleOnProgress}
+        playing={AutoPlayOn === 1}
       />
     ),
-    [FocusedYoutubeId, startTime.start, AutoPlayOn, setPlayedSeconds]
+    [FocusedYoutubeId, AutoPlayOn]
   );
   return (
     <Grid
@@ -121,7 +136,7 @@ export function VideoWithTranscription(props: Props) {
             </Typography>
           </Box>
         )}
-        {PlayerWrapperMemo}
+        {FocusedYoutubeId != undefined && PlayerMemo}
       </Grid>
       {FocusedVideo.transcription && (
         <Grid
@@ -135,8 +150,7 @@ export function VideoWithTranscription(props: Props) {
             transcription={FocusedVideo.transcription}
             translations={FocusedVideo.translations}
             playedSeconds={playedSeconds}
-            playing={playing}
-            setStartTime={SetStartTime}
+            playerRef={playerRef}
             setAutoPlayOn={SetAutoPlayOn}
             setPlayedSeconds={setPlayedSeconds}
           />
