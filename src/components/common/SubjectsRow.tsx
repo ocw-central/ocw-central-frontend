@@ -140,7 +140,7 @@ export function SubjectsRow({
   return (
     <Grid container spacing={1}>
       <Grid item xs={12} textAlign="left">
-        <Box sx={{ px: 2 }}>
+        <Box>
           <Typography color="black" sx={{ fontWeight: "bold", fontSize: 25 }}>
             {rowTitle}
           </Typography>
