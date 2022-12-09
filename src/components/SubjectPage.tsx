@@ -255,7 +255,7 @@ export function SubjectPage() {
           url={`${location.pathname}?video_id=${
             videos.length >= 1 ? videos[FocusedVideoOrdering].id : ""
           }`}
-          name={`${t("translation.report.label")}`}
+          name={t("translation.report.label")}
         />
       </Grid>
     </Grid>

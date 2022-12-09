@@ -87,12 +87,8 @@ export function FieldsPage() {
           aria-label="basic tabs example"
           variant="fullWidth"
         >
-          <Tab
-            label={`${t("translation.academic_field_page.japanese_lecture")}`}
-          />
-          <Tab
-            label={`${t("translation.academic_field_page.english_lecture")}`}
-          />
+          <Tab label={t("translation.academic_field_page.japanese_lecture")} />
+          <Tab label={t("translation.academic_field_page.english_lecture")} />
         </Tabs>
       </Box>
       <TabPanel value={selectedTabIndex} index={0}>

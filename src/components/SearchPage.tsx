@@ -107,10 +107,7 @@ export function SearchPage() {
                 </Typography>
               </Grid>
               <Grid item sx={{ ml: "auto", mr: 1 }}>
-                <ReportButton
-                  url={url}
-                  name={`${t("translation.report.label")}`}
-                />
+                <ReportButton url={url} name={t("translation.report.label")} />
               </Grid>
             </Grid>
             <Grid item>
@@ -136,7 +133,7 @@ export function SearchPage() {
                 <Tab
                   icon={<OndemandVideoIcon />}
                   iconPosition="start"
-                  label={`${t("translation.search.video_tab")}`}
+                  label={t("translation.search.video_tab")}
                   sx={{ fontSize: 20, fontWeight: "bold" }}
                 />
               </Tabs>
@@ -160,7 +157,7 @@ export function SearchPage() {
                   icon={<OndemandVideoIcon />}
                   iconPosition="start"
                   disabled
-                  label={`${t("translation.search.video_tab")}`}
+                  label={t("translation.search.video_tab")}
                   sx={{ fontSize: 20, fontWeight: "bold" }}
                 />
               </Tabs>
