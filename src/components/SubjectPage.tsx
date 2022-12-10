@@ -1,5 +1,7 @@
 import MetaTag from "@/components/common/MetaTag";
+import { ReportButton } from "@/components/common/ReportButton";
 import { Spinner } from "@/components/common/Spinner";
+import { SubjectsPane } from "@/components/common/SubjectsPane";
 import { SubjectCopyrightCard } from "@/components/subjectPageComponents/SubjectCopyrightCard";
 import { SubjectDetails } from "@/components/subjectPageComponents/SubjectDetails";
 import { SubjectResources } from "@/components/subjectPageComponents/SubjectResources";
@@ -8,18 +10,16 @@ import { VideoWithTranscription } from "@/components/subjectPageComponents/Video
 import { metadata } from "@/config/site-metadata";
 import { useSubjectQuery } from "@/generated/graphql";
 import { theme } from "@/utils/themes";
-import { Grid, Typography } from "@mui/material";
-import { Box } from "@mui/system";
-import { useParams } from "react-router-dom";
-import { TwitterIcon, TwitterShareButton } from "react-share";
-
-import { ReportButton } from "@/components/common/ReportButton";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { Grid, Typography } from "@mui/material";
 import Accordion from "@mui/material/Accordion";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import AccordionSummary from "@mui/material/AccordionSummary";
+import { Box } from "@mui/system";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useParams } from "react-router-dom";
+import { TwitterIcon, TwitterShareButton } from "react-share";
 import { VideosBox } from "./subjectPageComponents/VideosBox";
 
 export function SubjectPage() {
@@ -209,6 +209,16 @@ export function SubjectPage() {
             </AccordionDetails>
           </Accordion>
         )}
+      </Grid>
+      <Grid sx={{ pl: { xs: 2, md: 4 }, pr: { xs: 2, md: 4 } }}>
+        <SubjectsPane
+          category={""}
+          series={""}
+          academicField={subject.academicField}
+          numSubjects={12}
+          pageSubjectId={subject.id}
+          rowTitle={t("translation.subject.related_subjects")}
+        />
       </Grid>
       <Grid
         container
