@@ -121,7 +121,7 @@ export function DetailSearchBar() {
         </Grid>
         <Grid item xs={12} sm={12} md={4}>
           <SearchBar
-            label={`${t("translation.search.faculty_name")}`}
+            label={t("translation.search.faculty_name")}
             value={searchFaculty}
             setValue={setSearchFaculty}
             setSearchParams={setSearchParams}
@@ -151,7 +151,7 @@ export function DetailSearchBar() {
         }}
       >
         <Typography variant="h6">
-          <b>{`${t("translation.search.search")}`}</b>
+          <b>{t("translation.search.search")}</b>
         </Typography>
       </Button>
     </Box>

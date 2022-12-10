@@ -127,7 +127,7 @@ const EconomicsPane = () => {
   return (
     <SubjectsRow
       subjects={data ? data.randomSubjects : []}
-      rowTitle={`${t("translation.home.academic_fields.economics")}`}
+      rowTitle={t("translation.home.academic_fields.economics")}
       loading={loading}
       error={error !== undefined}
     />
@@ -167,7 +167,7 @@ const HumanitiesPane = () => {
   return (
     <SubjectsRow
       subjects={data ? data.randomSubjects : []}
-      rowTitle={`${t("translation.home.academic_fields.humanities")}`}
+      rowTitle={t("translation.home.academic_fields.humanities")}
       loading={loading}
       error={error !== undefined}
     />
@@ -207,7 +207,7 @@ const PhysicsPane = () => {
   return (
     <SubjectsRow
       subjects={data ? data.randomSubjects : []}
-      rowTitle={`${t("translation.home.academic_fields.physics")}`}
+      rowTitle={t("translation.home.academic_fields.physics")}
       loading={loading}
       error={error !== undefined}
     />
