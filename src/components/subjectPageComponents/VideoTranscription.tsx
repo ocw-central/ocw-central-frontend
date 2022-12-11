@@ -84,7 +84,7 @@ const TranscriptionLine = forwardRef<HTMLDivElement, TranscriptionLineProps>(
       <ListItemButton
         ref={ref}
         onClick={() => {
-          // コピーのための選択時は無効にする?
+          // コピーのための選択時はonClickを無効にする
           if (window.getSelection()?.toString() === "") {
             // Playerの再生時間を変更
             props.playerRef.current?.seekTo(Number(props.startTime), "seconds");
