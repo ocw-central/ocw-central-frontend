@@ -215,7 +215,9 @@ export function SubjectPage() {
           category={""}
           series={""}
           academicField={subject.academicField}
-          numSubjects={12}
+          // display 8 ~ 11 subjects to avoid using cached data all the time
+          // since data is cached for the combination of category, series, academicField and numSubjects
+          numSubjects={Math.floor(Math.random() * 4) + 8}
           pageSubjectId={subject.id}
           rowTitle={t("translation.subject.related_subjects")}
         />
