@@ -194,9 +194,7 @@ export function VideoTranscription(props: VideoTranscriptionProps) {
     });
   }, []);
 
-  const [currentIdx, setCurrentIdx] = useState(nearestIdx);
   useEffect(() => {
-    setCurrentIdx(nearestIdx);
     transcriptionLineRefs.current[nearestIdx].current?.scrollIntoView({
       behavior: "smooth",
       block: "nearest",
@@ -300,7 +298,7 @@ export function VideoTranscription(props: VideoTranscriptionProps) {
               key={idx}
               text={line.text}
               startTime={line.startTime}
-              isCurrent={idx === currentIdx}
+              isCurrent={idx === nearestIdx}
               setAutoPlayOn={props.setAutoPlayOn}
               playerRef={props.playerRef}
             />
