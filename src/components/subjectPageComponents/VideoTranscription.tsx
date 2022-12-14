@@ -75,7 +75,6 @@ type TranscriptionLineProps = {
   text: string;
   startTime: string;
   isCurrent: boolean;
-  setAutoPlayOn: (autoPlayOn: number) => void;
   playerRef: RefObject<YouTubePlayer>;
 };
 const TranscriptionLine = forwardRef<HTMLDivElement, TranscriptionLineProps>(
@@ -88,8 +87,6 @@ const TranscriptionLine = forwardRef<HTMLDivElement, TranscriptionLineProps>(
           if (window.getSelection()?.toString() === "") {
             // Playerの再生時間を変更
             props.playerRef.current?.seekTo(Number(props.startTime), "seconds");
-            // Playerの自動再生を設定
-            props.setAutoPlayOn(1);
           }
         }}
         sx={{
@@ -154,7 +151,6 @@ type VideoTranscriptionProps = {
   translations: Maybe<Translation>[];
   playedSeconds: number;
   playerRef: RefObject<YouTubePlayer>;
-  setAutoPlayOn: (autoPlayOn: number) => void;
   setPlayedSeconds: (playedSeconds: number) => void;
 };
 
@@ -299,7 +295,6 @@ export function VideoTranscription(props: VideoTranscriptionProps) {
               text={line.text}
               startTime={line.startTime}
               isCurrent={idx === nearestIdx}
-              setAutoPlayOn={props.setAutoPlayOn}
               playerRef={props.playerRef}
             />
           );
