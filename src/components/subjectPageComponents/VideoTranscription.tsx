@@ -151,7 +151,6 @@ type VideoTranscriptionProps = {
   translations: Maybe<Translation>[];
   playedSeconds: number;
   playerRef: RefObject<YouTubePlayer>;
-  setPlayedSeconds: (playedSeconds: number) => void;
 };
 
 export function VideoTranscription(props: VideoTranscriptionProps) {

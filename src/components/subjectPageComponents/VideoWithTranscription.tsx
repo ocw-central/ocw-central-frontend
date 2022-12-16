@@ -26,6 +26,7 @@ const removeParenthesis = (s: string) => {
 
 export function VideoWithTranscription(props: Props) {
   const videos = props.videos ?? []; //already sorted by `ordering` field
+  const [isPlaying, setIsPlaying] = useState(false);
   const [searchParams] = useSearchParams();
   const [playedSeconds, setPlayedSeconds] = useState(0);
 
@@ -61,11 +62,13 @@ export function VideoWithTranscription(props: Props) {
           maxWidth: 960,
           maxHeight: 540,
         }}
+        onPlay={() => setIsPlaying(true)}
+        onPause={() => setIsPlaying(false)}
         onProgress={handleOnProgress}
-        playing={true}
+        playing={isPlaying}
       />
     ),
-    [FocusedYoutubeId]
+    [FocusedYoutubeId, isPlaying]
   );
   return (
     <Grid
@@ -150,7 +153,6 @@ export function VideoWithTranscription(props: Props) {
             translations={FocusedVideo.translations}
             playedSeconds={playedSeconds}
             playerRef={playerRef}
-            setPlayedSeconds={setPlayedSeconds}
           />
         </Grid>
       )}
