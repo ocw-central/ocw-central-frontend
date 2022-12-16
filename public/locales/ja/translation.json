@@ -13,7 +13,7 @@
     "home": {
       "message": {
         "sentence1": "OCW CentralはOCW(大学によって提供される教育資料)のポータルサイトです。",
-        "sentence2": "AIモデルによる自動書き起こしでOCWをより便利にします。",
+        "sentence2": "AIモデルによる書き起こしでOCWをより便利にします。",
         "search_button": "講義を検索"
       },
       "academic_fields": {
@@ -36,6 +36,7 @@
       "course_resource": "講義資料",
       "course_details": "講義詳細",
       "subject_syllabus": "シラバス",
+      "related_subjects": "関連講義",
       "copyright_notice": "著作権表記",
       "copyright_sentence1": "この資料は京都大学OCWウェブサイトに掲載されている",
       "copyright_sentence2": "の資料であり、その著作権は",
@@ -84,6 +85,11 @@
         "japanese_field": "学問分野",
         "english_field": "学問分野(外国語講義)"
       }
+    },
+    "academic_field_page": {
+      "academic_field": "学問分野",
+      "japanese_lecture": "日本語講義",
+      "english_lecture": "外国語講義"
     },
     "report": {
       "label": "ご意見・不具合報告",

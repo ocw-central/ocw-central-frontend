@@ -69,9 +69,9 @@ export function VideoTranscription(props: Props) {
   // if there is only one language, don't show the language selector
   const showLanguageSelector = languages.length > 1;
   const language_map: { [key: string]: string } = {
-    original: `${t("translation.subject.original_translation")}`,
-    en: `${t("translation.subject.english_translation")}`,
-    ja: `${t("translation.subject.japanese_translation")}`,
+    original: t("translation.subject.original_translation"),
+    en: t("translation.subject.english_translation"),
+    ja: t("translation.subject.japanese_translation"),
   };
 
   return (

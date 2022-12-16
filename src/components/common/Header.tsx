@@ -82,7 +82,7 @@ export function Header() {
                 <SearchIcon />
               </SearchIconWrapper>
               <StyledInputBase
-                placeholder={`${t("translation.header.search_bar")}`}
+                placeholder={t("translation.header.search_bar")}
                 inputProps={{ "aria-label": "search" }}
                 onKeyDown={(e) => {
                   onEnterDown(e);

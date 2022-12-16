@@ -1,6 +1,6 @@
 import styles from "@/styles/nav.module.css";
-import MenuIcon from "@mui/icons-material/Menu";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import MenuIcon from "@mui/icons-material/Menu";
 import {
   Accordion,
   AccordionDetails,
@@ -21,16 +21,16 @@ export function Nav() {
     i18n.changeLanguage(language);
   };
   const pages = [
-    { link: "/", name: `${t("translation.header.nav.home")}` },
-    { link: "/search", name: `${t("translation.header.nav.detailed_search")}` },
-    { link: "/about", name: `${t("translation.header.nav.about")}` },
+    { link: "/", name: t("translation.header.nav.home") },
+    { link: "/search", name: t("translation.header.nav.detailed_search") },
+    { link: "/about", name: t("translation.header.nav.about") },
   ];
 
   const mobilePages = [
-    { link: "/", name: `${t("translation.header.nav.home")}` },
-    { link: "/search", name: `${t("translation.header.nav.detailed_search")}` },
-    { link: "/fields", name: `${t("translation.header.nav.academic_fields")}` },
-    { link: "/about", name: `${t("translation.header.nav.about")}` },
+    { link: "/", name: t("translation.header.nav.home") },
+    { link: "/search", name: t("translation.header.nav.detailed_search") },
+    { link: "/fields", name: t("translation.header.nav.academic_fields") },
+    { link: "/about", name: t("translation.header.nav.about") },
   ];
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
