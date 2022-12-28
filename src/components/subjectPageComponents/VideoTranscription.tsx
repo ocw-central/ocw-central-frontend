@@ -181,6 +181,7 @@ export function VideoTranscription(props: VideoTranscriptionProps) {
     processedLines,
     props.playedSeconds
   );
+  const transcriptionListRef = useRef<HTMLUListElement>(null);
   const transcriptionLineRefs = useRef<RefObject<HTMLDivElement>[]>([]);
   useEffect(() => {
     // 初回レンダリング時にrefを作成
@@ -190,9 +191,12 @@ export function VideoTranscription(props: VideoTranscriptionProps) {
   }, []);
 
   useEffect(() => {
-    transcriptionLineRefs.current[nearestIdx].current?.scrollIntoView({
+    const lineTop =
+      transcriptionLineRefs.current[nearestIdx].current?.offsetTop ?? 0;
+    const listHeight = transcriptionListRef.current?.offsetHeight ?? 0;
+    transcriptionListRef.current?.scrollTo({
+      top: lineTop - listHeight / 2,
       behavior: "smooth",
-      block: "nearest",
     });
   }, [nearestIdx]);
 
@@ -257,6 +261,7 @@ export function VideoTranscription(props: VideoTranscriptionProps) {
         </Grid>
       </Grid>
       <List
+        ref={transcriptionListRef}
         sx={{
           width: "100%",
           maxHeight: { xs: 250, sm: 540 },
