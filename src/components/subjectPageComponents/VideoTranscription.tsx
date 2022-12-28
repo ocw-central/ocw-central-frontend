@@ -89,6 +89,7 @@ const TranscriptionLine = forwardRef<HTMLDivElement, TranscriptionLineProps>(
             // Playerの再生時間を変更
             props.playerRef.current?.seekTo(Number(props.startTime), "seconds");
             // 書き起こしがクリックされるとビデオを再生する。TODO: ビデオ停止中は再生しないようにする
+            // https://github.com/ocw-central/ocw-central-frontend/issues/209
             props.setIsPlaying(true);
           }
         }}
