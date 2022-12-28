@@ -76,6 +76,7 @@ type TranscriptionLineProps = {
   startTime: string;
   isCurrent: boolean;
   playerRef: RefObject<YouTubePlayer>;
+  setIsPlaying: (isPlaying: boolean) => void;
 };
 const TranscriptionLine = forwardRef<HTMLDivElement, TranscriptionLineProps>(
   function TranscriptionLine(props, ref) {
@@ -87,6 +88,8 @@ const TranscriptionLine = forwardRef<HTMLDivElement, TranscriptionLineProps>(
           if (window.getSelection()?.toString() === "") {
             // Playerの再生時間を変更
             props.playerRef.current?.seekTo(Number(props.startTime), "seconds");
+            // 書き起こしがクリックされるとビデオを再生する。TODO: ビデオ停止中は再生しないようにする
+            props.setIsPlaying(true);
           }
         }}
         sx={{
@@ -151,6 +154,7 @@ type VideoTranscriptionProps = {
   translations: Maybe<Translation>[];
   playedSeconds: number;
   playerRef: RefObject<YouTubePlayer>;
+  setIsPlaying: (isPlaying: boolean) => void;
 };
 
 export function VideoTranscription(props: VideoTranscriptionProps) {
@@ -300,6 +304,7 @@ export function VideoTranscription(props: VideoTranscriptionProps) {
               startTime={line.startTime}
               isCurrent={idx === nearestIdx}
               playerRef={props.playerRef}
+              setIsPlaying={props.setIsPlaying}
             />
           );
         })}

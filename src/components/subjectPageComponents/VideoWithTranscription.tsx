@@ -153,6 +153,7 @@ export function VideoWithTranscription(props: Props) {
             translations={FocusedVideo.translations}
             playedSeconds={playedSeconds}
             playerRef={playerRef}
+            setIsPlaying={setIsPlaying}
           />
         </Grid>
       )}
