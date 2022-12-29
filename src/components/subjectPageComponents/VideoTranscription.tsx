@@ -75,8 +75,8 @@ type TranscriptionLineProps = {
   text: string;
   startTime: string;
   isCurrent: boolean;
-  setAutoPlayOn: (autoPlayOn: number) => void;
   playerRef: RefObject<YouTubePlayer>;
+  setIsPlaying: (isPlaying: boolean) => void;
 };
 const TranscriptionLine = forwardRef<HTMLDivElement, TranscriptionLineProps>(
   function TranscriptionLine(props, ref) {
@@ -88,8 +88,9 @@ const TranscriptionLine = forwardRef<HTMLDivElement, TranscriptionLineProps>(
           if (window.getSelection()?.toString() === "") {
             // Playerの再生時間を変更
             props.playerRef.current?.seekTo(Number(props.startTime), "seconds");
-            // Playerの自動再生を設定
-            props.setAutoPlayOn(1);
+            // 書き起こしがクリックされるとビデオを再生する。TODO: ビデオ停止中は再生しないようにする
+            // https://github.com/ocw-central/ocw-central-frontend/issues/209
+            props.setIsPlaying(true);
           }
         }}
         sx={{
@@ -154,8 +155,7 @@ type VideoTranscriptionProps = {
   translations: Maybe<Translation>[];
   playedSeconds: number;
   playerRef: RefObject<YouTubePlayer>;
-  setAutoPlayOn: (autoPlayOn: number) => void;
-  setPlayedSeconds: (playedSeconds: number) => void;
+  setIsPlaying: (isPlaying: boolean) => void;
 };
 
 export function VideoTranscription(props: VideoTranscriptionProps) {
@@ -304,8 +304,8 @@ export function VideoTranscription(props: VideoTranscriptionProps) {
               text={line.text}
               startTime={line.startTime}
               isCurrent={idx === nearestIdx}
-              setAutoPlayOn={props.setAutoPlayOn}
               playerRef={props.playerRef}
+              setIsPlaying={props.setIsPlaying}
             />
           );
         })}
