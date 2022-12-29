@@ -31,6 +31,7 @@ i18n
   // for all options read: https://www.i18next.com/overview/configuration-options
   .init({
     debug: false,
+    lng: "ja",
     supportedLngs: ["en", "ja"],
     nonExplicitSupportedLngs: true, // https://stackoverflow.com/questions/71665807/i18next-not-detecting-language-variation-eg-en-us
     detection: options,
