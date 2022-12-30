@@ -6,11 +6,11 @@ import { initReactI18next } from "react-i18next";
 const options = {
   // order and from where user language should be detected
   order: [
-    "navigator",
     "querystring",
     "cookie",
     "localStorage",
     "sessionStorage",
+    "navigator",
     "htmlTag",
     "path",
     "subdomain",
