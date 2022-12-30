@@ -119,7 +119,7 @@ export function Nav() {
                     fontWeight: "bold",
                   },
                   color:
-                    i18n.language === "en" ? "rgba(255,255,255,0.7)" : "white",
+                    i18n.language !== "ja" ? "rgba(255,255,255,0.7)" : "white",
                 }}
                 onClick={() => setLanguage("en")}
               >
