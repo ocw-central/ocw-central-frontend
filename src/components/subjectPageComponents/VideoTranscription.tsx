@@ -11,15 +11,17 @@ import {
   Typography,
 } from "@mui/material";
 import { alpha } from "@mui/material/styles";
+import {
+  createRef,
+  forwardRef,
+  memo,
+  RefObject,
+  useEffect,
+  useRef,
+} from "react";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-
-type Props = {
-  transcription: string;
-  translations: Maybe<Translation>[];
-  setTime: (time: { start: number }) => void;
-  setAutoPlayOn: (autoPlayOn: number) => void;
-};
+import YouTubePlayer from "react-player/youtube";
 
 function processText(text?: string) {
   //remove empty lines
@@ -49,7 +51,114 @@ function convertSecondToTime(second: number) {
   return `${mm}:${ss}`;
 }
 
-export function VideoTranscription(props: Props) {
+// TODO: binary searchへ変更
+function searchNearestTranscriptionIdx(
+  processedLines: { startTime: string; text: string }[],
+  playedSeconds: number
+) {
+  let nearestIdx = 0;
+  let nearestDiff = Infinity;
+  processedLines.forEach((line, idx) => {
+    const lineTime = Number(line.startTime);
+    const diff = Math.abs(lineTime - playedSeconds);
+    // 最も近い書き起こしは必ず実際の再生時間よりも前にあるようにする
+    // -> intervalの計算における仮定を満たすため
+    if (lineTime <= playedSeconds && diff < nearestDiff) {
+      nearestIdx = idx;
+      nearestDiff = diff;
+    }
+  });
+  return nearestIdx;
+}
+
+type TranscriptionLineProps = {
+  text: string;
+  startTime: string;
+  isCurrent: boolean;
+  playerRef: RefObject<YouTubePlayer>;
+  setIsPlaying: (isPlaying: boolean) => void;
+};
+const TranscriptionLine = forwardRef<HTMLDivElement, TranscriptionLineProps>(
+  function TranscriptionLine(props, ref) {
+    return (
+      <ListItemButton
+        ref={ref}
+        onClick={() => {
+          // コピーのための選択時はonClickを無効にする
+          if (window.getSelection()?.toString() === "") {
+            // Playerの再生時間を変更
+            props.playerRef.current?.seekTo(Number(props.startTime), "seconds");
+            // 書き起こしがクリックされるとビデオを再生する。TODO: ビデオ停止中は再生しないようにする
+            // https://github.com/ocw-central/ocw-central-frontend/issues/209
+            props.setIsPlaying(true);
+          }
+        }}
+        sx={{
+          color: "white",
+          p: 0,
+          "&:hover": {
+            bgcolor: alpha(theme.palette.primary.main, 0.3),
+            cursor: "pointer",
+          },
+          userSelect: "text",
+        }}
+      >
+        <Grid
+          container
+          direction="row"
+          sx={{
+            backgroundColor: props.isCurrent
+              ? alpha(theme.palette.primary.main, 0.3)
+              : "transparent",
+          }}
+        >
+          <Grid
+            item
+            xs={1}
+            sm={1}
+            sx={{
+              justifySelf: "center",
+            }}
+          >
+            <Typography
+              sx={{
+                color: `${theme.palette.secondary.main}`,
+                fontWeight: "bold",
+                fontSize: { xs: 12, sm: 14, md: 15 },
+                pt: 0.5,
+              }}
+            >
+              {`${convertSecondToTime(Number(props.startTime))} `}
+            </Typography>
+          </Grid>
+          <Grid item xs={11} sm={11}>
+            <Typography
+              sx={{
+                color: "black",
+                fontWeight: "medium",
+                fontSize: { xs: 16, sm: 20 },
+                pl: { md: 3.5, sm: 3, xs: 3 },
+              }}
+            >
+              {`${props.text}`}
+            </Typography>
+          </Grid>
+        </Grid>
+      </ListItemButton>
+    );
+  }
+);
+const TranscriptionLineMemo = memo(TranscriptionLine);
+
+type VideoTranscriptionProps = {
+  transcription: string;
+  translations: Maybe<Translation>[];
+  playedSeconds: number;
+  playerRef: RefObject<YouTubePlayer>;
+  setIsPlaying: (isPlaying: boolean) => void;
+};
+
+export function VideoTranscription(props: VideoTranscriptionProps) {
   const { t } = useTranslation();
   const [language, setLanguage] = useState("original");
   const handleLanguageChange = (event: SelectChangeEvent) => {
@@ -61,10 +170,6 @@ export function VideoTranscription(props: Props) {
       translations.set(t.languageCode, t.translation);
     }
   }
-  const transcription =
-    language == "original" ? props.transcription : translations.get(language);
-  const processedLines = processText(transcription);
-
   const languages = ["original", ...translations.keys()];
   // if there is only one language, don't show the language selector
   const showLanguageSelector = languages.length > 1;
@@ -73,6 +178,32 @@ export function VideoTranscription(props: Props) {
     en: t("translation.subject.english_translation"),
     ja: t("translation.subject.japanese_translation"),
   };
+  const transcription =
+    language == "original" ? props.transcription : translations.get(language);
+
+  const processedLines = processText(transcription);
+  const nearestIdx = searchNearestTranscriptionIdx(
+    processedLines,
+    props.playedSeconds
+  );
+  const transcriptionListRef = useRef<HTMLUListElement>(null);
+  const transcriptionLineRefs = useRef<RefObject<HTMLDivElement>[]>([]);
+  useEffect(() => {
+    // 初回レンダリング時にrefを作成
+    processedLines.forEach((_, idx) => {
+      transcriptionLineRefs.current[idx] = createRef<HTMLDivElement>();
+    });
+  }, []);
+
+  useEffect(() => {
+    const lineTop =
+      transcriptionLineRefs.current[nearestIdx].current?.offsetTop ?? 0;
+    const listHeight = transcriptionListRef.current?.offsetHeight ?? 0;
+    transcriptionListRef.current?.scrollTo({
+      top: lineTop - listHeight / 2,
+      behavior: "smooth",
+    });
+  }, [nearestIdx]);
 
   return (
     <Grid
@@ -135,6 +266,7 @@ export function VideoTranscription(props: Props) {
         </Grid>
       </Grid>
       <List
+        ref={transcriptionListRef}
         sx={{
           width: "100%",
           maxHeight: { xs: 250, sm: 540 },
@@ -164,59 +296,17 @@ export function VideoTranscription(props: Props) {
           },
         }}
       >
-        {processedLines.map((line, index) => {
+        {processedLines.map((line, idx) => {
           return (
-            <ListItemButton
-              key={index}
-              onClick={() => {
-                if (window.getSelection()?.toString() === "") {
-                  props.setTime({ start: Number(line.startTime) });
-                  props.setAutoPlayOn(1);
-                }
-              }}
-              sx={{
-                pt: 0.3,
-                pb: 0.3,
-                color: "white",
-                "&:hover, &:focus": {
-                  bgcolor: alpha(theme.palette.primary.main, 0.3),
-                  cursor: "pointer",
-                },
-                userSelect: "text",
-              }}
-            >
-              <Grid container direction="row">
-                <Grid
-                  item
-                  xs={1}
-                  sm={1}
-                  sx={{
-                    justifySelf: "center",
-                  }}
-                >
-                  <Typography
-                    sx={{
-                      color: `${theme.palette.secondary.main}`,
-                      fontWeight: "bold",
-                      fontSize: { xs: 12, sm: 14, md: 15 },
-                      pt: 0.5,
-                    }}
-                  >
-                    {`${convertSecondToTime(Number(line.startTime))} `}
-                  </Typography>
-                </Grid>
-                <Grid item xs={11} sm={11}>
-                  <Typography
-                    sx={{
-                      color: "black",
-                      fontWeight: "medium",
-                      fontSize: { xs: 16, sm: 20 },
-                      pl: { md: 3.5, sm: 3, xs: 3 },
-                    }}
-                  >{`${line.text}`}</Typography>
-                </Grid>
-              </Grid>
-            </ListItemButton>
+            <TranscriptionLineMemo
+              ref={transcriptionLineRefs.current[idx]}
+              key={idx}
+              text={line.text}
+              startTime={line.startTime}
+              isCurrent={idx === nearestIdx}
+              playerRef={props.playerRef}
+              setIsPlaying={props.setIsPlaying}
+            />
           );
         })}
       </List>
