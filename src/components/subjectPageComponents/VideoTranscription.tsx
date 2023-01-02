@@ -200,7 +200,7 @@ export function VideoTranscription(props: VideoTranscriptionProps) {
       transcriptionLineRefs.current[nearestIdx].current?.offsetTop ?? 0;
     const listHeight = transcriptionListRef.current?.offsetHeight ?? 0;
     transcriptionListRef.current?.scrollTo({
-      top: lineTop - listHeight / 2,
+      top: lineTop - listHeight / 4,
       behavior: "smooth",
     });
   }, [nearestIdx]);
